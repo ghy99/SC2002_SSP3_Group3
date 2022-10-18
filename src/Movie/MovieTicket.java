@@ -1,3 +1,5 @@
+package Movie;
+
 public class MovieTicket {
     // Linked to each Cinema
     // Diff category such as
