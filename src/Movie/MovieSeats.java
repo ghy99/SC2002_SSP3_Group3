@@ -1,3 +1,5 @@
+package Movie;
+
 public class MovieSeats {
     // Draw out matrix for movie theatres
     // Need to block out rows / columns for aisle
