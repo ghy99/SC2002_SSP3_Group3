@@ -15,9 +15,14 @@ public class Cineplex {
     }
 
     public void printCinemas() {
-        System.out.println("Cinemas available are:");
+//        System.out.println("Cinemas available are:");
         for (int i = 0; i < noOfCinema; i++) {
             System.out.printf("\t%s\n", listOfCinema[i].getCinemaName());
         }
+    }
+
+    public void InitializeMovies() {
+        System.out.println("Initializing list of movies in this cinema\n...\n...");
+        listOfCinema[0].AddNewMovies();
     }
 }
