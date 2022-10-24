@@ -16,6 +16,7 @@ public class Cinema {
         this.cinemaName = cinemaName;
     }
 
+
     public String AddNewMovies() {
         listOfMovies = new ArrayList<Movie>();
         File filename = new File("C:\\Users\\ganha\\IdeaProjects\\SC2002_SSP3_Group3\\src\\DataStorage\\Movies.txt");
