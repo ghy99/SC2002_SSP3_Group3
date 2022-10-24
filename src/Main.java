@@ -1,3 +1,5 @@
+import Service.DateTime;
+
 import java.util.Scanner;
 
 public class Main {
@@ -14,5 +16,6 @@ public class Main {
         System.out.println("Printing list of cinemas:");
         cineplex.printCinemas();
         cineplex.InitializeMovies();
+
     }
 }
