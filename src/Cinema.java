@@ -11,7 +11,7 @@ public class Cinema {
         this.cinemaName = cinemaName;
     }
 
-    public AddNewMovies()
+    //public AddNewMovies()
 
     public String getCinemaName() {
         return this.cinemaName;
