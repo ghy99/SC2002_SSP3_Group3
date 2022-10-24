@@ -1,19 +1,20 @@
 package Service;
 import Customer.Customer;
 
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.FileInputStream;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class TextDB {
     public static final String SEPARATOR = "|";
+    private static final Path CurrentRelativePath = Paths.get("");
+    private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString();
 
     // an example of reading
-    public static ArrayList<Customer> readFromFile(String filename) throws IOException {
+    public static ArrayList<Customer> ReadFromFile(String fileName) throws IOException {
         // read String from text file
-        ArrayList stringArray = (ArrayList)read(filename);
+        ArrayList stringArray = (ArrayList)Read(fileName);
         ArrayList alr = new ArrayList() ;
 
         for (int i = 0 ; i < stringArray.size() ; i++) {
@@ -35,11 +36,11 @@ public class TextDB {
         return alr ;
     }
 
-    public static void writeToTextDB(String filename, List<Customer> al) throws IOException {
+    public static void WriteToTextDB(String fileName, List<Customer> customerList) throws IOException {
         List alw = new ArrayList() ;// to store Professors data
 
-        for (int i = 0 ; i < al.size() ; i++) {
-            Customer customer = (Customer)al.get(i);
+        for (int i = 0 ; i < customerList.size() ; i++) {
+            Customer customer = (Customer)customerList.get(i);
             StringBuilder st =  new StringBuilder() ;
             st.append(customer.getMovieGoerName().trim());
             st.append(SEPARATOR);
@@ -50,16 +51,16 @@ public class TextDB {
             st.append(customer.getTID());
             alw.add(st.toString()) ;
         }
-        write(filename,alw);
+        Write(fileName,alw);
     }
 
     /** Write fixed content to the given file. */
-    public static void write(String fileName, List data) throws IOException  {
-        PrintWriter out = new PrintWriter(new FileWriter(fileName));
+    public static void Write(String fileName, List customerData) throws IOException  {
 
+        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory +"\\src\\DataStorage\\"+ fileName));
         try {
-            for (int i =0; i < data.size() ; i++) {
-                out.println((String)data.get(i));
+            for (int i =0; i < customerData.size() ; i++) {
+                out.println((String)customerData.get(i));
             }
         }
         finally {
@@ -68,9 +69,9 @@ public class TextDB {
     }
 
     /** Read the contents of the given file. */
-    public static List read(String fileName) throws IOException {
+    public static List Read(String fileName) throws IOException {
         List data = new ArrayList() ;
-        Scanner scanner = new Scanner(new FileInputStream(fileName));
+        Scanner scanner = new Scanner(new FileInputStream(CurrentDirectory +"\\src\\DataStorage\\"+ fileName));
         try {
             while (scanner.hasNextLine()){
                 data.add(scanner.nextLine());
@@ -90,10 +91,10 @@ public class TextDB {
         al.add(new Customer("xcv","756","ant@h.com", 2));
 
         //write test
-        writeToTextDB("test.txt" , al);
+        WriteToTextDB("test.txt" , al);
 
         //read test
-        for (Customer cs : readFromFile("test.txt"))
+        for (Customer cs : ReadFromFile("test.txt"))
         {
             System.out.println(cs.getMovieGoerName() + " " + cs.getMobileNumber() + " " + cs.getEmail()  + " " + cs.getTID());
         }
