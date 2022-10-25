@@ -1,6 +1,5 @@
-import java.io.*;
-import java.util.*;
 package Movie;
+
 // Draw out matrix for movie theatres
     // Need to block out rows / columns for aisle
     // Different Seat Types such as

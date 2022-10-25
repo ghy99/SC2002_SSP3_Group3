@@ -13,7 +13,7 @@ public class Main {
     // I think this is supposed to be Cineplex?
     private static ArrayList<Cineplex> cineplexes;
 
-    public static void InitializeCineplexes() {
+    public static void InitializeCineplexes() throws IOException {
 
         System.out.println("Initializing list of Cineplexes\n...\n...");
         TextDB db = new TextDB();
@@ -29,7 +29,7 @@ public class Main {
         }
         System.out.println("Cineplexes are initialized.\n");
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Moblima!");
         System.out.println("Initiating Cineplex..."); // Convert this portion to read from textfile
