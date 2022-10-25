@@ -18,29 +18,28 @@ public class TextDB {
 
         // read String from text file
         ArrayList stringArray = null;
-        try {
-            stringArray = (ArrayList)Read(fileName);
+            stringArray = (ArrayList) Read(fileName);
 
-            ArrayList alr = new ArrayList() ;
+            ArrayList alr = new ArrayList();
 
-            for (int i = 0 ; i < stringArray.size() ; i++) {
-                String st = (String)stringArray.get(i);
+            for (int i = 0; i < stringArray.size(); i++) {
+                String st = (String) stringArray.get(i);
 
                 // get individual 'fields' of the string separated by SEPARATOR
-                StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+                StringTokenizer star = new StringTokenizer(st, SEPARATOR);    // pass in the string to the string tokenizer using delimiter "|"
 
-                String  movieGoerName = star.nextToken().trim();
-                String  mobileNumber = star.nextToken().trim();
-                String  email = star.nextToken().trim();
-                int  TID = Integer.parseInt(star.nextToken().trim());
+                String movieGoerName = star.nextToken().trim();
+                String mobileNumber = star.nextToken().trim();
+                String email = star.nextToken().trim();
+                int TID = Integer.parseInt(star.nextToken().trim());
 
 
-            // create Professor object from file data
-            Customer customer = new Customer(movieGoerName,mobileNumber, email,TID);
-            // add to Professors list
-            customers.add(customer) ;
-        }
-        return customers ;
+                // create Professor object from file data
+                Customer customer = new Customer(movieGoerName, mobileNumber, email, TID);
+                // add to Professors list
+                customers.add(customer);
+            }
+        return customers;
     }
 
     public ArrayList<Movie> readFromFile(String filename, ArrayList<Movie> movies) throws IOException {
@@ -84,16 +83,6 @@ public class TextDB {
             cineplexes.add(cineplex);
         }
         return cineplexes;
-
-                // create Professor object from file data
-                Customer customer = new Customer(movieGoerName,mobileNumber, email,TID);
-                // add to Professors list
-                alr.add(customer) ;
-            }
-            return alr ;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
