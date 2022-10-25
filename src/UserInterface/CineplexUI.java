@@ -21,6 +21,7 @@ public class CineplexUI {
             movielist.get(i).printMovieDetails();
         }
         System.out.println("Select your Movie from the list above: ");
+
         int selectMovie = sc.nextInt() - 1;
         ticket.setChosenMovie(movielist.get(selectMovie));
         return ticket;

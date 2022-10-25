@@ -2,8 +2,12 @@ package Cineplex;
 import Movie.Movie;
 import Service.TextDB;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Cineplex {
@@ -36,17 +40,57 @@ public class Cineplex {
         return this.listOfMovies;
     }
 
-    public void InitializeMovies() {
+    public void InitializeMovies() throws IOException {
         System.out.println("Initializing list of movies in cinemas\n...\n...");
         TextDB db = new TextDB();
         this.listOfMovies = new ArrayList<Movie>();
-        String filename = "Movies.txt";
+
+        //Create dir and movie.txt if entered cineplex name doesn't exist in DataStorage dir
+        File cineplexDir = new File(TextDB.getCurrentDirectory() + "\\" + this.getCineplexName().replace(' ','_'));
+        if (!cineplexDir.exists()){
+            cineplexDir.mkdirs();
+            File movieFile = new File(cineplexDir+"\\" + TextDB.Files.Movies.ToString());
+            movieFile.createNewFile();
+
+            System.out.println("Created directory and Movies.txt. Path :" + cineplexDir+"\\" + TextDB.Files.Movies.ToString());
+        }
+
         try {
-            this.listOfMovies = db.readFromFile(filename, this.listOfMovies);
+            this.listOfMovies = db.readFromFile(  getCineplexName().replace(' ','_') + "\\" +TextDB.Files.Movies.ToString(), this.listOfMovies);
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("Movies are initialized.\n");
     }
 
+    //Class Test
+    public static void main(String[] args) throws IOException {
+        Cineplex myC = new Cineplex("Cineplex3" , 2);
+
+        System.out.println("Initializing list of movies in cinemas\n...\n...");
+        TextDB db = new TextDB();
+        myC.listOfMovies = new ArrayList<Movie>();
+
+        File cineplexDir = new File(TextDB.getCurrentDirectory() + "\\" + myC.getCineplexName().replace(' ','_'));
+        if (!cineplexDir.exists()){
+            cineplexDir.mkdirs();
+            File movieFile = new File(cineplexDir+"\\" + TextDB.Files.Movies.ToString());
+            movieFile.createNewFile();
+
+            System.out.println("Created directory and Movies.txt. Path :" + cineplexDir+"\\" + TextDB.Files.Movies.ToString());
+        }
+
+        try {
+            myC.listOfMovies = db.readFromFile(  myC.getCineplexName().replace(' ','_') + "\\" +TextDB.Files.Movies.ToString(), myC.listOfMovies);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Movie data : myC.getListOfMovies())
+        {
+            System.out.println(data.getMovieTitle());
+        }
+
+        System.out.println("Movies are initialized.\n");
+    }
 }
