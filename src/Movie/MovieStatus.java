@@ -1,4 +1,4 @@
-
+package Movie;
 
 public class MovieStatus{
 	

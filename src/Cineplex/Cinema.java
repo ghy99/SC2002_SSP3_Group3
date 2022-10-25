@@ -18,9 +18,6 @@ public class Cinema {
         this.cinemaName = cinemaName;
     }
 
-
-
-
     public String getCinemaName() {
         return this.cinemaName;
     }

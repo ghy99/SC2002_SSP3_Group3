@@ -9,9 +9,42 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class TextDB {
+
+    public enum Files
+    {
+        Movies("Movies.txt")
+        ;
+
+        public final String Files;
+
+        Files(String files) {
+            this.Files = files;
+        }
+
+        public String ToString(){
+            return Files;
+        }
+    }
+
+    public enum StroageDir
+    {
+        Cusomter("Customer\\")
+        ;
+
+        public final String StroageDir;
+
+        StroageDir(String stroageDir) {
+            this.StroageDir = stroageDir;
+        }
+
+        public String ToString(){
+            return StroageDir;
+        }
+    }
+
     public static final String SEPARATOR = "|";
     private static final Path CurrentRelativePath = Paths.get("");
-    private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString();
+    private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString() +"\\src\\DataStorage\\";
 
     // an example of reading
     public ArrayList<Customer> ReadFromFile(String fileName, ArrayList<Customer> customers) throws IOException {
@@ -137,7 +170,7 @@ public class TextDB {
     /** Write fixed content to the given file. */
     public static void Write(String fileName, List customerData) throws IOException  {
 
-        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory +"\\src\\DataStorage\\"+ fileName));
+        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
         try {
             for (int i =0; i < customerData.size() ; i++) {
                 out.println((String)customerData.get(i));
@@ -151,7 +184,7 @@ public class TextDB {
     /** Read the contents of the given file. */
     public static List Read(String fileName) throws IOException {
         List data = new ArrayList() ;
-        Scanner scanner = new Scanner(new FileInputStream(CurrentDirectory +"\\src\\DataStorage\\"+ fileName));
+        Scanner scanner = new Scanner(new FileInputStream(CurrentDirectory + fileName));
         try {
             while (scanner.hasNextLine()){
                 data.add(scanner.nextLine());
@@ -178,5 +211,9 @@ public class TextDB {
         {
             System.out.println(cs.getMovieGoerName() + " " + cs.getMobileNumber() + " " + cs.getEmail()  + " " + cs.getTID());
         }
+    }
+
+    public static String getCurrentDirectory() {
+        return CurrentDirectory;
     }
 }
