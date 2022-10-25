@@ -20,9 +20,14 @@ public class Customer {
         this.TID = TID;
     }
 
+    public void setMovieGoerName(String name) { this.MovieGoerName = name; }
+    public void setMobileNumber(String number) { this.MobileNumber = number; }
+    public void setEmail(String email) { this.Email = email; }
+    public void setTID(int transactionID) { this.TID = transactionID; }
     public void setTicket(MovieTicket tix) {
         this.Ticket = tix;
     }
+
 
     public String getMovieGoerName() {
         return MovieGoerName;
@@ -43,8 +48,6 @@ public class Customer {
     public MovieTicket getTicket() {
         return this.Ticket;
     }
-
-
 
     public void printCustomerDetails() {
         System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\nTransaction ID:\t%d\n",
