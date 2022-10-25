@@ -1,6 +1,7 @@
 package Service;
 import Customer.Customer;
 import Movie.Movie;
+import Cineplex.Cineplex;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -13,7 +14,8 @@ public class TextDB {
     private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString();
 
     // an example of reading
-    public static ArrayList<Customer> ReadFromFile(String fileName) {
+    public ArrayList<Customer> ReadFromFile(String fileName, ArrayList<Customer> customers) throws IOException {
+
         // read String from text file
         ArrayList stringArray = null;
         try {
@@ -31,6 +33,57 @@ public class TextDB {
                 String  mobileNumber = star.nextToken().trim();
                 String  email = star.nextToken().trim();
                 int  TID = Integer.parseInt(star.nextToken().trim());
+
+
+            // create Professor object from file data
+            Customer customer = new Customer(movieGoerName,mobileNumber, email,TID);
+            // add to Professors list
+            customers.add(customer) ;
+        }
+        return customers ;
+    }
+
+    public ArrayList<Movie> readFromFile(String filename, ArrayList<Movie> movies) throws IOException {
+        ArrayList<String> listofMovies = (ArrayList) TextDB.Read(filename);
+        ArrayList<Movie> alr = new ArrayList<Movie>();
+
+        for (String listofMovie : listofMovies) {
+            String st = listofMovie;
+
+            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
+
+            String title = star.nextToken().trim();
+            Movie.MovieStatus status = Movie.MovieStatus.valueOf(star.nextToken().trim());
+            String synopsis = star.nextToken().trim();
+            String[] temp = star.nextToken().trim().split(",");
+            ArrayList<String> casts = new ArrayList<>();
+            Collections.addAll(casts, temp);
+            Movie.MovieType type = Movie.MovieType.valueOf(star.nextToken().trim());
+            Movie.MovieCategory cat = Movie.MovieCategory.valueOf(star.nextToken().trim());
+            Movie.MovieDimension dim = Movie.MovieDimension.valueOf(star.nextToken().trim());
+
+            Movie movie = new Movie(
+                    title, status, synopsis, casts, type, cat, dim
+            );
+            movies.add(movie);
+        }
+        return movies;
+    }
+
+    public ArrayList<Cineplex> readFromFile(ArrayList<Cineplex> cineplexes, String filename) throws IOException {
+        ArrayList<String> listofCineplexes = (ArrayList) TextDB.Read(filename);
+        ArrayList<Cineplex> alr = new ArrayList<>();
+
+        for (String listofCineplex : listofCineplexes) {
+            String st = listofCineplex;
+
+            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
+            String name = star.nextToken().trim();
+            int noOfCinemas = Integer.parseInt(star.nextToken().trim());
+            Cineplex cineplex = new Cineplex(name, noOfCinemas);
+            cineplexes.add(cineplex);
+        }
+        return cineplexes;
 
                 // create Professor object from file data
                 Customer customer = new Customer(movieGoerName,mobileNumber, email,TID);
@@ -122,8 +175,8 @@ public class TextDB {
     }
 
     //DB test
-    public static void main(String[] args) throws IOException {
-        ArrayList al = new ArrayList();
+    public void main(String[] args) throws IOException {
+        ArrayList<Customer> al = new ArrayList();
         al.add(new Customer("Ant","12","ant@h.com", 0));
         al.add(new Customer("gdf","234","ant@h.com", 1));
         al.add(new Customer("xcv","756","ant@h.com", 2));
@@ -132,7 +185,7 @@ public class TextDB {
         WriteToTextDB("test.txt" , al);
 
         //read test
-        for (Customer cs : ReadFromFile("test.txt"))
+        for (Customer cs : ReadFromFile("test.txt", al))
         {
             System.out.println(cs.getMovieGoerName() + " " + cs.getMobileNumber() + " " + cs.getEmail()  + " " + cs.getTID());
         }
