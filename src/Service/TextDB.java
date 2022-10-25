@@ -2,6 +2,7 @@ package Service;
 import Customer.Customer;
 import Movie.Movie;
 import Cineplex.Cineplex;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,20 +15,25 @@ public class TextDB {
 
     // an example of reading
     public ArrayList<Customer> ReadFromFile(String fileName, ArrayList<Customer> customers) throws IOException {
+
         // read String from text file
-        ArrayList stringArray = (ArrayList)Read(fileName);
-        ArrayList alr = new ArrayList() ;
+        ArrayList stringArray = null;
+        try {
+            stringArray = (ArrayList)Read(fileName);
 
-        for (int i = 0 ; i < stringArray.size() ; i++) {
-            String st = (String)stringArray.get(i);
+            ArrayList alr = new ArrayList() ;
 
-            // get individual 'fields' of the string separated by SEPARATOR
-            StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+            for (int i = 0 ; i < stringArray.size() ; i++) {
+                String st = (String)stringArray.get(i);
 
-            String  movieGoerName = star.nextToken().trim();
-            String  mobileNumber = star.nextToken().trim();
-            String  email = star.nextToken().trim();
-            int  TID = Integer.parseInt(star.nextToken().trim());
+                // get individual 'fields' of the string separated by SEPARATOR
+                StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+
+                String  movieGoerName = star.nextToken().trim();
+                String  mobileNumber = star.nextToken().trim();
+                String  email = star.nextToken().trim();
+                int  TID = Integer.parseInt(star.nextToken().trim());
+
 
             // create Professor object from file data
             Customer customer = new Customer(movieGoerName,mobileNumber, email,TID);
@@ -78,6 +84,47 @@ public class TextDB {
             cineplexes.add(cineplex);
         }
         return cineplexes;
+
+                // create Professor object from file data
+                Customer customer = new Customer(movieGoerName,mobileNumber, email,TID);
+                // add to Professors list
+                alr.add(customer) ;
+            }
+            return alr ;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static List<Movie> ReadFromFile(String fileName){
+        // read String from text file
+        ArrayList stringArray = null;
+        try {
+            stringArray = (ArrayList)Read(fileName);
+            ArrayList alr = new ArrayList() ;
+
+            for (int i = 0 ; i < stringArray.size() ; i++) {
+                String st = (String)stringArray.get(i);
+
+                // get individual 'fields' of the string separated by SEPARATOR
+                StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "|"
+
+                String  movieGoerName = star.nextToken().trim();
+                String  mobileNumber = star.nextToken().trim();
+                String  email = star.nextToken().trim();
+                int  TID = Integer.parseInt(star.nextToken().trim());
+
+                // create Professor object from file data
+                Customer customer = new Customer(movieGoerName,mobileNumber, email,TID);
+                // add to Professors list
+                alr.add(customer) ;
+            }
+            return alr ;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public static void WriteToTextDB(String fileName, List<Customer> customerList) throws IOException {
