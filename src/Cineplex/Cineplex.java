@@ -65,7 +65,7 @@ public class Cineplex {
 
     //Class Test
     public static void main(String[] args) throws IOException {
-        Cineplex myC = new Cineplex("Cineplex3" , 2);
+        Cineplex myC = new Cineplex("Cineplex3" ,1, 2);
 
         System.out.println("Initializing list of movies in cinemas\n...\n...");
         TextDB db = new TextDB();
