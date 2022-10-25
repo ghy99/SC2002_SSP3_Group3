@@ -78,8 +78,10 @@ public class TextDB {
 
             StringTokenizer star = new StringTokenizer(st, SEPARATOR);
             String name = star.nextToken().trim();
-            int noOfCinemas = Integer.parseInt(star.nextToken().trim());
-            Cineplex cineplex = new Cineplex(name, noOfCinemas);
+            String[] cinemas = star.nextToken().trim().split(", ");
+            int regularCinemas = Integer.parseInt(cinemas[0]);
+            int premiumCinemas = Integer.parseInt(cinemas[1]);
+            Cineplex cineplex = new Cineplex(name, premiumCinemas, regularCinemas);
             cineplexes.add(cineplex);
         }
         return cineplexes;

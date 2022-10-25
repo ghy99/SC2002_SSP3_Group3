@@ -9,12 +9,14 @@ import java.util.Scanner;
 public class Cineplex {
     // This will be for Cineplexes
     private String cineplexName;
-    private int noOfCinema;
+    private int regularCinemas;
+    private int premiumCinemas;
     private ArrayList<Movie> listOfMovies;
 
-    public Cineplex(String name, int noOfCinema) {
+    public Cineplex(String name, int regular, int premium) {
         this.cineplexName = name;
-        this.noOfCinema = noOfCinema;
+        this.regularCinemas = regular;
+        this.premiumCinemas = premium;
     }
 
     public String getCineplexName() {
@@ -22,8 +24,10 @@ public class Cineplex {
     }
 
     public int getNoOfCinemas() {
-        return this.noOfCinema;
+        return this.regularCinemas + this.premiumCinemas;
     }
+    public int getNoOfRegularCinemas() { return this.regularCinemas; }
+    public int getNoOfPremiumCinemas() { return this.premiumCinemas; }
 
     public ArrayList<Movie> getListOfMovies() {
 //        for (int i = 0; i < this.listOfMovies.size(); i++) {

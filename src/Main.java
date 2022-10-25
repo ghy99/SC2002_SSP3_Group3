@@ -3,7 +3,7 @@ import Movie.*;
 import Service.DateTime;
 import Cineplex.Cineplex;
 import Service.TextDB;
-
+import UserInterface.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -52,44 +52,45 @@ public class Main {
                     }
                     break;
                 case 2: // do Customer Stuff
-                    System.out.println("Enter Your(Customer) Name, Phone Number, Email (Separated by ' | '):");
-                    String[] details = sc.nextLine().split(" [|] ");
-
-                    String name = details[0];
-                    String number = details[1];
-                    String email = details[2];
-                    Customer customer = new Customer(name, number, email, tid++);
-                    int choice;
-                    do {
-                        System.out.println("What would you like to do?");
-                        System.out.println("1) Select Cineplex");
-                        System.out.println("2) Change Cineplex");
-
-                        choice = sc.nextInt();
-                        switch (choice) {
-                            case 1 -> {
-                                MovieTicket ticket = new MovieTicket();
-                                for (int i = 0; i < cineplexes.size(); i++) {
-                                    System.out.printf("%d: Cineplex Name: %s\n", i + 1, cineplexes.get(i).getCineplexName());
-                                }
-                                int selectCineplex = sc.nextInt() - 1;
-                                ticket.setChosenCineplex(cineplexes.get(selectCineplex));
-                                System.out.println("These are the movies available:");
-                                ArrayList<Movie> movieList = ticket.getChosenCineplex().getListOfMovies();
-                                for (int i = 0; i < movieList.size(); i++) {
-                                    System.out.printf("%d) %s\n", i + 1, movieList.get(i).getMovieTitle());
-                                }
-                                System.out.println("Select Movie: ");
-                                int moviechoice = sc.nextInt() - 1;
-                                ticket.setChosenMovie(movieList.get(moviechoice));
-                                customer.setTicket(ticket);
-                                customer.printCustomerDetails();
-                                customer.getTicket().printTicket();
-                            }
-                            case 2 -> choice = 1;
-                            default -> choice = -1;
-                        }
-                    } while (choice > 0);
+                    CustomerUI.CustomerInterface(cineplexes);
+//                    System.out.println("Enter Your(Customer) Name, Phone Number, Email (Separated by ' | '):");
+//                    String[] details = sc.nextLine().split(" [|] ");
+//
+//                    String name = details[0];
+//                    String number = details[1];
+//                    String email = details[2];
+//                    Customer customer = new Customer(name, number, email, tid++);
+//                    int choice;
+//                    do {
+//                        System.out.println("What would you like to do?");
+//                        System.out.println("1) Select Cineplex");
+//                        System.out.println("2) Change Cineplex");
+//
+//                        choice = sc.nextInt();
+//                        switch (choice) {
+//                            case 1 -> {
+//                                MovieTicket ticket = new MovieTicket();
+//                                for (int i = 0; i < cineplexes.size(); i++) {
+//                                    System.out.printf("%d: Cineplex Name: %s\n", i + 1, cineplexes.get(i).getCineplexName());
+//                                }
+//                                int selectCineplex = sc.nextInt() - 1;
+//                                ticket.setChosenCineplex(cineplexes.get(selectCineplex));
+//                                System.out.println("These are the movies available:");
+//                                ArrayList<Movie> movieList = ticket.getChosenCineplex().getListOfMovies();
+//                                for (int i = 0; i < movieList.size(); i++) {
+//                                    System.out.printf("%d) %s\n", i + 1, movieList.get(i).getMovieTitle());
+//                                }
+//                                System.out.println("Select Movie: ");
+//                                int moviechoice = sc.nextInt() - 1;
+//                                ticket.setChosenMovie(movieList.get(moviechoice));
+//                                customer.setTicket(ticket);
+//                                customer.printCustomerDetails();
+//                                customer.getTicket().printTicket();
+//                            }
+//                            case 2 -> choice = 1;
+//                            default -> choice = -1;
+//                        }
+//                    } while (choice > 0);
                     break;
             }
         } while (option > 0);
