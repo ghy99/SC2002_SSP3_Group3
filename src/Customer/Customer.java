@@ -11,7 +11,7 @@ public class Customer {
     private String Email;
     //Purchase History
     private int TID;
-    private MovieTicket Ticket;
+    private MovieTicket Ticket = null;
 
     public Customer(String movieGoerName, String mobileNumber, String email, int TID) {
         MovieGoerName = movieGoerName;
@@ -52,5 +52,9 @@ public class Customer {
     public void printCustomerDetails() {
         System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\nTransaction ID:\t%d\n",
                 this.MovieGoerName, this.MobileNumber, this.Email, this.TID);
+        if (this.Ticket != null) {
+            System.out.println("Ticket:\n");
+            this.Ticket.printTicket();
+        }
     }
 }
