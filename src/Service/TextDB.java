@@ -1,6 +1,6 @@
 package Service;
 import Customer.Customer;
-import Movie.Movie;
+import Movie.*;
 import Cineplex.Cineplex;
 
 import java.io.*;
@@ -57,12 +57,13 @@ public class TextDB {
             String[] temp = star.nextToken().trim().split(",");
             ArrayList<String> casts = new ArrayList<>();
             Collections.addAll(casts, temp);
-            Movie.MovieType type = Movie.MovieType.valueOf(star.nextToken().trim());
-            Movie.MovieCategory cat = Movie.MovieCategory.valueOf(star.nextToken().trim());
-            Movie.MovieDimension dim = Movie.MovieDimension.valueOf(star.nextToken().trim());
+            MovieType.Type type = MovieType.Type.valueOf(star.nextToken().trim());
+            MovieType.Genre genre = MovieType.Genre.valueOf(star.nextToken().trim());
+            MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
+            MovieType.Class movieClass = MovieType.Class.valueOf(star.nextToken().trim());
 
             Movie movie = new Movie(
-                    title, status, synopsis, casts, type, cat, dim
+                    title, status, synopsis, casts, type, genre, dim, movieClass
             );
             movies.add(movie);
         }

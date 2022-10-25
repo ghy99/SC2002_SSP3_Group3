@@ -1,6 +1,6 @@
 package Movie;
 import Cineplex.Cineplex;
-
+import Movie.MovieType;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.random.RandomGenerator;
@@ -56,7 +56,8 @@ public class MovieTicket {
         else {
             chargeDay = chargeDay + 4;
         }
-
+        MovieType.Type CinemaType = this.Movie.getTypeOfCinema();
+        System.out.printf("You are watching in a %s Theatre!", CinemaType.toString());
         return 0;
     }
 
