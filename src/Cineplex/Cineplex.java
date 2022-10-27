@@ -9,18 +9,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+
 public class Cineplex {
+    private static final TextDB db = new TextDB();
+    //Create dir and movie.txt if entered cineplex name doesn't exist in DataStorage dir
+    private final File cineplexDir;
+    private final File showTimeFile;
+    private final File movieFile;
+
     // This will be for Cineplexes
     private String cineplexName;
-    private int regularCinemas;
-    private int premiumCinemas;
-    private ArrayList<Movie> listOfMovies;
+    private ArrayList<Cinema> listOfCinemas = new ArrayList<Cinema>();
+    private ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
 
-    public Cineplex(String name, int regular, int premium) {
+    public Cineplex(String name) {
         this.cineplexName = name;
-        this.regularCinemas = regular;
-        this.premiumCinemas = premium;
+        cineplexDir = new File(TextDB.getCurrentDirectory() + "\\" + this.getCineplexName().replace(' ','_'));
+        showTimeFile = new File(cineplexDir+"\\" + TextDB.Files.ShowTime.ToString());
+        movieFile = new File(cineplexDir+"\\" + TextDB.Files.Movies.ToString());
     }
 
     public String getCineplexName() {
@@ -28,35 +36,87 @@ public class Cineplex {
     }
 
     public int getNoOfCinemas() {
-        return this.regularCinemas + this.premiumCinemas;
+        return this.listOfCinemas.size();
     }
-    public int getNoOfRegularCinemas() { return this.regularCinemas; }
-    public int getNoOfPremiumCinemas() { return this.premiumCinemas; }
+    public int getNoOfRegularCinemas() {
+        int count = 0;
+        for (int i = 0; i < listOfCinemas.size(); i++)
+        {
+            if(listOfCinemas.get(i).getCinemaType() == Cinema.CinemaType.Regular)
+            {
+                count ++;
+            }
+        }
+        return count;
+    }
+    public int getNoOfPremiumCinemas() {
+        int count = 0;
+        for (int i = 0; i < listOfCinemas.size(); i++)
+        {
+            if(listOfCinemas.get(i).getCinemaType() == Cinema.CinemaType.Premium)
+            {
+                count ++;
+            }
+        }
+        return count;
+    }
+
+    public void addListOfCinema(Cinema cinema)
+    {
+        this.listOfCinemas.add(cinema);
+
+        //write to file
+    }
+
+    public ArrayList<Cinema> getListOfCinemas() {
+        return this.listOfCinemas;
+    }
+
+    public void updateListOfCinema(int index)
+    {
+        //write to file
+    }
+
+    public void addListOfMovies(Movie movie)
+    {
+        this.listOfMovies.add(movie);
+
+        //write to file
+    }
 
     public ArrayList<Movie> getListOfMovies() {
-//        for (int i = 0; i < this.listOfMovies.size(); i++) {
-//            this.listOfMovies.get(i).printMovieDetails();
-//        }
         return this.listOfMovies;
+    }
+
+    public void updateListOfMovies(int index)
+    {
+        //write to file
     }
 
     public void InitializeMovies() throws IOException {
         System.out.println("Initializing list of movies in cinemas\n...\n...");
-        TextDB db = new TextDB();
-        this.listOfMovies = new ArrayList<Movie>();
 
-        //Create dir and movie.txt if entered cineplex name doesn't exist in DataStorage dir
-        File cineplexDir = new File(TextDB.getCurrentDirectory() + "\\" + this.getCineplexName().replace(' ','_'));
         if (!cineplexDir.exists()){
             cineplexDir.mkdirs();
-            File movieFile = new File(cineplexDir+"\\" + TextDB.Files.Movies.ToString());
             movieFile.createNewFile();
+            showTimeFile.createNewFile();
 
-            System.out.println("Created directory and Movies.txt. Path :" + cineplexDir+"\\" + TextDB.Files.Movies.ToString());
+            System.out.println("Created directory, Movies.txt and Showtime.txt. Path :" + cineplexDir+"\\" );
+        }
+        else
+        {
+            if(!movieFile.exists())movieFile.createNewFile();
+            if(!showTimeFile.exists()) showTimeFile.createNewFile();
+
+            System.out.println("Created Movies.txt and Showtime.txt. Path :" + cineplexDir+"\\" );
         }
 
         try {
-            this.listOfMovies = db.readFromFile(  getCineplexName().replace(' ','_') + "\\" +TextDB.Files.Movies.ToString(), this.listOfMovies);
+            this.listOfMovies = db.readFromFile(getCineplexName().replace(' ','_') + "\\" +TextDB.Files.Movies.ToString(), this.listOfMovies);
+            for(Cinema c : listOfCinemas)
+            {
+               c.setShowTime(db.readFromFile(getCineplexName().replace(' ','_') + "\\" +TextDB.Files.ShowTime.ToString()  ,c));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,11 +125,13 @@ public class Cineplex {
 
     //Class Test
     public static void main(String[] args) throws IOException {
-        Cineplex myC = new Cineplex("Cineplex3" ,1, 2);
+    }
+
+
+    private void moveTextTest() throws IOException {
+        Cineplex myC = new Cineplex("Cineplex3" );
 
         System.out.println("Initializing list of movies in cinemas\n...\n...");
-        TextDB db = new TextDB();
-        myC.listOfMovies = new ArrayList<Movie>();
 
         File cineplexDir = new File(TextDB.getCurrentDirectory() + "\\" + myC.getCineplexName().replace(' ','_'));
         if (!cineplexDir.exists()){
