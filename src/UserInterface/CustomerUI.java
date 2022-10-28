@@ -46,7 +46,6 @@ public class CustomerUI {
 //                    double ticketPrice = customer.getTicket().CalculatePrice(); // Get movie datetime
 //                    System.out.printf("Your Ticket Price is: %.2f", ticketPrice);
 //                    customer.setTID(PaymentUI.PaymentInterface(customer));
-
                 }
                 case 2 -> {
                     System.out.println("Enter your new name: ");
