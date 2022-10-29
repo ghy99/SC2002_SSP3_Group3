@@ -1,7 +1,5 @@
-import Customer.Customer;
 import Movie.*;
 import Service.DateTime;
-import Cineplex.Cineplex;
 import Service.TextDB;
 import UserInterface.*;
 import java.io.IOException;

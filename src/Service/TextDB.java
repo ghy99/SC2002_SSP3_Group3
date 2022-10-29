@@ -132,37 +132,44 @@ public class TextDB {
     }
 
     public ArrayList<ShowTime> readFromFile(ArrayList<Movie> movie, String fileName) throws IOException {
-        ArrayList<String> listOfShowTime = (ArrayList) TextDB.Read(fileName);
-        ArrayList<ShowTime> alr = new ArrayList<>();
-        ArrayList<ArrayList<String>> temp = new ArrayList<>();
-        ShowTime tempST = null;
-        int rowCount = 0;
+        //Temp variable for stroing data
+        ArrayList<String> listOfShowTime = (ArrayList) TextDB.Read(fileName); //Read file line by line
+        ArrayList<ShowTime> alr = new ArrayList<>(); //Temp Showtime list to link to object
+        ArrayList<ArrayList<String>> temp = new ArrayList<>(); //Temp 2D arraylist for seats
+        ShowTime tempST = null; //Temp Showtime object
+        int rowCount = 0; //For updating current row count
 
+        //Loop trough all lines
         for (int i = 0; i < listOfShowTime.size(); i++) {
 
+            //Get each line
             String st = listOfShowTime.get(i);
 
-            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
-            String movieName = star.nextToken().trim();
-            String time = star.nextToken().trim();
-            int[] aisle = new int[2];
-            int count = 0;
+            StringTokenizer star = new StringTokenizer(st, SEPARATOR); //For current with seprator (|)
+            String movieName = star.nextToken().trim(); //Take string from start to (|)
+            String time = star.nextToken().trim(); //Take 2nd value from 1st (|) to 2nd (|)
+            int[] aisle = new int[2];//For storing aisle
+            int count = 0;//To update aisle count
 
-            //Read the 2d array seats
+            //Read the 2d array seats until first ] found
             while (!Objects.equals(listOfShowTime.get(i), "]")) {
-                if (i + 1 < listOfShowTime.size()) {
+                if (i + 1 < listOfShowTime.size()) { //if i not bigger than total line size keep increasing
                     i++;
+                    //if line is not "[" or "]"
                     if (!Objects.equals(listOfShowTime.get(i), "]") && !Objects.equals(listOfShowTime.get(i), "[")) {
-                        String[] t1 = listOfShowTime.get(i).split(",");
-                        temp.add(new ArrayList<>());
-                        ArrayList<String> currentRow = temp.get(rowCount);
+                        String[] t1 = listOfShowTime.get(i).split(","); //seperate line by ","
+                        temp.add(new ArrayList<>()); //add in new row
+                        ArrayList<String> currentRow = temp.get(rowCount);//get the column that just created
+                        //For each val seperated by ","
                         for(String s : t1)
                         {
+                            //Check is current column an aisle
                             if(Objects.equals( s,"@|") && count < 2)
                             {
                                 aisle[count++] = rowCount;
                             }
 
+                            //if current val is null add in null else add in value
                             if(Objects.equals(s , "null"))
                             {
                                 currentRow.add(null);
@@ -176,6 +183,7 @@ public class TextDB {
                     }
                 }
             }
+            
             //Refrence the current Showtime to our list of movies in cinexplex
             for (Movie m : movie) {
                 if (Objects.equals(m.getMovieTitle(), movieName)) {

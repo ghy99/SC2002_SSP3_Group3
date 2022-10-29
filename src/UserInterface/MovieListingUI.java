@@ -25,16 +25,16 @@ public class MovieListingUI {
 		}
 		System.out.println();
 		if(choice == 1) {
-			CreateMovie.main(null);
+			//CreateMovie.main(null);
 		}
 		else if(choice == 2) {
-			UpdateMovie.main(null);
+			//UpdateMovie.main(null);
 		}
 		else if(choice == 3){
-			DeleteMovie.main(null);
+			//DeleteMovie.main(null);
 		}
 		else if(choice == 4){
-			AdminFunctions.main(null);
+			//AdminFunctions.main(null);
 		}
 	}
 
