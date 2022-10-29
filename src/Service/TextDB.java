@@ -1,12 +1,18 @@
 package Service;
 import Customer.Customer;
-import Movie.*;
-import Cineplex.*;
+import Admin.*;
+import Cineplex.Cinema;
+import Cineplex.Cineplex;
+import Cineplex.ShowTime;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import Movie.*;
 
 public class TextDB {
 
@@ -170,6 +176,29 @@ public class TextDB {
         return alr;
     }
 
+    public ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList,String fileName) throws IOException {
+
+        // read String from text file
+    	ArrayList<String> stringArray = (ArrayList) TextDB.Read(fileName);
+        
+        for (String str : stringArray) {
+        	String st = str;
+
+          // get individual 'fields' of the string separated by SEPARATOR
+          StringTokenizer star = new StringTokenizer(st, SEPARATOR); // pass in the string to the string tokenizer using
+                                                                     // delimiter "|"
+
+          String userName = star.nextToken().trim();
+          String password = star.nextToken().trim();
+
+          Admin tempAdmin = new Admin(userName, password);
+          // add to Professors list
+          adminList.add(tempAdmin);
+        }
+        return adminList;
+      }
+
+    
     public static void WriteToTextDB(String fileName, Cineplex cineplex) throws IOException {
         List alw = new ArrayList() ;// to store Professors data
 
@@ -237,21 +266,21 @@ public class TextDB {
     }
 
     //DB test
-    public void main(String[] args) throws IOException {
-        ArrayList<Customer> al = new ArrayList();
-        al.add(new Customer("Ant","12","ant@h.com", 0));
-        al.add(new Customer("gdf","234","ant@h.com", 1));
-        al.add(new Customer("xcv","756","ant@h.com", 2));
-
-        //write test
-        WriteToTextDB("test.txt" , al);
-
-        //read test
-        for (Customer cs : ReadFromFile("test.txt", al))
-        {
-            System.out.println(cs.getMovieGoerName() + " " + cs.getMobileNumber() + " " + cs.getEmail()  + " " + cs.getTID());
-        }
-    }
+//    public void main(String[] args) throws IOException {
+//        ArrayList<Customer> al = new ArrayList();
+//        al.add(new Customer("Ant","12","ant@h.com", 0));
+//        al.add(new Customer("gdf","234","ant@h.com", 1));
+//        al.add(new Customer("xcv","756","ant@h.com", 2));
+//
+//        //write test
+//        WriteToTextDB("test.txt" , al);
+//
+//        //read test
+//        for (Customer cs : ReadFromFile("test.txt", al))
+//        {
+//            System.out.println(cs.getMovieGoerName() + " " + cs.getMobileNumber() + " " + cs.getEmail()  + " " + cs.getTID());
+//        }
+//    }
 
     public static String getCurrentDirectory() {
         return CurrentDirectory;
