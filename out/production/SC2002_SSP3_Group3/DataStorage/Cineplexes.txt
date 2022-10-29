@@ -1,3 +1,0 @@
-Shaw Theatre | cinema1:Premium,cinema2:Regular,cinema3:Premium,cinema4:Premium
-Cathay Cineplex | cinema1:Premium,cinema2:Regular,cinema3:Premium,cinema4:Premium
-Golden Village | cinema1:Premium,cinema2:Regular,cinema3:Premium,cinema4:Premium
