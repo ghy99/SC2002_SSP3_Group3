@@ -152,18 +152,18 @@ public class TextDB {
         return alr;
     }
 
-    public static ArrayList<ArrayList<Integer>> readFromFile(String fileName,MovieTicket ticket) throws IOException {
+    public static ArrayList<ArrayList<Double>> readFromFile(String fileName,MovieTicket ticket) throws IOException {
         // Implement read ticket price txtfile
         ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
-        ArrayList<ArrayList<Integer>> alr = new ArrayList<>();
+        ArrayList<ArrayList<Double>> alr = new ArrayList<>();
 
         for (String prices : listOfTicketPrice) {
-            ArrayList<Integer> storePriceTypes = new ArrayList<Integer>();
+            ArrayList<Double> storePriceTypes = new ArrayList<Double>();
             StringTokenizer star = new StringTokenizer(prices, SEPARATOR);
             String stringChargingPrices = star.nextToken().trim();
             String[] temp = star.nextToken().trim().split(",");
             for (String priceType : temp) {
-                storePriceTypes.add(Integer.parseInt(priceType));
+                storePriceTypes.add(Double.parseDouble(priceType));
             }
             alr.add(storePriceTypes);
         }
