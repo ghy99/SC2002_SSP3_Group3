@@ -17,7 +17,7 @@ public class CineplexUnitTest {
         String filename = "Cineplexes.txt";
 
         try {
-            cineplexes = db.readFromFile(cineplexes, filename);
+            cineplexes = db.readFromFile(filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,6 +36,7 @@ public class CineplexUnitTest {
                         for (ShowTime st : z.getShowTime())
                         {
                             System.out.println((DateTime.convertTime(st.time.getTime()) ));
+                            st.printSeats();
                         }
                     }
                 }
