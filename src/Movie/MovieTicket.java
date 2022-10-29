@@ -53,11 +53,11 @@ public class MovieTicket {
     }
 
     public double CalculatePrice(MovieTicket ticket) throws IOException {
-        ArrayList<ArrayList<Integer>> ticketPrices = new ArrayList<>();
+        ArrayList<ArrayList<Double>> ticketPrices = new ArrayList<>();
         String filename = "TicketPrice.txt";
         ticketPrices = TextDB.readFromFile(filename, ticket);
-        for (ArrayList<Integer> prices : ticketPrices) {
-            for (int cat : prices) {
+        for (ArrayList<Double> prices : ticketPrices) {
+            for (double cat : prices) {
                 System.out.printf("%d\t", cat);
             }
             System.out.println();
