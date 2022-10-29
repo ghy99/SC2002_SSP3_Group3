@@ -32,9 +32,12 @@ package Movie;
     this.startRow = 65+row-1;
   }
 
+     public MovieSeats() {
 
-   
-  public void seatsCreation(){ //Set up seats layout. 
+     }
+
+
+     public void seatsCreation(){ //Set up seats layout.
     
     //ClassOfCinema class calls movieSeat.seatsCreation() in Main
     //eg: ClassOfCinema Platinum = new ClassOfCinema(PLATINUM)
