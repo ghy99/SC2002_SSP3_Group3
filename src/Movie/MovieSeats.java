@@ -13,7 +13,13 @@ package Movie;
     // System does not allow unoccupied seats between selected seats
 
 
- public class MovieSeats {
+import Cineplex.Cinema;
+import Cineplex.ShowTime;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class MovieSeats  {
    
   //enum Name = {PLATINUM, 2D};
   private int row;
@@ -23,7 +29,7 @@ package Movie;
   private String[][] seats; //seat layout in 2D array
   private int startRow; //for row labels
 
-  public MovieSeats(int row, int col,int aisleOne, int aisleTwo) {
+  public MovieSeats(int row, int col, int aisleOne, int aisleTwo) {
     this.row = row+1; //additional 1 row for row labels
     this.col = col+3; //additional 3 col: 2 for col labels, 1 for layout
     this.aisleOne = aisleOne+1;
@@ -32,10 +38,17 @@ package Movie;
     this.startRow = 65+row-1;
   }
 
+  public MovieSeats(int row, int col, int[] aisle) {
+    this.row = row; //additional 1 row for row labels
+    this.col = col; //additional 3 col: 2 for col labels, 1 for layout
+    this.aisleOne = aisleOne;
+    this.aisleTwo = aisleTwo;
+    this.startRow = 65+row-1;
+  }
+
      public MovieSeats() {
 
      }
-
 
      public void seatsCreation(){ //Set up seats layout.
     
@@ -83,28 +96,25 @@ package Movie;
   }
 
 
-   
+
   public void printSeats(){
-    System.out.println("");
-    System.out.println("~CATHAY PLATINUM 1~"); 
-    System.out.println("");
-    System.out.println("SELECT SEATS:");
-    System.out.println("----------------------------------------------------------");
-    System.out.println("|SCREEN| ");
+    System.out.println("                         |SCREEN|                         ");
     System.out.println("----------------------------------------------------------");
 
     for (int i=0; i<this.row; i++) {
       for (int j=0; j<this.col; j++) {
         if(this.seats[i][j] == null){
-          this.seats[i][j] = "   ";
+          System.out.print(" ");
         }
-        System.out.print(this.seats[i][j]);
+        else {
+          System.out.print(this.seats[i][j]);
+        }
     }
       System.out.println("");
       System.out.println("----------------------------------------------------------");
     }
-    
-    System.out.println("|ENTRANCE| ");
+
+    System.out.println("                         |ENTRANCE|                       ");
     System.out.println("----------------------------------------------------------");
     System.out.println("");
     System.out.println("Legend:");
@@ -113,12 +123,12 @@ package Movie;
     System.out.print("|X| Seat Taken");
     System.out.println("");
     System.out.println("");
-  } 
+  }
 
 
-   
+
   public int checkSeats(char i, int j){
-    
+
     //printSeats(); //show current seats available
     //int rows = this.row -(i - '0'-16); //i-'0' convert to integer; '0' = 48; -16 to ...
     int rows = (17+this.row-1) - (i - '0');
@@ -135,7 +145,10 @@ package Movie;
       return 1; //return 1 to calling method to say seat is successfully booked
       }
 	}
-	
+
+  protected void setSeats(String[][] seats) {
+    this.seats = seats;
+  }
 }
 	
 
