@@ -148,11 +148,26 @@ public class TextDB {
                     alr.add(new ShowTime(DateTime.StringToDate(time)) );
                 }
             }
-
-
         }
         return alr;
+    }
 
+    public static ArrayList<ArrayList<Integer>> readFromFile(String fileName,MovieTicket ticket) throws IOException {
+        // Implement read ticket price txtfile
+        ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
+        ArrayList<ArrayList<Integer>> alr = new ArrayList<>();
+
+        for (String prices : listOfTicketPrice) {
+            ArrayList<Integer> storePriceTypes = new ArrayList<Integer>();
+            StringTokenizer star = new StringTokenizer(prices, SEPARATOR);
+            String stringChargingPrices = star.nextToken().trim();
+            String[] temp = star.nextToken().trim().split(",");
+            for (String priceType : temp) {
+                storePriceTypes.add(Integer.parseInt(priceType));
+            }
+            alr.add(storePriceTypes);
+        }
+        return alr;
     }
 
     public static void WriteToTextDB(String fileName, Cineplex cineplex) throws IOException {
