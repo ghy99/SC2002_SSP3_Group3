@@ -1,13 +1,19 @@
 package Service;
 
 import Customer.Customer;
-import Movie.*;
-import Cineplex.*;
+import Admin.*;
+import Cineplex.Cinema;
+import Cineplex.Cineplex;
+import Cineplex.ShowTime;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import Movie.*;
 
 public class TextDB {
 
@@ -177,14 +183,54 @@ public class TextDB {
                     break;
                 }
             }
+        }
+        return alr;
+    }
 
             alr.add(tempST);
+            }
+    public static ArrayList<ArrayList<Double>> readFromFile(String fileName,MovieTicket ticket) throws IOException {
+        // Implement read ticket price txtfile
+        ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
+        ArrayList<ArrayList<Double>> alr = new ArrayList<>();
+
+        for (String prices : listOfTicketPrice) {
+            ArrayList<Double> storePriceTypes = new ArrayList<Double>();
+            StringTokenizer star = new StringTokenizer(prices, SEPARATOR);
+            String stringChargingPrices = star.nextToken().trim();
+            String[] temp = star.nextToken().trim().split(",");
+            for (String priceType : temp) {
+                storePriceTypes.add(Double.parseDouble(priceType));
+            }
+            alr.add(storePriceTypes);
         }
 
         return alr;
-
     }
 
+    public ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList,String fileName) throws IOException {
+
+        // read String from text file
+    	ArrayList<String> stringArray = (ArrayList) TextDB.Read(fileName);
+        
+        for (String str : stringArray) {
+        	String st = str;
+
+          // get individual 'fields' of the string separated by SEPARATOR
+          StringTokenizer star = new StringTokenizer(st, SEPARATOR); // pass in the string to the string tokenizer using
+                                                                     // delimiter "|"
+
+          String userName = star.nextToken().trim();
+          String password = star.nextToken().trim();
+
+          Admin tempAdmin = new Admin(userName, password);
+          // add to Professors list
+          adminList.add(tempAdmin);
+        }
+        return adminList;
+      }
+
+    
     public static void WriteToTextDB(String fileName, Cineplex cineplex) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
