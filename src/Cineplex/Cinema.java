@@ -12,8 +12,7 @@ import java.nio.file.Paths;
 public class Cinema {
     public enum CinemaType{
         Premium("Premium"),
-        Regular("Regular")
-                ;
+        Regular("Regular");
 
         public final String CinemaType;
 
@@ -57,23 +56,23 @@ public class Cinema {
         return showTime;
     }
 
-    public void addShowTime(Date time) {
+    private void createShowTime(Date time , Movie movie) {
 
         if(cinemaType == CinemaType.Premium)
         {
-            showTime.add(new ShowTime(0,0,0,0,time));
+            showTime.add(new ShowTime(0,0,0,0,time , movie));
         }
         else
         {
-            showTime.add(new ShowTime(0,0,0,0,time));
+            showTime.add(new ShowTime(0,0,0,0,time, movie));
         }
 
         showTime.sort(Comparator.comparing(ShowTime::getTimeHour));
     }
 
-    public void updateCinemaTime(int index , Date showTime) {
+    public void updateCinemaTime(int index , Date showTime, Movie movie) {
         deleteCinemaTime(index);
-        addShowTime(showTime);
+        addShowTime(showTime,movie);
     }
 
     public void deleteCinemaTime(int index)
@@ -81,7 +80,7 @@ public class Cinema {
         listOfMovies.remove(index);
     }
 
-    public void updateShowTime(Date date ) {
+    public void addShowTime(Date date , Movie movie) {
         var temp = this.getShowTime();
 
         //if no showtime just add
@@ -94,7 +93,7 @@ public class Cinema {
                     if (i + 1 < temp.size()) {
                         long remainTime = temp.get(i + 1).getTimeHour() - temp.get(i).getTimeHour();
                         if (date.getTime() + 2 * HOUR < remainTime) {
-                            this.addShowTime(date);
+                            this.createShowTime(date,movie);
                             return;
                         }
                     }
@@ -104,7 +103,7 @@ public class Cinema {
         }
         else
         {
-            this.addShowTime(date);
+            this.addShowTime(date, movie);
         }
     }
 }

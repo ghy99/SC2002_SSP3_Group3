@@ -16,8 +16,6 @@ public class Cineplex {
     private static final TextDB db = new TextDB();
     //Create dir and movie.txt if entered cineplex name doesn't exist in DataStorage dir
     private final File cineplexDir;
-    private final File showTimeFile;
-    private final File movieFile;
 
     // This will be for Cineplexes
     private String cineplexName;
@@ -27,8 +25,6 @@ public class Cineplex {
     public Cineplex(String name) {
         this.cineplexName = name;
         cineplexDir = new File(TextDB.getCurrentDirectory() + "\\" + this.getCineplexName().replace(' ','_'));
-        showTimeFile = new File(cineplexDir+"\\" + TextDB.Files.ShowTime.ToString());
-        movieFile = new File(cineplexDir+"\\" + TextDB.Files.Movies.ToString());
     }
 
     public String getCineplexName() {
@@ -96,8 +92,12 @@ public class Cineplex {
     public void InitializeMovies() throws IOException {
         System.out.println("Initializing list of movies in cinemas\n...\n...");
 
+        File movieFile = new File(cineplexDir+"\\" + TextDB.Files.ShowTime.ToString());
+        File showTimeFile = new File(cineplexDir+"\\" + TextDB.Files.Movies.ToString());
+
         if (!cineplexDir.exists()){
             cineplexDir.mkdirs();
+
             movieFile.createNewFile();
             showTimeFile.createNewFile();
 
@@ -115,7 +115,9 @@ public class Cineplex {
             this.listOfMovies = db.readFromFile(getCineplexName().replace(' ','_') + "\\" +TextDB.Files.Movies.ToString(), this.listOfMovies);
             for(Cinema c : listOfCinemas)
             {
-               c.setShowTime(db.readFromFile(getCineplexName().replace(' ','_') + "\\" +TextDB.Files.ShowTime.ToString()  ,c));
+                File cinema = new File(cineplexDir+"\\" + c.getCinemaName()+".txt");
+                if(!cinema.exists())cinema.createNewFile();
+                c.setShowTime(db.readFromFile( this.listOfMovies, "\\" + this.getCineplexName().replace(' ','_')+ "\\"+c.getCinemaName()+".txt" ));
             }
         } catch (IOException e) {
             e.printStackTrace();
