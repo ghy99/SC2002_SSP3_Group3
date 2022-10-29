@@ -2,16 +2,20 @@ package Movie;
 
 public class MovieType {
 
+    public enum Type {
+        Premium, Regular
+    }
+
     public enum Genre{
         Action, Comedy, Drama, Fantasy, Horror, Myster, Romance, Thriller, Western;
     }
 
-    public enum Class{
-        G, PG, PG13, NC16, M18, R21;
+    public enum Dimension {
+        TWO_D, THREE_D, BLOCKBUSTER;
     }
 
-    public enum Type{
-        TWO_D, THREE_D, BLOCKBUSTER;
+    public enum Class{
+        G, PG, PG13, NC16, M18, R21;
     }
 
     private final String movieGenre, movieClass, movieType;
