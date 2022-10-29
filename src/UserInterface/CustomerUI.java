@@ -8,7 +8,7 @@ import Cineplex.Cineplex;
 import Customer.Customer;
 
 public class CustomerUI {
-    public static void CustomerInterface(ArrayList<Cineplex> cineplex) {
+    public static void CustomerInterface(ArrayList<Cineplex> cineplex) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your (Customer) name: ");
@@ -27,7 +27,8 @@ public class CustomerUI {
             System.out.println("\t3) Change your number.");
             System.out.println("\t4) Change your email.");
             System.out.println("\t5) Print your details.");
-            System.out.println("\tEnter '-1' to exit!");
+            System.out.println("\t6) Print your Booking History.");
+            System.out.println("\tEnter '11' to exit!");
 
             do {
                 while (!sc.hasNextInt()) {
@@ -43,9 +44,9 @@ public class CustomerUI {
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
                     customer.getTicket().printTicket();
-//                    double ticketPrice = customer.getTicket().CalculatePrice(); // Get movie datetime
-//                    System.out.printf("Your Ticket Price is: %.2f", ticketPrice);
-//                    customer.setTID(PaymentUI.PaymentInterface(customer));
+                    double ticketPrice = customer.getTicket().CalculatePrice(customer.getTicket()); // Get movie datetime
+                    System.out.printf("Your Ticket Price is: %.2f", ticketPrice);
+                    customer.setTID(PaymentUI.PaymentInterface(customer));
                 }
                 case 2 -> {
                     System.out.println("Enter your new name: ");
@@ -68,10 +69,13 @@ public class CustomerUI {
                 case 5 -> {
                     customer.printCustomerDetails();
                 }
+                case 6 -> {
+                    // Call function to check booking history
+                }
                 default -> {
                     System.out.println("Invalid Input. Try again.");
                 }
             }
-        } while (choice >= 0);
+        } while (choice < 10);
     }
 }

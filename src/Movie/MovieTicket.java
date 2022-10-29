@@ -1,6 +1,10 @@
 package Movie;
 import Cineplex.Cineplex;
 import Movie.MovieType;
+import Service.TextDB;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.random.RandomGenerator;
@@ -13,6 +17,9 @@ public class MovieTicket {
         // Cinema Class - Gold, Premium, Platinum, Regular
         // Age of buyer - Elderly, Adult, Child
         // Day of the week - weekday, weekend, public holiday
+    // text file format:
+        // Student, Adult, Senior Citizen | Weekday, Weekend, Public Holiday | 2D, 3D | Regular, Platinum
+        // Blockbusters + $1
     private Cineplex ChosenCineplex;
     private Movie Movie;
     private MovieSeats SeatID;
@@ -45,19 +52,28 @@ public class MovieTicket {
         return this.Movie;
     }
 
-    public double CalculatePrice() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(MovieDateTime);
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        int chargeDay = 0;
-        if (dayOfWeek < 6) { // if weekday charge $2, weekend charge $4
-            chargeDay = chargeDay + 2;
+    public double CalculatePrice(MovieTicket ticket) throws IOException {
+        ArrayList<ArrayList<Integer>> ticketPrices = new ArrayList<>();
+        String filename = "TicketPrice.txt";
+        ticketPrices = TextDB.readFromFile(filename, ticket);
+        for (ArrayList<Integer> prices : ticketPrices) {
+            for (int cat : prices) {
+                System.out.printf("%d\t", cat);
+            }
+            System.out.println();
         }
-        else {
-            chargeDay = chargeDay + 4;
-        }
-        MovieType.Type CinemaType = this.Movie.getTypeOfCinema();
-        System.out.printf("You are watching in a %s Theatre!", CinemaType.toString());
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(MovieDateTime);
+//        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+//        int chargeDay = 0;
+//        if (dayOfWeek < 6) { // if weekday charge $2, weekend charge $4
+//            chargeDay = chargeDay + 2;
+//        }
+//        else {
+//            chargeDay = chargeDay + 4;
+//        }
+//        MovieType.Type CinemaType = this.Movie.getTypeOfCinema();
+//        System.out.printf("You are watching in a %s Theatre!", CinemaType.toString());
         return 0;
     }
 
