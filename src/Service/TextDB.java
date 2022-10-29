@@ -78,34 +78,36 @@ public class TextDB {
         }
         return customers;
     }
+    
+    //commenting out due to error in valueOf
 
-    public ArrayList<Movie> readFromFile(String fileName, ArrayList<Movie> movies) throws IOException {
-        ArrayList<String> listofMovies = (ArrayList) TextDB.Read(fileName);
-        ArrayList<Movie> alr = new ArrayList<Movie>();
-
-        for (String listofMovie : listofMovies) {
-            String st = listofMovie;
-
-            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
-
-            String title = star.nextToken().trim();
-            Movie.MovieStatus status = Movie.MovieStatus.valueOf(star.nextToken().trim());
-            String synopsis = star.nextToken().trim();
-            String[] temp = star.nextToken().trim().split(",");
-            ArrayList<String> casts = new ArrayList<>();
-            Collections.addAll(casts, temp);
-            MovieType.Type type = MovieType.Type.valueOf(star.nextToken().trim());
-            MovieType.Genre genre = MovieType.Genre.valueOf(star.nextToken().trim());
-            MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
-            MovieType.Class movieClass = MovieType.Class.valueOf(star.nextToken().trim());
-
-            Movie movie = new Movie(
-                    title, status, synopsis, casts, type, genre, dim, movieClass
-            );
-            movies.add(movie);
-        }
-        return movies;
-    }
+//    public ArrayList<Movie> readFromFile(String fileName, ArrayList<Movie> movies) throws IOException {
+//        ArrayList<String> listofMovies = (ArrayList) TextDB.Read(fileName);
+//        ArrayList<Movie> alr = new ArrayList<Movie>();
+//
+//        for (String listofMovie : listofMovies) {
+//            String st = listofMovie;
+//
+//            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
+//
+//            String title = star.nextToken().trim();
+//            Movie.MovieStatus status = Movie.MovieStatus.valueOf(star.nextToken().trim());
+//            String synopsis = star.nextToken().trim();
+//            String[] temp = star.nextToken().trim().split(",");
+//            ArrayList<String> casts = new ArrayList<>();
+//            Collections.addAll(casts, temp);
+//            MovieType.Type type = MovieType.Type.valueOf(star.nextToken().trim());
+//            MovieType.Genre genre = MovieType.Genre.valueOf(star.nextToken().trim());
+//            MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
+//            MovieType.Class movieClass = MovieType.Class.valueOf(star.nextToken().trim());
+//
+//            Movie movie = new Movie(
+//                    title, status, synopsis, casts, type, genre, dim, movieClass
+//            );
+//            movies.add(movie);
+//        }
+//        return movies;
+//    }
 
     public ArrayList<Cineplex> readFromFile(String filename) throws IOException {
         ArrayList<String> listofCineplexes = (ArrayList) TextDB.Read(filename);
@@ -130,65 +132,67 @@ public class TextDB {
         return alr;
 
     }
+    
+    //Commenting it out due to error
 
-    public ArrayList<ShowTime> readFromFile(ArrayList<Movie> movie, String fileName) throws IOException {
-        ArrayList<String> listOfShowTime = (ArrayList) TextDB.Read(fileName);
-        ArrayList<ShowTime> alr = new ArrayList<>();
-        ArrayList<ArrayList<String>> temp = new ArrayList<>();
-        ShowTime tempST = null;
-        int rowCount = 0;
-
-        for (int i = 0; i < listOfShowTime.size(); i++) {
-
-            String st = listOfShowTime.get(i);
-
-            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
-            String movieName = star.nextToken().trim();
-            String time = star.nextToken().trim();
-            int[] aisle = new int[2];
-            int count = 0;
-
-            //Read the 2d array seats
-            while (!Objects.equals(listOfShowTime.get(i), "]")) {
-                if (i + 1 < listOfShowTime.size()) {
-                    i++;
-                    if (!Objects.equals(listOfShowTime.get(i), "]") && !Objects.equals(listOfShowTime.get(i), "[")) {
-                        String[] t1 = listOfShowTime.get(i).split(",");
-                        temp.add(new ArrayList<>());
-                        ArrayList<String> currentRow = temp.get(rowCount);
-                        for(String s : t1)
-                        {
-                            if(Objects.equals( s,"@|") && count < 2)
-                            {
-                                aisle[count++] = rowCount;
-                            }
-
-                            if(Objects.equals(s , "null"))
-                            {
-                                currentRow.add(null);
-                            }
-                            else
-                            {
-                                currentRow.add(s);
-                            }
-                        }
-                        rowCount++;
-                    }
-                }
-            }
-            //Refrence the current Showtime to our list of movies in cinexplex
-            for (Movie m : movie) {
-                if (Objects.equals(m.getMovieTitle(), movieName)) {
-                    tempST = new ShowTime(DateTime.StringToDate(time), m , temp , aisle);
-                    break;
-                }
-            }
-        }
-        return alr;
-    }
-
-            alr.add(tempST);
-            }
+//    public ArrayList<ShowTime> readFromFile(ArrayList<Movie> movie, String fileName) throws IOException {
+//        ArrayList<String> listOfShowTime = (ArrayList) TextDB.Read(fileName);
+//        ArrayList<ShowTime> alr = new ArrayList<>();
+//        ArrayList<ArrayList<String>> temp = new ArrayList<>();
+//        ShowTime tempST = null;
+//        int rowCount = 0;
+//
+//        for (int i = 0; i < listOfShowTime.size(); i++) {
+//
+//            String st = listOfShowTime.get(i);
+//
+//            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
+//            String movieName = star.nextToken().trim();
+//            String time = star.nextToken().trim();
+//            int[] aisle = new int[2];
+//            int count = 0;
+//
+//            //Read the 2d array seats
+//            while (!Objects.equals(listOfShowTime.get(i), "]")) {
+//                if (i + 1 < listOfShowTime.size()) {
+//                    i++;
+//                    if (!Objects.equals(listOfShowTime.get(i), "]") && !Objects.equals(listOfShowTime.get(i), "[")) {
+//                        String[] t1 = listOfShowTime.get(i).split(",");
+//                        temp.add(new ArrayList<>());
+//                        ArrayList<String> currentRow = temp.get(rowCount);
+//                        for(String s : t1)
+//                        {
+//                            if(Objects.equals( s,"@|") && count < 2)
+//                            {
+//                                aisle[count++] = rowCount;
+//                            }
+//
+//                            if(Objects.equals(s , "null"))
+//                            {
+//                                currentRow.add(null);
+//                            }
+//                            else
+//                            {
+//                                currentRow.add(s);
+//                            }
+//                        }
+//                        rowCount++;
+//                    }
+//                }
+//            }
+//            //Refrence the current Showtime to our list of movies in cinexplex
+//            for (Movie m : movie) {
+//                if (Objects.equals(m.getMovieTitle(), movieName)) {
+//                    tempST = new ShowTime(DateTime.StringToDate(time), m , temp , aisle);
+//                    break;
+//                }
+//            }
+//        }
+//        return alr;
+//    }
+//
+//            alr.add(tempST);
+//            }
     public static ArrayList<ArrayList<Double>> readFromFile(String fileName,MovieTicket ticket) throws IOException {
         // Implement read ticket price txtfile
         ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
@@ -211,6 +215,7 @@ public class TextDB {
     public ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList,String fileName) throws IOException {
 
         // read String from text file
+    	//for reading from admin.txt to extract admin username and passwords
     	ArrayList<String> stringArray = (ArrayList) TextDB.Read(fileName);
         
         for (String str : stringArray) {
@@ -230,12 +235,26 @@ public class TextDB {
         return adminList;
       }
 
+    public ArrayList<String> ReadFromFile(String fileName) throws IOException {
+
+        // read String from text file
+    	//for reading from HolidayDates.txt to extract holiday dates
+    	ArrayList<String> stringArray = (ArrayList) TextDB.Read(fileName);
+        ArrayList<String> dateArray = new ArrayList<>();
+        for (String str : stringArray) {
+        	String date = str;
+	        // add to Professors list
+        	dateArray.add(date);
+        }
+        return dateArray;
+      }
+ 
     
     public static void WriteToTextDB(String fileName, Cineplex cineplex) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
         StringBuilder st = new StringBuilder();
-        st.append(cineplex.getCineplexName().trim());
+  
         st.append(SEPARATOR);
 
         for (int i = 0; i < cineplex.getListOfCinemas().size(); i++) {
@@ -250,7 +269,21 @@ public class TextDB {
         }
         Write(fileName, alw);
     }
-
+    
+    
+    public static void WriteToTextDB(String fileName, String date) throws IOException {
+    	
+    	//for admin to write to add in dates into HolidayDates.txt file
+        
+        TextDB textDB = new TextDB();
+        ArrayList<String> holidayList = textDB.ReadFromFile("HolidayDates.txt");
+        holidayList.add(date);
+        Write(fileName, holidayList);
+        
+    }
+    
+    
+    
     public static void WriteToTextDB(String fileName, List<Customer> customerList) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
