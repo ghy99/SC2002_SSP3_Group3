@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Main {
     // This will be the Moblima main page
     // I think this is supposed to be Cineplex?
+
 //    private static ArrayList<Cineplex> cineplexes;
 //
 //    public static void InitializeCineplexes() throws IOException {
