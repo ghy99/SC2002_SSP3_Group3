@@ -1,9 +1,10 @@
+
 package AdminUI;
 
 import java.io.*;
 import java.util.*;
 
-public class MovieListingUI {
+public class MovieLIsting {
 	/**
 	 * main function driving the view
 	 * @param args null argument can be used to call the function
