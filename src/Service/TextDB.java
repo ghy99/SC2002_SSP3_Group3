@@ -183,12 +183,11 @@ public class TextDB {
                     break;
                 }
             }
+            alr.add(tempST);
         }
         return alr;
     }
 
-            alr.add(tempST);
-            }
     public static ArrayList<ArrayList<Double>> readFromFile(String fileName,MovieTicket ticket) throws IOException {
         // Implement read ticket price txtfile
         ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
