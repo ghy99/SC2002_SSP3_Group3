@@ -21,6 +21,7 @@ import testingreview.TextDB;
 public class TextDB {
 
     public enum Files {
+        Cineplex("Cineplex.txt"),
         Movies("Movies.txt"),
         ShowTime("ShowTime.txt");
 
@@ -113,7 +114,6 @@ public class TextDB {
     }
 
 
-
     public ArrayList<Cineplex> readFromFile(String filename) throws IOException {
         ArrayList<String> listofCineplexes = (ArrayList) TextDB.Read(filename);
         ArrayList<Cineplex> alr = new ArrayList<>();
@@ -129,7 +129,7 @@ public class TextDB {
             String[] cinemas = star.nextToken().trim().split(",");
             for (String cinema : cinemas) {
                 Cinema c = new Cinema(cinema.split(":")[0], Cinema.CinemaType.valueOf(cinema.split(":")[1]));
-                cineplex.addListOfCinema(c);
+                cineplex.addCinema(c);
             }
             alr.add(cineplex);
         }
@@ -185,8 +185,7 @@ public class TextDB {
     }
 
 
-
-    public static ArrayList<ArrayList<Double>> readFromFile(String fileName,MovieTicket ticket) throws IOException {
+    public static ArrayList<ArrayList<Double>> readFromFile(String fileName, MovieTicket ticket) throws IOException {
         // Implement read ticket price txtfile
         ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
         ArrayList<ArrayList<Double>> alr = new ArrayList<>();
@@ -252,6 +251,7 @@ public class TextDB {
 
     public ArrayList<String> ReadFromFile(String fileName) throws IOException {
 
+
         // read String from text file
         //for reading from HolidayDates.txt to extract holiday dates
         ArrayList<String> stringArray = (ArrayList) TextDB.Read(fileName);
@@ -295,8 +295,6 @@ public class TextDB {
         Write(fileName, alw);
     }
 
-
- 
     public static void WriteToTextDB(String fileName, Cineplex cineplex) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
@@ -340,8 +338,8 @@ public class TextDB {
             }
 
             alw.add("]");
-            alw.add(st.toString());
         }
+
         Write(fileName, alw);
     }
 
@@ -493,7 +491,6 @@ public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException
             oldData.add((String) d);
         }
 
-        FileWriter t = new FileWriter(CurrentDirectory + fileName);
         PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
 
         try {
@@ -506,6 +503,7 @@ public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException
     }
 
     public static void Update(String fileName, List data) throws IOException {
+
 
         PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
         try {
@@ -533,23 +531,11 @@ public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException
         return data;
     }
 
-    public static boolean isFileUnlocked(File file) {
-        try {
-            FileInputStream in = new FileInputStream(file);
-            if (in != null) in.close();
-            return true;
-        } catch (FileNotFoundException e) {
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return true;
-    }
 
     public static String getCurrentDirectory() {
         return CurrentDirectory;
     }
+
 
     public static void main(String[] args) throws IOException {
         ArrayList<String> test = new ArrayList<>();
