@@ -34,14 +34,6 @@ public class MainUI {
         System.out.println("Cineplexes are initialized\n");
     }
 
-    public void InitializeCustomerList() throws IOException {
-        //Implement this.
-    }
-
-    public void InitializeMovieTimetable() throws IOException {
-        // Implement this.
-    }
-
     public static void start() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Moblima!");
