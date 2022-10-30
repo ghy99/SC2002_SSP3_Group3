@@ -14,9 +14,6 @@ import java.util.concurrent.Semaphore;
 
 import Movie.*;
 import Review.*;
-import testingreview.OverallReview;
-import testingreview.Review;
-import testingreview.TextDB;
 
 public class TextDB {
 
@@ -249,21 +246,6 @@ public class TextDB {
         return adminList;
     }
 
-    public ArrayList<String> ReadFromFile(String fileName) throws IOException {
-
-
-        // read String from text file
-        //for reading from HolidayDates.txt to extract holiday dates
-        ArrayList<String> stringArray = (ArrayList) TextDB.Read(fileName);
-        ArrayList<String> dateArray = new ArrayList<>();
-        for (String str : stringArray) {
-            String date = str;
-            // add to Professors list
-            dateArray.add(date);
-        }
-        return dateArray;
-    }
-
     public static void WriteToTextDB(String fileName, ArrayList<Movie> moveis) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
@@ -347,9 +329,7 @@ public class TextDB {
     public static void WriteToTextDB(String fileName, String date) throws IOException {
 
         //for admin to write to add in dates into HolidayDates.txt file
-
-        TextDB textDB = new TextDB();
-        ArrayList<String> holidayList = textDB.ReadFromFile("HolidayDates.txt");
+        ArrayList<String> holidayList = (ArrayList<String>) Read("HolidayDates.txt");
         holidayList.add(date);
         Write(fileName, holidayList);
 

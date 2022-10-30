@@ -1,4 +1,4 @@
-package src.Review;
+package Review;
 import java.util.*;
 
 public class OverallReview {

@@ -1,4 +1,4 @@
-package src.Review;
+package Review;
 
 public class Review {
 	
