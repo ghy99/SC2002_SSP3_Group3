@@ -1,7 +1,6 @@
 package Movie;
-
 import Cineplex.Cinema;
-import Review.AllReviews;
+import Review.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
