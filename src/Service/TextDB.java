@@ -14,6 +14,9 @@ import java.util.concurrent.Semaphore;
 
 import Movie.*;
 import Review.*;
+import testingreview.OverallReview;
+import testingreview.Review;
+import testingreview.TextDB;
 
 public class TextDB {
 
@@ -303,7 +306,7 @@ public class TextDB {
         Write(fileName, alw);
     }
     
-    public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
+public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
     	
     	ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
 		ArrayList<OverallReview> overallReviewList = new ArrayList<OverallReview>();
@@ -322,6 +325,12 @@ public class TextDB {
             
             OverallReview overallReview = new OverallReview(movieTitle,avgRating,count);
             overallReviewList.add(overallReview);
+		}
+		
+		overallReviewList.sort(Comparator.comparing(OverallReview::getavgRating));
+		Collections.reverse(overallReviewList);
+		for(int i = 0; i<overallReviewList.size();i++) {
+			System.out.println(overallReviewList.get(i).getMovieTitle());
 		}
 		
 		return overallReviewList;
