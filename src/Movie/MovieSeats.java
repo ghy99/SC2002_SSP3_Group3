@@ -146,10 +146,6 @@ public class MovieSeats  {
       }
 	}
 
-  public String[][] getSeats() {
-    return seats;
-  }
-
   protected void setSeats(String[][] seats) {
     this.seats = seats;
   }
