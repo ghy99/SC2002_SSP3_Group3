@@ -95,44 +95,45 @@ public class movieInit {
     // admin Function, add timing. 
     // 
 
-    public void addTiming(){
-        
+    public void addTiming(int[][] cineplexMatrix, int whichTime, int whichMovie, int whichCinema){
+        if (cineplexMatrix[whichTime][whichMovie] == 0){
+            if (checkDuplicate(cineplexMatrix,whichTime, whichCinema) == ){
+            cineplexMatrix[whichTime][whichMovie] = whichCinema;
+            System.out.println("Movie is being implemented");
+         } else {
+            System.out.println("Cinema taken, choose another cinema");
+         }
+
+        } else {
+            System.out.println("Movie already have a timing, please remove before entering");
+        }
     }
 
-    public void deleteTiming(){
+    public int[][] deleteTiming(int[][] cineplexMatrix, int whichTime, int whichMovie){
+            if (cineplexMatrix[whichTime][whichMovie] > 0){ // if duplicate
+                cineplexMatrix[whichTime][whichMovie] = 0;
+                System.out.println("Timing removed");
+                // duplicate cinema in same timeslot
+            }  else {
+            System.out.println("Timing is not taken");
+            }
+            return cineplexMatrix;
 
-    }
+        }
     
 
+    public int checkDuplicate(int[][] cineplexMatrix, int whichTime, int cinemaNo){
+        // to check for duplicate.
 
-
-    public int checkDuplicate(int[][] cineplexMatrix, int whichMovie, int cinemaNo){
-        // to check for duplicate. 
 
         for (int x  = 0; x < cineplexMatrix.length; x++){ // check row. 
-            if (cineplexMatrix[x][whichMovie] == cinemaNo){ // if duplicate
-                return 0;
+            if (cineplexMatrix[whichTime][x] == cinemaNo){ // if duplicate
+                return 0; 
+                // duplicate cinema in same timeslot
             } 
-            else { 
-                for (int y = 0; y < cineplexMatrix[0].length; y++){
-                    if (cineplexMatrix[x][y] == cinemaNo){
-                        return 0;
-                    } 
-                }
-            }
         }
-
-        return 1; 
-        
-
-
-
-
-
+        return 1;  // return 1 if no duplicate.
     }
-
-
-
 
     //delete showTime. 
 
