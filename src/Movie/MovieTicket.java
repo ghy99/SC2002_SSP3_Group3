@@ -2,8 +2,12 @@ package Movie;
 import Cineplex.Cineplex;
 import Service.TextDB;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Calendar;
+import java.util.random.RandomGenerator;
+import java.time.*;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -56,6 +60,23 @@ public class MovieTicket {
 
     public Movie getChosenMovie() {
         return this.Movie;
+    }
+    
+    public boolean checkHoliday() throws IOException {
+    	LocalDate tdyDate = LocalDate.now();
+    	
+    	TextDB textDB = new TextDB();
+    	ArrayList<String> holidayList = textDB.ReadFromFile("HolidayDates.txt"); //extract list of holiday dates from storage
+    	
+    	for (int i = 0; i<holidayList.size();i++) {
+	    	if (tdyDate.toString().equals(holidayList.get(i))) {
+	    		System.out.println(tdyDate.toString());
+	    		return true;
+	    	}
+	    }
+    	
+    	return false;
+    	
     }
 
     public void setPriceByAge(ArrayList<Double> age) {

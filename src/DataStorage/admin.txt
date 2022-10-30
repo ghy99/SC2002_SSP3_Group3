@@ -1,1 +1,4 @@
-Jane | Password1 | Bob | Password2 | Henry | Password3 | Xiaoli | Password4
+Jane | Password1
+Bob | Password2
+Henry | Password3
+Xiaoli | Password4
