@@ -1,6 +1,5 @@
 package Movie;
-
-import Review.AllReviews;
+import Review.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
