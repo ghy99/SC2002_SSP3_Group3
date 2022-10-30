@@ -11,12 +11,16 @@ public class DateTime extends Date {
     {
         Date dt = null;
         try {
-             dt = sf.parse("19-08-2022; 01:34:23");
+             dt = sf.parse(dateTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         return dt;
+    }
+
+    public String getCurrentTime() {
+        return convertTime(super.getTime());
     }
 
     public static String convertTime(long time){
@@ -32,6 +36,6 @@ public class DateTime extends Date {
     //DateTime test
     public static void main(String[] args) {
         DateTime t = new DateTime();
-        System.out.println(t.ToTID("123"));
+        System.out.println(t.getCurrentTime());
     }
 }

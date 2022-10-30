@@ -1,8 +1,6 @@
 package Movie;
 import Cineplex.Cineplex;
-import Movie.MovieType;
 import Service.TextDB;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
