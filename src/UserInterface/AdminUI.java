@@ -5,6 +5,8 @@ import java.util.*;
 import Admin.*;
 import Movie.MovieTicket;
 import Service.*;
+import Review.*;
+
 
 
 public class AdminUI {
@@ -23,6 +25,7 @@ public class AdminUI {
 		do {
 			System.out.println("Choose the following options for other services");
 			System.out.println("\t 1) Add Holiday Dates");
+			System.out.println("\t 2) Display Top 5 movie rankings by rating");
 			
 			
             System.out.println("\tEnter '11' to exit!");
@@ -43,6 +46,14 @@ public class AdminUI {
                 	AddHoliday(date);
                 	
                 }
+                
+                case 2 -> {
+                	System.out.println("Display Top 5 movie rankings by rating");
+                	RankingByRating();
+                	
+                	
+                }
+                
                 
                 default -> {
                     System.out.println("Invalid Input. Try again.");
@@ -110,6 +121,16 @@ public class AdminUI {
 	
 	public void AddHoliday(String date) throws IOException {
     	TextDB.WriteToTextDB("HolidayDates.txt", date);
+	}
+	
+	public void RankingByRating () {
+		TextDB textDB = new TextDB();
+		ArrayList<OverallReview> overallreviewlist = textDB.ReadFromFile("Consolidated.txt");
+		
+		for(int i = 0; i<overallReviewList.size();i++) {
+			System.out.println(overallReviewList.get(i).getMovieTitle());
+		}
+		
 	}
 	
 	

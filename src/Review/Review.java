@@ -1,4 +1,4 @@
-package Review;
+package src.Review;
 
 public class Review {
 	
@@ -26,12 +26,6 @@ public class Review {
 	    public String getTitle() {
 	        return movieTitle;
 	    }
-	    
-//	    public void setRating(String newRating) {
-//	    	reviewerRating = newRating;
-//	    }
-	    
-	    
-	
+
 
 }
