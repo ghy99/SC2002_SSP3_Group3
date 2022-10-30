@@ -41,8 +41,16 @@ public class ShowTime extends MovieSeats{
         return time.getTime();
     }
 
+    public void printMovieTiming(){
+        // I NEED TO WRITE SOMETHING HERE!!
+
+        System.out.println(this.time);
+    }
+
+
     public static void main(String[] args) {
         ShowTime st = new ShowTime(5,5,3,3,new Date(),new Movie());
 
+        
     }
 }

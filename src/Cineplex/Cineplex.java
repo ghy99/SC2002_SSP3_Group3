@@ -157,4 +157,8 @@ public class Cineplex {
 
         System.out.println("Movies are initialized.\n");
     }
+
+    public String replace(char c, char d) {
+        return null;
+    }
 }

@@ -1,5 +1,5 @@
 package Cineplex;
-import Movie.Movie;
+import Movie.*;
 import Service.TextDB;
 
 import java.util.*;
@@ -52,7 +52,8 @@ public class Cinema {
         return cinemaType;
     }
 
-    public ArrayList<ShowTime> getShowTime() {
+    public ArrayList<ShowTime> getShowTime(Cineplex cineplex, Movie movie) {
+        // add function to get ShowTime.
         return showTime;
     }
 
