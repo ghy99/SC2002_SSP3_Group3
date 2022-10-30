@@ -358,7 +358,7 @@ public class TextDB {
                 oldData.add(d.toString());
             }
         }
-        
+
         for (Object d : data) {
             oldData.add((String) d);
         }
