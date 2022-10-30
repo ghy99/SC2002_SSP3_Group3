@@ -6,13 +6,12 @@ import Cineplex.Cinema;
 import Cineplex.Cineplex;
 import Cineplex.ShowTime;
 
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.Semaphore;
+
 import Movie.*;
 
 public class TextDB {
@@ -49,6 +48,8 @@ public class TextDB {
     public static final String SEPARATOR = "|";
     private static final Path CurrentRelativePath = Paths.get("");
     private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString() + "\\src\\DataStorage\\";
+
+    private static Semaphore sem = new Semaphore(1);
 
     // an example of reading
     public ArrayList<Customer> ReadFromFile(String fileName, ArrayList<Customer> customers) throws IOException {
@@ -131,43 +132,45 @@ public class TextDB {
     }
 
     public ArrayList<ShowTime> readFromFile(ArrayList<Movie> movie, String fileName) throws IOException {
-        ArrayList<String> listOfShowTime = (ArrayList) TextDB.Read(fileName);
-        ArrayList<ShowTime> alr = new ArrayList<>();
-        ArrayList<ArrayList<String>> temp = new ArrayList<>();
-        ShowTime tempST = null;
-        int rowCount = 0;
+        //Temp variable for stroing data
+        ArrayList<String> listOfShowTime = (ArrayList) TextDB.Read(fileName); //Read file line by line
+        ArrayList<ShowTime> alr = new ArrayList<>(); //Temp Showtime list to link to object
+        ArrayList<ArrayList<String>> temp = new ArrayList<>(); //Temp 2D arraylist for seats
+        ShowTime tempST = null; //Temp Showtime object
+        int rowCount = 0; //For updating current row count
 
+        //Loop trough all lines
         for (int i = 0; i < listOfShowTime.size(); i++) {
 
+            //Get each line
             String st = listOfShowTime.get(i);
 
-            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
-            String movieName = star.nextToken().trim();
-            String time = star.nextToken().trim();
-            int[] aisle = new int[2];
-            int count = 0;
+            StringTokenizer star = new StringTokenizer(st, SEPARATOR); //For current with seprator (|)
+            String movieName = star.nextToken().trim(); //Take string from start to (|)
+            String time = star.nextToken().trim(); //Take 2nd value from 1st (|) to 2nd (|)
+            int[] aisle = new int[2];//For storing aisle
+            int count = 0;//To update aisle count
 
-            //Read the 2d array seats
+            //Read the 2d array seats until first ] found
             while (!Objects.equals(listOfShowTime.get(i), "]")) {
-                if (i + 1 < listOfShowTime.size()) {
+                if (i + 1 < listOfShowTime.size()) { //if i not bigger than total line size keep increasing
                     i++;
+                    //if line is not "[" or "]"
                     if (!Objects.equals(listOfShowTime.get(i), "]") && !Objects.equals(listOfShowTime.get(i), "[")) {
-                        String[] t1 = listOfShowTime.get(i).split(",");
-                        temp.add(new ArrayList<>());
-                        ArrayList<String> currentRow = temp.get(rowCount);
-                        for(String s : t1)
-                        {
-                            if(Objects.equals( s,"@|") && count < 2)
-                            {
+                        String[] t1 = listOfShowTime.get(i).split(","); //seperate line by ","
+                        temp.add(new ArrayList<>()); //add in new row
+                        ArrayList<String> currentRow = temp.get(rowCount);//get the column that just created
+                        //For each val seperated by ","
+                        for (String s : t1) {
+                            //Check is current column an aisle
+                            if (Objects.equals(s, "@|") && count < 2) {
                                 aisle[count++] = rowCount;
                             }
 
-                            if(Objects.equals(s , "null"))
-                            {
+                            //if current val is null add in null else add in value
+                            if (Objects.equals(s, "null")) {
                                 currentRow.add(null);
-                            }
-                            else
-                            {
+                            } else {
                                 currentRow.add(s);
                             }
                         }
@@ -175,10 +178,11 @@ public class TextDB {
                     }
                 }
             }
+
             //Refrence the current Showtime to our list of movies in cinexplex
             for (Movie m : movie) {
                 if (Objects.equals(m.getMovieTitle(), movieName)) {
-                    tempST = new ShowTime(DateTime.StringToDate(time), m , temp , aisle);
+                    tempST = new ShowTime(DateTime.StringToDate(time), m, temp, aisle);
                     break;
                 }
             }
@@ -187,7 +191,7 @@ public class TextDB {
         return alr;
     }
 
-    public static ArrayList<ArrayList<Double>> readFromFile(String fileName,MovieTicket ticket) throws IOException {
+    public static ArrayList<ArrayList<Double>> readFromFile(String fileName, MovieTicket ticket) throws IOException {
         // Implement read ticket price txtfile
         ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
         ArrayList<ArrayList<Double>> alr = new ArrayList<>();
@@ -206,29 +210,29 @@ public class TextDB {
         return alr;
     }
 
-    public ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList,String fileName) throws IOException {
+    public ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList, String fileName) throws IOException {
 
         // read String from text file
-    	ArrayList<String> stringArray = (ArrayList) TextDB.Read(fileName);
-        
+        ArrayList<String> stringArray = (ArrayList) TextDB.Read(fileName);
+
         for (String str : stringArray) {
-        	String st = str;
+            String st = str;
 
-          // get individual 'fields' of the string separated by SEPARATOR
-          StringTokenizer star = new StringTokenizer(st, SEPARATOR); // pass in the string to the string tokenizer using
-                                                                     // delimiter "|"
+            // get individual 'fields' of the string separated by SEPARATOR
+            StringTokenizer star = new StringTokenizer(st, SEPARATOR); // pass in the string to the string tokenizer using
+            // delimiter "|"
 
-          String userName = star.nextToken().trim();
-          String password = star.nextToken().trim();
+            String userName = star.nextToken().trim();
+            String password = star.nextToken().trim();
 
-          Admin tempAdmin = new Admin(userName, password);
-          // add to Professors list
-          adminList.add(tempAdmin);
+            Admin tempAdmin = new Admin(userName, password);
+            // add to Professors list
+            adminList.add(tempAdmin);
         }
         return adminList;
-      }
+    }
 
-    
+
     public static void WriteToTextDB(String fileName, Cineplex cineplex) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
@@ -269,6 +273,26 @@ public class TextDB {
 
     public static void Write(String fileName, List data) throws IOException {
 
+        ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
+
+        for (Object d : data) {
+            oldData.add((String) d);
+        }
+
+        FileWriter t = new FileWriter(CurrentDirectory + fileName);
+        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
+
+        try {
+            for (int i = 0; i < oldData.size(); i++) {
+                out.println((String) oldData.get(i));
+            }
+        } finally {
+            out.close();
+        }
+    }
+
+    public static void Update(String fileName, List data) throws IOException {
+
         PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
         try {
             for (int i = 0; i < data.size(); i++) {
@@ -295,23 +319,36 @@ public class TextDB {
         return data;
     }
 
-    //DB test
-    public void main(String[] args) throws IOException {
-        ArrayList<Customer> al = new ArrayList();
-        al.add(new Customer("Ant", "12", "ant@h.com", 0));
-        al.add(new Customer("gdf", "234", "ant@h.com", 1));
-        al.add(new Customer("xcv", "756", "ant@h.com", 2));
-
-        //write test
-        WriteToTextDB("test.txt", al);
-
-        //read test
-        for (Customer cs : ReadFromFile("test.txt", al)) {
-            System.out.println(cs.getMovieGoerName() + " " + cs.getMobileNumber() + " " + cs.getEmail() + " " + cs.getTID());
+    public static boolean isFileUnlocked(File file) {
+        try {
+            FileInputStream in = new FileInputStream(file);
+            if (in != null) in.close();
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        return true;
     }
 
     public static String getCurrentDirectory() {
         return CurrentDirectory;
     }
+
+    public static void main(String[] args) throws IOException {
+        ArrayList<String> test = new ArrayList<>();
+        test.add("IT|19-08-2022; 03:34:23");
+        test.add("[");
+        test.add("null,1,2,3,4,5,null,null");
+        test.add("E,|,@|,X|,@ X|,|,|,E");
+        test.add("D,|,@|,|,@ |,|,|,");
+        test.add("C,|,@|,|,@ |,|,|,");
+        test.add("B,|,@|,|,@ |,|,X|,B");
+        test.add("A,|,@|,X|,@|,X|,|,A");
+        test.add("]");
+        Write("Shaw_Theatre\\cinema2.txt", test);
+    }
+
 }

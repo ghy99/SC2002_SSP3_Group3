@@ -1,13 +1,9 @@
 package Movie;
 import Cineplex.Cineplex;
-import Movie.MovieType;
 import Service.TextDB;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Calendar;
-import java.util.random.RandomGenerator;
 
 public class MovieTicket {
     // Linked to each Cinema
