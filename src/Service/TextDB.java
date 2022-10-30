@@ -195,18 +195,40 @@ public class TextDB {
         // Implement read ticket price txtfile
         ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
         ArrayList<ArrayList<Double>> alr = new ArrayList<>();
-
         for (String prices : listOfTicketPrice) {
-            ArrayList<Double> storePriceTypes = new ArrayList<Double>();
-            StringTokenizer star = new StringTokenizer(prices, SEPARATOR);
-            String stringChargingPrices = star.nextToken().trim();
-            String[] temp = star.nextToken().trim().split(",");
-            for (String priceType : temp) {
-                storePriceTypes.add(Double.parseDouble(priceType));
-            }
-            alr.add(storePriceTypes);
-        }
+            String st = prices;
+            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
+            String[] pricebyAge = star.nextToken().trim().split(", ");
+            String[] dayofWeek = star.nextToken().trim().split(", ");
+            String[] movieDim = star.nextToken().trim().split(", ");
+            String[] CinemaType = star.nextToken().trim().split(", ");
 
+            ArrayList<Double> temp1 = new ArrayList<Double>();
+            ArrayList<Double> temp2 = new ArrayList<Double>();
+            ArrayList<Double> temp3 = new ArrayList<Double>();
+            ArrayList<Double> temp4 = new ArrayList<Double>();
+
+            for (String item : pricebyAge) {
+//                System.out.printf("PRice by age: item: %s\n", item);
+                temp1.add(Double.parseDouble(item));
+            }
+            alr.add(temp1);
+            for (String item : dayofWeek) {
+//                System.out.printf("dayofWeek: item: %s\n", item);
+                temp2.add(Double.parseDouble(item));
+            }
+            alr.add(temp2);
+            for (String item : movieDim) {
+//                System.out.printf("moviedim: item: %s\n", item);
+                temp3.add(Double.parseDouble(item));
+            }
+            alr.add(temp3);
+            for (String item : CinemaType) {
+//                System.out.printf("cinematype: item: %s\n", item);
+                temp4.add(Double.parseDouble(item));
+            }
+            alr.add(temp4);
+        }
         return alr;
     }
 
