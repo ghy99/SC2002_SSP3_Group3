@@ -18,6 +18,7 @@ import Movie.*;
 public class TextDB {
 
     public enum Files {
+        Cineplex("Cineplex.txt"),
         Movies("Movies.txt"),
         ShowTime("ShowTime.txt");
 
@@ -94,7 +95,7 @@ public class TextDB {
             String[] temp = star.nextToken().trim().split(",");
             ArrayList<String> casts = new ArrayList<>();
             Collections.addAll(casts, temp);
-            MovieType.Type type = MovieType.Type.valueOf(star.nextToken().trim());
+            Cinema.CinemaType type = Cinema.CinemaType.valueOf(star.nextToken().trim());
             MovieType.Genre genre = MovieType.Genre.valueOf(star.nextToken().trim());
             MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
             MovieType.Class movieClass = MovieType.Class.valueOf(star.nextToken().trim());
@@ -123,7 +124,7 @@ public class TextDB {
             String[] cinemas = star.nextToken().trim().split(",");
             for (String cinema : cinemas) {
                 Cinema c = new Cinema(cinema.split(":")[0], Cinema.CinemaType.valueOf(cinema.split(":")[1]));
-                cineplex.addListOfCinema(c);
+                cineplex.addCinema(c);
             }
             alr.add(cineplex);
         }
@@ -153,6 +154,7 @@ public class TextDB {
                 if (i + 1 < listOfShowTime.size()) {
                     i++;
                     if (!Objects.equals(listOfShowTime.get(i), "]") && !Objects.equals(listOfShowTime.get(i), "[")) {
+<<<<<<< Updated upstream
                         String[] t1 = listOfShowTime.get(i).split(",");
                         temp.add(new ArrayList<>());
                         ArrayList<String> currentRow = temp.get(rowCount);
@@ -160,6 +162,15 @@ public class TextDB {
                         {
                             if(Objects.equals( s,"@|") && count < 2)
                             {
+=======
+                        String[] t1 = listOfShowTime.get(i).split(","); //seperate line by ","
+                        temp.add(new ArrayList<>()); //add in new row
+                        ArrayList<String> currentRow = temp.get(rowCount);//get the column that just created
+                        //For each val seperated by ","
+                        for (String s : t1) {
+                            //Check is current column an aisle
+                            if (Objects.equals(s, "@ |") && count < 2) {
+>>>>>>> Stashed changes
                                 aisle[count++] = rowCount;
                             }
 
@@ -176,6 +187,10 @@ public class TextDB {
                     }
                 }
             }
+<<<<<<< Updated upstream
+=======
+            tempST = new ShowTime(DateTime.StringToDate(time), null, temp, aisle);
+>>>>>>> Stashed changes
             //Refrence the current Showtime to our list of movies in cinexplex
             for (Movie m : movie) {
                 if (Objects.equals(m.getMovieTitle(), movieName)) {
@@ -184,6 +199,7 @@ public class TextDB {
                 }
             }
         }
+
         return alr;
     }
 
@@ -230,7 +246,43 @@ public class TextDB {
         return adminList;
       }
 
+<<<<<<< Updated upstream
     
+=======
+    public static void WriteToTextDB(String fileName, ArrayList<Movie> moveis) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        StringBuilder st = new StringBuilder();
+        for(Movie movie : moveis)
+        {
+            st.append(movie.getMovieTitle().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getShowingStatus().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getSynopsis().trim());
+            st.append(SEPARATOR);
+            for (int i=0; i< movie.getCast().size();i++)
+            {
+                st.append(movie.getCast().get(i));
+                if(i + 1 < movie.getCast().size())st.append(",");
+            }
+            st.append(SEPARATOR);
+            st.append(movie.getTypeOfCinema().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getMovieGenre().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getMovie3D().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getMovieClass().toString().trim());
+
+
+        }
+        alw.add(st.toString());
+
+        Write(fileName, alw);
+    }
+
+>>>>>>> Stashed changes
     public static void WriteToTextDB(String fileName, Cineplex cineplex) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
@@ -246,8 +298,39 @@ public class TextDB {
 
             if (i + 1 < cineplex.getListOfCinemas().size()) st.append(',');
 
-            alw.add(st.toString());
         }
+        alw.add(st.toString());
+
+        Write(fileName, alw);
+    }
+
+    public static void WriteToTextDB(String fileName ,Cinema cinema, ArrayList<ShowTime> showTimes) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        StringBuilder st = new StringBuilder();
+        for (ShowTime showTime : showTimes)
+        {
+            st.append(cinema.getCinemaName());
+            st.append(SEPARATOR);
+            st.append(DateTime.convertTime(showTime.time.getTime()));
+            st.append(SEPARATOR);
+            alw.add(st.toString());
+            alw.add("[");
+
+            for (String[] row : showTime.getSeats())
+            {
+                st = new StringBuilder();
+                for (int i = 0; i < row.length; i++)
+                {
+                    st.append(row[i]);
+                    if(i + 1 < row.length)st.append(",");
+                }
+                alw.add(st);
+            }
+
+            alw.add("]");
+        }
+
         Write(fileName, alw);
     }
 
@@ -271,6 +354,35 @@ public class TextDB {
 
     public static void Write(String fileName, List data) throws IOException {
 
+<<<<<<< Updated upstream
+=======
+        ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
+
+        if(oldData.size() > 0)
+        {
+            for (Object d : data) {
+                oldData.add(d.toString());
+            }
+        }
+
+        for (int i = 0; i < data.size(); i++) {
+            oldData.add(data.get(i).toString());
+        }
+
+        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
+
+        try {
+            for (int i = 0; i < oldData.size(); i++) {
+                out.println((String) oldData.get(i));
+            }
+        } finally {
+            out.close();
+        }
+    }
+
+    public static void Update(String fileName, List data) throws IOException {
+
+>>>>>>> Stashed changes
         PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
         try {
             for (int i = 0; i < data.size(); i++) {
@@ -297,6 +409,7 @@ public class TextDB {
         return data;
     }
 
+<<<<<<< Updated upstream
     //DB test
     public void main(String[] args) throws IOException {
         ArrayList<Customer> al = new ArrayList();
@@ -316,4 +429,11 @@ public class TextDB {
     public static String getCurrentDirectory() {
         return CurrentDirectory;
     }
+=======
+    public static String getCurrentDirectory() {
+        return CurrentDirectory;
+    }
+    
+
+>>>>>>> Stashed changes
 }
