@@ -295,7 +295,7 @@ public class TextDB {
         Write(fileName, alw);
     }
 
-      }
+
  
     public static void WriteToTextDB(String fileName, Cineplex cineplex) throws IOException {
         List alw = new ArrayList();// to store Professors data
@@ -488,8 +488,6 @@ public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException
                 oldData.add(d.toString());
             }
         }
-
-        ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
 
         for (Object d : data) {
             oldData.add((String) d);
