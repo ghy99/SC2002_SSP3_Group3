@@ -23,7 +23,7 @@ public class MainUI {
         cineplexes = new ArrayList<Cineplex>();
         String filename = "Cineplexes.txt";
         try {
-            cineplexes = db.readFromFile(cineplexes, filename);
+            cineplexes = db.readFromFile(filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,14 +32,6 @@ public class MainUI {
             cineplex.InitializeMovies();
         }
         System.out.println("Cineplexes are initialized\n");
-    }
-
-    public void InitializeCustomerList() throws IOException {
-        //Implement this.
-    }
-
-    public void InitializeMovieTimetable() throws IOException {
-        // Implement this.
     }
 
     public static void start() throws IOException {
