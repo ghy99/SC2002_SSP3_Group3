@@ -23,7 +23,7 @@ public class MainUI {
         cineplexes = new ArrayList<Cineplex>();
         String filename = "Cineplexes.txt";
         try {
-            cineplexes = db.readFromFile(cineplexes, filename);
+            cineplexes = db.readFromFile(filename);
         } catch (IOException e) {
             e.printStackTrace();
         }

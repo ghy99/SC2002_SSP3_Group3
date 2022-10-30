@@ -114,7 +114,6 @@ public class TextDB {
         for (String listofCineplex : listofCineplexes) {
 
             String st = listofCineplex;
-
             StringTokenizer star = new StringTokenizer(st, SEPARATOR);
             String name = star.nextToken().trim();
 
