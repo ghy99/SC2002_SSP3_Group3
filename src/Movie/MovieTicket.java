@@ -64,9 +64,8 @@ public class MovieTicket {
     
     public boolean checkHoliday() throws IOException {
     	LocalDate tdyDate = LocalDate.now();
-    	
-    	TextDB textDB = new TextDB();
-    	ArrayList<String> holidayList = textDB.ReadFromFile("HolidayDates.txt"); //extract list of holiday dates from storage
+
+    	ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
     	
     	for (int i = 0; i<holidayList.size();i++) {
 	    	if (tdyDate.toString().equals(holidayList.get(i))) {

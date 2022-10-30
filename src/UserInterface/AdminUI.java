@@ -123,12 +123,12 @@ public class AdminUI {
     	TextDB.WriteToTextDB("HolidayDates.txt", date);
 	}
 	
-	public void RankingByRating () {
+	public void RankingByRating () throws IOException {
 		TextDB textDB = new TextDB();
 		ArrayList<OverallReview> overallreviewlist = textDB.ReadFromFile("Consolidated.txt");
 		
-		for(int i = 0; i<overallReviewList.size();i++) {
-			System.out.println(overallReviewList.get(i).getMovieTitle());
+		for(int i = 0; i<overallreviewlist.size();i++) {
+			System.out.println(overallreviewlist.get(i).getMovieTitle());
 		}
 		
 	}

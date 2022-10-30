@@ -1,4 +1,4 @@
-package Movie
+package Movie;
 import Cineplex.Cinema;
 import Review.*;
 import java.util.ArrayList;
