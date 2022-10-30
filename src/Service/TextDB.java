@@ -339,9 +339,9 @@ public class TextDB {
     	
     	StringBuilder st = new StringBuilder();
     	st.append(title);
-    	st.append("SEPARATOR");
+    	st.append(SEPARATOR);
     	st.append(rating);
-    	st.append("SEPARATOR");
+    	st.append(SEPARATOR);
     	st.append(parareview);
     	alw.add(st.toString());
     	
