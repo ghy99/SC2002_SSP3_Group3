@@ -13,9 +13,7 @@ import java.util.*;
 import java.util.concurrent.Semaphore;
 
 import Movie.*;
-import testingreview.OverallReview;
-import testingreview.Review;
-import testingreview.TextDB;
+import Review.*;
 
 public class TextDB {
 
