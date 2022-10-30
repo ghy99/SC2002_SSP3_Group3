@@ -1,4 +1,4 @@
-package AdminUI;
+package UserInterface;
 
 import java.io.*;
 import java.util.*;
