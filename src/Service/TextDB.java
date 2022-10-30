@@ -307,6 +307,8 @@ public class TextDB {
     }
     
 public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
+	
+	//read from consolidated.txt
     	
     	ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
 		ArrayList<OverallReview> overallReviewList = new ArrayList<OverallReview>();
@@ -329,9 +331,6 @@ public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException
 		
 		overallReviewList.sort(Comparator.comparing(OverallReview::getavgRating));
 		Collections.reverse(overallReviewList);
-		for(int i = 0; i<overallReviewList.size();i++) {
-			System.out.println(overallReviewList.get(i).getMovieTitle());
-		}
 		
 		return overallReviewList;
     }
@@ -339,7 +338,8 @@ public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException
     
     
     public static void WriteToTextDB(String fileName1,String fileName2, Review review) throws IOException {
-    	//write to main review ALL txt
+    	
+    	//write to ALLreview.txt
     	List alw = new ArrayList();
     	List alw2 = new ArrayList();
     	String rating = review.getRating();
@@ -395,6 +395,8 @@ public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException
     	            st2.append(SEPARATOR);
     	            alw2.add(st2.toString());
     	        }
+    			
+    			//write to consolidated.txt to update ratings
     			
     			Update(fileName2,alw2);
     					
