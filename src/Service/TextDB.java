@@ -13,6 +13,10 @@ import java.util.*;
 import java.util.concurrent.Semaphore;
 
 import Movie.*;
+import Review.*;
+import testingreview.OverallReview;
+import testingreview.Review;
+import testingreview.TextDB;
 
 public class TextDB {
 
@@ -185,18 +189,40 @@ public class TextDB {
         // Implement read ticket price txtfile
         ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
         ArrayList<ArrayList<Double>> alr = new ArrayList<>();
-
         for (String prices : listOfTicketPrice) {
-            ArrayList<Double> storePriceTypes = new ArrayList<Double>();
-            StringTokenizer star = new StringTokenizer(prices, SEPARATOR);
-            String stringChargingPrices = star.nextToken().trim();
-            String[] temp = star.nextToken().trim().split(",");
-            for (String priceType : temp) {
-                storePriceTypes.add(Double.parseDouble(priceType));
-            }
-            alr.add(storePriceTypes);
-        }
+            String st = prices;
+            StringTokenizer star = new StringTokenizer(st, SEPARATOR);
+            String[] pricebyAge = star.nextToken().trim().split(", ");
+            String[] dayofWeek = star.nextToken().trim().split(", ");
+            String[] movieDim = star.nextToken().trim().split(", ");
+            String[] CinemaType = star.nextToken().trim().split(", ");
 
+            ArrayList<Double> temp1 = new ArrayList<Double>();
+            ArrayList<Double> temp2 = new ArrayList<Double>();
+            ArrayList<Double> temp3 = new ArrayList<Double>();
+            ArrayList<Double> temp4 = new ArrayList<Double>();
+
+            for (String item : pricebyAge) {
+//                System.out.printf("PRice by age: item: %s\n", item);
+                temp1.add(Double.parseDouble(item));
+            }
+            alr.add(temp1);
+            for (String item : dayofWeek) {
+//                System.out.printf("dayofWeek: item: %s\n", item);
+                temp2.add(Double.parseDouble(item));
+            }
+            alr.add(temp2);
+            for (String item : movieDim) {
+//                System.out.printf("moviedim: item: %s\n", item);
+                temp3.add(Double.parseDouble(item));
+            }
+            alr.add(temp3);
+            for (String item : CinemaType) {
+//                System.out.printf("cinematype: item: %s\n", item);
+                temp4.add(Double.parseDouble(item));
+            }
+            alr.add(temp4);
+        }
         return alr;
     }
 
@@ -347,6 +373,108 @@ public class TextDB {
         }
         Write(fileName, alw);
     }
+    
+public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
+	
+	//read from consolidated.txt
+    	
+    	ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
+		ArrayList<OverallReview> overallReviewList = new ArrayList<OverallReview>();
+		
+		
+		for (int i = 0; i<oldData.size();i++) {
+			String string = (String) oldData.get(i);
+
+            // get individual 'fields' of the string separated by SEPARATOR
+            StringTokenizer star = new StringTokenizer(string, SEPARATOR);    // pass in the string to the string tokenizer using delimiter "|"
+
+            String movieTitle = star.nextToken().trim();
+            String avgRating = star.nextToken().trim();
+            String count = star.nextToken().trim();
+            
+            
+            OverallReview overallReview = new OverallReview(movieTitle,avgRating,count);
+            overallReviewList.add(overallReview);
+		}
+		
+		overallReviewList.sort(Comparator.comparing(OverallReview::getavgRating));
+		Collections.reverse(overallReviewList);
+		
+		return overallReviewList;
+    }
+    
+    
+    
+    public static void WriteToTextDB(String fileName1,String fileName2, Review review) throws IOException {
+    	
+    	//write to ALLreview.txt
+    	List alw = new ArrayList();
+    	List alw2 = new ArrayList();
+    	String rating = review.getRating();
+    	String parareview = review.getReview();
+    	String title =  review.getTitle();
+    	
+    	StringBuilder st = new StringBuilder();
+    	st.append(title);
+    	st.append(SEPARATOR);
+    	st.append(rating);
+    	st.append(SEPARATOR);
+    	st.append(parareview);
+    	alw.add(st.toString());
+    	
+    	Write(fileName1,alw);
+    	
+    	
+    	
+    	//convert read data into arraylists to identify where to modify
+    	TextDB textDB = new TextDB();
+    	ArrayList<OverallReview> overallReviewList = textDB.ReadFromFile(fileName2);
+    			
+    			boolean found = false;
+    			for (int i = 0; i<overallReviewList.size();i++) {
+    				if (overallReviewList.get(i).getMovieTitle().equals(title)) {
+    					found = true;
+    					double oldrating = Double.parseDouble(overallReviewList.get(i).getavgRating());
+    					double count = Double.parseDouble(overallReviewList.get(i).getCount());
+    					double newRating = Double.parseDouble(rating);
+    					
+    					double newAvgRating = (oldrating*count+newRating)/(count+1);
+    					String s = String.valueOf(newAvgRating);
+    					overallReviewList.get(i).setavgRating(s);
+    					String c = String.valueOf(count+1);
+    					overallReviewList.get(i).setCount(c);
+    					
+    				}
+    			}
+    			
+    			if (found!=true) {
+    				OverallReview overallReview = new OverallReview(title,rating,"1");
+    	            overallReviewList.add(overallReview);
+    			}
+    			
+    			for (int i = 0; i < overallReviewList.size(); i++) {
+    				OverallReview overallReview = overallReviewList.get(i);
+    	            StringBuilder st2 = new StringBuilder();
+    	            st2.append(overallReview.getMovieTitle().trim());
+    	            st2.append(SEPARATOR);
+    	            st2.append(overallReview.getavgRating().trim());
+    	            st2.append(SEPARATOR);
+    	            st2.append(overallReview.getCount().trim());
+    	            st2.append(SEPARATOR);
+    	            alw2.add(st2.toString());
+    	        }
+    			
+    			//write to consolidated.txt to update ratings
+    			
+    			Update(fileName2,alw2);
+    					
+		
+		
+		
+		
+    	
+    }
+    
 
     public static void Write(String fileName, List data) throws IOException {
 
