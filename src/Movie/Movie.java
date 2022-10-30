@@ -1,10 +1,9 @@
 package Movie;
-
-import Review.AllReviews;
+//import Review.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Movie extends AllReviews {
+public class Movie {
     // Each Movie.Movie requires variables such as
     // Movie.Movie Title
     // Showing Status - Coming Soon, Preview, Now Showing
