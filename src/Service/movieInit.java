@@ -97,7 +97,7 @@ public class movieInit {
 
     public void addTiming(int[][] cineplexMatrix, int whichTime, int whichMovie, int whichCinema){
         if (cineplexMatrix[whichTime][whichMovie] == 0){
-            if (checkDuplicate(cineplexMatrix,whichTime, whichCinema) == ){
+            if (checkDuplicate(cineplexMatrix,whichTime, whichCinema) == 0){
             cineplexMatrix[whichTime][whichMovie] = whichCinema;
             System.out.println("Movie is being implemented");
          } else {
