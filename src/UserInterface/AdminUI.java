@@ -111,6 +111,8 @@ public class AdminUI {
 	public void AddHoliday(String date) throws IOException {
     	TextDB.WriteToTextDB("HolidayDates.txt", date);
 	}
+	
+	
 
 	
 }
