@@ -15,7 +15,6 @@ public class ShowTime extends MovieSeats{
         super(row, col, aisleOne, aisleTwo);
         this.time = time;
         this.movie = movie;
-        seatsCreation();
     }
 
     public ShowTime(Date time , Movie movie , ArrayList<ArrayList<String>> seats , int[] aisle) {
@@ -35,18 +34,15 @@ public class ShowTime extends MovieSeats{
         }
 
         super.setSeats(seat);
-    }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public Date getTime() {
-        return time;
     }
 
     public Long getTimeHour() {
         return time.getTime();
     }
 
+    public static void main(String[] args) {
+        ShowTime st = new ShowTime(5,5,3,3,new Date(),new Movie());
+
+    }
 }

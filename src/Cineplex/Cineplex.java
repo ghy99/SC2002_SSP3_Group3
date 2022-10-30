@@ -57,7 +57,7 @@ public class Cineplex {
         return count;
     }
 
-    public void addCinema(Cinema cinema)
+    public void addListOfCinema(Cinema cinema)
     {
         this.listOfCinemas.add(cinema);
 
@@ -73,7 +73,7 @@ public class Cineplex {
         //write to file
     }
 
-    public void addMovies(Movie movie)
+    public void addListOfMovies(Movie movie)
     {
         this.listOfMovies.add(movie);
 
