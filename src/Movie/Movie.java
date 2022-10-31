@@ -1,9 +1,10 @@
 package Movie;
+import Cineplex.Cinema;
 import Review.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Movie extends AllReviews {
+public class Movie {
     // Each Movie.Movie requires variables such as
     // Movie.Movie Title
     // Showing Status - Coming Soon, Preview, Now Showing
@@ -17,7 +18,7 @@ public class Movie extends AllReviews {
     private String synopsis;
     private ArrayList<String> cast = new ArrayList<>();
 
-    private MovieType.Type typeOfCinema;
+    private Cinema.CinemaType typeOfCinema;
 
     private MovieType.Genre MovieGenre;
 
@@ -31,11 +32,8 @@ public class Movie extends AllReviews {
         NowShowing
     }
 
-    public Movie() {
-
-    }
     public Movie(String movieTitle, MovieStatus showingStatus, String synopsis, ArrayList<String> cast,
-                 MovieType.Type movietype, MovieType.Genre moviecat,
+                 Cinema.CinemaType movietype, MovieType.Genre moviecat,
                  MovieType.Dimension dimension, MovieType.Class movieClass) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
@@ -59,7 +57,7 @@ public class Movie extends AllReviews {
     public ArrayList<String> getCast() {
         return this.cast;
     }
-    public MovieType.Type getTypeOfCinema() { return this.typeOfCinema; }
+    public Cinema.CinemaType getTypeOfCinema() { return this.typeOfCinema; }
     public MovieType.Genre getMovieGenre() { return this.MovieGenre; }
     public MovieType.Dimension getMovie3D() { return this.movie3D; }
     public MovieType.Class getMovieClass() {
@@ -82,7 +80,7 @@ public class Movie extends AllReviews {
         this.cast.addAll(casts);
     }
 
-    public void setMovieType(MovieType.Type type) {
+    public void setMovieType(Cinema.CinemaType type) {
         this.typeOfCinema = type;
     }
 

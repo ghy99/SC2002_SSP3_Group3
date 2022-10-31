@@ -12,17 +12,27 @@ public class CineplexUI {
         for (int i = 0; i < cineplexes.size(); i++) {
             System.out.printf("\t%d: Cineplex Name: %s\n", i + 1, cineplexes.get(i).getCineplexName());
         }
-        System.out.println("Select your Cineplex: ");
-        int selectCineplex = sc.nextInt() - 1;
-        ticket.setChosenCineplex(cineplexes.get(selectCineplex)); // setting user's chosen Cineplex
-        ArrayList<Movie> movielist = ticket.getChosenCineplex().getListOfMovies();
-        for (int i = 0; i < movielist.size(); i++) {
-            System.out.printf("%d)\n", i + 1);
-            movielist.get(i).printMovieDetails();
+        int selectCineplex = 0;
+        while (selectCineplex >= 0) {
+            System.out.println("Select your Cineplex: ");
+            selectCineplex = sc.nextInt() - 1;
+            ticket.setChosenCineplex(cineplexes.get(selectCineplex)); // setting user's chosen Cineplex
+            ArrayList<Movie> movielist = ticket.getChosenCineplex().getListOfMovies();
+            if (movielist.size() == 0) {
+                System.out.printf("%s is not showing any movies at this moment. Please select another Cineplex.\n\n", ticket.getChosenCineplex().getCineplexName());
+            }
+            else {
+                for (int i = 0; i < movielist.size(); i++) {
+                    System.out.printf("%d)\n", i + 1);
+                    movielist.get(i).printMovieDetails();
+                }
+                System.out.println("Select your Movie from the list above: ");
+                int selectMovie = sc.nextInt() - 1;
+                ticket.setChosenMovie(movielist.get(selectMovie));
+                // call movieUI
+                break;
+            }
         }
-        System.out.println("Select your Movie from the list above: ");
-        int selectMovie = sc.nextInt() - 1;
-        ticket.setChosenMovie(movielist.get(selectMovie));
         return ticket;
     }
 }

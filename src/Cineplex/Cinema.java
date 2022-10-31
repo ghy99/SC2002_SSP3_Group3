@@ -1,5 +1,7 @@
 package Cineplex;
-import Movie.*;
+
+import Movie.Movie;
+import Service.DateTime;
 import Service.TextDB;
 
 import java.util.*;
@@ -10,7 +12,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 public class Cinema {
-    public enum CinemaType{
+    public enum CinemaType {
         Premium("Premium"),
         Regular("Regular");
 
@@ -20,21 +22,21 @@ public class Cinema {
             this.CinemaType = cinemaType;
         }
 
-        public String ToString(){
+        public String ToString() {
             return CinemaType;
         }
     }
 
-    private static final long HOUR = 3600*1000; // in milli-seconds.
+    private static final long HOUR = 3600 * 1000; // in milli-seconds.
 
     // This will be for Cinema, to be declared in a list in cineplex
     private String cinemaName;
     private CinemaType cinemaType;
 
     private ArrayList<ShowTime> showTime = new ArrayList<>();
-    private ArrayList<Movie> listOfMovies= new ArrayList<>();
+    private ArrayList<Movie> listOfMovies = new ArrayList<>();
 
-    public Cinema(String cinemaName,  CinemaType cinemaType) {
+    public Cinema(String cinemaName, CinemaType cinemaType) {
 
         this.cinemaName = cinemaName;
         this.cinemaType = cinemaType;
@@ -57,54 +59,58 @@ public class Cinema {
         return showTime;
     }
 
-    private void createShowTime(Date time , Movie movie) {
+    private void createShowTime(Date time, Movie movie) {
 
-        if(cinemaType == CinemaType.Premium)
-        {
-            showTime.add(new ShowTime(0,0,0,0,time , movie));
-        }
-        else
-        {
-            showTime.add(new ShowTime(0,0,0,0,time, movie));
+        if (cinemaType == CinemaType.Premium) {
+            showTime.add(new ShowTime(6, 6, 2, 4, time, movie));
+        } else {
+            showTime.add(new ShowTime(3, 3, 1, 1, time, movie));
         }
 
         showTime.sort(Comparator.comparing(ShowTime::getTimeHour));
     }
 
-    public void updateCinemaTime(int index , Date showTime, Movie movie) {
+    public void updateCinemaTime(int index, Date showTime, Movie movie) {
         deleteCinemaTime(index);
-        addShowTime(showTime,movie);
+        addShowTime(showTime, movie);
     }
 
-    public void deleteCinemaTime(int index)
-    {
+    public void deleteCinemaTime(int index) {
         listOfMovies.remove(index);
     }
 
-    public void addShowTime(Date date , Movie movie) {
+    public boolean addShowTime(Date date, Movie movie) {
         var temp = this.getShowTime();
-
-        //if no showtime just add
+        int i = 0;
+        ShowTime currentSTDate = null;
         if (temp.size() != 0) {
             //Loop through all showtime
-            for (int i = 0; i < temp.size(); i++) {
-                //if show time + 2 hours still smaller than time to be added
-                if (temp.get(i).getTimeHour() + 2 * HOUR < date.getTime()) {
-                    //if time still in range
-                    if (i + 1 < temp.size()) {
-                        long remainTime = temp.get(i + 1).getTimeHour() - temp.get(i).getTimeHour();
-                        if (date.getTime() + 2 * HOUR < remainTime) {
-                            this.createShowTime(date,movie);
-                            return;
-                        }
-                    }
+            while (i < temp.size()) {
+                currentSTDate = temp.get(i);
+                if (currentSTDate.time.getTime() > date.getTime()) {
+                    break;
                 }
+                i++;
+            }
+            //if show time + 2 hours still smaller than time to be added
 
+            if (i - 1 > 0) {
+                currentSTDate = temp.get(i - 1);
+                if (currentSTDate.time.getTime() + 2 * HOUR < date.getTime()) {
+                    this.createShowTime(date, movie);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } else {
+                this.createShowTime(date, movie);
+                return true;
             }
         }
-        else
-        {
-            this.addShowTime(date, movie);
-        }
+        this.createShowTime(date, movie);
+        return true;
     }
+
 }
