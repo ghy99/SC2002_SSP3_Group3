@@ -101,9 +101,10 @@ public class TextDB {
             MovieType.Genre genre = MovieType.Genre.valueOf(star.nextToken().trim());
             MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
             MovieType.Class movieClass = MovieType.Class.valueOf(star.nextToken().trim());
+            int movieTotalSales = Integer.parseInt(star.nextToken().trim()) ;
 
             Movie movie = new Movie(
-                    title, status, synopsis, casts, type, genre, dim, movieClass
+                    title, status, synopsis, casts, type, genre, dim, movieClass,movieTotalSales
             );
             movies.add(movie);
         }
@@ -269,6 +270,8 @@ public class TextDB {
             st.append(movie.getMovie3D().toString().trim());
             st.append(SEPARATOR);
             st.append(movie.getMovieClass().toString().trim());
+            st.append(SEPARATOR);
+            st.append(String.valueOf(movie.getMovieTotalSales()));
 
 
         }
@@ -298,12 +301,12 @@ public class TextDB {
         Write(fileName, alw);
     }
 
-    public static void WriteToTextDB(String fileName, Cinema cinema, ArrayList<ShowTime> showTimes) throws IOException {
+    public static void WriteToTextDB(String fileName, Movie movie, ArrayList<ShowTime> showTimes) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
         StringBuilder st = new StringBuilder();
         for (ShowTime showTime : showTimes) {
-            st.append(cinema.getCinemaName());
+            st.append(movie.getMovieTitle());
             st.append(SEPARATOR);
             st.append(DateTime.convertTime(showTime.time.getTime()));
             st.append(SEPARATOR);
@@ -518,17 +521,6 @@ public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException
 
 
     public static void main(String[] args) throws IOException {
-        ArrayList<String> test = new ArrayList<>();
-        test.add("IT|19-08-2022; 03:34:23");
-        test.add("[");
-        test.add("null,1,2,3,4,5,null,null");
-        test.add("E,|,@|,X|,@ X|,|,|,E");
-        test.add("D,|,@|,|,@ |,|,|,");
-        test.add("C,|,@|,|,@ |,|,|,");
-        test.add("B,|,@|,|,@ |,|,X|,B");
-        test.add("A,|,@|,X|,@|,X|,|,A");
-        test.add("]");
-        Write("Shaw_Theatre\\cinema2.txt", test);
     }
 
 }
