@@ -44,9 +44,10 @@ public class CustomerUI {
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
                     customer.getTicket().printTicket();
-                    double ticketPrice = customer.getTicket().CalculatePrice(customer.getTicket()); // Get movie datetime
-                    System.out.printf("Your Ticket Price is: %.2f", ticketPrice);
-                    customer.setTID(PaymentUI.PaymentInterface(customer));
+                    Double tid = PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
+//                    customer.setTID(PaymentUI.PaymentInterface(customer));
+
+
                 }
                 case 2 -> {
                     System.out.println("Enter your new name: ");
