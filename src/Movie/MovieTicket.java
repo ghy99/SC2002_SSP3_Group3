@@ -54,14 +54,6 @@ public class MovieTicket {
         this.Movie = movie;
     }
 
-    public void setMovieSeats(MovieSeats seatID){
-        this.SeatID = seatID;
-    }
-
-    public void setMovieDateTime(Date movieDateTime){
-        this.MovieDateTime = movieDateTime;
-    }
-
     public Cineplex getChosenCineplex() {
         return this.ChosenCineplex;
     }
@@ -69,15 +61,6 @@ public class MovieTicket {
     public Movie getChosenMovie() {
         return this.Movie;
     }
-
-    public MovieSeats getMovieSeats(){
-        return this.SeatID;
-    }
-
-    public Date getMovieTiming(){
-        return this.MovieDateTime;
-    }
-
     
     public boolean checkHoliday() throws IOException {
     	LocalDate tdyDate = LocalDate.now();

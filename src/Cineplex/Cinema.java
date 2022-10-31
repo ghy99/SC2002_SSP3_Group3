@@ -54,8 +54,7 @@ public class Cinema {
         return cinemaType;
     }
 
-    public ArrayList<ShowTime> getShowTime(Cineplex cineplex, Movie movie) {
-        // add function to get ShowTime.
+    public ArrayList<ShowTime> getShowTime() {
         return showTime;
     }
 
