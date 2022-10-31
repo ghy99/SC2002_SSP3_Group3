@@ -48,7 +48,8 @@ public class MainUI {
             switch(option) {
                 case 1 -> {
                     // Call adminUI
-                    System.out.println("Calling adminUI");
+                    System.out.println("Calling edit ticket");
+                    EditTicketPriceUI.EditTicket();
                 }
                 case 2 -> {
                     CustomerUI.CustomerInterface(cineplexes, tid++);
