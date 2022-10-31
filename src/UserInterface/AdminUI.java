@@ -11,132 +11,105 @@ import Review.*;
 
 public class AdminUI {
 	
-	public void AdminInterface()throws IOException{
-		System.out.println("Welcome to the Admin Portal. ");
-		//only success log in then can access other services
-		int flag = login(); 
-		if (flag==0) {
-			return;
-		}
-	    
-		int choice = 0;
-		Scanner sc = new Scanner(System.in);
-		
+	public static void AdminInterface()throws IOException {
+        System.out.println("Welcome to the Admin Portal. ");
+        //only success log in then can access other services
+
+        Scanner scan = new Scanner(System.in);
+        TextDB textDB = new TextDB();
+        int loginFlag = 0;
+
+        System.out.println("Please Provide Username");
+        String usernameInput = scan.nextLine();
+        System.out.println("Please Provide Password");
+        String passwordInput = scan.nextLine();
+        Admin admin = new Admin(usernameInput, passwordInput);
+        loginFlag = admin.login();
+
+        if (loginFlag == 0){
+            System.out.println("Please go back to the main portal to re-login");
+            return;
+        }
+
+        int choice = 0;
+
 		do {
-			System.out.println("Choose the following options for other services");
+			System.out.println("Choose the following options for admin services");
 			System.out.println("\t 1) Add Holiday Dates");
-			System.out.println("\t 2) Display Top 5 movie rankings by rating");
-			
-			
+            System.out.println("\t 2) Delete holiday dates");
+            System.out.println("\t 3) Edit holiday dates");
+			System.out.println("\t 4) Display Top 5 movie rankings by rating");
             System.out.println("\tEnter '11' to exit!");
 
             do {
-                while (!sc.hasNextInt()) {
+                while (!scan.hasNextInt()) {
                     System.out.println("That's not a number!");
-                    sc.next(); // this is important!
+                    scan.next(); // this is important!
                 }
-                choice = sc.nextInt();
-                sc.nextLine();
+                choice = scan.nextInt();
+                scan.nextLine();
             } while (choice < -1);
+
+
             switch (choice) {
                 case 1 -> {
-                	System.out.println("To Add holiday dates");
-                	System.out.println("Input Date in (YYYY-MM-DD) format");
-                	String date = sc.nextLine();
-                	AddHoliday(date);
-                	
+                	System.out.println("Add holiday dates");
+                	System.out.println("Input Date in YYYY-MM-DD format");
+                	String date = scan.nextLine();
+                    admin.AddHoliday(date);
+
                 }
-                
+
                 case 2 -> {
-                	System.out.println("Display Top 5 movie rankings by rating");
-                	RankingByRating();
-                	
-                	
+                    System.out.println("Delete holiday dates");
+                    System.out.println("Input Date in YYYY-MM-DD format");
+                    String date = scan.nextLine();
+                    admin.deleteHoliday(date);
+
                 }
-                
-                
+
+                case 3 -> {
+                    System.out.println("Edit holiday dates");
+                    System.out.println("Input Old Date to be edited in YYYY-MM-DD format");
+                    String oldDate = scan.nextLine();
+                    System.out.println("Input New Date in YYYY-MM-DD format");
+                    String newDate = scan.nextLine();
+                    admin.editHoliday(oldDate,newDate);
+
+                }
+
+
+
+                case 4 -> {
+                	System.out.println("Display Top 5 movie rankings by rating");
+                	admin.RankingByRating();
+                }
+
+
                 default -> {
+
                     System.out.println("Invalid Input. Try again.");
                 }
             }
         } while (choice < 10);
     }
-	
-	
-	
-	public int login() throws IOException {
-			
-			//fetch data of admin info from txt storage
-			ArrayList<Admin> emptyAdminList = new ArrayList<Admin>();
-		    TextDB textDB = new TextDB();
-		    ArrayList<Admin> filledAdminList = textDB.ReadFromFile(emptyAdminList, "admin.txt");
-		    
-		    
-		    //for debugging checking output
-	//	    for (int i = 0; i<filledAdminList.size();i++) {
-	//	    	System.out.println(filledAdminList.get(i).getName()+ filledAdminList.get(i).getPassword());
-	//	    }
-		    
-		    boolean flag = true; //used for looping while loop
-		    int flagNum = 0; //used to indicate if successfully logged in
-		    
-		    do{
-		    	
-				System.out.println("Please Provide Username");
-				Scanner scan = new Scanner(System.in);
-				String userName = scan.nextLine();
-				System.out.println("Please Provide Password");
-				String passWord = scan.nextLine();
-				
-				String dataName; //can use .equals() because string is an object
-				String dataPassword;
-				for (int i = 0; i<filledAdminList.size();i++) {
-					dataName = filledAdminList.get(i).getName();
-					dataPassword = filledAdminList.get(i).getPassword();
-					if(userName.equals(dataName) && passWord.equals(dataPassword)) {
-						System.out.println("Welcome " + dataName + ". You have logged in successfully to the admin portal.");
-						flagNum = 1; //logged in successfully
-						flag = false; //end while loop
-						break; //break out of for loop, not while loop
-					}
-				}
-				
-				if(flagNum!=1) {
-					System.out.println("Incorrect Username or Password.");
-					System.out.println("You may enter 1 to re-login or Enter 0 if you dont want to log in anymore.");
-					int temp = scan.nextInt();
-					if(temp==0) {
-						flagNum = 0; //Unsuccessful log in
-						flag = false; //end while loop
-						System.out.println("Goodbye!");
-					}
-				}
-				
-		    }while (flag);
-		    
-			//to return after the while loop incase while is never executed
-		    return flagNum;
-			
-		}
-	
-	public void AddHoliday(String date) throws IOException {
-    	TextDB.WriteToTextDB("HolidayDates.txt", date);
-	}
-	
-	public void RankingByRating () throws IOException {
-		TextDB textDB = new TextDB();
-		ArrayList<OverallReview> overallreviewlist = textDB.ReadFromFile("Consolidated.txt");
-		
-		for(int i = 0; i<overallreviewlist.size();i++) {
-			System.out.println(overallreviewlist.get(i).getMovieTitle());
-		}
-		
-	}
-	
-	
 
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
 
 
 

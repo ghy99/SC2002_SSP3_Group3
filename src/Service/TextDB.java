@@ -334,7 +334,7 @@ public class TextDB {
         //for admin to write to add in dates into HolidayDates.txt file
         ArrayList<String> holidayList = (ArrayList<String>) Read("HolidayDates.txt");
         holidayList.add(date);
-        Write(fileName, holidayList);
+        Update(fileName, holidayList);
 
     }
 
@@ -359,7 +359,7 @@ public class TextDB {
     
 public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
 	
-	//read from consolidated.txt
+	//read from Consolidatedreview.txt
     	
     	ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
 		ArrayList<OverallReview> overallReviewList = new ArrayList<OverallReview>();
