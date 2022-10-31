@@ -71,7 +71,7 @@ public class TextDB {
             String movieGoerName = star.nextToken().trim();
             String mobileNumber = star.nextToken().trim();
             String email = star.nextToken().trim();
-            int TID = Integer.parseInt(star.nextToken().trim());
+            Double TID = Double.parseDouble(star.nextToken().trim());
 
 
             // create Professor object from file data

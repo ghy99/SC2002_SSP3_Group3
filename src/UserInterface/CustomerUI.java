@@ -8,7 +8,7 @@ import Cineplex.Cineplex;
 import Customer.Customer;
 
 public class CustomerUI {
-    public static void CustomerInterface(ArrayList<Cineplex> cineplex) throws IOException {
+    public static void CustomerInterface(ArrayList<Cineplex> cineplex, Double tid) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your (Customer) name: ");
@@ -18,7 +18,7 @@ public class CustomerUI {
         System.out.println("Enter your email (for tracking purpose): ");
         String email = sc.nextLine();
 
-        Customer customer = new Customer(name, number, email, 1);
+        Customer customer = new Customer(name, number, email, tid);
         customer.printCustomerDetails();
         do {
             System.out.println("\nWhat would you like to do?");
@@ -44,10 +44,8 @@ public class CustomerUI {
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
                     customer.getTicket().printTicket();
-                    Double tid = PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
-//                    customer.setTID(PaymentUI.PaymentInterface(customer));
-
-
+//                    PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
+                    customer.setTID(PaymentUI.PaymentInterface(customer));
                 }
                 case 2 -> {
                     System.out.println("Enter your new name: ");
@@ -74,7 +72,8 @@ public class CustomerUI {
                     // Call function to check booking history
                 }
                 default -> {
-                    System.out.println("Invalid Input. Try again.");
+                    break;
+//                    System.out.println("Invalid Input. Try again.");
                 }
             }
         } while (choice < 10);

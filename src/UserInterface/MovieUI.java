@@ -3,9 +3,9 @@ import java.util.Scanner;
 import Movie.*;
 
 public class MovieUI {
-    public static void MovieInterface(MovieTicket ticket) {
+    public static MovieSeats MovieInterface(MovieTicket ticket) {
         // can be used to implement timing
-        System.out.printf("You have selected the Movie: %s\n", ticket.getChosenMovie());
+        System.out.printf("You have selected the Movie: %s\n", ticket.getChosenMovie().getMovieTitle());
         System.out.println("Select the Movie Timing that you prefer:");
         // display movie timings.
         System.out.println("Select your Movie Seats:");
@@ -13,5 +13,6 @@ public class MovieUI {
         System.out.println("Selected movie timing of (Insert Movie Timing)");
         System.out.println("Selected movie seat ID (Insert Seat ID)");
         // return type ticket?
+        return null;
     }
 }
