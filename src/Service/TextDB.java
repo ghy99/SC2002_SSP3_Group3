@@ -106,9 +106,9 @@ public class TextDB {
             Movie movie = new Movie(
                     title, status, synopsis, casts, type, genre, dim, movieClass,movieTotalSales
             );
-            movies.add(movie);
+            alr.add(movie);
         }
-        return movies;
+        return alr;
     }
 
 
@@ -172,10 +172,10 @@ public class TextDB {
                     }
                 }
             }
-            tempST = new ShowTime(DateTime.StringToDate(time), null, temp, aisle);
             //Refrence the current Showtime to our list of movies in cinexplex
             for (Movie m : movie) {
                 if (Objects.equals(m.getMovieTitle(), movieName)) {
+                    alr.add(new ShowTime(DateTime.StringToDate(time), m, temp, aisle));
                 }
             }
         }

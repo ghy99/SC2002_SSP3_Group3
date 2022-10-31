@@ -18,6 +18,7 @@ import Cineplex.ShowTime;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class MovieSeats  {
    
@@ -98,24 +99,24 @@ public class MovieSeats  {
 
 
   public void printSeats(){
-    System.out.println("                         |SCREEN|                         ");
-    System.out.println("----------------------------------------------------------");
+    System.out.println("        |SCREEN|          ");
+    System.out.println("-----------------------");
 
     for (int i=0; i<this.row; i++) {
       for (int j=0; j<this.col; j++) {
         if(this.seats[i][j] == null){
-          System.out.print(" ");
+          System.out.print("    ");
         }
         else {
-          System.out.print(this.seats[i][j]);
+            System.out.print(this.seats[i][j] );
         }
     }
-      System.out.println("");
-      System.out.println("----------------------------------------------------------");
+      System.out.println();
+      System.out.println("-----------------------");
     }
 
-    System.out.println("                         |ENTRANCE|                       ");
-    System.out.println("----------------------------------------------------------");
+    System.out.println("        |ENTRANCE|          ");
+    System.out.println("-----------------------");
     System.out.println("");
     System.out.println("Legend:");
     System.out.print("|@| Aisle  ");
@@ -124,8 +125,6 @@ public class MovieSeats  {
     System.out.println("");
     System.out.println("");
   }
-
-
 
   public int checkSeats(char i, int j){
 

@@ -1,4 +1,4 @@
-Avengers | NowShowing | Group of people comes together to fight purple grape. | Metal Frisbee, Metal Boy, New Axe, Arrows, Russian | Regular | Action | TWO_D | PG13
-IT | NowShowing | Group of kids fight a child predator. | Child 1, Child 2, Child 3, Child 4 | Regular | Horror | TWO_D | G
-The Notebook | NowShowing | Something about a notebook. | Pen, Paper, Notebook | Regular | Romance | TWO_D | R21
-Transformers | NowShowing | Cars and Trucks fight Planes. | Car, Truck, Underachieving White Boy | Premium | Action | THREE_D | M18
+Avengers | NowShowing | Group of people comes together to fight purple grape. | Metal Frisbee, Metal Boy, New Axe, Arrows, Russian | Regular | Action | TWO_D | PG13 | 5
+IT | NowShowing | Group of kids fight a child predator. | Child 1, Child 2, Child 3, Child 4 | Regular | Horror | TWO_D | G | 0
+The Notebook | NowShowing | Something about a notebook. | Pen, Paper, Notebook | Regular | Romance | TWO_D | R21 | 100
+Transformers | NowShowing | Cars and Trucks fight Planes. | Car, Truck, Underachieving White Boy | Premium | Action | THREE_D | M18 | 20
