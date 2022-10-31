@@ -54,6 +54,10 @@ public class MovieTicket {
         this.Movie = movie;
     }
 
+    public void setSeatID(MovieSeats seat) {
+        this.SeatID = seat;
+    }
+
     public Cineplex getChosenCineplex() {
         return this.ChosenCineplex;
     }

@@ -10,10 +10,10 @@ public class Customer {
     private String MobileNumber;
     private String Email;
     //Purchase History
-    private int TID;
+    private Double TID;
     private MovieTicket Ticket = null;
 
-    public Customer(String movieGoerName, String mobileNumber, String email, int TID) {
+    public Customer(String movieGoerName, String mobileNumber, String email, Double TID) {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
@@ -23,7 +23,7 @@ public class Customer {
     public void setMovieGoerName(String name) { this.MovieGoerName = name; }
     public void setMobileNumber(String number) { this.MobileNumber = number; }
     public void setEmail(String email) { this.Email = email; }
-    public void setTID(int transactionID) { this.TID = transactionID; }
+    public void setTID(Double transactionID) { this.TID = transactionID; }
     public void setTicket(MovieTicket tix) {
         this.Ticket = tix;
     }
@@ -41,7 +41,7 @@ public class Customer {
         return Email;
     }
 
-    public int getTID() {
+    public Double getTID() {
         return TID;
     }
 
@@ -50,7 +50,7 @@ public class Customer {
     }
 
     public void printCustomerDetails() {
-        System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\nTransaction ID:\t%d\n",
+        System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\nTransaction ID:\t%.0f\n",
                 this.MovieGoerName, this.MobileNumber, this.Email, this.TID);
         if (this.Ticket != null) {
             System.out.println("Ticket:\n");

@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class MainUI {
     private static ArrayList<Cineplex> cineplexes;
-    private static int tid;
+    private static Double tid;
 
     public static void InitializeCineplexes() throws IOException {
         System.out.println("Initializing Cineplexes...\n...\n...");
@@ -39,7 +39,7 @@ public class MainUI {
         System.out.println("Welcome to Moblima!");
         System.out.println("Initializing");
         InitializeCineplexes();
-        tid = 1;
+        tid = 1.0;
         int option = 1;
         do {
             System.out.println("Select option: \n1) Administrator\n2) Customer");
@@ -51,7 +51,7 @@ public class MainUI {
                     System.out.println("Calling adminUI");
                 }
                 case 2 -> {
-                    CustomerUI.CustomerInterface(cineplexes);
+                    CustomerUI.CustomerInterface(cineplexes, tid++);
                 }
             }
         } while (option > 0);
