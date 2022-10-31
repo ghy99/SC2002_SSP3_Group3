@@ -29,6 +29,8 @@ public class CineplexUI {
                 System.out.println("Select your Movie from the list above: ");
                 int selectMovie = sc.nextInt() - 1;
                 ticket.setChosenMovie(movielist.get(selectMovie));
+                System.out.println("\nMoving to MovieUI!\n");
+                MovieUI.MovieInterface(ticket); // set ticket seats. change return type to ticket?
                 // call movieUI
                 break;
             }
