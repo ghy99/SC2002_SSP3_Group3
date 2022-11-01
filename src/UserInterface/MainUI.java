@@ -49,6 +49,7 @@ public class MainUI {
                 case 1 -> {
                     // Call adminUI
                     System.out.println("Calling adminUI");
+                    AdminUI.AdminInterface();
                 }
                 case 2 -> {
                     CustomerUI.CustomerInterface(cineplexes, tid++);

@@ -15,6 +15,7 @@ package Movie;
 
 import Cineplex.Cinema;
 import Cineplex.ShowTime;
+import Service.TextDB;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -137,7 +138,7 @@ public class MovieSeats  {
       return 0; //return 0 to calling method (from classOfCinema class), which will ask user to re-select another Seat
       } else {
       this.seats[rows][j+1] = " X|"; //mark seat as booked
-      System.out.println("Updated seats:");
+      System.out.println("Printing the updated seats:");
       printSeats();
       System.out.println("Successfully booked seat: " + i + j + ".Thank you!");
       System.out.println("");
@@ -152,6 +153,8 @@ public class MovieSeats  {
   protected void setSeats(String[][] seats) {
     this.seats = seats;
   }
+
+
 }
 	
 
