@@ -57,7 +57,6 @@ public class CineplexUI {
                             }
                         }
                     }
-
                     if (allST.size() > 0)
                     {
                         for(int i = 0; i < allST.size(); i++)
