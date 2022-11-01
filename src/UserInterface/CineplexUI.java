@@ -1,14 +1,19 @@
 package UserInterface;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 import Cineplex.*;
 import Movie.*;
+import Service.TextDB;
 import Service.DateTime;
 
 
 public class CineplexUI {
-    public static MovieTicket CineplexInterface(ArrayList<Cineplex> cineplexes) {
+
+
+    public static MovieTicket CineplexInterface(ArrayList<Cineplex> cineplexes) throws IOException {
+
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         MovieTicket ticket = new MovieTicket();

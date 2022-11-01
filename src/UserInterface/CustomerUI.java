@@ -8,17 +8,20 @@ import Cineplex.Cineplex;
 import Customer.Customer;
 
 public class CustomerUI {
-    public static void CustomerInterface(ArrayList<Cineplex> cineplex, Double tid) throws IOException {
+    public static void CustomerInterface(ArrayList<Cineplex> cineplex, Customer customer) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your (Customer) name: ");
-        String name = sc.nextLine();
-        System.out.println("Enter your phone number: ");
-        String number = sc.nextLine();
-        System.out.println("Enter your email (for tracking purpose): ");
-        String email = sc.nextLine();
 
-        Customer customer = new Customer(name, number, email);
+        if (customer == null) {
+            System.out.println("Enter your (Customer) name: ");
+            String name = sc.nextLine();
+            System.out.println("Enter your phone number: ");
+            String number = sc.nextLine();
+            System.out.println("Enter your email (for tracking purpose): ");
+            String email = sc.nextLine();
+
+            customer = new Customer(name, number, email);
+        }
         customer.printCustomerDetails();
         do {
             System.out.println("\nWhat would you like to do?");

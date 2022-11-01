@@ -18,6 +18,10 @@ public class Customer {
         Email = email;
     }
 
+    public Customer() {
+
+    }
+
     public void setMovieGoerName(String name) { this.MovieGoerName = name; }
     public void setMobileNumber(String number) { this.MobileNumber = number; }
     public void setEmail(String email) { this.Email = email; }
