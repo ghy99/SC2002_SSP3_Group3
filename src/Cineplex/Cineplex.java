@@ -24,7 +24,7 @@ public class Cineplex {
 
     public Cineplex(String name) {
         this.cineplexName = name;
-        cineplexDir = new File(TextDB.getCurrentDirectory() + "\\" + this.getCineplexName().replace(' ','_'));
+        cineplexDir = new File(TextDB.getCurrentDirectory() + File.separator + this.getCineplexName().replace(' ','_'));
     }
 
     public String getCineplexName() {
@@ -99,15 +99,15 @@ public class Cineplex {
         if (!cineplexDir.exists()){
             cineplexDir.mkdirs();
 
-            System.out.println("Created directory. Path :" + cineplexDir+"\\" );
+            System.out.println("Created directory. Path :" + cineplexDir+File.separator );
         }
 
         try {
             for(Cinema c : listOfCinemas)
             {
-                File cinema = new File(cineplexDir+"\\" + c.getCinemaName()+".txt");
+                File cinema = new File(cineplexDir+File.separator + c.getCinemaName()+".txt");
                 if(!cinema.exists())cinema.createNewFile();
-                c.setShowTime(db.readFromFile( this.listOfMovies, "\\" + this.getCineplexName().replace(' ','_')+ "\\"+c.getCinemaName()+".txt" ));
+                c.setShowTime(db.readFromFile( this.listOfMovies, File.separator + this.getCineplexName().replace(' ','_')+ File.separator+c.getCinemaName()+".txt" ));
             }
         } catch (IOException e) {
             e.printStackTrace();
