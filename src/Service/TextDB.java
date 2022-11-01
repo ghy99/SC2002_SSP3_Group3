@@ -54,7 +54,7 @@ public class TextDB {
     private static Semaphore sem = new Semaphore(1);
 
     // an example of reading
-    public ArrayList<Customer> ReadFromFile(String fileName, ArrayList<Customer> customers) throws IOException {
+    public ArrayList<Customer> readFromFile(String fileName, ArrayList<Customer> customers, Customer temp) throws IOException {
 
         // read String from text file
         ArrayList stringArray = null;
@@ -71,11 +71,11 @@ public class TextDB {
             String movieGoerName = star.nextToken().trim();
             String mobileNumber = star.nextToken().trim();
             String email = star.nextToken().trim();
-            Double TID = Double.parseDouble(star.nextToken().trim());
+//            Double TID = Double.parseDouble(star.nextToken().trim());
 
 
             // create Professor object from file data
-            Customer customer = new Customer(movieGoerName, mobileNumber, email, TID);
+            Customer customer = new Customer(movieGoerName, mobileNumber, email);
             // add to Professors list
             customers.add(customer);
         }
@@ -370,7 +370,8 @@ public class TextDB {
         //for admin to write to add in dates into HolidayDates.txt file
         ArrayList<String> holidayList = (ArrayList<String>) Read("HolidayDates.txt");
         holidayList.add(date);
-        Write(fileName, holidayList);
+        Update(fileName, holidayList);
+
     }
 
 
@@ -394,7 +395,7 @@ public class TextDB {
     
 public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
 	
-	//read from consolidated.txt
+	//read from Consolidatedreview.txt
     	
     	ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
 		ArrayList<OverallReview> overallReviewList = new ArrayList<OverallReview>();
