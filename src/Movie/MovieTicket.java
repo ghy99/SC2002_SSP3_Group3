@@ -1,5 +1,5 @@
 package Movie;
-import Cineplex.Cineplex;
+import Cineplex.*;
 import Service.TextDB;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -23,7 +23,9 @@ public class MovieTicket {
         // Student, Adult, Senior Citizen | Weekday, Weekend, Public Holiday | 2D, 3D | Regular, Platinum
         // Blockbusters + $1
     private Cineplex ChosenCineplex;
+    private Cinema Cinema;
     private Movie Movie;
+    private String TID;
     private MovieSeats SeatID;
     private Date MovieDateTime;
     private int MovieTicketID;
@@ -39,7 +41,7 @@ public class MovieTicket {
     public MovieTicket() {
         System.out.println("Ticket Created.");
     }
-    public MovieTicket(Cineplex cineplex, Movie movie, MovieSeats seatid, Date moviedatetime, int movieTicketID) {
+    public MovieTicket( Movie movie, MovieSeats seatid, Date moviedatetime, int movieTicketID) {
         this.Movie = movie;
         this.SeatID = seatid;
         this.MovieDateTime = moviedatetime;
@@ -50,12 +52,24 @@ public class MovieTicket {
         this.ChosenCineplex = cineplex;
     }
 
+    public void setCinema(Cinema cinema) {
+        this.Cinema = cinema;
+    }
+
     public void setChosenMovie(Movie movie) {
         this.Movie = movie;
     }
 
     public void setSeatID(MovieSeats seat) {
         this.SeatID = seat;
+    }
+
+    public void setTID(String TID) {
+        this.TID = TID;
+    }
+
+    public Cinema getCinema() {
+        return Cinema;
     }
 
     public Cineplex getChosenCineplex() {
@@ -65,7 +79,11 @@ public class MovieTicket {
     public Movie getChosenMovie() {
         return this.Movie;
     }
-    
+
+    public String getTID() {
+        return TID;
+    }
+
     public boolean checkHoliday() throws IOException {
     	LocalDate tdyDate = LocalDate.now();
 
@@ -202,18 +220,18 @@ public class MovieTicket {
         return -1;
     }
 
-    public double CalculatePrice(MovieTicket ticket) throws IOException {
+    public static double CalculatePrice(MovieTicket ticket) throws IOException {
         System.out.println("Calculate Price\n");
         System.out.println("Initializing Prices to compare\n");
-        initTicketprices();
+        ticket.initTicketprices();
         int userAge = 20;
         int day = 2;
         int dim = 2;
         int type = 1;
-        double ageCost = getPriceByAge(userAge); // get user age
-        double dayCost = getPriceByDay(day); // change to get day of week through datetime
-        double dimCost = getPriceByDim(dim); // get dimension of movie
-        double typeCost = getPriceByType(type); // get cinema type
+        double ageCost = ticket.getPriceByAge(userAge); // get user age
+        double dayCost = ticket.getPriceByDay(day); // change to get day of week through datetime
+        double dimCost = ticket.getPriceByDim(dim); // get dimension of movie
+        double typeCost = ticket.getPriceByType(type); // get cinema type
         if (ageCost == -1) {
             System.out.println("Age is invalid. please enter a new value.");
             return -1;

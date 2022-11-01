@@ -71,11 +71,9 @@ public class TextDB {
             String movieGoerName = star.nextToken().trim();
             String mobileNumber = star.nextToken().trim();
             String email = star.nextToken().trim();
-            Double TID = Double.parseDouble(star.nextToken().trim());
-
 
             // create Professor object from file data
-            Customer customer = new Customer(movieGoerName, mobileNumber, email, TID);
+            Customer customer = new Customer(movieGoerName, mobileNumber, email);
             // add to Professors list
             customers.add(customer);
         }
@@ -126,7 +124,7 @@ public class TextDB {
 
             String[] cinemas = star.nextToken().trim().split(",");
             for (String cinema : cinemas) {
-                Cinema c = new Cinema(cinema.split(":")[0], Cinema.CinemaType.valueOf(cinema.split(":")[1]));
+                Cinema c = new Cinema(cinema.split(":")[0]  , cinema.split(":")[1] , Cinema.CinemaType.valueOf(cinema.split(":")[2]));
                 cineplex.addCinema(c);
             }
             alr.add(cineplex);
@@ -350,8 +348,6 @@ public class TextDB {
             st.append(customer.getMobileNumber().trim());
             st.append(SEPARATOR);
             st.append(customer.getEmail());
-            st.append(SEPARATOR);
-            st.append(customer.getTID());
             alw.add(st.toString());
         }
         Write(fileName, alw);

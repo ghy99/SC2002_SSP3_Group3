@@ -10,22 +10,23 @@ public class Customer {
     private String MobileNumber;
     private String Email;
     //Purchase History
-    private Double TID;
-    private MovieTicket Ticket = null;
+    private ArrayList<MovieTicket> Ticket = new ArrayList<MovieTicket>();
 
-    public Customer(String movieGoerName, String mobileNumber, String email, Double TID) {
+    public Customer(String movieGoerName, String mobileNumber, String email) {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
-        this.TID = TID;
     }
 
     public void setMovieGoerName(String name) { this.MovieGoerName = name; }
     public void setMobileNumber(String number) { this.MobileNumber = number; }
     public void setEmail(String email) { this.Email = email; }
-    public void setTID(Double transactionID) { this.TID = transactionID; }
-    public void setTicket(MovieTicket tix) {
+    public void setTicket(ArrayList<MovieTicket> tix) {
         this.Ticket = tix;
+    }
+
+    public void addTicket(MovieTicket tix) {
+        this.Ticket.add(tix) ;
     }
 
 
@@ -41,20 +42,20 @@ public class Customer {
         return Email;
     }
 
-    public Double getTID() {
-        return TID;
-    }
 
-    public MovieTicket getTicket() {
+    public ArrayList<MovieTicket> getTicket() {
         return this.Ticket;
     }
 
     public void printCustomerDetails() {
-        System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\nTransaction ID:\t%.0f\n",
-                this.MovieGoerName, this.MobileNumber, this.Email, this.TID);
-        if (this.Ticket != null) {
-            System.out.println("Ticket:\n");
-            this.Ticket.printTicket();
+        System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\n",
+                this.MovieGoerName, this.MobileNumber, this.Email);
+        if (this.Ticket.size() != 0) {
+            for(MovieTicket mt : this.getTicket())
+            {
+                System.out.println("Ticket:\n");
+                mt.printTicket();
+            }
         }
     }
 }
