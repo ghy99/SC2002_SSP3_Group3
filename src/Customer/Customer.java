@@ -14,7 +14,7 @@ public class Customer {
     private String MobileNumber;
     private String Email;
     //Purchase History
-    private MovieTicket Ticket = null;
+    private MovieTicket Ticket;
 
     public Customer(String movieGoerName, String mobileNumber, String email , boolean createAccount) throws IOException {
         MovieGoerName = movieGoerName;
@@ -38,9 +38,6 @@ public class Customer {
         this.Ticket = tix;
     }
 
-    public void addTicket(MovieTicket tix) {
-        this.Ticket = tix;
-    }
 
     public String getMovieGoerName() {
         return MovieGoerName;

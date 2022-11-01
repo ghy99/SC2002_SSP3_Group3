@@ -1,5 +1,6 @@
 package Service;
 
+
 import Customer.Customer;
 import Admin.*;
 import Cineplex.Cinema;
@@ -37,7 +38,7 @@ public class TextDB {
     }
     public static final String SEPARATOR = "|";
     private static final Path CurrentRelativePath = Paths.get("");
-    private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString() + "\\src\\DataStorage\\";
+    private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString() + File.separator +"src" +File.separator +"DataStorage" + File.separator;
 
     // an example of reading
     public static ArrayList<Customer> readFromFile(String fileName, ArrayList<Customer> customers, Customer temp) throws IOException {

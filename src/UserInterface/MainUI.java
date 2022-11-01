@@ -33,10 +33,10 @@ public class MainUI {
         }
 
 
-        File movieFile = new File(TextDB.getCurrentDirectory() +"\\" + TextDB.Files.ShowTime.ToString());
+        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.ShowTime.ToString());
         if(!movieFile.exists())movieFile.createNewFile();
 
-        ArrayList<Movie> movieList = db.readFromFile("\\" +TextDB.Files.Movies.ToString(), new ArrayList<>());
+        ArrayList<Movie> movieList = db.readFromFile(File.separator+TextDB.Files.Movies.ToString(), new ArrayList<>());
 
         for (Cineplex cineplex : cineplexes) {
             cineplex.setListOfMovies(movieList);

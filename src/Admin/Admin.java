@@ -75,8 +75,86 @@ public class Admin {
 
 	}
 
+	//implement function for ticket prices HERE
+
+	public void HolidayDateFunctions(int choice2) throws IOException {
+		Scanner scan = new Scanner(System.in);
+		switch(choice2){
+			case 1->{
+				System.out.println("\t 1. Add Holiday Dates");
+				System.out.println("Input Date in YYYY-MM-DD format");
+				String date = scan.nextLine();
+				AddHoliday(date);
+			}
+
+			case 2->{
+				System.out.println("\t 2. Edit holiday dates");
+				System.out.println("Input Old Date to be edited in YYYY-MM-DD format");
+				String oldDate = scan.nextLine();
+				System.out.println("Input New Date in YYYY-MM-DD format");
+				String newDate = scan.nextLine();
+				editHoliday(oldDate,newDate);
+			}
+
+			case 3->{
+				System.out.println("\t 3. Delete Holiday Dates");
+				System.out.println("Input Date in YYYY-MM-DD format");
+				String date = scan.nextLine();
+				deleteHoliday(date);
+			}
+
+
+
+
+		}
+
+	}
+
 	public void AddHoliday(String date) throws IOException {
 		TextDB.WriteToTextDB("HolidayDates.txt", date);
+	}
+
+	public void editHoliday(String oldDate, String newDate) throws IOException {
+		ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
+		for (int i = 0; i<holidayList.size();i++) {
+			if (oldDate.toString().equals(holidayList.get(i))) {
+				holidayList.remove(i);
+				holidayList.add(i,newDate);
+			}
+		}
+
+		TextDB textDB = new TextDB();
+		TextDB.Update("HolidayDates.txt",holidayList);
+
+	}
+
+	public void deleteHoliday(String date) throws IOException {
+		ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
+		for (int i = 0; i<holidayList.size();i++) {
+			if (date.toString().equals(holidayList.get(i))) {
+				holidayList.remove(i);
+			}
+		}
+
+		TextDB textDB = new TextDB();
+		TextDB.Update("HolidayDates.txt",holidayList);
+
+	}
+
+	//implement function for MOVIES HERE
+
+	public void RankingFunctions(int choice2) throws IOException{
+		switch(choice2){
+			case 1->{
+				System.out.println("\t 1.Display Top 5 movie rankings by rating");
+				RankingByRating();
+			}
+			case 2->{
+				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
+				//Implement function by ranking of ticketsales
+			}
+
+		}
 	}
 
 	public void RankingByRating () throws IOException {
@@ -94,32 +172,11 @@ public class Admin {
 		}
 	}
 
-	public void deleteHoliday(String date) throws IOException {
-		ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
-		for (int i = 0; i<holidayList.size();i++) {
-			if (date.toString().equals(holidayList.get(i))) {
-				holidayList.remove(i);
-			}
-		}
-
+	public void RankingByTicketSales () throws IOException{
 		TextDB textDB = new TextDB();
-		TextDB.Update("HolidayDates.txt",holidayList);
-
+		textDB.readFromFile("Movies.txt");
 	}
 
-	public void editHoliday(String oldDate, String newDate) throws IOException {
-		ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
-		for (int i = 0; i<holidayList.size();i++) {
-			if (oldDate.toString().equals(holidayList.get(i))) {
-				holidayList.remove(i);
-				holidayList.add(i,newDate);
-			}
-		}
-
-		TextDB textDB = new TextDB();
-		TextDB.Update("HolidayDates.txt",holidayList);
-
-	}
 
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {

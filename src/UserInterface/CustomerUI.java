@@ -43,7 +43,7 @@ public class CustomerUI {
             } while (choice < -1);
             switch (choice) {
                 case 1 -> {
-                    customer.addTicket(CineplexUI.CineplexInterface(cineplex));
+                    customer.setTicket(CineplexUI.CineplexInterface(cineplex));
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
                     customer.getTicket().printTicket();
