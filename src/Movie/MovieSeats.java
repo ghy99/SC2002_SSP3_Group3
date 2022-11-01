@@ -15,6 +15,7 @@ package Movie;
 
 import Cineplex.Cinema;
 import Cineplex.ShowTime;
+import Service.TextDB;
 
 import java.util.ArrayList;
 import java.util.Date;

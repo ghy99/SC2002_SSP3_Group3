@@ -27,13 +27,13 @@ log/
 target/
 
 # Inclusions
-!lib/**
+!lib/
 
 # Compiled Files
 *.class
 bin/
 build/
 /bin1/
-java/build/**
+java/build/
 out/
 /out/
