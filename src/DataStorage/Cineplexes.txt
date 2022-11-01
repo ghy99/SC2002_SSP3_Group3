@@ -1,3 +1,3 @@
-Shaw Theatre | 001:cinema1:Premium, 002:cinema2:Regular, 003:cinema3:Premium,cinema4:Premium
-Cathay Cineplex | 001:cinema1:Premium, 002:cinema2:Regular,003:cinema3:Premium,cinema4:Premium
-Golden Village | 001:cinema1:Premium, 002:cinema2:Regular,003:cinema3:Premium,cinema4:Premium
+Shaw Theatre | 001:cinema1:Premium, 002:cinema2:Regular, 003:cinema3:Premium, 004:cinema4:Regular
+Cathay Cineplex | 001:cinema1:Premium, 002:cinema2:Regular, 003:cinema3:Regular, 004:cinema4:Regular
+Golden Village | 001:cinema1:Premium, 002:cinema2:Regular, 003:cinema3:Regular, 004:cinema4:Premium

@@ -124,9 +124,10 @@ public class TextDB {
 
             Cineplex cineplex = new Cineplex(name);
 
-            String[] cinemas = star.nextToken().trim().split(",");
+            String[] cinemas = star.nextToken().trim().split(", ");
             for (String cinema : cinemas) {
-                Cinema c = new Cinema(cinema.split(":")[0]  , cinema.split(":")[1] , Cinema.CinemaType.valueOf(cinema.split(":")[2]));
+                String[] cinTypes = cinema.split(":");
+                Cinema c = new Cinema(cinTypes[0], cinTypes[1] , Cinema.CinemaType.valueOf(cinTypes[2]));
                 cineplex.addCinema(c);
             }
             alr.add(cineplex);
