@@ -33,13 +33,15 @@ public class AdminUI {
         }
 
         int choice = 0;
+        int choice2 = 0;
 
 		do {
 			System.out.println("Choose the following options for admin services");
-			System.out.println("\t 1) Add Holiday Dates");
-            System.out.println("\t 2) Delete holiday dates");
-            System.out.println("\t 3) Edit holiday dates");
-			System.out.println("\t 4) Display Top 5 movie rankings by rating");
+			System.out.println("\t 1) Ticket Prices");
+            System.out.println("\t 2) Holiday Dates");
+            System.out.println("\t 3) Movies");
+            System.out.println("\t 4) Movie Listing by rank");
+            System.out.println("\t 5) Other Settings");
             System.out.println("\tEnter '11' to exit!");
 
             do {
@@ -54,36 +56,34 @@ public class AdminUI {
 
             switch (choice) {
                 case 1 -> {
-                	System.out.println("Add holiday dates");
-                	System.out.println("Input Date in YYYY-MM-DD format");
-                	String date = scan.nextLine();
-                    admin.AddHoliday(date);
-
+                	System.out.println("1) Ticket Prices, Please select one of the following functions");
+                    //call function to edit ticket prices
                 }
 
                 case 2 -> {
-                    System.out.println("Delete holiday dates");
-                    System.out.println("Input Date in YYYY-MM-DD format");
-                    String date = scan.nextLine();
-                    admin.deleteHoliday(date);
-
+                    System.out.println("2) Holiday Dates, Please select one of the following functions");
+                    System.out.println("\t 1. Add Holiday Dates");
+                    System.out.println("\t 2. Edit Holiday Dates");
+                    System.out.println("\t 3. Delete Holiday Dates");
+                    choice2 = scan.nextInt();
+                    admin.HolidayDateFunctions(choice2);
                 }
 
                 case 3 -> {
-                    System.out.println("Edit holiday dates");
-                    System.out.println("Input Old Date to be edited in YYYY-MM-DD format");
-                    String oldDate = scan.nextLine();
-                    System.out.println("Input New Date in YYYY-MM-DD format");
-                    String newDate = scan.nextLine();
-                    admin.editHoliday(oldDate,newDate);
+                    System.out.println("3) Movies, Please select one of the following functions");
+                    //function for movies
 
                 }
 
 
 
                 case 4 -> {
-                	System.out.println("Display Top 5 movie rankings by rating");
-                	admin.RankingByRating();
+                	System.out.println("4) Movie Listing by rank. Please select one of the following functions ");
+                    System.out.println("\t 1.Display Top 5 movie rankings by rating");
+                    System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
+                    choice2 = scan.nextInt();
+                    admin.RankingFunctions(choice2);
+                	//admin.RankingByRating();
                 }
 
 
@@ -94,6 +94,9 @@ public class AdminUI {
             }
         } while (choice < 10);
     }
+
+
+
 
 
 

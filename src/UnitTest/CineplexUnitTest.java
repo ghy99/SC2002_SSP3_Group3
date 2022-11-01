@@ -41,6 +41,7 @@ public class CineplexUnitTest {
                         {
                             System.out.println((DateTime.convertTime(st.time.getTime()) ));
                             st.printSeats();
+                            st.checkSeats('B',1);
 
                         }
 
@@ -53,6 +54,7 @@ public class CineplexUnitTest {
 
     public static void main(String[] args) throws IOException {
         cineplexTextTest();
+
     }
 }
 

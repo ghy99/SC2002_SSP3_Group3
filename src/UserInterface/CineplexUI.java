@@ -55,16 +55,20 @@ public class CineplexUI {
                                     cinemas.add(c);
                                 }
                             }
-                        } else {
-                            System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", ticket.getChosenCineplex().getCineplexName());
-                            return null;
                         }
                     }
 
-                    for(int i = 0; i < listOfCinemas.size(); i++)
+                    if (allST.size() > 0)
                     {
-                        System.out.printf("%s) %s %s %s\n", i+1, listOfCinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).getTime().getTime()));
+                        for(int i = 0; i < allST.size(); i++)
+                        {
+                            System.out.printf("%s) %s %s %s\n", i+1, listOfCinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).getTime().getTime()));
+                        }
+                    }else {
+                        System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", ticket.getChosenCineplex().getCineplexName());
+                        return null;
                     }
+
 
                     System.out.println("Select your Showtime from the list above: ");
                     selectShowtime = sc.nextInt() - 1;

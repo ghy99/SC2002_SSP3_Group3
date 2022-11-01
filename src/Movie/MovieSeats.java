@@ -15,6 +15,7 @@ package Movie;
 
 import Cineplex.Cinema;
 import Cineplex.ShowTime;
+import Service.TextDB;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -130,18 +131,19 @@ public class MovieSeats  {
 
     //printSeats(); //show current seats available
     //int rows = this.row -(i - '0'-16); //i-'0' convert to integer; '0' = 48; -16 to ...
-    int rows = (17+this.row-1) - (i - '0');
-    if (this.seats[rows][j+1] == " X|" || this.seats[rows][j+1] == "@ |"){
-      printSeats();
-      System.out.println("Sorry, seat: " + i + j + " is not available.");
-      return 0; //return 0 to calling method (from classOfCinema class), which will ask user to re-select another Seat
-      } else {
-      this.seats[rows][j+1] = " X|"; //mark seat as booked
-      System.out.println("Updated seats:");
-      printSeats();
-      System.out.println("Successfully booked seat: " + i + j + ".Thank you!");
-      System.out.println("");
-      return 1; //return 1 to calling method to say seat is successfully booked
+      int rows = (17+this.row-1) - (i - '0');
+      if (this.seats[rows][j+1] == " X|" || this.seats[rows][j+1] == "@ |"){
+          printSeats();
+          System.out.println("Sorry, seat: " + i + j + " is not available.");
+          return 0; //return 0 to calling method (from classOfCinema class), which will ask user to re-select another Seat
+      }
+      else {
+          this.seats[rows][j+1] = " X|"; //mark seat as booked
+          System.out.println("Updated seats:");
+          printSeats();
+          System.out.println("Successfully booked seat: " + i + j + ".Thank you!");
+          System.out.println("");
+          return 1; //return 1 to calling method to say seat is successfully booked
       }
 	}
 

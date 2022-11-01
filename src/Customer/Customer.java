@@ -29,9 +29,6 @@ public class Customer {
         this.Ticket = tix;
     }
 
-    public void addTicket(MovieTicket tix) {
-        this.Ticket = tix;
-    }
 
 
     public String getMovieGoerName() {
