@@ -1,6 +1,7 @@
 package UserInterface;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import Admin.*;
 import Movie.MovieTicket;
@@ -11,7 +12,7 @@ import Review.*;
 
 public class AdminUI {
 	
-	public static void AdminInterface()throws IOException {
+	public static void AdminInterface() throws IOException, NoSuchAlgorithmException {
         System.out.println("Welcome to the Admin Portal. ");
         //only success log in then can access other services
 

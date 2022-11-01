@@ -63,7 +63,7 @@ public class CineplexUI {
 
                     for(int i = 0; i < listOfCinemas.size(); i++)
                     {
-                        System.out.printf("%s %s , %s \n", i+1 , allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).time.getTime()));
+                        System.out.printf("%s %s , %s \n", i+1 , allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime(allST.get(i).time.getTime()));
                     }
 
                     System.out.println("Select your Showtime from the list above: ");

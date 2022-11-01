@@ -1,15 +1,8 @@
 package Cineplex;
 
 import Movie.Movie;
-import Service.DateTime;
-import Service.TextDB;
 
 import java.util.*;
-import java.io.FileNotFoundException;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
 
 public class Cinema {
     public enum CinemaType {
@@ -115,6 +108,26 @@ public class Cinema {
         }
         this.createShowTime(date, movie);
         return true;
+    }
+
+    public static void CreateNewCinema(Cineplex cineplex , String cinemaName , CinemaType cinemaType)
+    {
+        int cinemaAlpha = 'A';
+
+        StringBuilder sb = new StringBuilder();
+        String temp = "";
+
+        for(Cinema c : cineplex.getListOfCinemas())
+        {
+            temp = String.valueOf(c.cinemaCode.charAt(0));
+            cinemaAlpha++;
+        }
+
+        sb.append(temp) ;
+        sb.append(cinemaType.ToString().charAt(0));
+        sb.append((char)++cinemaAlpha);
+
+        cineplex.addCinema(new Cinema(sb.toString()  , cinemaName , cinemaType));
     }
 
 }

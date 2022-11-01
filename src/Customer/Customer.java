@@ -46,7 +46,6 @@ public class Customer {
         return Email;
     }
 
-
     public ArrayList<MovieTicket> getTicket() {
         return this.Ticket;
     }

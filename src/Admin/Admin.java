@@ -1,9 +1,11 @@
 package Admin;
 
 import Review.OverallReview;
+import Service.SHA256;
 import Service.TextDB;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,9 +13,9 @@ public class Admin {
 	private String username;
 	private String password;
 
-	public Admin(String username, String password){
+	public Admin(String username, String password) throws NoSuchAlgorithmException {
 		this.username = username;
-	    this.password =  password;
+	    this.password = SHA256.toString(password);
 	}
 
 	public String getUsername(){
@@ -24,8 +26,12 @@ public class Admin {
 		return password;
 	}
 
+	public void addAdmin(Admin admin) throws IOException, NoSuchAlgorithmException {
+		TextDB textDB = new TextDB();
+		textDB.WriteToTextDB("\\"+"admin.txt" , admin);
+	}
 
-	public int login() throws IOException {
+	public int login() throws IOException, NoSuchAlgorithmException {
 
 		//fetch data of admin info from txt storage
 		ArrayList<Admin> emptyAdminList = new ArrayList<Admin>();
