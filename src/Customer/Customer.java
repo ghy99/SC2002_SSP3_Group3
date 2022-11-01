@@ -10,7 +10,7 @@ public class Customer {
     private String MobileNumber;
     private String Email;
     //Purchase History
-    private MovieTicket Ticket = null;
+    private MovieTicket Ticket;
 
     public Customer(String movieGoerName, String mobileNumber, String email) {
         MovieGoerName = movieGoerName;
