@@ -152,6 +152,8 @@ public class MovieSeats  {
   protected void setSeats(String[][] seats) {
     this.seats = seats;
   }
+
+
 }
 	
 
