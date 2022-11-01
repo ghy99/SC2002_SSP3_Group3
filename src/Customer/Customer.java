@@ -13,11 +13,14 @@ public class Customer {
     private Double TID;
     private MovieTicket Ticket = null;
 
-    public Customer(String movieGoerName, String mobileNumber, String email, Double TID) {
+    public Customer(String movieGoerName, String mobileNumber, String email) {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
-        this.TID = TID;
+    }
+
+    public Customer() {
+
     }
 
     public void setMovieGoerName(String name) { this.MovieGoerName = name; }

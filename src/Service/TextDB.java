@@ -54,7 +54,7 @@ public class TextDB {
     private static Semaphore sem = new Semaphore(1);
 
     // an example of reading
-    public ArrayList<Customer> ReadFromFile(String fileName, ArrayList<Customer> customers) throws IOException {
+    public ArrayList<Customer> readFromFile(String fileName, ArrayList<Customer> customers, Customer temp) throws IOException {
 
         // read String from text file
         ArrayList stringArray = null;
@@ -71,11 +71,11 @@ public class TextDB {
             String movieGoerName = star.nextToken().trim();
             String mobileNumber = star.nextToken().trim();
             String email = star.nextToken().trim();
-            Double TID = Double.parseDouble(star.nextToken().trim());
+//            Double TID = Double.parseDouble(star.nextToken().trim());
 
 
             // create Professor object from file data
-            Customer customer = new Customer(movieGoerName, mobileNumber, email, TID);
+            Customer customer = new Customer(movieGoerName, mobileNumber, email);
             // add to Professors list
             customers.add(customer);
         }
