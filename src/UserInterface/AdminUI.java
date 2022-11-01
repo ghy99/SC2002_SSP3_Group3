@@ -12,26 +12,18 @@ import Review.*;
 
 public class AdminUI {
 	
-	public static void AdminInterface() throws IOException, NoSuchAlgorithmException {
+	public static void AdminInterface(int loginFlag ,String usernameInput , String passwordInput) throws IOException, NoSuchAlgorithmException {
         System.out.println("Welcome to the Admin Portal. ");
         //only success log in then can access other services
 
         Scanner scan = new Scanner(System.in);
-        TextDB textDB = new TextDB();
-        int loginFlag = 0;
-
-        System.out.println("Please Provide Username");
-        String usernameInput = scan.nextLine();
-        System.out.println("Please Provide Password");
-        String passwordInput = scan.nextLine();
-        Admin admin = new Admin(usernameInput, passwordInput);
-        loginFlag = admin.login();
 
         if (loginFlag == 0){
             System.out.println("Please go back to the main portal to re-login");
             return;
         }
 
+        Admin admin = new Admin(usernameInput, passwordInput , true);
         int choice = 0;
 
 		do {

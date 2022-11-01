@@ -4,6 +4,7 @@ import Review.OverallReview;
 import Service.SHA256;
 import Service.TextDB;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -13,9 +14,14 @@ public class Admin {
 	private String username;
 	private String password;
 
-	public Admin(String username, String password) throws NoSuchAlgorithmException {
+	public Admin(String username, String password, boolean hashed) throws NoSuchAlgorithmException {
 		this.username = username;
-	    this.password = SHA256.toString(password);
+		if(hashed)
+		{
+			this.password = password;
+		}else {
+			this.password = SHA256.toString(password);
+		}
 	}
 
 	public String getUsername(){
@@ -31,13 +37,13 @@ public class Admin {
 		textDB.WriteToTextDB("\\"+"admin.txt" , admin);
 	}
 
-	public int login() throws IOException, NoSuchAlgorithmException {
-
+	public static int login(String username, String password) throws IOException, NoSuchAlgorithmException {
 		//fetch data of admin info from txt storage
 		ArrayList<Admin> emptyAdminList = new ArrayList<Admin>();
 		TextDB textDB = new TextDB();
 		ArrayList<Admin> filledAdminList = textDB.ReadFromFile(emptyAdminList, "admin.txt");
 
+		password = SHA256.toString(password);
 
 		//for debugging checking output
 		for (int i = 0; i<filledAdminList.size();i++) {
@@ -53,8 +59,8 @@ public class Admin {
 		for (int i = 0; i<filledAdminList.size();i++) {
 			dataName = filledAdminList.get(i).getUsername();
 			dataPassword = filledAdminList.get(i).getPassword();
-			if(this.username.equals(dataName) && this.password.equals(dataPassword)) {
-				System.out.println("Welcome " + this.username + ". You have logged in successfully to the admin portal.");
+			if(username.equals(dataName) && password.equals(dataPassword)) {
+				System.out.println("Welcome " + username + ". You have logged in successfully to the admin portal.");
 				flagNum = 1; //logged in successfully
 			}
 		}
@@ -116,8 +122,9 @@ public class Admin {
 	}
 
 
-
-
+	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
+		System.out.println(Admin.login("ant" , "12345"));
+	}
 
 
 
