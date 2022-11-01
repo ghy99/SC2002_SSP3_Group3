@@ -10,7 +10,7 @@ public class Customer {
     private String MobileNumber;
     private String Email;
     //Purchase History
-    private ArrayList<MovieTicket> Ticket = new ArrayList<MovieTicket>();
+    private MovieTicket Ticket = null;
 
     public Customer(String movieGoerName, String mobileNumber, String email) {
         MovieGoerName = movieGoerName;
@@ -25,12 +25,12 @@ public class Customer {
     public void setMovieGoerName(String name) { this.MovieGoerName = name; }
     public void setMobileNumber(String number) { this.MobileNumber = number; }
     public void setEmail(String email) { this.Email = email; }
-    public void setTicket(ArrayList<MovieTicket> tix) {
+    public void setTicket(MovieTicket tix) {
         this.Ticket = tix;
     }
 
     public void addTicket(MovieTicket tix) {
-        this.Ticket.add(tix) ;
+        this.Ticket = tix;
     }
 
 
@@ -47,19 +47,16 @@ public class Customer {
     }
 
 
-    public ArrayList<MovieTicket> getTicket() {
+    public MovieTicket getTicket() {
         return this.Ticket;
     }
 
     public void printCustomerDetails() {
         System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\n",
                 this.MovieGoerName, this.MobileNumber, this.Email);
-        if (this.Ticket.size() != 0) {
-            for(MovieTicket mt : this.getTicket())
-            {
-                System.out.println("Ticket:\n");
-                mt.printTicket();
-            }
+        if (this.Ticket != null) {
+            System.out.println("Ticket:\n");
+            this.getTicket().printTicket();
         }
     }
 }

@@ -62,6 +62,9 @@ public class MovieTicket {
     public void setTID(String TID) {
         this.TID = TID;
     }
+    public void setMovieDateTime(Date movieDateTime) {
+        this.MovieDateTime = movieDateTime;
+    }
 
     public Cinema getCinema() {
         return Cinema;
@@ -131,6 +134,7 @@ public class MovieTicket {
     public void printTicket() {
         System.out.printf("CINEPLEX: %s\n", this.ChosenCineplex.getCineplexName());
         System.out.printf("MOVIE: %s\n", this.Movie.getMovieTitle());
+        System.out.printf("MOVIE DATE:TIME: %s\n", this.MovieDateTime);
         System.out.printf("SEAT: %s\n", this.SeatID);
         if (this.MovieDateTime != null)
             System.out.printf("TIME: %s\n", this.MovieDateTime.toString());
