@@ -63,14 +63,14 @@ public class CineplexUI {
 
                     for(int i = 0; i < listOfCinemas.size(); i++)
                     {
-                        System.out.printf("%s) %s %s %s\n", i+1, listOfCinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).time.getTime()));
+                        System.out.printf("%s) %s %s %s\n", i+1, listOfCinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).getTime().getTime()));
                     }
 
                     System.out.println("Select your Showtime from the list above: ");
                     selectShowtime = sc.nextInt() - 1;
                     ticket.setCinema(cinemas.get(selectShowtime));
                     ticket.setChosenMovie(allST.get(selectShowtime).getMovie());
-                    ticket.setMovieDateTime(allST.get(selectShowtime).getTime());
+                    ticket.setMovieDateTime(allST.get(selectShowtime));
                     break;
                 }
                 movielist.get(selectMovie).increaseMovieTotalSale(); //increase sales of movie

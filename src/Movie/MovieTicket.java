@@ -27,9 +27,8 @@ public class MovieTicket {
     private Movie Movie;
     private String TID;
     private String SeatID;
-    private Date MovieDateTime;
+    private ShowTime MovieDateTime;
     private int MovieTicketID;
-    private ShowTime Time;
 
 
 
@@ -37,7 +36,7 @@ public class MovieTicket {
     public MovieTicket() {
         System.out.println("Ticket Created.");
     }
-    public MovieTicket(Cineplex cineplex, Movie movie, String seatid, Date moviedatetime, int movieTicketID) {
+    public MovieTicket(Cineplex cineplex, Movie movie, String seatid, ShowTime moviedatetime, int movieTicketID) {
         this.ChosenCineplex = cineplex;
         this.Movie = movie;
         this.SeatID = seatid;
@@ -63,7 +62,7 @@ public class MovieTicket {
 
 
     public void setShowtime(ShowTime time){
-        this.Time = time;
+        this.MovieDateTime = time;
     }
 
 
@@ -72,14 +71,14 @@ public class MovieTicket {
     }
 
     public ShowTime getShowtime(){
-        return this.Time;
+        return this.MovieDateTime;
     }
 
     public void setTID(String TID) {
         this.TID = TID;
     }
 
-    public void setMovieDateTime(Date movieDateTime) {
+    public void setMovieDateTime(ShowTime movieDateTime) {
         this.MovieDateTime = movieDateTime;
     }
 

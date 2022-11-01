@@ -29,7 +29,7 @@ public class MovieUI {
             movieseats = sc.next();
             row = movieseats.charAt(0);
             col = movieseats.charAt(1);
-        } while(ticket.getShowtime().checkSeats(row, col) != 1);
+        } while(ticket.getShowtime().checkSeats(row, Integer.parseInt(String.valueOf(col))) != 1);
 
     
         System.out.println("Selected movie seat ID(" + row +""+ col +")" );
