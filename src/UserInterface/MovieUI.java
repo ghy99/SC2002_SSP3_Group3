@@ -1,18 +1,39 @@
 package UserInterface;
 import java.util.Scanner;
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import Cineplex.Cinema;
 import Movie.*;
+import Service.*;
+
+
+
+
 
 public class MovieUI {
-    public static MovieSeats MovieInterface(MovieTicket ticket) {
+    public static String MovieInterface(MovieTicket ticket) {
         // can be used to implement timing
-        System.out.printf("You have selected the Movie: %s\n", ticket.getChosenMovie().getMovieTitle());
-        System.out.println("Select the Movie Timing that you prefer:");
+
+        Scanner sc = new Scanner(System.in);
+
+        ticket.getShowtime().printSeats();
+       String movieseats;
+
         // display movie timings.
-        System.out.println("Select your Movie Seats:");
         // display movie seats.
-        System.out.println("Selected movie timing of (Insert Movie Timing)");
-        System.out.println("Selected movie seat ID (Insert Seat ID)");
+        char row, col;
+        do {
+            System.out.println("Select your Movie Seats:");
+            movieseats = sc.next();
+            row = movieseats.charAt(0);
+            col = movieseats.charAt(1);
+        } while(ticket.getShowtime().checkSeats(row, Integer.parseInt(String.valueOf(col))) != 1);
+
+    
+        System.out.println("Selected movie seat ID(" + row +""+ col +")" );
         // return type ticket?
-        return null;
+        return movieseats;
     }
 }
