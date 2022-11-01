@@ -26,6 +26,8 @@ public class Movie {
 
     private MovieType.Class movieClass;
 
+    private int movieTotalSales = 0;
+
     public enum MovieStatus {
         ComingSoon,
         Preview,
@@ -45,6 +47,21 @@ public class Movie {
         this.movieClass = movieClass;
     }
 
+    public Movie(String movieTitle, MovieStatus showingStatus, String synopsis, ArrayList<String> cast,
+                 Cinema.CinemaType movietype, MovieType.Genre moviecat,
+                 MovieType.Dimension dimension, MovieType.Class movieClass,int movieTotalSales) {
+        this.movieTitle = movieTitle;
+        this.showingStatus = showingStatus;
+        this.synopsis = synopsis;
+        this.cast = cast;
+        this.typeOfCinema = movietype;
+        this.MovieGenre = moviecat;
+        this.movie3D = dimension;
+        this.movieClass = movieClass;
+        this.movieTotalSales = movieTotalSales;
+    }
+
+
     public String getMovieTitle() {
         return this.movieTitle;
     }
@@ -63,37 +80,11 @@ public class Movie {
     public MovieType.Class getMovieClass() {
         return this.movieClass;
     }
+    public int getMovieTotalSales() { return this.movieTotalSales;}
 
-    public void setMovieTitle(String movieName) {
-        this.movieTitle = movieName;
-    }
-
-    public void setShowingStatus(MovieStatus status) {
-        this.showingStatus = status;
-    }
-
-    public void setSynopsis(String synop) {
-        this.synopsis = synop;
-    }
-
-    public void setCast(ArrayList<String> casts) {
-        this.cast.addAll(casts);
-    }
-
-    public void setMovieType(Cinema.CinemaType type) {
-        this.typeOfCinema = type;
-    }
-
-    public void setMovieGenre(MovieType.Genre genre) {
-        this.MovieGenre = genre;
-    }
-
-    public void setMovie3D(MovieType.Dimension dim) {
-        this.movie3D = dim;
-    }
-
-    public void setMovieClass(MovieType.Class movieclass) {
-        this.movieClass = movieclass;
+    public void increaseMovieTotalSale()
+    {
+        this.movieTotalSales++;
     }
 
     public void printMovieDetails() {

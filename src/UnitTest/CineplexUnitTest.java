@@ -1,6 +1,7 @@
 package UnitTest;
 
 import Cineplex.*;
+import Movie.Movie;
 import Service.DateTime;
 import Service.TextDB;
 
@@ -22,23 +23,26 @@ public class CineplexUnitTest {
             e.printStackTrace();
         }
 
+        ArrayList<Movie> movieList = db.readFromFile("\\" +TextDB.Files.Movies.ToString(), new ArrayList<>());
         for(Cineplex c : cineplexes)
         {
             System.out.println(c.getCineplexName());
 
             if(Objects.equals(c.getCineplexName(), "Shaw Theatre"))
             {
+                c.setListOfMovies(movieList);
                 c.InitializeMovies();
                 for (Cinema z : c.getListOfCinemas())
                 {
                     System.out.println(z.getCinemaName() + " " + z.getCinemaType());
-                    {
+
                         for (ShowTime st : z.getShowTime())
                         {
                             System.out.println((DateTime.convertTime(st.time.getTime()) ));
                             st.printSeats();
+
                         }
-                    }
+
                 }
             }
 

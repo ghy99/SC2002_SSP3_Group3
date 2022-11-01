@@ -10,21 +10,26 @@ public class Customer {
     private String MobileNumber;
     private String Email;
     //Purchase History
-    private int TID;
     private MovieTicket Ticket = null;
 
-    public Customer(String movieGoerName, String mobileNumber, String email, int TID) {
+    public Customer(String movieGoerName, String mobileNumber, String email) {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
-        this.TID = TID;
+    }
+
+    public Customer() {
+
     }
 
     public void setMovieGoerName(String name) { this.MovieGoerName = name; }
     public void setMobileNumber(String number) { this.MobileNumber = number; }
     public void setEmail(String email) { this.Email = email; }
-    public void setTID(int transactionID) { this.TID = transactionID; }
     public void setTicket(MovieTicket tix) {
+        this.Ticket = tix;
+    }
+
+    public void addTicket(MovieTicket tix) {
         this.Ticket = tix;
     }
 
@@ -41,20 +46,17 @@ public class Customer {
         return Email;
     }
 
-    public int getTID() {
-        return TID;
-    }
 
     public MovieTicket getTicket() {
         return this.Ticket;
     }
 
     public void printCustomerDetails() {
-        System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\nTransaction ID:\t%d\n",
-                this.MovieGoerName, this.MobileNumber, this.Email, this.TID);
+        System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\n",
+                this.MovieGoerName, this.MobileNumber, this.Email);
         if (this.Ticket != null) {
             System.out.println("Ticket:\n");
-            this.Ticket.printTicket();
+            this.getTicket().printTicket();
         }
     }
 }

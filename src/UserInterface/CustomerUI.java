@@ -8,17 +8,20 @@ import Cineplex.Cineplex;
 import Customer.Customer;
 
 public class CustomerUI {
-    public static void CustomerInterface(ArrayList<Cineplex> cineplex) throws IOException {
+    public static void CustomerInterface(ArrayList<Cineplex> cineplex, Customer customer) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your (Customer) name: ");
-        String name = sc.nextLine();
-        System.out.println("Enter your phone number: ");
-        String number = sc.nextLine();
-        System.out.println("Enter your email (for tracking purpose): ");
-        String email = sc.nextLine();
 
-        Customer customer = new Customer(name, number, email, 1);
+        if (customer == null) {
+            System.out.println("Enter your (Customer) name: ");
+            String name = sc.nextLine();
+            System.out.println("Enter your phone number: ");
+            String number = sc.nextLine();
+            System.out.println("Enter your email (for tracking purpose): ");
+            String email = sc.nextLine();
+
+            customer = new Customer(name, number, email);
+        }
         customer.printCustomerDetails();
         do {
             System.out.println("\nWhat would you like to do?");
@@ -40,13 +43,12 @@ public class CustomerUI {
             } while (choice < -1);
             switch (choice) {
                 case 1 -> {
-                    customer.setTicket(CineplexUI.CineplexInterface(cineplex));
+                    customer.addTicket(CineplexUI.CineplexInterface(cineplex));
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
                     customer.getTicket().printTicket();
-                    double ticketPrice = customer.getTicket().CalculatePrice(customer.getTicket()); // Get movie datetime
-                    System.out.printf("Your Ticket Price is: %.2f", ticketPrice);
-                    customer.setTID(PaymentUI.PaymentInterface(customer));
+//                   PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
+                    //customer.setTID(PaymentUI.PaymentInterface(customer));
                 }
                 case 2 -> {
                     System.out.println("Enter your new name: ");
@@ -73,7 +75,8 @@ public class CustomerUI {
                     // Call function to check booking history
                 }
                 default -> {
-                    System.out.println("Invalid Input. Try again.");
+                    break;
+//                    System.out.println("Invalid Input. Try again.");
                 }
             }
         } while (choice < 10);

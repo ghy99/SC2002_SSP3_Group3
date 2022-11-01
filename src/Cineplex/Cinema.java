@@ -30,14 +30,15 @@ public class Cinema {
     private static final long HOUR = 3600 * 1000; // in milli-seconds.
 
     // This will be for Cinema, to be declared in a list in cineplex
+    private String cinemaCode;
     private String cinemaName;
     private CinemaType cinemaType;
 
     private ArrayList<ShowTime> showTime = new ArrayList<>();
     private ArrayList<Movie> listOfMovies = new ArrayList<>();
 
-    public Cinema(String cinemaName, CinemaType cinemaType) {
-
+    public Cinema(String cinemaCode, String cinemaName, CinemaType cinemaType) {
+        this.cinemaCode = cinemaCode;
         this.cinemaName = cinemaName;
         this.cinemaType = cinemaType;
     }
@@ -54,9 +55,12 @@ public class Cinema {
         return cinemaType;
     }
 
-    public ArrayList<ShowTime> getShowTime(Cineplex cineplex, Movie movie) {
-        // add function to get ShowTime.
+    public ArrayList<ShowTime> getShowTime() {
         return showTime;
+    }
+
+    public String getCinemaCode() {
+        return cinemaCode;
     }
 
     private void createShowTime(Date time, Movie movie) {
