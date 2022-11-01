@@ -43,12 +43,12 @@ public class CustomerUI {
             } while (choice < -1);
             switch (choice) {
                 case 1 -> {
-                    customer.setTicket(CineplexUI.CineplexInterface(cineplex));
+                    customer.addTicket(CineplexUI.CineplexInterface(cineplex));
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
-                    customer.getTicket().printTicket();
-//                    PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
-                    customer.setTID(PaymentUI.PaymentInterface(customer));
+                    customer.getTicket().get(customer.getTicket().size() - 1).printTicket();
+//                   PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
+                    //customer.setTID(PaymentUI.PaymentInterface(customer));
                 }
                 case 2 -> {
                     System.out.println("Enter your new name: ");
