@@ -29,6 +29,44 @@ public class CineplexUI {
                 System.out.println("Select your Movie from the list above: ");
                 int selectMovie = sc.nextInt() - 1;
                 ticket.setChosenMovie(movielist.get(selectMovie));
+<<<<<<< Updated upstream
+=======
+
+                //Ask for showtime
+                while (selectShowtime >= 0) {
+                    ArrayList<Cinema> listOfCinemas = ticket.getChosenCineplex().getListOfCinemas();
+                    ArrayList<ShowTime> allST = new ArrayList<>();
+                    ArrayList<Cinema> cinemas = new ArrayList<>();
+                    //filter out showtime
+                    for (Cinema c : listOfCinemas) {
+                        ArrayList<ShowTime> listOfShowtime = c.getShowTime();
+                        if (listOfShowtime.size() > 0) {
+                            for (ShowTime st : listOfShowtime) {
+                                if (Objects.equals(st.getMovie().getMovieTitle(), ticket.getChosenMovie().getMovieTitle())) {
+                                    allST.add(st);
+                                    cinemas.add(c);
+                                }
+                            }
+                        } else {
+                            System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", ticket.getChosenCineplex().getCineplexName());
+                            return null;
+                        }
+                    }
+
+                    for(int i = 0; i < listOfCinemas.size(); i++)
+                    {
+                        System.out.printf("%s %s , %s \n", i+1 , allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).time.getTime()));
+                    }
+
+                    System.out.println("Select your Showtime from the list above: ");
+                    selectShowtime = sc.nextInt() - 1;
+                    ticket.setCinema(cinemas.get(selectShowtime));
+                    ticket.setShowtime(allST.get(selectShowtime));
+                }
+                movielist.get(selectMovie).increaseMovieTotalSale(); //increase sales of movie
+                System.out.println("\nMoving to MovieUI!\n");
+                ticket.setSeatID(MovieUI.MovieInterface(ticket)); // set ticket seats. change return type to ticket?
+>>>>>>> Stashed changes
                 // call movieUI
                 break;
             }

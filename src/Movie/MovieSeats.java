@@ -125,8 +125,12 @@ public class MovieSeats  {
     System.out.println("");
   }
 
+<<<<<<< Updated upstream
 
 
+=======
+  
+>>>>>>> Stashed changes
   public int checkSeats(char i, int j){
 
     //printSeats(); //show current seats available

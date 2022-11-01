@@ -23,10 +23,17 @@ public class MovieTicket {
         // Student, Adult, Senior Citizen | Weekday, Weekend, Public Holiday | 2D, 3D | Regular, Platinum
         // Blockbusters + $1
     private Cineplex ChosenCineplex;
+<<<<<<< Updated upstream
     private Movie Movie;
     private MovieSeats SeatID;
+=======
+    private Cinema Cinema;
+    private String TID;
+    private String SeatID;
+>>>>>>> Stashed changes
     private Date MovieDateTime;
     private int MovieTicketID;
+    private ShowTime Time;
 
     private Hashtable<Integer, Double> priceByAge;
     private Hashtable<Integer, Double> priceByDay;
@@ -39,8 +46,12 @@ public class MovieTicket {
     public MovieTicket() {
         System.out.println("Ticket Created.");
     }
+<<<<<<< Updated upstream
     public MovieTicket(Cineplex cineplex, Movie movie, MovieSeats seatid, Date moviedatetime, int movieTicketID) {
         this.Movie = movie;
+=======
+    public MovieTicket( String seatid, Date moviedatetime, int movieTicketID) {
+>>>>>>> Stashed changes
         this.SeatID = seatid;
         this.MovieDateTime = moviedatetime;
         this.MovieTicketID = movieTicketID;
@@ -50,12 +61,36 @@ public class MovieTicket {
         this.ChosenCineplex = cineplex;
     }
 
+<<<<<<< Updated upstream
     public void setChosenMovie(Movie movie) {
         this.Movie = movie;
     }
 
     public void setMovieSeats(MovieSeats seatID){
         this.SeatID = seatID;
+=======
+    public void setCinema(Cinema cinema) {
+        this.Cinema = cinema;
+    }
+
+
+
+    public void setShowtime(ShowTime time){
+        this.Time = time;
+    }
+
+
+    public void setSeatID(String seat) {
+        this.SeatID = seat;
+    }
+
+    public ShowTime getShowtime(){
+        return this.Time;
+    }
+
+    public void setTID(String TID) {
+        this.TID = TID;
+>>>>>>> Stashed changes
     }
 
     public void setMovieDateTime(Date movieDateTime){
@@ -66,12 +101,17 @@ public class MovieTicket {
         return this.ChosenCineplex;
     }
 
+<<<<<<< Updated upstream
     public Movie getChosenMovie() {
         return this.Movie;
     }
 
     public MovieSeats getMovieSeats(){
         return this.SeatID;
+=======
+    public String getTID() {
+        return TID;
+>>>>>>> Stashed changes
     }
 
     public Date getMovieTiming(){
