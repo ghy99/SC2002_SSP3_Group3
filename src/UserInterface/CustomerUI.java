@@ -46,7 +46,7 @@ public class CustomerUI {
                     customer.addTicket(CineplexUI.CineplexInterface(cineplex));
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
-                    customer.getTicket().get(customer.getTicket().size() - 1).printTicket();
+                    customer.getTicket().printTicket();
 //                   PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
                     //customer.setTID(PaymentUI.PaymentInterface(customer));
                 }

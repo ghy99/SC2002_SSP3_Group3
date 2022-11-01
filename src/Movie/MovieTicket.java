@@ -26,9 +26,10 @@ public class MovieTicket {
     private Cinema Cinema;
     private Movie Movie;
     private String TID;
-    private MovieSeats SeatID;
+    private String SeatID;
     private Date MovieDateTime;
     private int MovieTicketID;
+    private ShowTime Time;
 
 
 
@@ -36,7 +37,8 @@ public class MovieTicket {
     public MovieTicket() {
         System.out.println("Ticket Created.");
     }
-    public MovieTicket( Movie movie, MovieSeats seatid, Date moviedatetime, int movieTicketID) {
+    public MovieTicket(Cineplex cineplex, Movie movie, String seatid, Date moviedatetime, int movieTicketID) {
+        this.ChosenCineplex = cineplex;
         this.Movie = movie;
         this.SeatID = seatid;
         this.MovieDateTime = moviedatetime;
@@ -47,20 +49,38 @@ public class MovieTicket {
         this.ChosenCineplex = cineplex;
     }
 
-    public void setCinema(Cinema cinema) {
-        this.Cinema = cinema;
-    }
-
     public void setChosenMovie(Movie movie) {
         this.Movie = movie;
     }
 
-    public void setSeatID(MovieSeats seat) {
+    public void setMovieSeats(String seatID){
+        this.SeatID = seatID;
+    }
+
+    public void setCinema(Cinema cinema) {
+        this.Cinema = cinema;
+    }
+
+
+    public void setShowtime(ShowTime time){
+        this.Time = time;
+    }
+
+
+    public void setSeatID(String seat) {
         this.SeatID = seat;
+    }
+
+    public ShowTime getShowtime(){
+        return this.Time;
     }
 
     public void setTID(String TID) {
         this.TID = TID;
+    }
+
+    public void setMovieDateTime(Date movieDateTime) {
+        this.MovieDateTime = movieDateTime;
     }
 
     public Cinema getCinema() {
@@ -75,6 +95,9 @@ public class MovieTicket {
         return this.Movie;
     }
 
+    public String getMovieSeats(){
+        return this.SeatID;
+    }
     public String getTID() {
         return TID;
     }
@@ -131,6 +154,7 @@ public class MovieTicket {
     public void printTicket() {
         System.out.printf("CINEPLEX: %s\n", this.ChosenCineplex.getCineplexName());
         System.out.printf("MOVIE: %s\n", this.Movie.getMovieTitle());
+        System.out.printf("MOVIE DATE:TIME: %s\n", this.MovieDateTime);
         System.out.printf("SEAT: %s\n", this.SeatID);
         if (this.MovieDateTime != null)
             System.out.printf("TIME: %s\n", this.MovieDateTime.toString());

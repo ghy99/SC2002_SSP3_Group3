@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class PaymentUI {
     public static String PaymentInterface(Customer customer) throws IOException {
         DateTime datetime = new DateTime();
-        MovieTicket currTicket = customer.getTicket().get(customer.getTicket().size()-1);
+        MovieTicket currTicket = customer.getTicket();
         double ticketPrice = MovieTicket.CalculatePrice(currTicket); // Get movie datetime
         System.out.printf("Your Ticket Price is: %.2f\n", ticketPrice);
         System.out.println("Ticket cost will automatically be deducted from your registered PayLah account.");

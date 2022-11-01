@@ -3,6 +3,7 @@ import Movie.*;
 import Cineplex.Cineplex;
 import Service.TextDB;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -30,7 +31,14 @@ public class MainUI {
             e.printStackTrace();
         }
 
+
+        File movieFile = new File(TextDB.getCurrentDirectory() +"\\" + TextDB.Files.ShowTime.ToString());
+        if(!movieFile.exists())movieFile.createNewFile();
+
+        ArrayList<Movie> movieList = db.readFromFile("\\" +TextDB.Files.Movies.ToString(), new ArrayList<>());
+
         for (Cineplex cineplex : cineplexes) {
+            cineplex.setListOfMovies(movieList);
             cineplex.InitializeMovies();
         }
         System.out.println("Cineplexes are initialized\n");
