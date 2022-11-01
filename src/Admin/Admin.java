@@ -166,10 +166,10 @@ public class Admin {
 		}
 	}
 
-	public void RankingByTicketSales () throws IOException{
-		TextDB textDB = new TextDB();
-		textDB.readFromFile("Movies.txt");
-	}
+//	public void RankingByTicketSales () throws IOException{
+//		TextDB textDB = new TextDB();
+//		textDB.readFromFile("Movies.txt");
+//	}
 
 
 

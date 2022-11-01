@@ -132,7 +132,7 @@ public class MovieSeats  {
     //printSeats(); //show current seats available
     //int rows = this.row -(i - '0'-16); //i-'0' convert to integer; '0' = 48; -16 to ...
       int rows = (17+this.row-1) - (i - '0');
-      if (this.seats[rows][j+1] == " X|" || this.seats[rows][j+1] == "@ |"){
+      if (j >= this.col-2 || j <= 0 || rows <= 0 || rows >= this.row||this.seats[rows][j+1] == " X|" || this.seats[rows][j+1] == "@ |"){
           printSeats();
           System.out.println("Sorry, seat: " + i + j + " is not available.");
           return 0; //return 0 to calling method (from classOfCinema class), which will ask user to re-select another Seat
@@ -155,8 +155,19 @@ public class MovieSeats  {
     this.seats = seats;
   }
 
+  //Testing
+//  public static void main(String[] args) {
+//    MovieSeats seats = new MovieSeats(5,8,3,6);
+//    seats.seatsCreation();
+//    seats.printSeats();
+//    seats.checkSeats('@',-8);
+//
+//
+//  }
 
 }
+
+
 	
 
 
