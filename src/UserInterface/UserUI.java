@@ -49,7 +49,7 @@ public class UserUI {
             number = sc.nextLine();
 
 
-            if (Objects.equals(username, "-1")) {
+            if (Objects.equals(number, "-1")) {
                 return;
             }
 
