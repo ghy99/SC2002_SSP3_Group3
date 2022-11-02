@@ -1,5 +1,7 @@
 package Admin;
 
+import Cineplex.Cineplex;
+import Movie.Movie;
 import Review.OverallReview;
 import Service.SHA256;
 import Service.TextDB;
@@ -8,6 +10,8 @@ import javax.swing.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Admin {
@@ -151,7 +155,7 @@ public class Admin {
 			}
 			case 2->{
 				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-				//Implement function by ranking of ticketsales
+				RankingByTicketSales();
 			}
 
 		}
@@ -161,6 +165,7 @@ public class Admin {
 		TextDB textDB = new TextDB();
 		ArrayList<OverallReview> overallReviewList = textDB.ReadFromFile("Consolidatedreview.txt");
 		System.out.println("The top 5 movies by ratings are: ");
+		System.out.println("");
 		if (overallReviewList.size()<5){
 			for(int i = 0; i<overallReviewList.size();i++) {
 				System.out.println((i+1)+")" +overallReviewList.get(i).getMovieTitle() + " -> Rating: "+ overallReviewList.get(i).getavgRating());
@@ -172,11 +177,51 @@ public class Admin {
 		}
 	}
 
-//	public void RankingByTicketSales () throws IOException{
-//		TextDB textDB = new TextDB();
-//		textDB.readFromFile("Movies.txt");
-//	}
+	public void RankingByTicketSales () throws IOException{
+		TextDB textDB = new TextDB();
+		ArrayList<Movie> movieList = textDB.readFromFile("Movies.txt",new ArrayList<>());
+		movieList.sort(Comparator.comparing(Movie::getMovieTotalSales));
+		Collections.reverse(movieList);
+		System.out.println("The top 5 movies by ticket sales are: ");
+		System.out.println("");
+		if (movieList.size()<5){
+			for (int i = 0; i<movieList.size();i++){
+				String movieTitle = movieList.get(i).getMovieTitle();
+				int ticketSales = movieList.get(i).getMovieTotalSales();
+				System.out.println((i+1)+")" + movieTitle + " -> Ticket Sales: " + ticketSales);
+			}
+		} else {
+			for (int i = 0; i<5;i++){
+				String movieTitle = movieList.get(i).getMovieTitle();
+				int ticketSales = movieList.get(i).getMovieTotalSales();
+				System.out.println((i+1)+")" + movieTitle + " -> Ticket Sales: " + ticketSales);
+			}
+		}
 
+
+
+	}
+
+	public void SettingFunctions(int choice2) throws IOException{
+		Scanner scan = new Scanner(System.in);
+		switch(choice2){
+			case 1->{
+				System.out.println("\t 1. Control the display of movie rankings to customers");
+				System.out.println("Input 1 to display by rating, 2 to display by ticket sales and 3 to display both");
+				int choice = scan.nextInt();
+				ControlRankingDisplay(choice);
+			}
+			case 2->{
+				System.out.println("\t 2.Help new staffs to register new Admin Account");
+
+			}
+
+		}
+	}
+
+	public void ControlRankingDisplay(int choice){
+		
+	}
 
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
