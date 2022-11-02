@@ -61,17 +61,17 @@ public class MainUI {
             switch(option) {
                 case 1 -> {
                     for (int i = 0; i < cineplexes.size(); i++) {
-                        System.out.printf("%d) %s\n", i + 1, cineplexes.get(i).getCineplexName());
+                        System.out.printf("\t%d) %s\n", i + 1, cineplexes.get(i).getCineplexName());
                     }
+                    System.out.println();
                 }
                 case 2 -> {
-                    for (int i = 0; i < cineplexes.size(); i++) {
-                        ArrayList<Movie> movielist =  cineplexes.get(i).getListOfMovies();
-                        for (int j = 0; j < movielist.size(); j++) {
-                            System.out.printf("%d)\n", j + 1);
-                            movielist.get(j).printMovieDetails();
-                        }
+                    ArrayList<Movie> movielist =  cineplexes.get(0).getListOfMovies();
+                    for (int j = 0; j < movielist.size(); j++) {
+                        System.out.printf("\t%d)\n", j + 1);
+                        movielist.get(j).printMovieDetails();
                     }
+                    System.out.println();
                 }
                 case 3 -> {
                     UserUI.UserInterface(cineplexes);
