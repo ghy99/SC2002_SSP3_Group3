@@ -3,7 +3,7 @@ package Movie;
 public class MovieType {
 
     public enum Genre{
-        Action, Comedy, Drama, Fantasy, Horror, Myster, Romance, Thriller, Western;
+        Action, Comedy, Drama, Fantasy, Horror, Mystery, Romance, Thriller, Western;
     }
 
     public enum Dimension {

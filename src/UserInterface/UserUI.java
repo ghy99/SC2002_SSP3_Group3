@@ -16,7 +16,8 @@ import static UserInterface.AdminUI.AdminInterface;
 public class UserUI {
 
     private static ArrayList<Customer> customers = new ArrayList<Customer>();
-    public static void UserInterface(ArrayList<Cineplex> cineplex) throws IOException, NoSuchAlgorithmException {
+
+    public static void UserInterface(ArrayList<Cineplex> cineplex, Double tid) throws Exception {
 //        String adminFile = "admin.txt";
 //        ArrayList<Admin> admins = new ArrayList<Admin>(); // to store list of admins
 //        ArrayList<Customer> customers = new ArrayList<Customer>(); // to store list of customers
