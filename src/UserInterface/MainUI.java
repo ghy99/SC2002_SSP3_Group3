@@ -5,6 +5,7 @@ import Service.TextDB;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,7 +45,7 @@ public class MainUI {
         System.out.println("Cineplexes are initialized\n");
     }
 
-    public static void start() throws IOException {
+    public static void start() throws IOException, NoSuchAlgorithmException {
         InitializeCineplexes();
 
         Scanner sc = new Scanner(System.in);

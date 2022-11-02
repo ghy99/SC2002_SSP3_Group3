@@ -20,7 +20,7 @@ public class CustomerUI {
             System.out.println("Enter your email (for tracking purpose): ");
             String email = sc.nextLine();
 
-            customer = new Customer(name, number, email);
+            customer = new Customer(name, number, email , true);
         }
         customer.printCustomerDetails();
         do {
