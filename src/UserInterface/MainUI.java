@@ -32,11 +32,10 @@ public class MainUI {
             e.printStackTrace();
         }
 
-
-        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.ShowTime.ToString());
+        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.ShowTime.toString());
         if(!movieFile.exists())movieFile.createNewFile();
 
-        ArrayList<Movie> movieList = db.readFromFile(File.separator+TextDB.Files.Movies.ToString(), new ArrayList<>());
+        ArrayList<Movie> movieList = db.readFromFile(File.separator+TextDB.Files.Movies.toString(), new ArrayList<>());
 
         for (Cineplex cineplex : cineplexes) {
             cineplex.setListOfMovies(movieList);
@@ -45,13 +44,12 @@ public class MainUI {
         System.out.println("Cineplexes are initialized\n");
     }
 
-    public static void start() throws IOException, NoSuchAlgorithmException {
+    public static void start() throws Exception {
         InitializeCineplexes();
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Moblima!");
-        System.out.println("Initializing");
-        tid = 1.0;
+
         int option = 1;
         do {
             System.out.println("Select option:");
@@ -76,17 +74,8 @@ public class MainUI {
                     }
                 }
                 case 3 -> {
-                    UserUI.UserInterface(cineplexes, tid);
+                    UserUI.UserInterface(cineplexes);
                 }
-
-//                case 1 -> {
-//                    // Call adminUI
-//                    System.out.println("Calling edit ticket");
-//                    EditTicketPriceUI.EditTicket();
-//                }
-//                case 2 -> {
-//                    CustomerUI.CustomerInterface(cineplexes, tid++);
-//                }
             }
         } while (option > 0);
 

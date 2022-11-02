@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -37,15 +38,13 @@ public class Admin {
 	}
 
 	public void addAdmin(Admin admin) throws IOException, NoSuchAlgorithmException {
-		TextDB textDB = new TextDB();
-		textDB.WriteToTextDB("\\"+"admin.txt" , admin);
+		TextDB.WriteToTextDB(TextDB.Files.Admin.toString(), admin);
 	}
 
 	public static int login(String username, String password) throws IOException, NoSuchAlgorithmException {
 		//fetch data of admin info from txt storage
 		ArrayList<Admin> emptyAdminList = new ArrayList<Admin>();
-		TextDB textDB = new TextDB();
-		ArrayList<Admin> filledAdminList = textDB.ReadFromFile(emptyAdminList, "admin.txt");
+		ArrayList<Admin> filledAdminList = TextDB.ReadFromFile(emptyAdminList, "admin.txt");
 
 		password = SHA256.toString(password);
 

@@ -12,7 +12,7 @@ import Review.*;
 
 public class AdminUI {
 	
-	public static void AdminInterface(int loginFlag ,String usernameInput , String passwordInput) throws IOException, NoSuchAlgorithmException {
+	public static void AdminInterface(int loginFlag ,String usernameInput , String passwordInput) throws Exception {
         System.out.println("Welcome to the Admin Portal. ");
         //only success log in then can access other services
 
@@ -32,7 +32,7 @@ public class AdminUI {
 			System.out.println("Choose the following options for admin services");
 			System.out.println("\t 1) Ticket Prices");
             System.out.println("\t 2) Holiday Dates");
-            System.out.println("\t 3) Movies");
+            System.out.println("\t 3) Movie's Functions");
             System.out.println("\t 4) Movie Listing by rank");
             System.out.println("\t 5) Other Settings");
             System.out.println("\tEnter '11' to exit!");
@@ -63,7 +63,7 @@ public class AdminUI {
                 }
 
                 case 3 -> {
-                    System.out.println("3) Movies, Please select one of the following functions");
+                    MovieListingUI.MovieListingInterface();
                     //function for movies
 
                 }
