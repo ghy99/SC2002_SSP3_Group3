@@ -30,9 +30,6 @@ public class MovieTicket {
     private ShowTime MovieDateTime;
     private int MovieTicketID;
 
-
-
-
     public MovieTicket() {
         System.out.println("Ticket Created.");
     }

@@ -1,0 +1,9 @@
+IT | 4 | st
+IT | 2 | www
+IT | 3 | ssssss
+IT | 2 | ppp
+IT | 2 | aaa
+IT | 2.3 | A
+
+IT|7|qqq
+IT|1|wwwww

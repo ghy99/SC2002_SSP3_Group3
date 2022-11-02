@@ -1,6 +1,7 @@
 package UserInterface;
 import Movie.*;
 import Cineplex.*;
+import Service.GetNumberInput;
 import Service.TextDB;
 
 import java.io.File;
@@ -57,7 +58,7 @@ public class MainUI {
             System.out.println("2) Display List of Movies.");
             System.out.println("3) Display List of Timing.");
             System.out.println("4) Login with your Account.");
-            option = sc.nextInt();
+            option = GetNumberInput.getInt();
 //            sc.nextLine();
             switch (option) {
                 case 1 -> {

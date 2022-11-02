@@ -1,12 +1,13 @@
 package UserInterface;
 
 import Movie.TicketCharges;
+import Service.GetNumberInput;
 import Service.TextDB;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class EditTicketPriceUI {
-    public static void EditTicket() throws IOException {
+    public void EditTicket() throws IOException {
         Scanner sc = new Scanner(System.in);
         String file = "TicketPrice.txt";
         System.out.println("Tickets are charged in the following manner:");
@@ -19,7 +20,7 @@ public class EditTicketPriceUI {
             System.out.println("2) Day of the week");
             System.out.println("3) Movie Dimension");
             System.out.println("4) Type of Cinema");
-            cat = sc.nextInt();
+            cat = GetNumberInput.getInt();
             if (cat == -1) {
                 break;
             }
@@ -44,9 +45,9 @@ public class EditTicketPriceUI {
                     System.out.println("2) Premium Cinema");
                 }
             }
-            int choice = sc.nextInt();
+            int choice = GetNumberInput.getInt();
             System.out.println("What is the new value:");
-            Double newvalue = sc.nextDouble();
+            Double newvalue = GetNumberInput.getDouble();
             TextDB.UpdateToTextDB(file, cat, choice, newvalue);
         } while (cat != -1);
     }

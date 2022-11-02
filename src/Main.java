@@ -7,8 +7,15 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author Gan Hao Yi
+ * @since 2022-10-11
+ *
+ */
 public class Main {
-    // This will be the  Moblima main page
+    /**
+     * This is the main function that starts the app.
+     */
     public static void main(String[] args) throws Exception {
         MainUI.start();
     }
