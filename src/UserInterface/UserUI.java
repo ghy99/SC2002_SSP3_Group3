@@ -14,9 +14,17 @@ import java.util.Scanner;
 import static UserInterface.AdminUI.AdminInterface;
 
 public class UserUI {
-
+    /**
+     * A list of customers is loaded in this variable when database is accessed.
+     */
     private static ArrayList<Customer> customers = new ArrayList<Customer>();
-    public static void UserInterface(ArrayList<Cineplex> cineplex) throws IOException, NoSuchAlgorithmException {
+
+    /**
+     * This is the User Interface. It is called in mainUI and it controls the interface for the Login option.
+     * @param cineplex This object is passed into the Customer Interface to start the ticket booking process.
+     * @throws Exception This Exception is thrown if reading customer database causes error.
+     */
+    public static void UserInterface(ArrayList<Cineplex> cineplex) throws Exception {
 //        String adminFile = "admin.txt";
 //        ArrayList<Admin> admins = new ArrayList<Admin>(); // to store list of admins
 //        ArrayList<Customer> customers = new ArrayList<Customer>(); // to store list of customers
@@ -57,7 +65,13 @@ public class UserUI {
         CustomerUI.CustomerInterface(cineplex, customers, checkCustomerNumber(username, number));
     }
 
-    public static boolean checkCustomerName(String name, String number) throws IOException {
+    /**
+     * This method checks that customer name exists in database
+     * @param name = name that user entered
+     * @param number = number that user entered
+     * @return boolean result
+     */
+    public static boolean checkCustomerName(String name, String number) {
 //        ArrayList<Customer> customers = new ArrayList<Customer>();
         for (Customer customer : customers) {
             if (Objects.equals(customer.getMovieGoerName(), name)) {
@@ -73,7 +87,13 @@ public class UserUI {
         return false;
     }
 
-    public static Customer checkCustomerNumber(String name, String number) throws IOException {
+    /**
+     * This method returns a Customer object if name and number that was entered matches a value in database
+     * @param name
+     * @param number
+     * @return
+     */
+    public static Customer checkCustomerNumber(String name, String number) {
 
 //        ArrayList<Customer> customers = new ArrayList<Customer>();
         for (Customer customer : customers) {

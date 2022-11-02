@@ -1,6 +1,10 @@
 package Admin;
 
+import Cineplex.Cineplex;
+import Movie.Movie;
+import Movie.TicketCharges;
 import Review.OverallReview;
+import Service.GetNumberInput;
 import Service.SHA256;
 import Service.TextDB;
 
@@ -9,6 +13,8 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Admin {
@@ -75,6 +81,50 @@ public class Admin {
 	}
 
 	//implement function for ticket prices HERE
+	public void EditTicket() throws IOException {
+		Scanner sc = new Scanner(System.in);
+		String file = "TicketPrice.txt";
+		System.out.println("Tickets are charged in the following manner:");
+		TicketCharges charges = new TicketCharges();
+		charges.printTicketCharges();
+		int cat = 0;
+		do {
+			System.out.println("Select category that you want to change: (Enter -1 to exit)");
+			System.out.println("1) Age");
+			System.out.println("2) Day of the week");
+			System.out.println("3) Movie Dimension");
+			System.out.println("4) Type of Cinema");
+			cat = GetNumberInput.getInt();
+			if (cat == -1) {
+				break;
+			}
+			System.out.println("Which do you want to edit:");
+			switch (cat) {
+				case 1 -> {
+					System.out.println("1) Student price");
+					System.out.println("2) Adult price");
+					System.out.println("3) Senior Citizen price");
+				}
+				case 2 -> {
+					System.out.println("1) Monday - Friday");
+					System.out.println("2) Saturday - Sunday");
+					System.out.println("3) Public Holiday");
+				}
+				case 3 -> {
+					System.out.println("1) 2D Movie");
+					System.out.println("2) 3D Movie");
+				}
+				case 4 -> {
+					System.out.println("1) Regular Cinema");
+					System.out.println("2) Premium Cinema");
+				}
+			}
+			int choice = GetNumberInput.getInt();
+			System.out.println("What is the new value:");
+			Double newvalue = GetNumberInput.getDouble();
+			TextDB.UpdateToTextDB(file, cat, choice, newvalue);
+		} while (cat != -1);
+	}
 
 	public void HolidayDateFunctions(int choice2) throws IOException {
 		Scanner scan = new Scanner(System.in);
@@ -85,7 +135,6 @@ public class Admin {
 				String date = scan.nextLine();
 				AddHoliday(date);
 			}
-
 			case 2->{
 				System.out.println("\t 2. Edit holiday dates");
 				System.out.println("Input Old Date to be edited in YYYY-MM-DD format");
@@ -94,19 +143,13 @@ public class Admin {
 				String newDate = scan.nextLine();
 				editHoliday(oldDate,newDate);
 			}
-
 			case 3->{
 				System.out.println("\t 3. Delete Holiday Dates");
 				System.out.println("Input Date in YYYY-MM-DD format");
 				String date = scan.nextLine();
 				deleteHoliday(date);
 			}
-
-
-
-
 		}
-
 	}
 
 	public void AddHoliday(String date) throws IOException {
@@ -150,7 +193,7 @@ public class Admin {
 			}
 			case 2->{
 				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-				//Implement function by ranking of ticketsales
+				RankingByTicketSales();
 			}
 
 		}
@@ -160,6 +203,7 @@ public class Admin {
 		TextDB textDB = new TextDB();
 		ArrayList<OverallReview> overallReviewList = textDB.ReadFromFile("Consolidatedreview.txt");
 		System.out.println("The top 5 movies by ratings are: ");
+		System.out.println("");
 		if (overallReviewList.size()<5){
 			for(int i = 0; i<overallReviewList.size();i++) {
 				System.out.println((i+1)+")" +overallReviewList.get(i).getMovieTitle() + " -> Rating: "+ overallReviewList.get(i).getavgRating());
@@ -173,9 +217,49 @@ public class Admin {
 
 	public void RankingByTicketSales () throws IOException{
 		TextDB textDB = new TextDB();
-		textDB.readFromFile("Movies.txt");
+		ArrayList<Movie> movieList = textDB.readFromFile("Movies.txt",new ArrayList<>());
+		movieList.sort(Comparator.comparing(Movie::getMovieTotalSales));
+		Collections.reverse(movieList);
+		System.out.println("The top 5 movies by ticket sales are: ");
+		System.out.println("");
+		if (movieList.size()<5){
+			for (int i = 0; i<movieList.size();i++){
+				String movieTitle = movieList.get(i).getMovieTitle();
+				int ticketSales = movieList.get(i).getMovieTotalSales();
+				System.out.println((i+1)+")" + movieTitle + " -> Ticket Sales: " + ticketSales);
+			}
+		} else {
+			for (int i = 0; i<5;i++){
+				String movieTitle = movieList.get(i).getMovieTitle();
+				int ticketSales = movieList.get(i).getMovieTotalSales();
+				System.out.println((i+1)+")" + movieTitle + " -> Ticket Sales: " + ticketSales);
+			}
+		}
+
+
+
 	}
 
+	public void SettingFunctions(int choice2) throws IOException{
+		Scanner scan = new Scanner(System.in);
+		switch(choice2){
+			case 1->{
+				System.out.println("\t 1. Control the display of movie rankings to customers");
+				System.out.println("Input 1 to display by rating, 2 to display by ticket sales and 3 to display both");
+				int choice = scan.nextInt();
+				ControlRankingDisplay(choice);
+			}
+			case 2->{
+				System.out.println("\t 2.Help new staffs to register new Admin Account");
+
+			}
+
+		}
+	}
+
+	public void ControlRankingDisplay(int choice){
+		
+	}
 
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {

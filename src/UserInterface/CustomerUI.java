@@ -9,6 +9,7 @@ import Cineplex.Cineplex;
 import Customer.Customer;
 import Movie.MovieTicket;
 import Service.TextDB;
+import Service.GetNumberInput;
 
 public class CustomerUI {
     public static void CustomerInterface(ArrayList<Cineplex> cineplex, ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
@@ -25,14 +26,7 @@ public class CustomerUI {
             System.out.println("\t6) Print your Booking History.");
             System.out.println("\tEnter '11' to exit!");
 
-            do {
-                while (!sc.hasNextInt()) {
-                    System.out.println("That's not a number!");
-                    sc.next(); // this is important!
-                }
-                choice = sc.nextInt();
-                sc.nextLine();
-            } while (choice < -1);
+            choice = GetNumberInput.getInt();
             switch (choice) {
                 case 1 -> {
                     customer.setTicket(CineplexUI.CineplexInterface(cineplex));
