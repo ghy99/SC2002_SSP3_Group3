@@ -15,6 +15,7 @@ public class Movie {
     // Past review, Reviewer Rating
     private String movieTitle;
     private MovieStatus showingStatus;
+    private String director;
     private String synopsis;
     private ArrayList<String> cast = new ArrayList<>();
 
@@ -31,14 +32,17 @@ public class Movie {
     public enum MovieStatus {
         ComingSoon,
         Preview,
-        NowShowing
+        NowShowing,
+        EndOfShowing
     }
 
-    public Movie(String movieTitle, MovieStatus showingStatus, String synopsis, ArrayList<String> cast,
+    public Movie(String movieTitle, MovieStatus showingStatus, String director,
+                 String synopsis, ArrayList<String> cast,
                  Cinema.CinemaType movietype, MovieType.Genre moviecat,
                  MovieType.Dimension dimension, MovieType.Class movieClass) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
+        this.director = director;
         this.synopsis = synopsis;
         this.cast = cast;
         this.typeOfCinema = movietype;
@@ -47,11 +51,13 @@ public class Movie {
         this.movieClass = movieClass;
     }
 
-    public Movie(String movieTitle, MovieStatus showingStatus, String synopsis, ArrayList<String> cast,
+    public Movie(String movieTitle, MovieStatus showingStatus, String director,
+                 String synopsis, ArrayList<String> cast,
                  Cinema.CinemaType movietype, MovieType.Genre moviecat,
                  MovieType.Dimension dimension, MovieType.Class movieClass,int movieTotalSales) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
+        this.director = director;
         this.synopsis = synopsis;
         this.cast = cast;
         this.typeOfCinema = movietype;
@@ -68,6 +74,11 @@ public class Movie {
     public MovieStatus getShowingStatus() {
         return this.showingStatus;
     }
+
+    public String getDirector() {
+        return director;
+    }
+
     public String getSynopsis() {
         return this.synopsis;
     }
@@ -81,6 +92,37 @@ public class Movie {
         return this.movieClass;
     }
     public int getMovieTotalSales() { return this.movieTotalSales;}
+
+    public void setMovieTitle(String movieTitle) {
+        this.movieTitle = movieTitle;
+    }
+    public void setShowingStatus(MovieStatus showingStatus) {
+        this.showingStatus = showingStatus;
+    }
+    public void setDirector(String director) {
+        this.director = director;
+    }
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+    public void setCast(ArrayList<String> cast) {
+        this.cast = cast;
+    }
+    public void setTypeOfCinema(Cinema.CinemaType typeOfCinema) {
+        this.typeOfCinema = typeOfCinema;
+    }
+    public void setMovieGenre(MovieType.Genre movieGenre) {
+        MovieGenre = movieGenre;
+    }
+    public void setMovie3D(MovieType.Dimension movie3D) {
+        this.movie3D = movie3D;
+    }
+    public void setMovieClass(MovieType.Class movieClass) {
+        this.movieClass = movieClass;
+    }
+    public void setMovieTotalSales(int movieTotalSales) {
+        this.movieTotalSales = movieTotalSales;
+    }
 
     public void increaseMovieTotalSale()
     {

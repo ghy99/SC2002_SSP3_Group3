@@ -323,11 +323,11 @@ public class TextDB {
     }
 
 
-    public static void WriteToTextDB(String fileName, ArrayList<Movie> moveis) throws IOException {
+    public static void WriteToTextDB(String fileName, ArrayList<Movie> movies) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
         StringBuilder st = new StringBuilder();
-        for (Movie movie : moveis) {
+        for (Movie movie : movies) {
             st.append(movie.getMovieTitle().trim());
             st.append(SEPARATOR);
             st.append(movie.getShowingStatus().toString().trim());
@@ -417,9 +417,6 @@ public class TextDB {
         Write(fileName, alw);
     }
 
-    /*
-    TEST THIS FUNCTION WHEN I COME BACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    * */
     public static void WriteToTextDB(String fileName, int cat, int choice, Double newTicketPrice) throws IOException {
         List alw = new ArrayList();
         StringBuilder st = new StringBuilder();
