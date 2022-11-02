@@ -4,6 +4,7 @@ import Cineplex.Cineplex;
 import Movie.*;
 import Service.TextDB;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -23,7 +24,7 @@ public class Customer {
 
         if(createAccount)
         {
-            TextDB.WriteToTextDB("\\"+ Customers.toString(), this);
+            TextDB.WriteToTextDB(File.separator + Customers.toString(), this);
         }
     }
 
