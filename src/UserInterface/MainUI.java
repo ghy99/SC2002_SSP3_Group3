@@ -80,24 +80,24 @@ public class MainUI {
 
 
 
-    public static void displayCineplexList() throws IOException {
+    public static void displayCineplexList() {
         for (int i = 0; i < cineplexes.size(); i++) {
-            System.out.printf("%d) %s\n", i + 1, cineplexes.get(i).getCineplexName());
+            System.out.printf("\t%d) %s\n", i + 1, cineplexes.get(i).getCineplexName());
         }
+        System.out.println();
     }
 
-    public static void displayMovieList() throws IOException {
-        for (int i = 0; i < cineplexes.size(); i++) {
-            ArrayList<Movie> movielist = cineplexes.get(i).getListOfMovies();
-            for (int j = 0; j < movielist.size(); j++) {
-                System.out.printf("%d)\n", j + 1);
-                movielist.get(j).printMovieDetails();
-            }
+    public static void displayMovieList() {
+        ArrayList<Movie> movielist = cineplexes.get(0).getListOfMovies();
+        for (int j = 0; j < movielist.size(); j++) {
+            System.out.printf("%d)\n", j + 1);
+            movielist.get(j).printMovieDetails();
         }
+        System.out.println();
     }
 
 
-    public static void displayMovieTimings() throws IOException {
+    public static void displayMovieTimings() {
         for (int i = 0; i < cineplexes.size(); i++) {
             System.out.printf("%s\n", cineplexes.get(i).getCineplexName());
             ArrayList<Movie> movielist = cineplexes.get(i).getListOfMovies();
