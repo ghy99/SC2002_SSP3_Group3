@@ -1,4 +1,5 @@
 package UserInterface;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -6,23 +7,14 @@ import java.util.Scanner;
 
 import Cineplex.Cineplex;
 import Customer.Customer;
+import Movie.MovieTicket;
+import Service.TextDB;
 import Service.GetNumberInput;
 
 public class CustomerUI {
-    public static void CustomerInterface(ArrayList<Cineplex> cineplex ,ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
+    public static void CustomerInterface(ArrayList<Cineplex> cineplex, ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
-
-        if (customer == null) {
-            System.out.println("Enter your (Customer) name: ");
-            String name = sc.nextLine();
-            System.out.println("Enter your phone number: ");
-            String number = sc.nextLine();
-            System.out.println("Enter your email (for tracking purpose): ");
-            String email = sc.nextLine();
-
-            customer = new Customer(name, number, email , true);
-        }
         customer.printCustomerDetails();
         do {
             System.out.println("\nWhat would you like to do?");
@@ -40,6 +32,7 @@ public class CustomerUI {
                     customer.setTicket(CineplexUI.CineplexInterface(cineplex));
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
+                    TextDB.WriteToTextDB(TextDB.Files.TransactionHistroy.toString(), customer, customer.getTicket());
                     customer.getTicket().printTicket();
 //                   PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
                     //customer.setTID(PaymentUI.PaymentInterface(customer));
@@ -48,25 +41,29 @@ public class CustomerUI {
                     System.out.println("Enter your new name: ");
                     String newName = sc.nextLine();
 //                    sc.nextLine();
-                    customer.updateMovieGoerName(newName , customerArrayList);
+                    customer.updateMovieGoerName(newName, customerArrayList);
                 }
                 case 3 -> {
                     System.out.println("Enter your new number: ");
                     String newNumber = sc.nextLine();
 //                    sc.nextLine();
-                    customer.updateMobileNumber(newNumber , customerArrayList);
+                    customer.updateMobileNumber(newNumber, customerArrayList);
                 }
                 case 4 -> {
                     System.out.println("Enter your new email: ");
                     String newEmail = sc.nextLine();
 //                    sc.nextLine();
-                    customer.updateEmail(newEmail , customerArrayList);
+                    customer.updateEmail(newEmail, customerArrayList);
                 }
                 case 5 -> {
                     customer.printCustomerDetails();
                 }
                 case 6 -> {
-                    // Call function to check booking history
+                    ArrayList<MovieTicket> movieTickets = TextDB.ReadFromFile(TextDB.Files.TransactionHistroy.toString(), customer.getEmail());
+                    for( MovieTicket mt : movieTickets)
+                    {
+                        mt.printTicket();
+                    }
                 }
                 default -> {
                     break;
@@ -75,4 +72,5 @@ public class CustomerUI {
             }
         } while (choice < 10);
     }
+
 }

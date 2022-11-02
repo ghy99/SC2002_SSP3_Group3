@@ -84,7 +84,7 @@ public class Cinema {
             //Loop through all showtime
             while (i < temp.size()) {
                 currentSTDate = temp.get(i);
-                if (currentSTDate.time.getTime() > date.getTime()) {
+                if (currentSTDate.getTime().getTime() > date.getTime()) {
                     break;
                 }
                 i++;
@@ -93,7 +93,7 @@ public class Cinema {
 
             if (i - 1 > 0) {
                 currentSTDate = temp.get(i - 1);
-                if (currentSTDate.time.getTime() + 2 * HOUR < date.getTime()) {
+                if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
                     this.createShowTime(date, movie);
                     return true;
                 }

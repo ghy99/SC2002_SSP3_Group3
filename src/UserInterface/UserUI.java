@@ -54,7 +54,6 @@ public class UserUI {
             System.out.println("Enter your phone number: (input -1 to go back to menu)");
             number = sc.nextLine();
 
-
             if (Objects.equals(number, "-1")) {
                 return;
             }
@@ -79,11 +78,13 @@ public class UserUI {
                 if (Objects.equals(customer.getMobileNumber(), number)) {
                     return true;
                 } else {
+                    System.out.println("Password is wrong!");
                     return false;
                 }
             }
         }
-        return true;
+        System.out.println("Username and password is wrong!");
+        return false;
     }
 
     /**
