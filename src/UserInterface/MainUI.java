@@ -44,7 +44,7 @@ public class MainUI {
         System.out.println("Cineplexes are initialized\n");
     }
 
-    public static void start() throws IOException, NoSuchAlgorithmException {
+    public static void start() throws Exception {
         InitializeCineplexes();
 
         Scanner sc = new Scanner(System.in);
@@ -73,15 +73,6 @@ public class MainUI {
                 case 4 -> {
                     UserUI.UserInterface(cineplexes);
                 }
-
-//                case 1 -> {
-//                    // Call adminUI
-//                    System.out.println("Calling edit ticket");
-//                    EditTicketPriceUI.EditTicket();
-//                }
-//                case 2 -> {
-//                    CustomerUI.CustomerInterface(cineplexes, tid++);
-//                }
             }
         } while (option > 0);
 

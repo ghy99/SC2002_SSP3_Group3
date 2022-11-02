@@ -79,6 +79,7 @@ public class TextDB {
 
             String title = star.nextToken().trim();
             Movie.MovieStatus status = Movie.MovieStatus.valueOf(star.nextToken().trim());
+            String director = star.nextToken().trim();
             String synopsis = star.nextToken().trim();
             String[] temp = star.nextToken().trim().split(",");
             ArrayList<String> casts = new ArrayList<>();
@@ -90,7 +91,7 @@ public class TextDB {
             int movieTotalSales = Integer.parseInt(star.nextToken().trim()) ;
 
             Movie movie = new Movie(
-                    title, status, synopsis, casts, type, genre, dim, movieClass,movieTotalSales
+                    title, status, director, synopsis, casts, type, genre, dim, movieClass,movieTotalSales
             );
             alr.add(movie);
         }
@@ -256,14 +257,78 @@ public class TextDB {
 		
 		return overallReviewList;
     }
-    public static void WriteToTextDB(String fileName, ArrayList<Movie> moveis) throws IOException {
+    
+    public static void WriteToTextDB(String fileName1,String fileName2, Review review) throws IOException {
+    	
+    	//write to ALLreview.txt
+    	List alw = new ArrayList();
+    	List alw2 = new ArrayList();
+    	String rating = review.getRating();
+    	String parareview = review.getReview();
+    	String title =  review.getTitle();
+    	
+    	StringBuilder st = new StringBuilder();
+    	st.append(title);
+    	st.append(SEPARATOR);
+    	st.append(rating);
+    	st.append(SEPARATOR);
+    	st.append(parareview);
+    	alw.add(st.toString());
+    	
+    	Write(fileName1,alw);
+    	
+    	//convert read data into arraylists to identify where to modify
+    	TextDB textDB = new TextDB();
+    	ArrayList<OverallReview> overallReviewList = textDB.ReadFromFile(fileName2);
+    			
+        boolean found = false;
+        for (int i = 0; i<overallReviewList.size();i++) {
+            if (overallReviewList.get(i).getMovieTitle().equals(title)) {
+                found = true;
+                double oldrating = Double.parseDouble(overallReviewList.get(i).getavgRating());
+                double count = Double.parseDouble(overallReviewList.get(i).getCount());
+                double newRating = Double.parseDouble(rating);
+
+                double newAvgRating = (oldrating*count+newRating)/(count+1);
+                String s = String.valueOf(newAvgRating);
+                overallReviewList.get(i).setavgRating(s);
+                String c = String.valueOf(count+1);
+                overallReviewList.get(i).setCount(c);
+            }
+        }
+
+        if (found!=true) {
+            OverallReview overallReview = new OverallReview(title,rating,"1");
+            overallReviewList.add(overallReview);
+        }
+
+        for (int i = 0; i < overallReviewList.size(); i++) {
+            OverallReview overallReview = overallReviewList.get(i);
+            StringBuilder st2 = new StringBuilder();
+            st2.append(overallReview.getMovieTitle().trim());
+            st2.append(SEPARATOR);
+            st2.append(overallReview.getavgRating().trim());
+            st2.append(SEPARATOR);
+            st2.append(overallReview.getCount().trim());
+            st2.append(SEPARATOR);
+            alw2.add(st2.toString());
+        }
+        //write to consolidated.txt to update ratings
+
+        Update(fileName2,alw2);
+    }
+
+
+    public static void WriteToTextDB(String fileName, ArrayList<Movie> movies) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
         StringBuilder st = new StringBuilder();
-        for (Movie movie : moveis) {
+        for (Movie movie : movies) {
             st.append(movie.getMovieTitle().trim());
             st.append(SEPARATOR);
             st.append(movie.getShowingStatus().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getDirector().trim());
             st.append(SEPARATOR);
             st.append(movie.getSynopsis().trim());
             st.append(SEPARATOR);
@@ -349,10 +414,76 @@ public class TextDB {
 
         Write(fileName, alw);
     }
+
+    public static void WriteToTextDB(String fileName, int cat, int choice, Double newTicketPrice) throws IOException {
+        List alw = new ArrayList();
+        StringBuilder st = new StringBuilder();
+        ArrayList<String[][]> ticketPrices = new ArrayList<>();
+        ticketPrices = TextDB.readFromFile(fileName, (TicketCharges) null);
+        String[][] changingCat = ticketPrices.get(cat - 1);
+        changingCat[choice - 1][1] = newTicketPrice.toString();
+        for (int i = 0; i < ticketPrices.size(); i++) {
+            if (i == cat - 1) {
+                for (int j = 0; j < changingCat.length; j++) {
+                    st.append(changingCat[j][0]);
+                    st.append(":");
+                    st.append(changingCat[j][1]);
+                    if (j + 1 < changingCat.length) st.append(", ");
+                }
+            }
+            else {
+                String[][] temp = ticketPrices.get(i);
+                for (int j = 0; j < temp.length; j++) {
+                    st.append(temp[j][0]);
+                    st.append(":");
+                    st.append(temp[j][1]);
+                    if (j + 1 < temp.length) st.append(", ");
+                }
+            }
+            if (i + 1 < ticketPrices.size()) st.append(" " + SEPARATOR + " ");
+        }
+
+        alw.add(st.toString());
+        Update(fileName, alw);
+    }
+
+    public static void UpdateTextDB(String fileName, ArrayList<Movie> movies) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+
+        for (Movie movie : movies) {
+            StringBuilder st = new StringBuilder();
+            st.append(movie.getMovieTitle().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getShowingStatus().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getDirector().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getSynopsis().trim());
+            st.append(SEPARATOR);
+            for (int i = 0; i < movie.getCast().size(); i++) {
+                st.append(movie.getCast().get(i));
+                if (i + 1 < movie.getCast().size()) st.append(",");
+            }
+            st.append(SEPARATOR);
+            st.append(movie.getTypeOfCinema().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getMovieGenre().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getMovie3D().toString().trim());
+            st.append(SEPARATOR);
+            st.append(movie.getMovieClass().toString().trim());
+            st.append(SEPARATOR);
+            st.append(String.valueOf(movie.getMovieTotalSales()));
+            alw.add(st.toString());
+        }
+        Update(fileName, alw);
+    }
+
     public static void WriteToTextDB(String fileName, String date) throws IOException {
 
         //for admin to write to add in dates into HolidayDates.txt file
-        ArrayList<String> holidayList = (ArrayList<String>) Read("HolidayDates.txt");
+        ArrayList<String> holidayList = (ArrayList<String>) Read(fileName);
         holidayList.add(date);
         Update(fileName, holidayList);
 

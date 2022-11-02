@@ -8,10 +8,6 @@ import Cineplex.Cinema;
 import Movie.*;
 import Service.*;
 
-
-
-
-
 public class MovieUI {
     public static String MovieInterface(MovieTicket ticket) {
         // can be used to implement timing

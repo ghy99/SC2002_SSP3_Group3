@@ -9,7 +9,7 @@ public class EditTicketPriceUI {
     public static void EditTicket() throws IOException {
         Scanner sc = new Scanner(System.in);
         String file = "TicketPrice.txt";
-        System.out.println("Show how tickets are charged:");
+        System.out.println("Tickets are charged in the following manner:");
         TicketCharges charges = new TicketCharges();
         charges.printTicketCharges();
         int cat = 0;
