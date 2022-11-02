@@ -5,20 +5,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Cineplex.Cinema;
+import Cineplex.ShowTime;
 import Movie.*;
 import Service.*;
 
-
-
-
-
 public class MovieUI {
-    public static String MovieInterface(MovieTicket ticket) {
+    public static String MovieInterface(MovieTicket ticket , ShowTime showTime) {
         // can be used to implement timing
 
         Scanner sc = new Scanner(System.in);
 
-        ticket.getShowtime().printSeats();
+        showTime.printSeats();
        String movieseats;
 
         // display movie timings.
@@ -29,7 +26,7 @@ public class MovieUI {
             movieseats = sc.next();
             row = movieseats.charAt(0);
             col = movieseats.charAt(1);
-        } while(ticket.getShowtime().checkSeats(row, Integer.parseInt(String.valueOf(col))) != 1);
+        } while(showTime.checkSeats(row, Integer.parseInt(String.valueOf(col))) != 1);
 
     
         System.out.println("Selected movie seat ID(" + row +""+ col +")" );

@@ -32,7 +32,7 @@ public class MainUI {
             e.printStackTrace();
         }
 
-        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.ShowTime.toString());
+        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
         if(!movieFile.exists())movieFile.createNewFile();
 
         ArrayList<Movie> movieList = db.readFromFile(File.separator+TextDB.Files.Movies.toString(), new ArrayList<>());
@@ -55,7 +55,8 @@ public class MainUI {
             System.out.println("Select option:");
             System.out.println("1) Display List of Cineplexes.");
             System.out.println("2) Display List of Movies.");
-            System.out.println("3) Login with your Account.");
+            System.out.println("4) Book as guest.");
+            System.out.println("5) Login with your Account.");
             option = sc.nextInt();
 //            sc.nextLine();
             switch(option) {
@@ -73,18 +74,13 @@ public class MainUI {
                         }
                     }
                 }
-                case 3 -> {
+                case 4 -> {
+                    GuestUI.UserInterface(cineplexes);
+                }
+                case 5 -> {
                     UserUI.UserInterface(cineplexes);
                 }
 
-//                case 1 -> {
-//                    // Call adminUI
-//                    System.out.println("Calling edit ticket");
-//                    EditTicketPriceUI.EditTicket();
-//                }
-//                case 2 -> {
-//                    CustomerUI.CustomerInterface(cineplexes, tid++);
-//                }
             }
         } while (option > 0);
 
