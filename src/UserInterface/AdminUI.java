@@ -9,9 +9,18 @@ import Service.*;
 import Review.*;
 
 
-
+/**
+ * This is the AdminUI class.it controls the Admin Interface.
+ * @author Tan Jue Lin, Gan Hao Yi
+ */
 public class AdminUI {
-	
+    /**
+     *
+     * @param loginFlag This flag is to edit the access for customers to display Top 5 movies.
+     * @param usernameInput This input is for
+     * @param passwordInput
+     * @throws Exception
+     */
 	public static void AdminInterface(int loginFlag ,String usernameInput , String passwordInput) throws Exception {
         System.out.println("Welcome to the Admin Portal. ");
         //only success log in then can access other services
@@ -37,60 +46,39 @@ public class AdminUI {
             System.out.println("\t 5) Other Settings");
             System.out.println("\tEnter '11' to exit!");
 
-            do {
-                while (!scan.hasNextInt()) {
-                    System.out.println("That's not a number!");
-                    scan.next(); // this is important!
-                }
-                choice = scan.nextInt();
-                scan.nextLine();
-            } while (choice < -1);
-
+            choice = GetNumberInput.getInt();
 
             switch (choice) {
                 case 1 -> {
                 	System.out.println("1) Ticket Prices, Please select one of the following functions");
-                    EditTicketPriceUI.EditTicket();
-                    //call function to edit ticket prices
+                    admin.EditTicket();
                 }
-
                 case 2 -> {
                     System.out.println("2) Holiday Dates, Please select one of the following functions");
                     System.out.println("\t 1. Add Holiday Dates");
                     System.out.println("\t 2. Edit Holiday Dates");
                     System.out.println("\t 3. Delete Holiday Dates");
-                    choice2 = scan.nextInt();
+                    choice2 = GetNumberInput.getInt();
                     admin.HolidayDateFunctions(choice2);
                 }
-
                 case 3 -> {
                     MovieListingUI.MovieListingInterface();
-                    //function for movies
-
                 }
-
-
-
                 case 4 -> {
                 	System.out.println("4) Movie Listing by rank. Please select one of the following functions ");
                     System.out.println("\t 1.Display Top 5 movie rankings by rating");
                     System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-                    choice2 = scan.nextInt();
+                    choice2 = GetNumberInput.getInt();
                     admin.RankingFunctions(choice2);
-
                 }
-
                 case 5-> {
                     System.out.println("5) Other Settings. Please select one of the following functions ");
                     System.out.println("\t 1.Control the display of movie rankings to customers");
                     System.out.println("\t 2.Help new staffs to register new Admin Account");
-                    choice2 = scan.nextInt();
+                    choice2 = GetNumberInput.getInt();
                     admin.SettingFunctions(choice2);
                 }
-
-
                 default -> {
-
                     System.out.println("Invalid Input. Try again.");
                 }
             }

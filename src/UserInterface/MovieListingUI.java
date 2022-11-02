@@ -5,6 +5,7 @@ import java.util.*;
 import Cineplex.Cinema;
 import Movie.Movie;
 import Movie.MovieType;
+import Service.GetNumberInput;
 import Service.TextDB;
 
 import static Service.TextDB.readFromFile;
@@ -28,7 +29,7 @@ public class MovieListingUI {
 			System.out.println("3: Delete a Movie Listing");
 			System.out.println("4: Main Menu");
 			System.out.print("Please enter a choice: ");
-			num = sc.nextInt();
+			num = GetNumberInput.getInt();
 			if (num == 1) {
 				Movie newMovie = createMovie();
 				ArrayList<Movie> movies = new ArrayList<Movie>();
@@ -46,7 +47,7 @@ public class MovieListingUI {
 				System.out.println("Which movie would you like to edit?");
 				printMovieList(listOfMovies);
 				do {
-					choice = sc.nextInt() - 1;
+					choice = GetNumberInput.getInt() - 1;
 					if (choice < 0 || choice >= listOfMovies.size()) {
 						System.out.println("Invalid choice. Try again!");
 					}
@@ -66,7 +67,7 @@ public class MovieListingUI {
 				System.out.println("Which movie would you like to edit?");
 				printMovieList(listOfMovies);
 				do {
-					choice = sc.nextInt() - 1;
+					choice = GetNumberInput.getInt() - 1;
 					if (choice < 0 || choice >= listOfMovies.size()) {
 						System.out.println("Invalid choice. Try again!");
 					}
@@ -116,8 +117,8 @@ public class MovieListingUI {
 		Movie.MovieStatus moviestatus = null;
 		int statuschoice = 0;
 		do {
-			statuschoice = sc.nextInt();
-			sc.nextLine();
+			statuschoice = GetNumberInput.getInt();
+//			sc.nextLine();
 			switch (statuschoice) {
 				case 1 -> moviestatus = Movie.MovieStatus.ComingSoon;
 				case 2 -> moviestatus = Movie.MovieStatus.Preview;
@@ -152,8 +153,8 @@ public class MovieListingUI {
 		System.out.println("2: Premium");
 		System.out.println("Enter your option:");
 		Cinema.CinemaType cinemaType;
-		int cinChoice = sc.nextInt();
-		sc.nextLine();
+		int cinChoice = GetNumberInput.getInt();
+//		sc.nextLine();
 		if (cinChoice == 1) {
 			cinemaType = Cinema.CinemaType.Regular;
 		}
@@ -176,8 +177,8 @@ public class MovieListingUI {
 		MovieType.Genre genre = null;
 		int genrechoice;
 		do {
-			genrechoice = sc.nextInt();
-			sc.nextLine();
+			genrechoice = GetNumberInput.getInt();
+//			sc.nextLine();
 			switch (genrechoice) {
 				case 1 -> genre = MovieType.Genre.Action;
 				case 2 -> genre = MovieType.Genre.Comedy;
@@ -198,8 +199,8 @@ public class MovieListingUI {
 		System.out.println("2: No");
 		System.out.println("Enter your option:");
 		MovieType.Dimension movieDim;
-		int dimChoice = sc.nextInt();
-		sc.nextLine();
+		int dimChoice = GetNumberInput.getInt();
+//		sc.nextLine();
 		if (dimChoice == 1) {
 			movieDim = MovieType.Dimension.valueOf("THREE_D");
 		}
@@ -220,8 +221,8 @@ public class MovieListingUI {
 		MovieType.Class ratings = null;
 
 		do {
-			ratingchoice = sc.nextInt();
-			sc.nextLine();
+			ratingchoice = GetNumberInput.getInt();
+//			sc.nextLine();
 			switch (ratingchoice) {
 				case 1 -> ratings = MovieType.Class.G;
 				case 2 -> ratings = MovieType.Class.PG;
@@ -256,8 +257,8 @@ public class MovieListingUI {
 			System.out.println("-1: Done Editing");
 			System.out.println();
 
-			option = sc.nextInt();
-			sc.nextLine();
+			option = GetNumberInput.getInt();
+//			sc.nextLine();
 			switch (option) {
 				case 1 -> {
 					System.out.println("Enter new Movie Title:");
@@ -269,13 +270,13 @@ public class MovieListingUI {
 					System.out.println("2: Preview");
 					System.out.println("3: Now showing");
 					System.out.println("4: End of showing");
-					switch (sc.nextInt() - 1) {
+					switch (GetNumberInput.getInt() - 1) {
 						case 1 -> movie.setShowingStatus(Movie.MovieStatus.ComingSoon);
 						case 2 -> movie.setShowingStatus(Movie.MovieStatus.Preview);
 						case 3 -> movie.setShowingStatus(Movie.MovieStatus.NowShowing);
 						case 4 -> movie.setShowingStatus(Movie.MovieStatus.EndOfShowing);
 					}
-					sc.nextLine();
+//					sc.nextLine();
 				}
 				case 3 -> {
 					System.out.println("Enter new Director Name:");
@@ -297,11 +298,11 @@ public class MovieListingUI {
 					System.out.println("1: Regular");
 					System.out.println("2: Premium");
 					System.out.println("Enter your option:");
-					switch (sc.nextInt() - 1) {
+					switch (GetNumberInput.getInt() - 1) {
 						case 1 -> movie.setTypeOfCinema(Cinema.CinemaType.Regular);
 						case 2 -> movie.setTypeOfCinema(Cinema.CinemaType.Premium);
 					}
-					sc.nextLine();
+//					sc.nextLine();
 				}
 				case 7 -> {
 					System.out.println();
@@ -315,7 +316,7 @@ public class MovieListingUI {
 					System.out.println("7: Romance");
 					System.out.println("8: Thriller");
 					System.out.println("9: Western");
-					switch (sc.nextInt() - 1) {
+					switch (GetNumberInput.getInt() - 1) {
 						case 1 -> movie.setMovieGenre(MovieType.Genre.Action);
 						case 2 -> movie.setMovieGenre(MovieType.Genre.Comedy);
 						case 3 -> movie.setMovieGenre(MovieType.Genre.Drama);
@@ -326,7 +327,7 @@ public class MovieListingUI {
 						case 8 -> movie.setMovieGenre(MovieType.Genre.Thriller);
 						case 9 -> movie.setMovieGenre(MovieType.Genre.Western);
 					}
-					sc.nextLine();
+//					sc.nextLine();
 				}
 				case 8 -> {
 					System.out.println();
@@ -334,11 +335,11 @@ public class MovieListingUI {
 					System.out.println("1: Yes");
 					System.out.println("2: No");
 					System.out.println("Enter your option:");
-					switch (sc.nextInt() - 1) {
+					switch (GetNumberInput.getInt() - 1) {
 						case 1 -> movie.setMovie3D(MovieType.Dimension.THREE_D);
 						case 2 -> movie.setMovie3D(MovieType.Dimension.TWO_D);
 					}
-					sc.nextLine();
+//					sc.nextLine();
 				}
 				case 9 -> {
 					System.out.println(" Select new Movie Age Rating ");
@@ -348,7 +349,7 @@ public class MovieListingUI {
 					System.out.println("4: NC16");
 					System.out.println("5: M18");
 					System.out.println("6: R21");
-					switch (sc.nextInt() - 1) {
+					switch (GetNumberInput.getInt() - 1) {
 						case 1 -> movie.setMovieClass(MovieType.Class.G);
 						case 2 -> movie.setMovieClass(MovieType.Class.PG);
 						case 3 -> movie.setMovieClass(MovieType.Class.PG13);
@@ -356,7 +357,7 @@ public class MovieListingUI {
 						case 5 -> movie.setMovieClass(MovieType.Class.M18);
 						case 6 -> movie.setMovieClass(MovieType.Class.R21);
 					}
-					sc.nextLine();
+//					sc.nextLine();
 				}
 				case -1 -> {
 					System.out.println("Exiting.");
