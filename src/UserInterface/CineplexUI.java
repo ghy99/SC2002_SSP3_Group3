@@ -29,7 +29,7 @@ public class CineplexUI {
             ArrayList<Movie> movielist = ticket.getChosenCineplex().getListOfMovies();
             if (movielist.size() == 0) {
                 System.out.printf("%s is not showing any movies at this moment. Please select another Cineplex.\n\n", ticket.getChosenCineplex().getCineplexName());
-                return  null;
+//                return  null;
             }
             else {
                 for (int i = 0; i < movielist.size(); i++) {

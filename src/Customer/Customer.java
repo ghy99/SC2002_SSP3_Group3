@@ -2,20 +2,29 @@ package Customer;
 
 import Cineplex.Cineplex;
 import Movie.*;
+import Service.TextDB;
 
+import java.io.IOException;
 import java.util.*;
+
+import static Service.TextDB.Files.Customers;
 
 public class Customer {
     private String MovieGoerName;
     private String MobileNumber;
     private String Email;
     //Purchase History
-    private MovieTicket Ticket = null;
+    private MovieTicket Ticket;
 
-    public Customer(String movieGoerName, String mobileNumber, String email) {
+    public Customer(String movieGoerName, String mobileNumber, String email , boolean createAccount) throws IOException {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
+
+        if(createAccount)
+        {
+            TextDB.WriteToTextDB("\\"+Customers, this);
+        }
     }
 
     public Customer() {
@@ -30,7 +39,6 @@ public class Customer {
     }
 
 
-
     public String getMovieGoerName() {
         return MovieGoerName;
     }
@@ -42,7 +50,6 @@ public class Customer {
     public String getEmail() {
         return Email;
     }
-
 
     public MovieTicket getTicket() {
         return this.Ticket;
@@ -56,4 +63,5 @@ public class Customer {
             this.getTicket().printTicket();
         }
     }
+
 }

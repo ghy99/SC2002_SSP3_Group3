@@ -23,7 +23,8 @@ public class TextDB {
     public enum Files {
         Cineplex("Cineplex.txt"),
         Movies("Movies.txt"),
-        ShowTime("ShowTime.txt");
+        ShowTime("ShowTime.txt"),
+        Customers("Customers.txt");
 
         public final String Files;
 
@@ -40,7 +41,7 @@ public class TextDB {
     private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString() + File.separator +"src" +File.separator +"DataStorage" + File.separator;
 
     // an example of reading
-    public ArrayList<Customer> readFromFile(String fileName, ArrayList<Customer> customers, Customer temp) throws IOException {
+    public static ArrayList<Customer> readFromFile(String fileName, ArrayList<Customer> customers, Customer temp) throws IOException {
 
         // read String from text file
         ArrayList stringArray = null;
@@ -61,14 +62,14 @@ public class TextDB {
 
 
             // create Professor object from file data
-            Customer customer = new Customer(movieGoerName, mobileNumber, email);
+            Customer customer = new Customer(movieGoerName, mobileNumber, email , false);
             // add to Professors list
             customers.add(customer);
         }
         return customers;
     }
 
-    public ArrayList<Movie> readFromFile(String fileName, ArrayList<Movie> movies) throws IOException {
+    public static ArrayList<Movie> readFromFile(String fileName, ArrayList<Movie> movies) throws IOException {
         ArrayList<String> listofMovies = (ArrayList) TextDB.Read(fileName);
         ArrayList<Movie> alr = new ArrayList<Movie>();
 
@@ -97,7 +98,7 @@ public class TextDB {
         return alr;
     }
 
-    public ArrayList<Cineplex> readFromFile(String filename) throws IOException {
+    public static ArrayList<Cineplex> readFromFile(String filename) throws IOException {
         ArrayList<String> listofCineplexes = (ArrayList) TextDB.Read(filename);
         ArrayList<Cineplex> alr = new ArrayList<>();
 
@@ -121,13 +122,13 @@ public class TextDB {
 
     }
 
-    public ArrayList<ShowTime> readFromFile(ArrayList<Movie> movie, String fileName) throws IOException {
+    public static ArrayList<ShowTime> readFromFile(ArrayList<Movie> movie, String fileName) throws IOException {
         ArrayList<String> listOfShowTime = (ArrayList) TextDB.Read(fileName);
         ArrayList<ShowTime> alr = new ArrayList<>();
-        ArrayList<ArrayList<String>> temp = new ArrayList<>();
-        ShowTime tempST = null;
-        int rowCount = 0;
+
         for (int i = 0; i < listOfShowTime.size(); i++) {
+            int rowCount = 0;
+            ArrayList<ArrayList<String>> temp = new ArrayList<>();
             String st = listOfShowTime.get(i);
             StringTokenizer star = new StringTokenizer(st, SEPARATOR);
             String movieName = star.nextToken().trim();
@@ -210,7 +211,7 @@ public class TextDB {
         return alr;
     }
 
-    public ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList, String fileName) throws IOException, NoSuchAlgorithmException {
+    public static ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList, String fileName) throws IOException, NoSuchAlgorithmException {
 
         // read String from text file
         //for reading from admin.txt to extract admin username and passwords
@@ -226,14 +227,14 @@ public class TextDB {
             String userName = star.nextToken().trim();
             String password = star.nextToken().trim();
 
-            Admin tempAdmin = new Admin(userName, password);
+            Admin tempAdmin = new Admin(userName, password , true);
             // add to Professors list
             adminList.add(tempAdmin);
         }
         return adminList;
     }
     
-    public ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
+    public static ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
 	
 	//read from Consolidatedreview.txt
     	
@@ -322,7 +323,6 @@ public class TextDB {
         Update(fileName2,alw2);
     }
 
-
     public static void WriteToTextDB(String fileName, ArrayList<Movie> moveis) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
@@ -363,6 +363,7 @@ public class TextDB {
 
         StringBuilder st = new StringBuilder();
         st.append(admin.getUsername());
+        st.append(SEPARATOR);
         st.append(SHA256.toString(admin.getPassword()));
         alw.add(st.toString());
 
@@ -461,19 +462,17 @@ public class TextDB {
 
     }
 
-    public static void WriteToTextDB(String fileName, List<Customer> customerList) throws IOException {
+    public static void WriteToTextDB(String fileName ,Customer customer) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
-        for (int i = 0; i < customerList.size(); i++) {
-            Customer customer = (Customer) customerList.get(i);
-            StringBuilder st = new StringBuilder();
-            st.append(customer.getMovieGoerName().trim());
-            st.append(SEPARATOR);
-            st.append(customer.getMobileNumber().trim());
-            st.append(SEPARATOR);
-            st.append(customer.getEmail());
-            alw.add(st.toString());
-        }
+        StringBuilder st = new StringBuilder();
+        st.append(customer.getMovieGoerName().trim());
+        st.append(SEPARATOR);
+        st.append(customer.getMobileNumber().trim());
+        st.append(SEPARATOR);
+        st.append(customer.getEmail());
+        alw.add(st.toString());
+
         Write(fileName, alw);
     }
 
