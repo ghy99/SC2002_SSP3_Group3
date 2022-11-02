@@ -50,6 +50,7 @@ public class AdminUI {
             switch (choice) {
                 case 1 -> {
                 	System.out.println("1) Ticket Prices, Please select one of the following functions");
+                    EditTicketPriceUI.EditTicket();
                     //call function to edit ticket prices
                 }
 
