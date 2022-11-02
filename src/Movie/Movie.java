@@ -124,6 +124,10 @@ public class Movie {
         this.movieTotalSales = movieTotalSales;
     }
 
+    public void updateShowingStatus(MovieStatus showingStatus) {
+        this.showingStatus = showingStatus;
+    }
+
     public void increaseMovieTotalSale()
     {
         this.movieTotalSales++;
@@ -132,7 +136,9 @@ public class Movie {
     public void printMovieDetails() {
         System.out.printf("\t\tMovie Title: %s\n", this.movieTitle);
         System.out.printf("\t\tMovie Status: %s\n", this.showingStatus);
-        System.out.printf("\t\tMovie Synopsis: %s\n", this.synopsis);
+        System.out.printf("\t\tMovie Director: %s\n", this.director);
+        System.out.println("\t\tMovie Synopsis:");
+        printSynopsis();
         System.out.printf("\t\tMovie Casts: %s\n", this.cast);
         System.out.printf("\t\tCinema Type: %s\n", this.typeOfCinema.toString());
         System.out.printf("\t\tMovie Category: %s\n", this.MovieGenre.toString());
@@ -144,5 +150,20 @@ public class Movie {
         }
         System.out.printf("\t\tMinimum Age for Watching: %s\n", this.movieClass.toString());
 
+    }
+
+    public void printSynopsis() {
+        String[] words = this.synopsis.split(" ");
+        int count = 0;
+        System.out.print("\t\t\t");
+        for (String word : words) {
+            if (count == 20) {
+                System.out.print("\n\t\t\t");
+                count = 0;
+            }
+            System.out.printf("%s ", word);
+            count++;
+        }
+        System.out.println("\n");
     }
 }

@@ -15,10 +15,8 @@ public class MovieListingUI {
 		String filename = "movies.txt";
 		ArrayList<Movie> listOfMovies = getMovieList(filename);
 		Scanner sc = new Scanner(System.in);
-		Movie temp = null;
-		TextDB db = new TextDB();
 
-		System.out.println("Current list of movies:");
+//		System.out.println("Current list of movies:");
 //		printMovieList(listOfMovies);
 
 		do {
@@ -34,15 +32,13 @@ public class MovieListingUI {
 			if (num == 1) {
 				Movie newMovie = createMovie();
 				ArrayList<Movie> movies = new ArrayList<Movie>();
-				movies.add(newMovie);
-				printMovieList(listOfMovies);
+				listOfMovies.add(newMovie);
+//				printMovieList(listOfMovies);
 				printMovieList(movies);
-				TextDB.WriteToTextDB(filename, movies);
+				TextDB.UpdateTextDB(filename, listOfMovies);
 				// Add writeToDB for updates --> appending new movie
 			}
 			else if (num==2) {
-				int index = 0;
-
 				System.out.println("-----------------------------------");
 				System.out.println("        Modify Movie Details       ");
 				System.out.println("-----------------------------------");
@@ -56,13 +52,28 @@ public class MovieListingUI {
 					}
 				} while (choice < 0 || choice >= listOfMovies.size());
 				Movie movie = listOfMovies.get(choice);
-				movie = modifyMovie(listOfMovies, movie);
-				listOfMovies.set(choice, movie);
-				TextDB.WriteToTextDB(filename, listOfMovies);
+				Movie newmovie = modifyMovie(listOfMovies, movie);
+				newmovie.printMovieDetails();
+				listOfMovies.set(choice, newmovie);
+				TextDB.UpdateTextDB(filename, listOfMovies);
 				// Add writeToDB for updates --> overwriting old movie
 			}
 			else if (num == 3) {
-				Movie deletingMovie = deleteMovie();
+				System.out.println("-----------------------------------");
+				System.out.println("           Removing Movie          ");
+				System.out.println("-----------------------------------");
+				int choice;
+				System.out.println("Which movie would you like to edit?");
+				printMovieList(listOfMovies);
+				do {
+					choice = sc.nextInt() - 1;
+					if (choice < 0 || choice >= listOfMovies.size()) {
+						System.out.println("Invalid choice. Try again!");
+					}
+				} while (choice < 0 || choice >= listOfMovies.size());
+				Movie deletingMovie = deleteMovie(listOfMovies.get(choice));
+				listOfMovies.set(choice, deletingMovie);
+				TextDB.UpdateTextDB(filename, listOfMovies);
 				// Add write to DB for deleting movie --> changing showing status to EndOfShowing
 			}
 		} while (num != 4);
@@ -71,9 +82,8 @@ public class MovieListingUI {
 
 	public static ArrayList<Movie> getMovieList(String filename) throws IOException {
 		Movie temp = null;
-		TextDB db = new TextDB();
 		ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
-		listOfMovies = db.readFromFile(filename, listOfMovies);
+		listOfMovies = readFromFile(filename, listOfMovies);
 		return listOfMovies;
 	}
 
@@ -107,7 +117,7 @@ public class MovieListingUI {
 		int statuschoice = 0;
 		do {
 			statuschoice = sc.nextInt();
-
+			sc.nextLine();
 			switch (statuschoice) {
 				case 1 -> moviestatus = Movie.MovieStatus.ComingSoon;
 				case 2 -> moviestatus = Movie.MovieStatus.Preview;
@@ -143,6 +153,7 @@ public class MovieListingUI {
 		System.out.println("Enter your option:");
 		Cinema.CinemaType cinemaType;
 		int cinChoice = sc.nextInt();
+		sc.nextLine();
 		if (cinChoice == 1) {
 			cinemaType = Cinema.CinemaType.Regular;
 		}
@@ -166,7 +177,7 @@ public class MovieListingUI {
 		int genrechoice;
 		do {
 			genrechoice = sc.nextInt();
-
+			sc.nextLine();
 			switch (genrechoice) {
 				case 1 -> genre = MovieType.Genre.Action;
 				case 2 -> genre = MovieType.Genre.Comedy;
@@ -188,6 +199,7 @@ public class MovieListingUI {
 		System.out.println("Enter your option:");
 		MovieType.Dimension movieDim;
 		int dimChoice = sc.nextInt();
+		sc.nextLine();
 		if (dimChoice == 1) {
 			movieDim = MovieType.Dimension.valueOf("THREE_D");
 		}
@@ -209,6 +221,7 @@ public class MovieListingUI {
 
 		do {
 			ratingchoice = sc.nextInt();
+			sc.nextLine();
 			switch (ratingchoice) {
 				case 1 -> ratings = MovieType.Class.G;
 				case 2 -> ratings = MovieType.Class.PG;
@@ -223,7 +236,7 @@ public class MovieListingUI {
 				synopsis, cast, cinemaType, genre, movieDim, ratings);
 	}
 
-	public static Movie modifyMovie(ArrayList<Movie> listOfMovies, Movie movie) throws IOException {
+	public static Movie modifyMovie(ArrayList<Movie> listOfMovies, Movie movie) {
 		Scanner sc = new Scanner(System.in);
 
 		int option;
@@ -244,6 +257,7 @@ public class MovieListingUI {
 			System.out.println();
 
 			option = sc.nextInt();
+			sc.nextLine();
 			switch (option) {
 				case 1 -> {
 					System.out.println("Enter new Movie Title:");
@@ -261,6 +275,7 @@ public class MovieListingUI {
 						case 3 -> movie.setShowingStatus(Movie.MovieStatus.NowShowing);
 						case 4 -> movie.setShowingStatus(Movie.MovieStatus.EndOfShowing);
 					}
+					sc.nextLine();
 				}
 				case 3 -> {
 					System.out.println("Enter new Director Name:");
@@ -286,6 +301,7 @@ public class MovieListingUI {
 						case 1 -> movie.setTypeOfCinema(Cinema.CinemaType.Regular);
 						case 2 -> movie.setTypeOfCinema(Cinema.CinemaType.Premium);
 					}
+					sc.nextLine();
 				}
 				case 7 -> {
 					System.out.println();
@@ -310,6 +326,7 @@ public class MovieListingUI {
 						case 8 -> movie.setMovieGenre(MovieType.Genre.Thriller);
 						case 9 -> movie.setMovieGenre(MovieType.Genre.Western);
 					}
+					sc.nextLine();
 				}
 				case 8 -> {
 					System.out.println();
@@ -321,6 +338,7 @@ public class MovieListingUI {
 						case 1 -> movie.setMovie3D(MovieType.Dimension.THREE_D);
 						case 2 -> movie.setMovie3D(MovieType.Dimension.TWO_D);
 					}
+					sc.nextLine();
 				}
 				case 9 -> {
 					System.out.println(" Select new Movie Age Rating ");
@@ -338,6 +356,7 @@ public class MovieListingUI {
 						case 5 -> movie.setMovieClass(MovieType.Class.M18);
 						case 6 -> movie.setMovieClass(MovieType.Class.R21);
 					}
+					sc.nextLine();
 				}
 				case -1 -> {
 					System.out.println("Exiting.");
@@ -348,8 +367,14 @@ public class MovieListingUI {
 		return movie;
 	}
 
-	public static Movie deleteMovie() {
-		return null;
+	public static Movie deleteMovie(Movie movie) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println();
+		System.out.printf("Changing Movie Status of %s to EndOfShowing...", movie.getMovieTitle());
+		Movie.MovieStatus moviestatus = Movie.MovieStatus.EndOfShowing;
+		movie.updateShowingStatus(moviestatus);
+		System.out.println("New Movie Details:");
+		movie.printMovieDetails();
+		return movie;
 	}
-
 }
