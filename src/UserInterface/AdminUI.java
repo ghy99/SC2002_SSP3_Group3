@@ -28,6 +28,7 @@ public class AdminUI {
         int choice2 = 0;
 
 		do {
+            System.out.println(" ");
 			System.out.println("Choose the following options for admin services");
 			System.out.println("\t 1) Ticket Prices");
             System.out.println("\t 2) Holiday Dates");
@@ -75,7 +76,15 @@ public class AdminUI {
                     System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
                     choice2 = scan.nextInt();
                     admin.RankingFunctions(choice2);
-                	//admin.RankingByRating();
+
+                }
+
+                case 5-> {
+                    System.out.println("5) Other Settings. Please select one of the following functions ");
+                    System.out.println("\t 1.Control the display of movie rankings to customers");
+                    System.out.println("\t 2.Help new staffs to register new Admin Account");
+                    choice2 = scan.nextInt();
+                    admin.SettingFunctions(choice2);
                 }
 
 
