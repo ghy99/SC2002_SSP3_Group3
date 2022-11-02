@@ -21,11 +21,11 @@ import Review.*;
 public class TextDB {
 
     public enum Files {
-        Cineplex("\\Cineplex.txt"),
-        Movies("\\Movies.txt"),
-        ShowTime("\\ShowTime.txt"),
-        Customers("\\Customers.txt"),
-        Admin("\\Admin.txt");
+        Cineplex(File.separator + "Cineplex.txt"),
+        Movies(File.separator+ "Movies.txt"),
+        ShowTime(File.separator + "ShowTime.txt"),
+        Customers(File.separator + "Customers.txt"),
+        Admin(File.separator + "Admin.txt");
 
         public final String Files;
 
