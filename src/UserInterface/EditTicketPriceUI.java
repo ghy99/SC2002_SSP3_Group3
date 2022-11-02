@@ -47,7 +47,7 @@ public class EditTicketPriceUI {
             int choice = sc.nextInt();
             System.out.println("What is the new value:");
             Double newvalue = sc.nextDouble();
-            TextDB.WriteToTextDB(file, cat, choice, newvalue);
+            TextDB.UpdateToTextDB(file, cat, choice, newvalue);
         } while (cat != -1);
     }
 }

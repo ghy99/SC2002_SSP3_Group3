@@ -32,11 +32,10 @@ public class MainUI {
             e.printStackTrace();
         }
 
-
-        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.ShowTime.ToString());
+        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.ShowTime.toString());
         if(!movieFile.exists())movieFile.createNewFile();
 
-        ArrayList<Movie> movieList = db.readFromFile(File.separator+TextDB.Files.Movies.ToString(), new ArrayList<>());
+        ArrayList<Movie> movieList = db.readFromFile(File.separator+TextDB.Files.Movies.toString(), new ArrayList<>());
 
         for (Cineplex cineplex : cineplexes) {
             cineplex.setListOfMovies(movieList);
@@ -50,8 +49,7 @@ public class MainUI {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Moblima!");
-        System.out.println("Initializing");
-        tid = 1.0;
+
         int option = 1;
         do {
             System.out.println("Select option:");
@@ -76,7 +74,7 @@ public class MainUI {
                     }
                 }
                 case 3 -> {
-                    UserUI.UserInterface(cineplexes, tid);
+                    UserUI.UserInterface(cineplexes);
                 }
             }
         } while (option > 0);
