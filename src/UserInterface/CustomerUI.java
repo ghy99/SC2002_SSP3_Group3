@@ -8,7 +8,7 @@ import Cineplex.Cineplex;
 import Customer.Customer;
 
 public class CustomerUI {
-    public static void CustomerInterface(ArrayList<Cineplex> cineplex, Customer customer) throws IOException {
+    public static void CustomerInterface(ArrayList<Cineplex> cineplex ,ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
 
@@ -54,19 +54,19 @@ public class CustomerUI {
                     System.out.println("Enter your new name: ");
                     String newName = sc.nextLine();
 //                    sc.nextLine();
-                    customer.setMovieGoerName(newName);
+                    customer.updateMovieGoerName(newName , customerArrayList);
                 }
                 case 3 -> {
                     System.out.println("Enter your new number: ");
                     String newNumber = sc.nextLine();
 //                    sc.nextLine();
-                    customer.setMobileNumber(newNumber);
+                    customer.updateMobileNumber(newNumber , customerArrayList);
                 }
                 case 4 -> {
                     System.out.println("Enter your new email: ");
                     String newEmail = sc.nextLine();
 //                    sc.nextLine();
-                    customer.setEmail(newEmail);
+                    customer.updateEmail(newEmail , customerArrayList);
                 }
                 case 5 -> {
                     customer.printCustomerDetails();

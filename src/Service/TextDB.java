@@ -21,10 +21,11 @@ import Review.*;
 public class TextDB {
 
     public enum Files {
-        Cineplex("Cineplex.txt"),
-        Movies("Movies.txt"),
-        ShowTime("ShowTime.txt"),
-        Customers("Customers.txt");
+        Cineplex("\\Cineplex.txt"),
+        Movies("\\Movies.txt"),
+        ShowTime("\\ShowTime.txt"),
+        Customers("\\Customers.txt"),
+        Admin("\\Admin.txt");
 
         public final String Files;
 
@@ -32,7 +33,8 @@ public class TextDB {
             this.Files = files;
         }
 
-        public String ToString() {
+        @Override
+        public String toString() {
             return Files;
         }
     }
@@ -40,7 +42,6 @@ public class TextDB {
     private static final Path CurrentRelativePath = Paths.get("");
     private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString() + File.separator +"src" +File.separator +"DataStorage" + File.separator;
 
-    // an example of reading
     public static ArrayList<Customer> readFromFile(String fileName, ArrayList<Customer> customers, Customer temp) throws IOException {
 
         // read String from text file
@@ -60,7 +61,6 @@ public class TextDB {
             String email = star.nextToken().trim();
 //            Double TID = Double.parseDouble(star.nextToken().trim());
 
-
             // create Professor object from file data
             Customer customer = new Customer(movieGoerName, mobileNumber, email , false);
             // add to Professors list
@@ -68,7 +68,6 @@ public class TextDB {
         }
         return customers;
     }
-
     public static ArrayList<Movie> readFromFile(String fileName, ArrayList<Movie> movies) throws IOException {
         ArrayList<String> listofMovies = (ArrayList) TextDB.Read(fileName);
         ArrayList<Movie> alr = new ArrayList<Movie>();
@@ -97,7 +96,6 @@ public class TextDB {
         }
         return alr;
     }
-
     public static ArrayList<Cineplex> readFromFile(String filename) throws IOException {
         ArrayList<String> listofCineplexes = (ArrayList) TextDB.Read(filename);
         ArrayList<Cineplex> alr = new ArrayList<>();
@@ -121,7 +119,6 @@ public class TextDB {
         return alr;
 
     }
-
     public static ArrayList<ShowTime> readFromFile(ArrayList<Movie> movie, String fileName) throws IOException {
         ArrayList<String> listOfShowTime = (ArrayList) TextDB.Read(fileName);
         ArrayList<ShowTime> alr = new ArrayList<>();
@@ -168,7 +165,6 @@ public class TextDB {
         }
         return alr;
     }
-
     public static ArrayList<String[][]> readFromFile(String fileName, TicketCharges charges) throws IOException {
         // Implement read ticket price txtfile
         ArrayList<String> listOfTicketPrice = (ArrayList) TextDB.Read(fileName);
@@ -210,7 +206,6 @@ public class TextDB {
         }
         return alr;
     }
-
     public static ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList, String fileName) throws IOException, NoSuchAlgorithmException {
 
         // read String from text file
@@ -233,7 +228,6 @@ public class TextDB {
         }
         return adminList;
     }
-    
     public static ArrayList<OverallReview> ReadFromFile(String fileName) throws IOException {
 	
 	//read from Consolidatedreview.txt
@@ -262,67 +256,6 @@ public class TextDB {
 		
 		return overallReviewList;
     }
-    
-    public static void WriteToTextDB(String fileName1,String fileName2, Review review) throws IOException {
-    	
-    	//write to ALLreview.txt
-    	List alw = new ArrayList();
-    	List alw2 = new ArrayList();
-    	String rating = review.getRating();
-    	String parareview = review.getReview();
-    	String title =  review.getTitle();
-    	
-    	StringBuilder st = new StringBuilder();
-    	st.append(title);
-    	st.append(SEPARATOR);
-    	st.append(rating);
-    	st.append(SEPARATOR);
-    	st.append(parareview);
-    	alw.add(st.toString());
-    	
-    	Write(fileName1,alw);
-    	
-    	//convert read data into arraylists to identify where to modify
-    	TextDB textDB = new TextDB();
-    	ArrayList<OverallReview> overallReviewList = textDB.ReadFromFile(fileName2);
-    			
-        boolean found = false;
-        for (int i = 0; i<overallReviewList.size();i++) {
-            if (overallReviewList.get(i).getMovieTitle().equals(title)) {
-                found = true;
-                double oldrating = Double.parseDouble(overallReviewList.get(i).getavgRating());
-                double count = Double.parseDouble(overallReviewList.get(i).getCount());
-                double newRating = Double.parseDouble(rating);
-
-                double newAvgRating = (oldrating*count+newRating)/(count+1);
-                String s = String.valueOf(newAvgRating);
-                overallReviewList.get(i).setavgRating(s);
-                String c = String.valueOf(count+1);
-                overallReviewList.get(i).setCount(c);
-            }
-        }
-
-        if (found!=true) {
-            OverallReview overallReview = new OverallReview(title,rating,"1");
-            overallReviewList.add(overallReview);
-        }
-
-        for (int i = 0; i < overallReviewList.size(); i++) {
-            OverallReview overallReview = overallReviewList.get(i);
-            StringBuilder st2 = new StringBuilder();
-            st2.append(overallReview.getMovieTitle().trim());
-            st2.append(SEPARATOR);
-            st2.append(overallReview.getavgRating().trim());
-            st2.append(SEPARATOR);
-            st2.append(overallReview.getCount().trim());
-            st2.append(SEPARATOR);
-            alw2.add(st2.toString());
-        }
-        //write to consolidated.txt to update ratings
-
-        Update(fileName2,alw2);
-    }
-
     public static void WriteToTextDB(String fileName, ArrayList<Movie> moveis) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
@@ -355,7 +288,6 @@ public class TextDB {
 
         Write(fileName, alw);
     }
-
     public static void WriteToTextDB(String fileName, Admin admin) throws IOException, NoSuchAlgorithmException {
         List alw = new ArrayList();// to store Professors data
 
@@ -417,11 +349,130 @@ public class TextDB {
 
         Write(fileName, alw);
     }
+    public static void WriteToTextDB(String fileName, String date) throws IOException {
 
+        //for admin to write to add in dates into HolidayDates.txt file
+        ArrayList<String> holidayList = (ArrayList<String>) Read("HolidayDates.txt");
+        holidayList.add(date);
+        Update(fileName, holidayList);
+
+    }
+    public static void WriteToTextDB(String fileName ,Customer customer) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        StringBuilder st = new StringBuilder();
+        st.append(customer.getMovieGoerName().trim());
+        st.append(SEPARATOR);
+        st.append(customer.getMobileNumber().trim());
+        st.append(SEPARATOR);
+        st.append(customer.getEmail());
+        alw.add(st.toString());
+
+        Write(fileName, alw);
+    }
+    public static void UpdateToTextDB(String fileName ,ArrayList<Customer> customer) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+
+        for (int i = 0; i < customer.size();i++)
+        {
+            StringBuilder st = new StringBuilder();
+            st.append(customer.get(i).getMovieGoerName().trim());
+            st.append(SEPARATOR);
+            st.append(customer.get(i).getMobileNumber().trim());
+            st.append(SEPARATOR);
+            st.append(customer.get(i).getEmail());
+            alw.add(st.toString());
+        }
+
+        Update(fileName, alw);
+    }
+    public static void Write(String fileName, List data) throws IOException {
+
+        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName,true));
+
+        try {
+            for (int i = 0; i < data.size(); i++) {
+                out.println((String) data.get(i));
+            }
+        } finally {
+            out.close();
+        }
+    }
+    public static void Update(String fileName, List data) throws IOException {
+
+        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName,false));
+        try {
+            for (int i = 0; i < data.size(); i++) {
+                out.println((String) data.get(i));
+            }
+        } finally {
+            out.close();
+        }
+    }
+    public static void UpdateToTextDB(String fileName1,String fileName2, Review review) throws IOException {
+
+        //write to ALLreview.txt
+        List alw = new ArrayList();
+        List alw2 = new ArrayList();
+        String rating = review.getRating();
+        String parareview = review.getReview();
+        String title =  review.getTitle();
+
+        StringBuilder st = new StringBuilder();
+        st.append(title);
+        st.append(SEPARATOR);
+        st.append(rating);
+        st.append(SEPARATOR);
+        st.append(parareview);
+        alw.add(st.toString());
+
+        Write(fileName1,alw);
+
+        //convert read data into arraylists to identify where to modify
+        TextDB textDB = new TextDB();
+        ArrayList<OverallReview> overallReviewList = textDB.ReadFromFile(fileName2);
+
+        boolean found = false;
+        for (int i = 0; i<overallReviewList.size();i++) {
+            if (overallReviewList.get(i).getMovieTitle().equals(title)) {
+                found = true;
+                double oldrating = Double.parseDouble(overallReviewList.get(i).getavgRating());
+                double count = Double.parseDouble(overallReviewList.get(i).getCount());
+                double newRating = Double.parseDouble(rating);
+
+                double newAvgRating = (oldrating*count+newRating)/(count+1);
+                String s = String.valueOf(newAvgRating);
+                overallReviewList.get(i).setavgRating(s);
+                String c = String.valueOf(count+1);
+                overallReviewList.get(i).setCount(c);
+            }
+        }
+
+        if (found!=true) {
+            OverallReview overallReview = new OverallReview(title,rating,"1");
+            overallReviewList.add(overallReview);
+        }
+
+        for (int i = 0; i < overallReviewList.size(); i++) {
+            OverallReview overallReview = overallReviewList.get(i);
+            StringBuilder st2 = new StringBuilder();
+            st2.append(overallReview.getMovieTitle().trim());
+            st2.append(SEPARATOR);
+            st2.append(overallReview.getavgRating().trim());
+            st2.append(SEPARATOR);
+            st2.append(overallReview.getCount().trim());
+            st2.append(SEPARATOR);
+            alw2.add(st2.toString());
+        }
+        //write to consolidated.txt to update ratings
+
+        Update(fileName2,alw2);
+    }
     /*
     TEST THIS FUNCTION WHEN I COME BACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     * */
-    public static void WriteToTextDB(String fileName, int cat, int choice, Double newTicketPrice) throws IOException {
+    public static void UpdateToTextDB(String fileName, int cat, int choice, Double newTicketPrice) throws IOException {
         List alw = new ArrayList();
         StringBuilder st = new StringBuilder();
         ArrayList<String[][]> ticketPrices = new ArrayList<>();
@@ -452,69 +503,6 @@ public class TextDB {
         alw.add(st.toString());
         Update(fileName, alw);
     }
-
-    public static void WriteToTextDB(String fileName, String date) throws IOException {
-
-        //for admin to write to add in dates into HolidayDates.txt file
-        ArrayList<String> holidayList = (ArrayList<String>) Read("HolidayDates.txt");
-        holidayList.add(date);
-        Update(fileName, holidayList);
-
-    }
-
-    public static void WriteToTextDB(String fileName ,Customer customer) throws IOException {
-        List alw = new ArrayList();// to store Professors data
-
-        StringBuilder st = new StringBuilder();
-        st.append(customer.getMovieGoerName().trim());
-        st.append(SEPARATOR);
-        st.append(customer.getMobileNumber().trim());
-        st.append(SEPARATOR);
-        st.append(customer.getEmail());
-        alw.add(st.toString());
-
-        Write(fileName, alw);
-    }
-
-    public static void Write(String fileName, List data) throws IOException {
-
-
-        ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
-
-        if (oldData.size() > 0) {
-            for (Object d : data) {
-                oldData.add(d.toString());
-            }
-        }
-
-        for (Object d : data) {
-            oldData.add((String) d);
-        }
-
-        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
-
-        try {
-            for (int i = 0; i < oldData.size(); i++) {
-                out.println((String) oldData.get(i));
-            }
-        } finally {
-            out.close();
-        }
-    }
-
-    public static void Update(String fileName, List data) throws IOException {
-
-
-        PrintWriter out = new PrintWriter(new FileWriter(CurrentDirectory + fileName));
-        try {
-            for (int i = 0; i < data.size(); i++) {
-                out.println((String) data.get(i));
-            }
-        } finally {
-            out.close();
-        }
-    }
-
     /**
      * Read the contents of the given file.
      */
@@ -530,12 +518,8 @@ public class TextDB {
         }
         return data;
     }
-
     public static String getCurrentDirectory() {
         return CurrentDirectory;
-    }
-
-    public static void main(String[] args) throws IOException {
     }
 
 }

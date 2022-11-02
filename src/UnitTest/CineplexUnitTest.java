@@ -23,7 +23,7 @@ public class CineplexUnitTest {
             e.printStackTrace();
         }
 
-        ArrayList<Movie> movieList = db.readFromFile("\\" +TextDB.Files.Movies.ToString(), new ArrayList<>());
+        ArrayList<Movie> movieList = db.readFromFile("\\" +TextDB.Files.Movies.toString(), new ArrayList<>());
         for(Cineplex c : cineplexes)
         {
             System.out.println(c.getCineplexName());
@@ -53,8 +53,8 @@ public class CineplexUnitTest {
 
 
     public static void main(String[] args) throws IOException {
-        cineplexTextTest();
-
+        //cineplexTextTest();
+        System.out.println("=   =   =      =       =       ======      =     =");
     }
 }
 
