@@ -25,7 +25,7 @@ public class TextDB {
         Cineplex(File.separator + "Cineplex.txt"),
         Movies(File.separator+ "Movies.txt"),
         Customers(File.separator + "Customers.txt"),
-        Admin(File.separator + "Admin.txt");
+        Admin(File.separator + "Admin.txt"),
         TransactionHistroy(File.separator + "TransactionHistory.txt");
 
 
@@ -93,8 +93,7 @@ public class TextDB {
             int movieTotalSales = Integer.parseInt(star.nextToken().trim());
 
             Movie movie = new Movie(
-                    title, status, synopsis, casts, type, genre, dim, movieClass, movieTotalSales
-
+                    title, status ,director, synopsis, casts, type, genre, dim, movieClass, movieTotalSales
             );
             alr.add(movie);
         }
@@ -752,7 +751,7 @@ public class TextDB {
     public static void main(String[] args) throws IOException {
         ArrayList<String> cast = new ArrayList<>();
         cast.add("test1");
-        Movie m = new Movie("testMovie" , Movie.MovieStatus.NowShowing ,"test" , cast , Cinema.CinemaType.Regular , MovieType.Genre.Drama , MovieType.Dimension.THREE_D, MovieType.Class.M18);
+        Movie m = new Movie("testMovie"  , Movie.MovieStatus.NowShowing , "testDir" ,"test" , cast , Cinema.CinemaType.Regular , MovieType.Genre.Drama , MovieType.Dimension.THREE_D, MovieType.Class.M18);
         Cinema cinema = new Cinema("asd" , "cinema1" , Cinema.CinemaType.Premium);
         cinema.addShowTime(new Date() , m);
         cinema.addShowTime(new Date() , m);
