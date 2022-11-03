@@ -3,11 +3,12 @@ import Movie.*;
 import Cineplex.*;
 import Service.GetNumberInput;
 import Service.TextDB;
-
+import Review.Review;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -60,6 +61,7 @@ public class MainUI {
             System.out.println("3) Display List of Timing.");
             System.out.println("4) Book as guest.");
             System.out.println("5) Login with your Account.");
+            System.out.println("6) Display Movies by Ranking.");
             option = GetNumberInput.getInt();
 
 //            sc.nextLine();
@@ -79,6 +81,33 @@ public class MainUI {
                 case 5 -> {
                     UserUI.UserInterface(cineplexes);
                 }
+
+                case 6 ->{
+
+                    List data = TextDB.Read("env.txt");
+                    String env = (String) data.get(0);
+                    int envInt = Integer.parseInt(env);
+                    switch(envInt) {
+                        case 1 -> {
+                            Review.RankingByRating();
+
+                        }
+
+                        case 2 -> {
+                            Review.RankingByTicketSales();
+                        }
+
+                        case 3 -> {
+                            Review.RankingByRating();
+                            Review.RankingByTicketSales();
+                        }
+                    }
+
+                }
+
+
+
+
             }
         } while (option > 0);
 

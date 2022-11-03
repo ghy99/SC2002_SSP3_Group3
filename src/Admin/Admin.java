@@ -7,6 +7,7 @@ import Review.OverallReview;
 import Service.GetNumberInput;
 import Service.SHA256;
 import Service.TextDB;
+import Review.Review;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -189,55 +190,14 @@ public class Admin {
 		switch(choice2){
 			case 1->{
 				System.out.println("\t 1.Display Top 5 movie rankings by rating");
-				RankingByRating();
+				Review.RankingByRating();
 			}
 			case 2->{
 				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-				RankingByTicketSales();
+				Review.RankingByTicketSales();
 			}
 
 		}
-	}
-
-	public void RankingByRating () throws IOException {
-		TextDB textDB = new TextDB();
-		ArrayList<OverallReview> overallReviewList = textDB.ReadFromFile("Consolidatedreview.txt");
-		System.out.println("The top 5 movies by ratings are: ");
-		System.out.println("");
-		if (overallReviewList.size()<5){
-			for(int i = 0; i<overallReviewList.size();i++) {
-				System.out.println((i+1)+")" +overallReviewList.get(i).getMovieTitle() + " -> Rating: "+ overallReviewList.get(i).getavgRating());
-			}
-		} else{
-			for(int i = 0; i<5;i++) {
-				System.out.println((i+1)+")" +overallReviewList.get(i).getMovieTitle() + " -> Rating: "+ overallReviewList.get(i).getavgRating());
-			}
-		}
-	}
-
-	public void RankingByTicketSales () throws IOException{
-		TextDB textDB = new TextDB();
-		ArrayList<Movie> movieList = textDB.readFromFile("Movies.txt",new ArrayList<>());
-		movieList.sort(Comparator.comparing(Movie::getMovieTotalSales));
-		Collections.reverse(movieList);
-		System.out.println("The top 5 movies by ticket sales are: ");
-		System.out.println("");
-		if (movieList.size()<5){
-			for (int i = 0; i<movieList.size();i++){
-				String movieTitle = movieList.get(i).getMovieTitle();
-				int ticketSales = movieList.get(i).getMovieTotalSales();
-				System.out.println((i+1)+")" + movieTitle + " -> Ticket Sales: " + ticketSales);
-			}
-		} else {
-			for (int i = 0; i<5;i++){
-				String movieTitle = movieList.get(i).getMovieTitle();
-				int ticketSales = movieList.get(i).getMovieTotalSales();
-				System.out.println((i+1)+")" + movieTitle + " -> Ticket Sales: " + ticketSales);
-			}
-		}
-
-
-
 	}
 
 	public void SettingFunctions(int choice2) throws IOException{
@@ -245,9 +205,10 @@ public class Admin {
 		switch(choice2){
 			case 1->{
 				System.out.println("\t 1. Control the display of movie rankings to customers");
-				System.out.println("Input 1 to display by rating, 2 to display by ticket sales and 3 to display both");
-				int choice = scan.nextInt();
-				ControlRankingDisplay(choice);
+				System.out.println("\t \t - Enter 1 to display by rating\n" +
+						"\t \t - Enter 2 to display by ticket sales\n" +
+						"\t \t - Enter 3 to display both\n");
+				ControlRankingDisplay();
 			}
 			case 2->{
 				System.out.println("\t 2.Help new staffs to register new Admin Account");
@@ -257,8 +218,12 @@ public class Admin {
 		}
 	}
 
-	public void ControlRankingDisplay(int choice){
-		
+	public void ControlRankingDisplay() throws IOException {
+		Scanner scan = new Scanner(System.in);
+		int choice = scan.nextInt();
+		ArrayList<String> env = new ArrayList<>();
+		env.add(String.valueOf(choice));
+		TextDB.Update("env.txt",env);
 	}
 
 
