@@ -90,26 +90,6 @@ public class CineplexUI {
 
                         }
                     }
-
-
-
-                    /*
-                    if (allST.size() > 0)
-                    {
-                        for(int i = 0; i < allST.size(); i++)
-                        {
-                            if (Objects.equals(prevDate,DateTime.convertDate( allST.get(i).getTime().getTime()))){
-
-                            } else {
-                                System.out.printf("%s) %s %s %s\n", i + 1, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle(), DateTime.convertDate(allST.get(i).getTime().getTime()));
-                                prevDate = DateTime.convertDate(allST.get(i).getTime().getTime());
-                            }
-                        }
-                    }else {
-                        System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", cineplexes.get(selectCineplex).getCineplexName());
-                        return null;
-                    }*/
-
                     
                     if (allST.size() > 0)
                     {
