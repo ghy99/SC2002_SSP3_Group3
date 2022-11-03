@@ -61,11 +61,18 @@ public class CineplexUI {
                             }
                         }
                     }
+
+                    String prevDate = "";
                     if (allST.size() > 0)
                     {
                         for(int i = 0; i < allST.size(); i++)
                         {
-                            System.out.printf("%s) %s %s %s\n", i+1, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertDate( allST.get(i).getTime().getTime()));
+                            if (Objects.equals(prevDate,DateTime.convertDate( allST.get(i).getTime().getTime()))){
+
+                            } else {
+                                System.out.printf("%s) %s %s %s\n", i + 1, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle(), DateTime.convertDate(allST.get(i).getTime().getTime()));
+                                prevDate = DateTime.convertDate(allST.get(i).getTime().getTime());
+                            }
                         }
                     }else {
                         System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", cineplexes.get(selectCineplex).getCineplexName());
@@ -75,8 +82,7 @@ public class CineplexUI {
                     System.out.println("Select your date from the list above: ");
                     selectDate = sc.nextInt() - 1;
                     String selectedDate = DateTime.convertDate(allST.get(selectDate).getTime().getTime());
-
-
+                    
                     if (allST.size() > 0)
                     {
                         for(int i = 0; i < allST.size(); i++)
