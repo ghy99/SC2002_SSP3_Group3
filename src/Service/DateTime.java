@@ -41,6 +41,13 @@ public class DateTime extends Date {
         return sf.format(date);
     }
 
+    public static String convertDate(long time){
+        Date date = new Date(time);
+        return sf1.format(date);
+    }
+
+
+
     public String ToTID(String cinemaCode) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
         return cinemaCode + dateFormatter.format(super.getTime());
