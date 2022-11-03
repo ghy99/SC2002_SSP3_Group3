@@ -18,6 +18,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
+import static Service.TextDB.ReadFromFile;
+import static Service.TextDB.UpdateAdmin;
+
 public class Admin {
 	private String username;
 	private String password;
@@ -30,6 +33,11 @@ public class Admin {
 		}else {
 			this.password = SHA256.toString(password);
 		}
+	}
+
+	public Admin(String username, String password) throws NoSuchAlgorithmException{
+		this.username = username;
+		this.password = password;
 	}
 
 	public String getUsername(){
@@ -47,7 +55,7 @@ public class Admin {
 	public static int login(String username, String password) throws IOException, NoSuchAlgorithmException {
 		//fetch data of admin info from txt storage
 		ArrayList<Admin> emptyAdminList = new ArrayList<Admin>();
-		ArrayList<Admin> filledAdminList = TextDB.ReadFromFile(emptyAdminList, "admin.txt");
+		ArrayList<Admin> filledAdminList = ReadFromFile(emptyAdminList, "admin.txt");
 
 		password = SHA256.toString(password);
 
@@ -200,7 +208,7 @@ public class Admin {
 		}
 	}
 
-	public void SettingFunctions(int choice2) throws IOException{
+	public void SettingFunctions(int choice2) throws IOException, NoSuchAlgorithmException {
 		Scanner scan = new Scanner(System.in);
 		switch(choice2){
 			case 1->{
@@ -212,7 +220,7 @@ public class Admin {
 			}
 			case 2->{
 				System.out.println("\t 2.Help new staffs to register new Admin Account");
-
+				CreateAdmin();
 			}
 
 		}
@@ -225,6 +233,39 @@ public class Admin {
 		env.add(String.valueOf(choice));
 		TextDB.Update("env.txt",env);
 	}
+
+	private void CreateAdmin() throws IOException, NoSuchAlgorithmException {
+		String filename = "admin.txt";
+		ArrayList<Admin> AdminList = null;
+
+		AdminList = getAdminList(filename);
+		Scanner sc = new Scanner(System.in);
+		Admin newAdmin = null;
+		newAdmin = AddnewAdmin();
+		ArrayList<Admin> admins = new ArrayList<Admin>();
+		AdminList.add(newAdmin);
+		UpdateAdmin(filename, AdminList);
+	}
+
+	public static ArrayList<Admin> getAdminList(String filename) throws IOException, NoSuchAlgorithmException {
+		ArrayList<Admin> AdminList = new ArrayList<Admin>();
+		AdminList = ReadFromFile(AdminList, filename);
+		return AdminList;
+	}
+
+	private static Admin AddnewAdmin() throws IOException, NoSuchAlgorithmException {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Create New Admin ");
+		String username, password;
+		System.out.println("\t Enter the new admin username");
+		username = scan.nextLine();
+
+		System.out.println("\t Enter the new admin password");
+		password = scan.nextLine();
+
+		return new Admin(username, password);
+	}
+
 
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
