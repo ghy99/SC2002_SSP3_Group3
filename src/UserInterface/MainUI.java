@@ -17,12 +17,18 @@ import java.util.Scanner;
  * Controls main through initializing everything needed.
  *
  */
-
 public class MainUI {
-
-    private static Double tid;
-
+    /**
+     * This variable stores an ArrayList of cineplex to be passed into
+     * guest booking movies / members booking movies.
+     */
     private static ArrayList<Cineplex> cineplexes;
+
+    /**
+     * This method initializes the cineplex. It reads the cineplex names stored
+     * and load it into the Cineplex ArrayList.
+     * @throws IOException to check if Cineplexes.txt exist.
+     */
     public static void InitializeCineplexes() throws IOException {
         System.out.println("Initializing Cineplexes...\n...\n...");
         TextDB db = new TextDB();
@@ -47,6 +53,12 @@ public class MainUI {
         System.out.println("Cineplexes are initialized\n");
     }
 
+    /**
+     * This function represents the starting page when the app loads.
+     * It shows the list of options user can use when the app starts.
+     * @throws Exception when accessing env.txt to check for Customer / Guest rights to view
+     * what kind of Top 5 listing method they are allowed to use.
+     */
     public static void start() throws Exception {
         InitializeCineplexes();
 
@@ -114,7 +126,9 @@ public class MainUI {
     }
 
 
-
+    /**
+     * This Method displays the list of cineplex(Branches) available.
+     */
     public static void displayCineplexList() {
         for (int i = 0; i < cineplexes.size(); i++) {
             System.out.printf("\t%d) %s\n", i + 1, cineplexes.get(i).getCineplexName());
@@ -122,6 +136,10 @@ public class MainUI {
         System.out.println();
     }
 
+    /**
+     * This Method displays the List of Movies currently available. User will only see Movie Title.
+     * After this method, user will be able to select which movie to display more details.
+     */
     public static void displayMovieList() {
         ArrayList<Movie> movielist = cineplexes.get(0).getListOfMovies();
         for (int j = 0; j < movielist.size(); j++) {
@@ -131,7 +149,9 @@ public class MainUI {
         System.out.println();
     }
 
-
+    /**
+     * This Method displays the movie date & time for each movie.
+     */
     public static void displayMovieTimings() {
         for (int i = 0; i < cineplexes.size(); i++) {
             System.out.printf("%s\n", cineplexes.get(i).getCineplexName());
