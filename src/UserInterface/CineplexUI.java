@@ -2,6 +2,8 @@ package UserInterface;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -62,7 +64,36 @@ public class CineplexUI {
                         }
                     }
 
-                    String prevDate = "";
+
+                    String selectedDate = "";
+                    int dateChecking = -1;
+                    while(dateChecking == -1){
+                        ArrayList<String> STDates = new ArrayList<>();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+                        LocalDate STDate = java.time.LocalDate.now();
+                        for (int d = 0; d < 7; d++){
+                            System.out.printf("%s) %s\n",d+1,formatter.format(STDate));
+                            STDates.add(formatter.format(STDate));
+                            STDate = STDate.plusDays(1);
+                        }
+                        System.out.println("Select your date from the list above: ");
+                        selectDate = sc.nextInt() - 1;
+                        selectedDate = STDates.get(selectDate);
+                        for(int z = 0; z < allST.size(); z++) {
+                            if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(z).getTime().getTime()))){
+                                dateChecking++;
+                                break;
+                            } else {
+                                System.out.printf("%s no showtime for this movies on %s. Please select another Date.\n\n", cineplexes.get(selectCineplex).getCineplexName(), selectedDate);
+                                break;
+                            }
+
+                        }
+                    }
+
+
+
+                    /*
                     if (allST.size() > 0)
                     {
                         for(int i = 0; i < allST.size(); i++)
@@ -77,11 +108,8 @@ public class CineplexUI {
                     }else {
                         System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", cineplexes.get(selectCineplex).getCineplexName());
                         return null;
-                    }
+                    }*/
 
-                    System.out.println("Select your date from the list above: ");
-                    selectDate = sc.nextInt() - 1;
-                    String selectedDate = DateTime.convertDate(allST.get(selectDate).getTime().getTime());
                     
                     if (allST.size() > 0)
                     {
@@ -89,9 +117,12 @@ public class CineplexUI {
                         {
                             if (Objects.equals(selectedDate, DateTime.convertDate( allST.get(i).getTime().getTime()))){
                             System.out.printf("%s) %s %s %s\n", i+1, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).getTime().getTime()));
-                        }}
+                        }
+
+                        }
+
                     }else {
-                        System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", cineplexes.get(selectCineplex).getCineplexName());
+                        System.out.printf("%s is no showtime for this movies. Please select another Date.\n\n", cineplexes.get(selectCineplex).getCineplexName());
                         return null;
                     }
 
