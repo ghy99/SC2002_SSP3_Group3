@@ -1,5 +1,6 @@
 package Movie;
 import Cineplex.*;
+import Service.DateTime;
 import Service.TextDB;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -22,80 +23,87 @@ public class MovieTicket {
     // text file format:
         // Student, Adult, Senior Citizen | Weekday, Weekend, Public Holiday | 2D, 3D | Regular, Platinum
         // Blockbusters + $1
-    private Cineplex ChosenCineplex;
-    private Cinema Cinema;
-    private Movie Movie;
+    private String Email;
+    private String ChosenCineplex;
+    private String Cinema;
+    private String Movie;
     private String TID;
     private String SeatID;
-    private ShowTime MovieDateTime;
-    private int MovieTicketID;
+    private String MovieDateTime;
 
     public MovieTicket() {
         System.out.println("Ticket Created.");
     }
-    public MovieTicket(Cineplex cineplex, Movie movie, String seatid, ShowTime moviedatetime, int movieTicketID) {
+    public MovieTicket(String cineplex, String movie, String seatid, String moviedatetime) {
         this.ChosenCineplex = cineplex;
         this.Movie = movie;
         this.SeatID = seatid;
         this.MovieDateTime = moviedatetime;
-        this.MovieTicketID = movieTicketID;
     }
 
-    public void setChosenCineplex(Cineplex cineplex) {
-        this.ChosenCineplex = cineplex;
-    }
-
-    public void setChosenMovie(Movie movie) {
-        this.Movie = movie;
-    }
-
-    public void setMovieSeats(String seatID){
-        this.SeatID = seatID;
-    }
-
-    public void setCinema(Cinema cinema) {
+    public MovieTicket(String email ,String chosenCineplex, String cinema, String movie, String TID, String seatID, String movieDateTime) {
+        this.Email = email;
+        this.ChosenCineplex = chosenCineplex;
         this.Cinema = cinema;
-    }
-
-
-    public void setShowtime(ShowTime time){
-        this.MovieDateTime = time;
-    }
-
-
-    public void setSeatID(String seat) {
-        this.SeatID = seat;
-    }
-
-    public ShowTime getShowtime(){
-        return this.MovieDateTime;
-    }
-
-    public void setTID(String TID) {
+        this.Movie = movie;
         this.TID = TID;
-    }
-
-    public void setMovieDateTime(ShowTime movieDateTime) {
+        this.SeatID = seatID;
         this.MovieDateTime = movieDateTime;
     }
 
-    public Cinema getCinema() {
-        return Cinema;
+    public void setChosenCineplex(String cineplex) {
+        this.ChosenCineplex = cineplex;
     }
-
-    public Cineplex getChosenCineplex() {
+    public String getChosenCineplex() {
         return this.ChosenCineplex;
     }
 
-    public Movie getChosenMovie() {
+    public String getChosenMovie() {
         return this.Movie;
+    }
+    public void setChosenMovie(String movie) {
+        this.Movie = movie;
     }
 
     public String getMovieSeats(){
         return this.SeatID;
     }
+    public void setMovieSeats(String seatID){
+        this.SeatID = seatID;
+    }
+    public String getCinema() {
+        return Cinema;
+    }
+    public void setCinema(String cinema) {
+        this.Cinema = cinema;
+    }
+    public String getShowtime(){
+        return this.MovieDateTime;
+    }
+    public void setMovieDateTime(String movieDateTime) {
+        this.MovieDateTime = movieDateTime;
+    }
     public String getTID() {
         return TID;
+    }
+    public void setTID(String TID) {
+        this.TID = TID;
+    }
+
+    public String getSeatID() {
+        return SeatID;
+    }
+
+    public void setSeatID(String seat) {
+        this.SeatID = seat;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
     }
 
     public boolean checkHoliday() throws IOException {
@@ -148,12 +156,13 @@ public class MovieTicket {
     }
 
     public void printTicket() {
-        System.out.printf("CINEPLEX: %s\n", this.ChosenCineplex.getCineplexName());
-        System.out.printf("MOVIE: %s\n", this.Movie.getMovieTitle());
-        System.out.printf("MOVIE DATE:TIME: %s\n", this.MovieDateTime.getTime());
+
+        System.out.printf("CINEPLEX: %s\n", this.ChosenCineplex);
+        System.out.printf("MOVIE: %s\n", this.getChosenMovie());
+        System.out.printf("MOVIE DATE:TIME: %s\n", this.getShowtime());
         System.out.printf("SEAT: %s\n", this.SeatID);
-        if (this.MovieDateTime != null)
-            System.out.printf("TIME: %s\n", this.MovieDateTime.toString());
-        System.out.printf("TICKET ID: %d\n", this.MovieTicketID);
+        System.out.printf("TIME: %s\n", this.MovieDateTime);
+        System.out.printf("TICKET ID: %s\n", this.getTID());
+        System.out.println();
     }
 }

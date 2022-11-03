@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class ShowTime extends MovieSeats{
-    public Date time;
+    private Date time;
     private Movie movie;
 
     public ShowTime(int row, int col, int aisleOne, int aisleTwo , Date time , Movie movie) {

@@ -34,8 +34,9 @@ public class MainUI {
             e.printStackTrace();
         }
 
-        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.ShowTime.toString());
-        if (!movieFile.exists()) movieFile.createNewFile();
+        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
+        if(!movieFile.exists())movieFile.createNewFile();
+
 
         ArrayList<Movie> movieList = db.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
 
@@ -58,9 +59,11 @@ public class MainUI {
             System.out.println("1) Display List of Cineplexes.");
             System.out.println("2) Display List of Movies.");
             System.out.println("3) Display List of Timing.");
-            System.out.println("4) Login with your Account.");
-            System.out.println("5) Display Movies by Ranking.");
+            System.out.println("4) Book as guest.");
+            System.out.println("5) Login with your Account.");
+            System.out.println("6) Display Movies by Ranking.");
             option = GetNumberInput.getInt();
+
 //            sc.nextLine();
             switch (option) {
                 case 1 -> {
@@ -69,15 +72,17 @@ public class MainUI {
                 case 2 -> {
                    displayMovieList();
                 }
-                case 3 -> {
+               case 3 -> {
                     displayMovieTimings();
                 }
-
                 case 4 -> {
+                    GuestUI.UserInterface(cineplexes);
+                }
+                case 5 -> {
                     UserUI.UserInterface(cineplexes);
                 }
 
-                case 5 ->{
+                case 6 ->{
 
                     List data = TextDB.Read("env.txt");
                     String env = (String) data.get(0);
