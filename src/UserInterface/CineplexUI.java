@@ -1,6 +1,7 @@
 package UserInterface;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -26,6 +27,7 @@ public class CineplexUI {
         }
         int selectCineplex = 0;
         int selectShowtime = 0;
+        int selectDate = 0;
 
         while (selectCineplex >= 0) {
             System.out.println("Select your Cineplex: ");
@@ -59,12 +61,35 @@ public class CineplexUI {
                             }
                         }
                     }
+
+                    String prevDate = "";
                     if (allST.size() > 0)
                     {
                         for(int i = 0; i < allST.size(); i++)
                         {
-                            System.out.printf("%s) %s %s %s\n", i+1, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).getTime().getTime()));
+                            if (Objects.equals(prevDate,DateTime.convertDate( allST.get(i).getTime().getTime()))){
+
+                            } else {
+                                System.out.printf("%s) %s %s %s\n", i + 1, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle(), DateTime.convertDate(allST.get(i).getTime().getTime()));
+                                prevDate = DateTime.convertDate(allST.get(i).getTime().getTime());
+                            }
                         }
+                    }else {
+                        System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", cineplexes.get(selectCineplex).getCineplexName());
+                        return null;
+                    }
+
+                    System.out.println("Select your date from the list above: ");
+                    selectDate = sc.nextInt() - 1;
+                    String selectedDate = DateTime.convertDate(allST.get(selectDate).getTime().getTime());
+                    
+                    if (allST.size() > 0)
+                    {
+                        for(int i = 0; i < allST.size(); i++)
+                        {
+                            if (Objects.equals(selectedDate, DateTime.convertDate( allST.get(i).getTime().getTime()))){
+                            System.out.printf("%s) %s %s %s\n", i+1, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).getTime().getTime()));
+                        }}
                     }else {
                         System.out.printf("%s is no showtime for this movies. Please select another Cinema.\n\n", cineplexes.get(selectCineplex).getCineplexName());
                         return null;
