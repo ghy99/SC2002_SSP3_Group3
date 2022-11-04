@@ -57,6 +57,7 @@ public class CineplexUI {
                 System.out.println("Select your Movie from the list above: ");
                 int selectMovie = GetNumberInput.getInt() - 1;
 
+
                 //Ask for showtime
                 while (selectShowtime >= 0) {
                     ArrayList<Cinema> listOfCinemas = cineplexes.getCineplexes().get(selectCineplex).getListOfCinemas();
@@ -72,6 +73,7 @@ public class CineplexUI {
                             }
                         }
                     }
+
 
 
                     String selectedDate = "";
@@ -101,24 +103,63 @@ public class CineplexUI {
                             }
 
                     }
-
+                    int three_d = 0;
+                    MovieType.Dimension dim = null;
+                    do {
+                        System.out.println("Would you like to watch the movie in 3D?");
+                        System.out.println("1) Yes\n2) No");
+                        three_d = GetNumberInput.getInt();
+                        if (three_d != 1 && three_d != 2) continue;
+                        switch (three_d) {
+                            case 1 -> {
+                                // 3D
+                                dim = MovieType.Dimension.THREE_D;
+                            }
+                            case 2 -> {
+                                // 2D
+                                dim = MovieType.Dimension.TWO_D;
+                            }
+                        }
+                        int count = 0;
+                        for(int i = 0; i < allST.size(); i++)
+                        {
+                            if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(i).getTime().getTime())) &&
+                                    Objects.equals(allST.get(i).getDimension(), dim)){
+                                count++;
+                            }
+                        }
+                        if (count == 0) {
+                            System.out.printf("There is no available movies for a %s movie. Please select the other choice.\n", dim);
+                            dim = null;
+                        }
+                    } while (dim == null);
                     
                     if (allST.size() > 0)
                     {
                         int count = 1;
                         for(int i = 0; i < allST.size(); i++)
                         {
-                            if (Objects.equals(selectedDate, DateTime.convertDate( allST.get(i).getTime().getTime()))){
+
+                            if (Objects.equals(selectedDate, DateTime.convertDate( allST.get(i).getTime().getTime())) &&
+                                    Objects.equals(allST.get(i).getDimension(), dim)){
                                 System.out.printf("%s) %s %s %s\n", count++, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).getTime().getTime()));
                             }
                         }
-                    }else {
+                    }
+                    else {
                         System.out.printf("%s is no showtime for this movies. Please select another Date.\n\n", cineplexes.getCineplexes().get(selectCineplex).getCineplexName());
                         return null;
                     }
 
+
                     System.out.println("Select your Showtime from the list above: ");
                     selectShowtime = GetNumberInput.getInt() - 1;
+
+                    System.out.println("\n\nYou have selected the following movie: ");
+                    allST.get(selectShowtime).getMovie().printMovieDetails();
+                    System.out.printf("\nCinema Room: %s\n", cinemas.get(selectShowtime).getCinemaName());
+                    System.out.printf("Movie Timing: %s\n", DateTime.convertTime( allST.get(selectShowtime).getTime().getTime()));
+
                     ticket.setCinema(cinemas.get(selectShowtime).getCinemaName());
                     ticket.setChosenMovie(allST.get(selectShowtime).getMovie().getMovieTitle());
                     ticket.setMovieDateTime(DateTime.convertTime(allST.get(selectShowtime).getTime().getTime()));

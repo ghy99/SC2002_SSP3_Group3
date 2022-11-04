@@ -26,8 +26,7 @@ public class Movie extends AllReviews {
     private Cinema.CinemaType typeOfCinema;
 
     private MovieType.Genre MovieGenre;
-
-    private MovieType.Dimension movie3D;
+    private MovieType.Blockbuster BlockBuster;
 
     private MovieType.Class movieClass;
 
@@ -43,7 +42,7 @@ public class Movie extends AllReviews {
     public Movie(String movieTitle, MovieStatus showingStatus, String director,
                  String synopsis, ArrayList<String> cast,
                  Cinema.CinemaType movietype, MovieType.Genre moviecat,
-                 MovieType.Dimension dimension, MovieType.Class movieClass) {
+                 MovieType.Blockbuster blockbuster, MovieType.Class movieClass) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
         this.director = director;
@@ -51,14 +50,14 @@ public class Movie extends AllReviews {
         this.cast = cast;
         this.typeOfCinema = movietype;
         this.MovieGenre = moviecat;
-        this.movie3D = dimension;
+        this.BlockBuster = blockbuster;
         this.movieClass = movieClass;
     }
 
     public Movie(String movieTitle, MovieStatus showingStatus, String director,
                  String synopsis, ArrayList<String> cast,
                  Cinema.CinemaType movietype, MovieType.Genre moviecat,
-                 MovieType.Dimension dimension, MovieType.Class movieClass,int movieTotalSales) {
+                 MovieType.Blockbuster blockbuster, MovieType.Class movieClass,int movieTotalSales) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
         this.director = director;
@@ -66,8 +65,8 @@ public class Movie extends AllReviews {
         this.cast = cast;
         this.typeOfCinema = movietype;
         this.MovieGenre = moviecat;
-        this.movie3D = dimension;
         this.movieClass = movieClass;
+        this.BlockBuster = blockbuster;
         this.movieTotalSales = movieTotalSales;
     }
 
@@ -91,7 +90,9 @@ public class Movie extends AllReviews {
     }
     public Cinema.CinemaType getTypeOfCinema() { return this.typeOfCinema; }
     public MovieType.Genre getMovieGenre() { return this.MovieGenre; }
-    public MovieType.Dimension getMovie3D() { return this.movie3D; }
+    public MovieType.Blockbuster getBlockBuster() {
+        return BlockBuster;
+    }
     public MovieType.Class getMovieClass() {
         return this.movieClass;
     }
@@ -118,8 +119,8 @@ public class Movie extends AllReviews {
     public void setMovieGenre(MovieType.Genre movieGenre) {
         MovieGenre = movieGenre;
     }
-    public void setMovie3D(MovieType.Dimension movie3D) {
-        this.movie3D = movie3D;
+    public void setBlockBuster(MovieType.Blockbuster blockBuster) {
+        BlockBuster = blockBuster;
     }
     public void setMovieClass(MovieType.Class movieClass) {
         this.movieClass = movieClass;
@@ -146,14 +147,10 @@ public class Movie extends AllReviews {
         System.out.printf("\t\tMovie Casts: %s\n", this.cast);
         System.out.printf("\t\tCinema Type: %s\n", this.typeOfCinema.toString());
         System.out.printf("\t\tMovie Category: %s\n", this.MovieGenre.toString());
-        if (Objects.equals(this.movie3D.toString(), "Three")) {
-            System.out.println("\t\tMovie is available in 3D!\n");
-        }
-        else {
-            System.out.println("\t\tMovie is available in 2D\n");
-        }
         System.out.printf("\t\tMinimum Age for Watching: %s\n", this.movieClass.toString());
-
+        if (Objects.equals(getBlockBuster(), MovieType.Blockbuster.BLOCKBUSTER)) {
+            System.out.printf("\t\t%s\n", this.getBlockBuster());
+        }
     }
 
     public void printSynopsis() {

@@ -89,13 +89,13 @@ public class TextDB {
             Collections.addAll(casts, temp);
             Cinema.CinemaType type = Cinema.CinemaType.valueOf(star.nextToken().trim());
             MovieType.Genre genre = MovieType.Genre.valueOf(star.nextToken().trim());
-            MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
+            MovieType.Blockbuster blockbuster = MovieType.Blockbuster.valueOf(star.nextToken().trim());
             MovieType.Class movieClass = MovieType.Class.valueOf(star.nextToken().trim());
             int movieTotalSales = Integer.parseInt(star.nextToken().trim());
 
 
             Movie movie = new Movie(
-                    title, status, director, synopsis, casts, type, genre, dim, movieClass, movieTotalSales
+                    title, status, director, synopsis, casts, type, genre, blockbuster, movieClass, movieTotalSales
             );
 
             while (!Objects.equals(listofMovies.get(i), "]")) {
@@ -160,6 +160,7 @@ public class TextDB {
             StringTokenizer star = new StringTokenizer(st, SEPARATOR);
             String movieName = star.nextToken().trim();
             String time = star.nextToken().trim();
+            MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
             int[] aisle = new int[2];
             int count = 0;
             //Read the 2d array seats
@@ -189,7 +190,7 @@ public class TextDB {
             //Refrence the current Showtime to our list of movies in cinexplex
             for (Movie m : movie) {
                 if (Objects.equals(m.getMovieTitle(), movieName)) {
-                    alr.add(new ShowTime(DateTime.StringToDate(time), m, temp, aisle));
+                    alr.add(new ShowTime(DateTime.StringToDate(time), m, temp, aisle, dim));
                 }
             }
         }
@@ -326,7 +327,7 @@ public class TextDB {
         st.append(SEPARATOR);
         st.append(movie.getMovieGenre().toString().trim());
         st.append(SEPARATOR);
-        st.append(movie.getMovie3D().toString().trim());
+        st.append(movie.getBlockBuster().toString().trim());
         st.append(SEPARATOR);
         st.append(movie.getMovieClass().toString().trim());
         st.append(SEPARATOR);
@@ -418,7 +419,7 @@ public class TextDB {
             st.append(SEPARATOR);
             st.append(movie.getMovieGenre().toString().trim());
             st.append(SEPARATOR);
-            st.append(movie.getMovie3D().toString().trim());
+            st.append(movie.getBlockBuster().toString().trim());
             st.append(SEPARATOR);
             st.append(movie.getMovieClass().toString().trim());
             st.append(SEPARATOR);
@@ -443,7 +444,7 @@ public class TextDB {
         Update(fileName, alw);
     }
 
-    public static void UpdateToTextDB(String fileName, ArrayList<ShowTime> showTimes, Movie movie) throws IOException {
+    public static void UpdateToTextDB(String fileName, ArrayList<ShowTime> showTimes, MovieType.Dimension dim) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
         for (int a = 0; a < showTimes.size(); a++) {
@@ -451,6 +452,8 @@ public class TextDB {
             st.append(showTimes.get(a).getMovie().getMovieTitle());
             st.append(SEPARATOR);
             st.append(DateTime.convertTime(showTimes.get(a).getTime().getTime()));
+            st.append(SEPARATOR);
+            st.append(dim.toString());
             alw.add(st.toString());
             alw.add("[");
 
@@ -523,8 +526,6 @@ public class TextDB {
             st.append(movie.getTypeOfCinema().toString().trim());
             st.append(SEPARATOR);
             st.append(movie.getMovieGenre().toString().trim());
-            st.append(SEPARATOR);
-            st.append(movie.getMovie3D().toString().trim());
             st.append(SEPARATOR);
             st.append(movie.getMovieClass().toString().trim());
             st.append(SEPARATOR);
@@ -616,6 +617,7 @@ public class TextDB {
             st.append(SEPARATOR);
             st.append(DateTime.convertTime(showTime.getTime().getTime()));
             st.append(SEPARATOR);
+            st.append(showTime.getDimension());
             alw.add(st.toString());
             alw.add("[");
 
@@ -702,16 +704,4 @@ public class TextDB {
         return CurrentDirectory;
     }
 
-    public static void main(String[] args) throws IOException {
-        ArrayList<String> rwar = new ArrayList<>();
-        rwar.add("Test cast");
-        Movie m = new Movie("test", Movie.MovieStatus.NowShowing,"testDir" , "testsybn" ,rwar, Cinema.CinemaType.Regular, MovieType.Genre.Drama, MovieType.Dimension.THREE_D, MovieType.Class.M18);
-        m.setReview("",0.5f,"test review");
-        ArrayList<Movie> my = new ArrayList<>();
-        my.add(m);
-
-        UpdateToTextDB(Files.Movies.toString(), my , null);
-
-
-    }
 }
