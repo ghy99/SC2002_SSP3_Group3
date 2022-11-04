@@ -90,36 +90,4 @@ public class CinemaUI {
             }
         }
     }
-
-    private static ArrayList<Cineplex> cineplexes;
-
-    public static void InitializeCineplexes() throws IOException {
-        System.out.println("Initializing Cineplexes...\n...\n...");
-        TextDB db = new TextDB();
-        cineplexes = new ArrayList<Cineplex>();
-        String filename = "Cineplexes.txt";
-        try {
-            cineplexes = db.readFromFile(filename);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
-        if (!movieFile.exists()) movieFile.createNewFile();
-
-
-        ArrayList<Movie> movieList = db.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
-
-        for (Cineplex cineplex : cineplexes) {
-            cineplex.setListOfMovies(movieList);
-            cineplex.InitializeMovies();
-        }
-        System.out.println("Cineplexes are initialized\n");
-    }
-
-    public static void main(String[] args) throws IOException {
-        InitializeCineplexes();
-        UserInterface(cineplexes);
-
-    }
 }

@@ -16,13 +16,11 @@ public class Customer {
     private String Email;
     //Purchase History
     private MovieTicket Ticket;
-    private boolean IsGuest;
 
     public Customer(String movieGoerName, String mobileNumber, String email, boolean createAccount, boolean isGuest) throws IOException {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
-        IsGuest = isGuest;
 
 
         if(createAccount)
@@ -47,10 +45,6 @@ public class Customer {
         this.Ticket = tix;
     }
 
-    public void setGuest(boolean guest) {
-        IsGuest = guest;
-    }
-
     public String getMovieGoerName() {
         return MovieGoerName;
     }
@@ -65,10 +59,6 @@ public class Customer {
 
     public MovieTicket getTicket() {
         return this.Ticket;
-    }
-
-    public boolean isGuest() {
-        return IsGuest;
     }
 
     public void updateMovieGoerName(String name, ArrayList<Customer> customerArrayList) throws IOException {

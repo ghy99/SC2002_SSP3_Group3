@@ -3,7 +3,6 @@ package Admin;
 import Cineplex.Cineplex;
 import Movie.Movie;
 import Movie.TicketCharges;
-import Review.OverallReview;
 import Service.GetNumberInput;
 import Service.SHA256;
 import Service.TextDB;
@@ -181,38 +180,6 @@ public class Admin {
 		TextDB textDB = new TextDB();
 		TextDB.Update("HolidayDates.txt",holidayList);
 
-	}
-
-	//implement function for MOVIES HERE
-
-	public void RankingFunctions(int choice2) throws IOException{
-		switch(choice2){
-			case 1->{
-				System.out.println("\t 1.Display Top 5 movie rankings by rating");
-				RankingByRating();
-			}
-			case 2->{
-				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-				RankingByTicketSales();
-			}
-
-		}
-	}
-
-	public void RankingByRating () throws IOException {
-		TextDB textDB = new TextDB();
-		ArrayList<OverallReview> overallReviewList = textDB.ReadFromFile("Consolidatedreview.txt");
-		System.out.println("The top 5 movies by ratings are: ");
-		System.out.println("");
-		if (overallReviewList.size()<5){
-			for(int i = 0; i<overallReviewList.size();i++) {
-				System.out.println((i+1)+")" +overallReviewList.get(i).getMovieTitle() + " -> Rating: "+ overallReviewList.get(i).getavgRating());
-			}
-		} else{
-			for(int i = 0; i<5;i++) {
-				System.out.println((i+1)+")" +overallReviewList.get(i).getMovieTitle() + " -> Rating: "+ overallReviewList.get(i).getavgRating());
-			}
-		}
 	}
 
 	public void RankingByTicketSales () throws IOException{

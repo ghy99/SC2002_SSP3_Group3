@@ -44,7 +44,7 @@ public class UserUI {
                 System.out.println("Enter your password:");
                 number = sc.nextLine();
                 String temp = username.substring(username.lastIndexOf("admin/") +6);
-                AdminInterface(Admin.login(temp,number) , temp, number);
+                AdminInterface(cineplex, Admin.login(temp,number) , temp, number);
                 return;
             }
 
