@@ -1,6 +1,8 @@
 package Movie;
 import Cineplex.Cinema;
 import Review.*;
+import Service.TextDB;
+
 import java.util.ArrayList;
 import java.util.Objects;
 

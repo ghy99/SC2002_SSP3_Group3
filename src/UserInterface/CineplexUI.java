@@ -33,7 +33,7 @@ public class CineplexUI {
 
         while (selectCineplex >= 0) {
             System.out.println("Select your Cineplex: ");
-            selectCineplex = sc.nextInt() - 1;
+            selectCineplex = sc.nextInt() - 1; // error checking for correct cineplex
             ticket.setChosenCineplex(cineplexes.get(selectCineplex).getCineplexName()); // setting user's chosen Cineplex
             ArrayList<Movie> movielist = cineplexes.get(selectCineplex).getListOfMovies();
             if (movielist.size() == 0) {
@@ -67,29 +67,32 @@ public class CineplexUI {
 
                     String selectedDate = "";
                     int dateChecking = -1;
-                    while(dateChecking == -1){
+                    while(dateChecking == -1) {
                         ArrayList<String> STDates = new ArrayList<>();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
                         LocalDate STDate = java.time.LocalDate.now();
-                        for (int d = 0; d < 7; d++){
-                            System.out.printf("%s) %s\n",d+1,formatter.format(STDate));
+                        for (int d = 0; d < 7; d++) {
+                            System.out.printf("%s) %s\n", d + 1, formatter.format(STDate));
                             STDates.add(formatter.format(STDate));
                             STDate = STDate.plusDays(1);
                         }
                         System.out.println("Select your date from the list above: ");
                         selectDate = sc.nextInt() - 1;
                         selectedDate = STDates.get(selectDate);
-                        for(int z = 0; z < allST.size(); z++) {
-                            if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(z).getTime().getTime()))){
-                                dateChecking++;
-                                break;
-                            } else {
-                                System.out.printf("%s no showtime for this movies on %s. Please select another Date.\n\n", cineplexes.get(selectCineplex).getCineplexName(), selectedDate);
-                                break;
+
+                            for (int z = 0; z < allST.size(); z++) {
+                                if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(z).getTime().getTime()))) {
+                                    dateChecking++;
+                                    break;
+                                }
                             }
 
-                        }
+                            if(dateChecking == -1) {
+                                System.out.printf("%s no showtime for this movies on %s. Please select another Date.\n\n", cineplexes.get(selectCineplex).getCineplexName(), selectedDate);
+                            }
+
                     }
+
                     
                     if (allST.size() > 0)
                     {
