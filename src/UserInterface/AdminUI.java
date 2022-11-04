@@ -22,8 +22,10 @@ public class AdminUI {
      * @param passwordInput
      * @throws Exception
      */
+
 	public static void AdminInterface(int loginFlag , String usernameInput , String passwordInput,
                                       AllCineplex cineplexes) throws Exception {
+
         System.out.println("Welcome to the Admin Portal. ");
         //only success log in then can access other services
 
@@ -71,7 +73,7 @@ public class AdminUI {
                     System.out.println("\t 1.Display Top 5 movie rankings by rating");
                     System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
                     choice2 = GetNumberInput.getInt();
-                    admin.RankingFunctions(choice2);
+                   // cineplex.add(choice2);
                 }
                 case 5-> {
                     System.out.println("5) Other Settings. Please select one of the following functions ");

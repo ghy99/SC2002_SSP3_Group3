@@ -6,7 +6,7 @@ import Service.TextDB;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Movie {
+public class Movie extends AllReviews {
     // Each Movie.Movie requires variables such as
     // Movie.Movie Title
     // Showing Status - Coming Soon, Preview, Now Showing
