@@ -7,13 +7,11 @@ import Review.Review;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
- * Done by Gan Hao Yi
+ * Done by Gan Hao Yi & Eddy Cheng
  * Controls main through initializing everything needed.
  *
  */
@@ -125,8 +123,8 @@ public class MainUI {
 
     }
 
-
     /**
+    Done by : Eddy Cheng
      * This Method displays the list of cineplex(Branches) available.
      */
     public static void displayCineplexList() {
@@ -154,11 +152,11 @@ public class MainUI {
      */
     public static void displayMovieTimings() {
         for (int i = 0; i < cineplexes.size(); i++) {
-            System.out.printf("%s\n", cineplexes.get(i).getCineplexName());
+            System.out.printf("%s", cineplexes.get(i).getCineplexName());
             ArrayList<Movie> movielist = cineplexes.get(i).getListOfMovies();
             ArrayList<Cinema> listOfCinemas = cineplexes.get(i).getListOfCinemas();
             for (int j = 0; j < listOfCinemas.size(); j++) {
-                System.out.printf("\t%s\n", movielist.get(j).getMovieTitle()); // movie
+                System.out.printf("\n\t%s\n", movielist.get(j).getMovieTitle()); // movie
                 ArrayList<ShowTime> allST = new ArrayList<>();
                 for (Cinema c : listOfCinemas) {
                     ArrayList<ShowTime> listOfShowtime = c.getShowTime();
@@ -171,14 +169,34 @@ public class MainUI {
                     }
                 }
 
-                for (int k = 0; k < allST.size(); k ++){
-                    System.out.printf("\t\t%s\n", allST.get(k).getTime());
+                if (allST.size() > 0) {
+                    allST.sort(Comparator.comparing(ShowTime::getTimeHour));
+
+                    // need a sort function
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd-MM-YYYY");
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                    String previousString = dateFormat.format(allST.get(0).getTime());
+                    System.out.printf("\t\t %s ", previousString);
+                    //previousString = allST.get(0).getTime();
+                    for (int k = 0; k < allST.size(); k++) {
+                        if (Objects.equals(previousString, dateFormat.format(allST.get(k).getTime()))) {
+                            previousString = "";
+                            System.out.printf("%s\t%s", previousString, timeFormat.format(allST.get(k).getTime()));
+                            previousString = dateFormat.format(allST.get(k).getTime());
+                        } else {
+                            previousString = dateFormat.format(allST.get(k).getTime());
+                            System.out.printf("\n\t\t %s \t%s", previousString, timeFormat.format(allST.get(k).getTime()));
+                        }
+
+
+                    }
                 }
 
             }
 
         }
     }
+
 }
 
 
