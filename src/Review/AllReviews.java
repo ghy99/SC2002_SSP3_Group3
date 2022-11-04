@@ -1,9 +1,14 @@
 package Review;
+import Movie.Movie;
+import Service.TextDB;
+
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class AllReviews
 {
@@ -21,15 +26,30 @@ public class AllReviews
         return listOfReview;
     }
 
-    public Boolean addReview(float rating , String review){
+    public void setReview(String userName, float rating , String review){
         if(0 <= rating && rating <= 5) {
-            listOfReview.add(new Review(review,rating ));
-            return true;
+            listOfReview.add(new Review(userName, review,rating ));
         }
         else
         {
             System.out.println("Rating not added! Please enter rating between 1-5!");
-            return false;
+        }
+    }
+
+    public void addReview(String userName, float rating , String review , ArrayList<Movie> movies) throws IOException {
+        if(Objects.equals(userName,""))
+        {
+            userName = "Unknown";
+        }
+        if(0 <= rating && rating <= 5) {
+            Review temp =  new Review(userName, review,rating );
+            listOfReview.add(new Review(userName, review,rating ));
+            TextDB.UpdateToTextDB(TextDB.Files.Movies.toString(), movies , temp);
+            System.out.println("Rating added!");
+        }
+        else
+        {
+            System.out.println("Rating not added! Please enter rating between 1-5!");
         }
     }
 
@@ -63,7 +83,6 @@ public class AllReviews
             default -> {return this.listOfReview;}
         }
     }
-
     private float getOverAllReviwerRating() {
         if(listOfReview.size() < 1)
         {
@@ -81,11 +100,12 @@ public class AllReviews
         }
     }
 
-    public void printListOfReview() {
-        if(listOfReview.size() > 1)
+
+    public static void printListOfReview(ArrayList<Review> list) {
+        if(list.size() > 1)
         {
-            for (Review review : listOfReview) {
-                System.out.println("Review Rating: " + String.format("%.1f", review.getRating()) + " Review: " + review.getReview());
+            for (Review review : list) {
+                System.out.println("Review Rating: " + review.getRating() + " Review: " + review.getReview());
             }
         }
     }

@@ -1,19 +1,33 @@
 package Cineplex;
 
 import Movie.Movie;
+<<<<<<< Updated upstream
 import Service.GetNumberInput;
+=======
+import Review.AllReviews;
+import Review.Review;
+>>>>>>> Stashed changes
 import Service.TextDB;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class AllCineplex {
+    public  enum MovieSort{
+        Top5Rating,
+        Top5Sales
+    }
+
     private final String filename = "movies.txt";
     private ArrayList<Cineplex> cineplexes;
 
-    private ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
+    private ArrayList<Movie> listOfMovies ;
 
+    private boolean isSale;
+    private boolean isRating;
     public AllCineplex() throws IOException {
         InitializeCineplexes();
     }
@@ -36,6 +50,22 @@ public class AllCineplex {
         return this.listOfMovies;
     }
 
+    public void setRating(boolean rating) {
+        isRating = rating;
+    }
+
+    public void setSale(boolean sale) {
+        isSale = sale;
+    }
+
+    public boolean isRating() {
+        return isRating;
+    }
+
+    public boolean isSale() {
+        return isSale;
+    }
+
     public void updateListOfMovies(int index, Movie movie) throws IOException {
         //write to file
         this.listOfMovies.set(index, movie);
@@ -48,27 +78,48 @@ public class AllCineplex {
         TextDB.UpdateTextDB(filename, this.listOfMovies);
     }
 
+    public ArrayList<Movie> sortReview(MovieSort sortType)
+    {
+        ArrayList<Movie> tempMovie = (ArrayList<Movie>) this.listOfMovies.clone();
+
+        switch (sortType)
+        {
+            case Top5Rating -> {
+                tempMovie.sort(Comparator.comparing(Movie::getOverallRating));
+                Collections.reverse(tempMovie);
+                return tempMovie;
+            }
+            case Top5Sales -> {
+                tempMovie.sort(Comparator.comparing(Movie::getMovieTotalSales));
+                Collections.reverse(tempMovie);
+                return tempMovie;
+            }
+            default -> {return this.listOfMovies;}
+        }
+    }
+
     public void InitializeCineplexes() throws IOException {
+        Boolean[] env = TextDB.ReadFromFile(File.separator + TextDB.Files.Env.toString());
+        setSale(env[0]);
+        setRating(env[1]);
+        System.out.println("EVN variable loaded!! \n\n");
         System.out.println("Initializing Cineplexes...\n...\n...");
-        TextDB db = new TextDB();
-//        this.cineplexes = new ArrayList<Cineplex>();
-        String filename = "Cineplexes.txt";
         try {
-            this.cineplexes = db.readFromFile(filename);
+            this.cineplexes = TextDB.readFromFile(File.separator + TextDB.Files.Cineplex.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
         if (!movieFile.exists()) movieFile.createNewFile();
 
-
-        ArrayList<Movie> movieList = db.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
+        // movie instance
+        ArrayList<Movie> movieList = TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
 
         for (Cineplex cineplex : this.cineplexes) {
             setListOfMovies(movieList);
             cineplex.InitializeMovies(this.listOfMovies);
         }
+
         System.out.println("Cineplexes are initialized\n");
     }
 
@@ -88,8 +139,8 @@ public class AllCineplex {
      * This Method displays the List of Movies currently available. User will only see Movie Title.
      * After this method, user will be able to select which movie to display more details.
      */
-    public void displayMovieList() {
-        ArrayList<Movie> movielist = this.listOfMovies;
+    public static void displayMovieList(ArrayList<Movie> list ) {
+        ArrayList<Movie> movielist = list;
         for (int j = 0; j < movielist.size(); j++) {
             System.out.printf("%d) %s\n", j + 1, movielist.get(j).getMovieTitle());
         }

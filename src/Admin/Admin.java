@@ -228,11 +228,16 @@ public class Admin {
 				holidayList.remove(i);
 			}
 		}
+<<<<<<< Updated upstream
 		TextDB textDB = new TextDB();
+=======
+
+>>>>>>> Stashed changes
 		TextDB.Update("HolidayDates.txt",holidayList);
 
 	}
 
+<<<<<<< Updated upstream
 
 	//implement function for MOVIES HERE
 
@@ -254,6 +259,8 @@ public class Admin {
 	 * @throws IOException is thrown if the reading of the input causes error
 	 * @throws NoSuchAlgorithmException is thrown if the function is not found
 	 */
+=======
+>>>>>>> Stashed changes
 	public void SettingFunctions(int choice2) throws IOException, NoSuchAlgorithmException {
 		Scanner scan = new Scanner(System.in);
 		switch(choice2){

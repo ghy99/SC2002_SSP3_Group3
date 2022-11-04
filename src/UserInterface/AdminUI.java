@@ -72,8 +72,15 @@ public class AdminUI {
                 	System.out.println("4) Movie Listing by rank. Please select one of the following functions ");
                     System.out.println("\t 1.Display Top 5 movie rankings by rating");
                     System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-                    choice2 = GetNumberInput.getInt();
-                   // cineplex.add(choice2);
+
+                    if(GetNumberInput.getInt() == 1)
+                    {
+                        cineplexes.sortReview(AllCineplex.MovieSort.Top5Rating);
+                    }
+                    else
+                    {
+                        cineplexes.sortReview(AllCineplex.MovieSort.Top5Sales);
+                    }
                 }
                 case 5-> {
                     System.out.println("5) Other Settings. Please select one of the following functions ");

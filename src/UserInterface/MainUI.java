@@ -35,7 +35,6 @@ public class MainUI {
     public static void start() throws Exception {
         AllCineplex cineplexes = new AllCineplex();
 
-        Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Moblima!");
 
         int option = 1;
@@ -46,7 +45,13 @@ public class MainUI {
             System.out.println("3) Display List of Timing.");
             System.out.println("4) Book as guest.");
             System.out.println("5) Login with your Account.");
-            System.out.println("6) Display Movies by Ranking.");
+            if (cineplexes.isRating() || cineplexes.isSale()) {
+                System.out.println("6) Display Movies by Ranking.");
+                System.out.println("7) Add Review.");
+            } else {
+                System.out.println("6) Add Review.");
+            }
+
             option = GetNumberInput.getInt();
 
 //            sc.nextLine();
@@ -55,7 +60,7 @@ public class MainUI {
                     cineplexes.displayCineplexList();
                 }
                 case 2 -> {
-                    cineplexes.displayMovieList();
+                    cineplexes.displayMovieList(cineplexes.getListOfMovies());
                 }
                 case 3 -> {
                     System.out.println("Which cineplex would you like to view:");
@@ -71,6 +76,7 @@ public class MainUI {
                 case 5 -> {
                     UserUI.UserInterface(cineplexes);
                 }
+<<<<<<< Updated upstream
 
 //                case 6 -> {
 //                    List data = TextDB.Read("env.txt");
@@ -89,6 +95,86 @@ public class MainUI {
 //                        }
 //                    }
 //                }
+=======
+                case 6 -> {
+                    if (cineplexes.isRating() || cineplexes.isSale()) {
+                        if (cineplexes.isRating() && cineplexes.isSale()) {
+                            System.out.println("1) View by top 5 sale ");
+                            System.out.println("2) View by top 5 rating ");
+                            int userInput = GetNumberInput.getInt();
+
+                            switch (userInput) {
+                                case 1 -> {
+                                    System.out.println("############Top 5 sale#############");
+
+                                    ArrayList<Movie> temp = cineplexes.sortReview(AllCineplex.MovieSort.Top5Sales);
+
+                                    if (temp.size() > 5) {
+                                        for (int i = 0; i < 5; i++) {
+                                            System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
+                                        }
+                                    } else {
+                                        for (int i = 0; i < temp.size(); i++) {
+                                            System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
+                                        }
+                                    }
+                                    System.out.println();
+                                }
+                                case 2 -> {
+                                    System.out.println("############Top 5 rating############");
+                                    ArrayList<Movie> temp = cineplexes.sortReview(AllCineplex.MovieSort.Top5Rating);
+
+                                    if (temp.size() > 5) {
+                                        for (int i = 0; i < 5; i++) {
+                                            System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
+                                        }
+                                    } else {
+                                        for (int i = 0; i < temp.size(); i++) {
+                                            System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
+                                        }
+                                    }
+                                    System.out.println();
+                                }
+                            }
+
+                        } else if (cineplexes.isSale()) {
+                            System.out.println("############Top 5 sale#############");
+                            ArrayList<Movie> temp = cineplexes.sortReview(AllCineplex.MovieSort.Top5Sales);
+                            if (temp.size() > 5) {
+                                for (int i = 0; i < 5; i++) {
+                                    System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
+                                }
+                            } else {
+                                for (int i = 0; i < temp.size(); i++) {
+                                    System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
+                                }
+                            }
+                            System.out.println();
+                        } else if (cineplexes.isRating()) {
+                            System.out.println("############Top 5 rating############");
+                            ArrayList<Movie> temp = cineplexes.sortReview(AllCineplex.MovieSort.Top5Rating);
+                            if (temp.size() > 5) {
+                                for (int i = 0; i < 5; i++) {
+                                    System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
+                                }
+                            } else {
+                                for (int i = 0; i < temp.size(); i++) {
+                                    System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
+                                }
+                            }
+                            System.out.println();
+                        }
+                    } else {
+                        ReviewUI.UserInferface(cineplexes);
+                    }
+                }
+                case 7 -> {
+                    if (cineplexes.isRating() || cineplexes.isSale()) {
+                        ReviewUI.UserInferface(cineplexes);
+                    }
+
+                }
+>>>>>>> Stashed changes
             }
         } while (option > 0);
     }

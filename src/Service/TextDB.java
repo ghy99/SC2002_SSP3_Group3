@@ -22,11 +22,12 @@ public class TextDB {
 
     public enum Files {
 
-        Cineplex(File.separator + "Cineplex.txt"),
+        Cineplex(File.separator + "Cineplexes.txt"),
         Movies(File.separator + "Movies.txt"),
         Customers(File.separator + "Customers.txt"),
         Admin(File.separator + "Admin.txt"),
-        TransactionHistroy(File.separator + "TransactionHistory.txt");
+        TransactionHistroy(File.separator + "TransactionHistory.txt"),
+        Env(File.separator+"env.txt");
 
 
         public final String Files;
@@ -101,17 +102,17 @@ public class TextDB {
                 if (i + 1 < listofMovies.size()) {
                     i++;
                     if (!Objects.equals(listofMovies.get(i), "]") && !Objects.equals(listofMovies.get(i), "[")) {
-                        String[] t1 = listofMovies.get(i).split("|");
-                        if (t1.length > 2) {
+                        String[] t1 = listofMovies.get(i).split("\\|");
+                        if (t1.length > 3) {
                             StringBuilder sb = new StringBuilder();
                             int j = 1;
                             while (j < t1.length) {
                                 sb.append(t1[j]);
                                 j++;
                             }
-                            movie.addReview(Float.parseFloat(t1[0]), sb.toString());
+                            movie.setReview(t1[0],Float.parseFloat(t1[1]), sb.toString());
                         } else {
-                            movie.addReview(Float.parseFloat(t1[0]), t1[1]);
+                            movie.setReview(t1[0],Float.parseFloat(t1[1]), t1[2]);
                         }
                     }
                 }
@@ -292,6 +293,17 @@ public class TextDB {
         return movieTicketList;
     }
 
+    public static Boolean[] ReadFromFile(String fileName) throws IOException {
+        ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
+        Boolean[] flags = new Boolean[2];
+
+        for (int i = 0; i < oldData.size(); i++) {
+          flags[i] = Boolean.parseBoolean(oldData.get(i)) ;
+        }
+
+        return flags;
+    }
+
     public static void WriteToTextDB(String fileName, Movie movie) throws IOException {
 
         List alw = new ArrayList();// to store Professors data
@@ -374,6 +386,16 @@ public class TextDB {
         Write(fileName, alw);
     }
 
+    public static void UpdateToTextDB(String fileName , Boolean isSale , Boolean isRating) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        StringBuilder st = new StringBuilder();
+        alw.add(isSale.toString());
+        alw.add(isRating.toString());
+
+        Update(fileName, alw);
+    }
+
     public static void UpdateToTextDB(String fileName, ArrayList<Movie> movies, Review reviews) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
@@ -408,6 +430,8 @@ public class TextDB {
             for (Review review : movie.getListOfReview())
             {
                 st = new StringBuilder();
+                st.append(review.getUserName());
+                st.append(SEPARATOR);
                 st.append(review.getRating());
                 st.append(SEPARATOR);
                 st.append(review.getReview());
@@ -682,7 +706,7 @@ public class TextDB {
         ArrayList<String> rwar = new ArrayList<>();
         rwar.add("Test cast");
         Movie m = new Movie("test", Movie.MovieStatus.NowShowing,"testDir" , "testsybn" ,rwar, Cinema.CinemaType.Regular, MovieType.Genre.Drama, MovieType.Dimension.THREE_D, MovieType.Class.M18);
-        m.addReview(0.5f,"test review");
+        m.setReview("",0.5f,"test review");
         ArrayList<Movie> my = new ArrayList<>();
         my.add(m);
 
