@@ -443,30 +443,32 @@ public class TextDB {
         Write(fileName, alw);
     }
 
-    public static void WriteToTextDB(String fileName, Movie movie, ShowTime showTimes) throws IOException {
+    public static void UpdateToTextDB(String fileName,  ArrayList<ShowTime> showTimes , Movie movie) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
-        StringBuilder st = new StringBuilder();
-        st.append(movie.getMovieTitle());
-        st.append(SEPARATOR);
-        st.append(DateTime.convertTime(showTimes.getTime().getTime()));
-        st.append(SEPARATOR);
-        alw.add(st.toString());
-        alw.add("[");
+        for (int a = 0; a< showTimes.size(); a++)
+        {
+            StringBuilder st = new StringBuilder();
+            st.append(showTimes.get(a).getMovie().getMovieTitle());
+            st.append(SEPARATOR);
+            st.append(DateTime.convertTime(showTimes.get(a).getTime().getTime()));
+            alw.add(st.toString());
+            alw.add("[");
 
-        for (String[] row : showTimes.getSeats()) {
-            st = new StringBuilder();
-            for (int i = 0; i < row.length; i++) {
-                st.append(row[i]);
-                if (i + 1 < row.length) st.append(",");
+            for (String[] row : showTimes.get(a).getSeats()) {
+                st = new StringBuilder();
+                for (int i = 0; i < row.length; i++) {
+                    st.append(row[i]);
+                    if (i + 1 < row.length) st.append(",");
+                }
+                alw.add(st.toString());
             }
-            alw.add(st);
+
+            alw.add("]");
         }
 
-        alw.add("]");
 
-
-        Write(fileName, alw);
+        Update(fileName, alw);
     }
 
     public static void WriteToTextDB(String fileName, int cat, int choice, Double newTicketPrice) throws IOException {
