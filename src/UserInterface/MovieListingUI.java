@@ -16,10 +16,7 @@ import static Service.TextDB.readFromFile;
 public class MovieListingUI {
     public static void MovieListingInterface(AllCineplex cineplexes) throws Exception {
         int num = -1;
-        String filename = "movies.txt";
-//		ArrayList<Movie> listOfMovies = getMovieList(filename);
         ArrayList<Movie> listOfMovies = cineplexes.getListOfMovies();
-        Scanner sc = new Scanner(System.in);
 
 //		System.out.println("Current list of movies:");
 //		printMovieList(listOfMovies);
@@ -36,8 +33,8 @@ public class MovieListingUI {
             num = GetNumberInput.getInt();
 
             if (num == 1) {
-//				Movie newMovie = createMovie();
-                cineplexes.addMovies(createMovie());
+				Movie newMovie = createMovie();
+                cineplexes.addMovies(newMovie);
 //				ArrayList<Movie> movies = new ArrayList<Movie>();
 //				listOfMovies.add(newMovie);
 ////				printMovieList(listOfMovies);
@@ -104,6 +101,10 @@ public class MovieListingUI {
         }
     }
 
+    /**
+     * This method creates a new movie and returns an ArrayList of 2 movies
+     * @return ArrayList of 2 movies, the first a 3D Movie, the second a 2D Movie.
+     */
     public static Movie createMovie() {
         Scanner sc = new Scanner(System.in);
         System.out.println("------------------------");
@@ -201,17 +202,17 @@ public class MovieListingUI {
 
 
         System.out.println();
-        System.out.println("Is the movie 3D?");
+        System.out.println("Is the movie a BLOCKBUSTER?");
         System.out.println("1: Yes");
         System.out.println("2: No");
         System.out.println("Enter your option:");
-        MovieType.Dimension movieDim;
+        MovieType.Blockbuster blockbuster;
         int dimChoice = GetNumberInput.getInt();
 //		sc.nextLine();
         if (dimChoice == 1) {
-            movieDim = MovieType.Dimension.valueOf("THREE_D");
+            blockbuster = MovieType.Blockbuster.BLOCKBUSTER;
         } else {
-            movieDim = MovieType.Dimension.valueOf("TWO_D");
+            blockbuster = MovieType.Blockbuster.NOTBLOCKBUSTER;
         }
 
 
@@ -240,7 +241,7 @@ public class MovieListingUI {
         } while (ratingchoice > 6 || ratingchoice < 1);
 
         return new Movie(movieTitle, moviestatus, director,
-                synopsis, cast, cinemaType, genre, movieDim, ratings);
+                synopsis, cast, cinemaType, genre, blockbuster, ratings);
     }
 
     public static Movie modifyMovie(ArrayList<Movie> listOfMovies, Movie movie) {
@@ -337,13 +338,13 @@ public class MovieListingUI {
                 }
                 case 8 -> {
                     System.out.println();
-                    System.out.println("Is the movie 3D?");
+                    System.out.println("Is the movie a BLOCKBUSTER?");
                     System.out.println("1: Yes");
                     System.out.println("2: No");
                     System.out.println("Enter your option:");
                     switch (GetNumberInput.getInt() - 1) {
-                        case 1 -> movie.setMovie3D(MovieType.Dimension.THREE_D);
-                        case 2 -> movie.setMovie3D(MovieType.Dimension.TWO_D);
+                        case 1 -> movie.setBlockBuster(MovieType.Blockbuster.BLOCKBUSTER);
+                        case 2 -> movie.setBlockBuster(MovieType.Blockbuster.NOTBLOCKBUSTER);
                     }
 //					sc.nextLine();
                 }

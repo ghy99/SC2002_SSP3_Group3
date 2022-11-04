@@ -1,24 +1,24 @@
-Avengers|NowShowing|ChickenMan|Group of people comes together to fight purple grape.|Metal Frisbee, Metal Boy, New Axe, Arrows, Russian|Regular|Action|TWO_D|PG13|5
+Avengers|NowShowing|ChickenMan|Group of people comes together to fight purple grape.|Metal Frisbee, Metal Boy, New Axe, Arrows, Russian|Regular|Action|BLOCKBUSTER|PG13|5
 [
 5.0|test
 3.1|tesreview
 ]
-IT|NowShowing|ClownMan|Group of kids fight a child predator.|Child 1, Child 2, Child 3, Child 4|Regular|Horror|TWO_D|G|0
+IT|NowShowing|ClownMan|Group of kids fight a child predator.|Child 1, Child 2, Child 3, Child 4|Regular|Horror|NOTBLOCKBUSTER|G|0
 [
 1.0|yoooooo
 ]
-The Notebook|Preview|RomanticPerson|Something about a notebook.|Pen, Paper, Notebook|Regular|Romance|TWO_D|R21|100
+The Notebook|Preview|RomanticPerson|Something about a notebook.|Pen, Paper, Notebook|Regular|Romance|NOTBLOCKBUSTER|R21|100
 [
 ]
-Transformers: Dark of the Moon|NowShowing|Michael Bay|Cars and Trucks fight Planes.|Car, Truck, Underachieving White Boy|Premium|Action|THREE_D|M18|20
+Transformers: Dark of the Moon|NowShowing|Michael Bay|Cars and Trucks fight Planes.|Car, Truck, Underachieving White Boy|Premium|Action|BLOCKBUSTER|M18|20
 [
 ]
-Train to Busan|ComingSoon|Yeon Sang-ho|Seok-Woo is a fund manager in Seoul. He is separated from his wife and lives with his daughter Soo-An. Seok-Woo doesn't spend much time with his daughter or show affection to her. On the night before Soo-An's birthday, Soo-An insists on seeing her mother for her birthday. Seok-Woo has no other choce, but to take her to Busan. Early next morning, they board the KTX train for Busan at Seoul Station. Before the KTX train leaves Seoul Station, a zombie-like girl jumps onto the train. The train is infected with a horrific virus that is spreading like wildfire. Seok-Woo, Soo-An and the other passengers on the KTX train must now fight for their lives.|Gong Yoo, Jung Yu-Mi, Ma Dong-Seok, Kim Soo-Ahn, Kim Eui-Sung, Choi Woo-Sik, Ahn So-Hee|Premium|Mystery|THREE_D|M18|0
+Train to Busan|ComingSoon|Yeon Sang-ho|Seok-Woo is a fund manager in Seoul. He is separated from his wife and lives with his daughter Soo-An. Seok-Woo doesn't spend much time with his daughter or show affection to her. On the night before Soo-An's birthday, Soo-An insists on seeing her mother for her birthday. Seok-Woo has no other choce, but to take her to Busan. Early next morning, they board the KTX train for Busan at Seoul Station. Before the KTX train leaves Seoul Station, a zombie-like girl jumps onto the train. The train is infected with a horrific virus that is spreading like wildfire. Seok-Woo, Soo-An and the other passengers on the KTX train must now fight for their lives.|Gong Yoo, Jung Yu-Mi, Ma Dong-Seok, Kim Soo-Ahn, Kim Eui-Sung, Choi Woo-Sik, Ahn So-Hee|Premium|Mystery|BLOCKBUSTER|M18|0
 [
 ]
-Jujutsu Kaisen|ComingSoon|Gege Akutami|Yuji Itadori, a kind-hearted teenager, joins his school's Occult Club for fun, but discovers that its members are actual sorcerers who can manipulate the energy between beings for their own use. He hears about a cursed talisman - the finger of Sukuna, a demon - and its being targeted by other cursed beings.|Itadori Yuji, Fushiguro Megumi, Kugisaki Nobara, Gojo Satoru, Yuta Okkotsu, Inumaki Toge, Zen'in Maki, Panda|Premium|Action|THREE_D|PG13|0
+Jujutsu Kaisen|ComingSoon|Gege Akutami|Yuji Itadori, a kind-hearted teenager, joins his school's Occult Club for fun, but discovers that its members are actual sorcerers who can manipulate the energy between beings for their own use. He hears about a cursed talisman - the finger of Sukuna, a demon - and its being targeted by other cursed beings.|Itadori Yuji, Fushiguro Megumi, Kugisaki Nobara, Gojo Satoru, Yuta Okkotsu, Inumaki Toge, Zen'in Maki, Panda|Premium|Action|NOTBLOCKBUSTER|PG13|0
 [
 ]
-Jaws I|ComingSoon|Mr Shark|Humans destroy the ocean, sharks protect themselves, get killed by humans instead.|Shark 1, Shark 2, Shark 3, Some Annoying Human|Regular|Western|TWO_D|G|0
+Jaws I|ComingSoon|Mr Shark|Humans destroy the ocean, sharks protect themselves, get killed by humans instead.|Shark 1, Shark 2, Shark 3, Some Annoying Human|Regular|Western|NOTBLOCKBUSTER|G|0
 [
 ]

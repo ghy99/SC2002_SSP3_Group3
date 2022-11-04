@@ -1,7 +1,7 @@
 package UserInterface;
 
 import Cineplex.*;
-import Movie.Movie;
+import Movie.*;
 import Service.DateTime;
 import Service.GetNumberInput;
 import Service.TextDB;
@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class CinemaUI {
     public static void UserInterface(AllCineplex cineplexes) throws IOException {
@@ -60,10 +61,32 @@ public class CinemaUI {
                     System.out.printf("%s) %s" + "\n", i + 1, cineplexes.getListOfMovies().get(i).getMovieTitle());
                 }
 
-                choosenCinema.createShowTime(chosenCineplex, newDate, cineplexes.getListOfMovies().get(GetNumberInput.getInt() - 1));
+                int three_d = 0;
+                MovieType.Dimension dim = null;
+                do {
+                    System.out.println("Would you like to watch the movie in 3D?");
+                    System.out.println("1) Yes\n2) No");
+                    three_d = GetNumberInput.getInt();
+                    if (three_d != 1 && three_d != 2) continue;
+                    switch (three_d) {
+                        case 1 -> {
+                            // 3D
+                            dim = MovieType.Dimension.THREE_D;
+                        }
+                        case 2 -> {
+                            // 2D
+                            dim = MovieType.Dimension.TWO_D;
+                        }
+                    }
+                } while (dim == null);
+
+                choosenCinema.createShowTime(chosenCineplex, newDate, cineplexes.getListOfMovies().get(GetNumberInput.getInt() - 1), dim);
 
                 for (int i = 0; i < choosenCinema.getShowTime().size(); i++) {
-                    System.out.printf("%s) %s %s" + "\n", i + 1, choosenCinema.getShowTime().get(i).getMovie().getMovieTitle(), DateTime.convertTime(choosenCinema.getShowTime().get(i).getTime().getTime()));
+                    System.out.printf("%s) %s %s" + "\n", i + 1,
+                            choosenCinema.getShowTime().get(i).getMovie().getMovieTitle(),
+                            DateTime.convertTime(choosenCinema.getShowTime().get(i).getTime().getTime())
+                    );
                 }
 
             }
@@ -86,7 +109,13 @@ public class CinemaUI {
                 String date = day + "-" + month + "-" + year + ";" + hour + ":" + min;
                 Date newDate = DateTime.StringToDate(date);
 
-                choosenCinema.updateCinemaTime(choseShow, chosenCineplex, newDate, cineplexes.getListOfMovies().get(GetNumberInput.getInt() - 1));
+
+
+                choosenCinema.updateCinemaTime(
+                        choseShow, chosenCineplex, newDate,
+                        cineplexes.getListOfMovies().get(GetNumberInput.getInt() - 1),
+                        choosenCinema.getShowTime().get(choseShow).getDimension()
+                );
             }
         }
     }
