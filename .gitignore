@@ -37,4 +37,4 @@ build/
 java/build/
 out/
 /out/
-src/DataStorage
+src/DataStorage/
