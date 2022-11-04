@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class CinemaUI {
-    public static void UserInterface(ArrayList<Cineplex> cineplexes) throws IOException {
+    public static void UserInterface(AllCineplex cineplexes) throws IOException {
         int choseShow, userInput, day, month, year, hour, min;
 
         //Get cineplex to edit
         System.out.println("Please enter which cineplex showtime to edit :");
-        for (int i = 0; i < cineplexes.size(); i++) {
-            System.out.printf("%s) %s", i + 1, cineplexes.get(i).getCineplexName() + "\n");
+        for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
+            System.out.printf("%s) %s", i + 1, cineplexes.getCineplexes().get(i).getCineplexName() + "\n");
         }
 
-        Cineplex chosenCineplex = cineplexes.get(GetNumberInput.getInt() - 1);
+        Cineplex chosenCineplex = cineplexes.getCineplexes().get(GetNumberInput.getInt() - 1);
 
         System.out.println("Please enter which cinema showtime to edit :");
         for (int i = 0; i < chosenCineplex.getListOfCinemas().size(); i++) {
@@ -56,11 +56,11 @@ public class CinemaUI {
                 Date newDate = DateTime.StringToDate(date);
 
                 System.out.println("Please enter movie to add showtime:");
-                for (int i = 0; i < chosenCineplex.getListOfMovies().size(); i++) {
-                    System.out.printf("%s) %s" + "\n", i + 1, chosenCineplex.getListOfMovies().get(i).getMovieTitle());
+                for (int i = 0; i < cineplexes.getListOfMovies().size(); i++) {
+                    System.out.printf("%s) %s" + "\n", i + 1, cineplexes.getListOfMovies().get(i).getMovieTitle());
                 }
 
-                choosenCinema.createShowTime(chosenCineplex, newDate, chosenCineplex.getListOfMovies().get(GetNumberInput.getInt() - 1));
+                choosenCinema.createShowTime(chosenCineplex, newDate, cineplexes.getListOfMovies().get(GetNumberInput.getInt() - 1));
 
                 for (int i = 0; i < choosenCinema.getShowTime().size(); i++) {
                     System.out.printf("%s) %s %s" + "\n", i + 1, choosenCinema.getShowTime().get(i).getMovie().getMovieTitle(), DateTime.convertTime(choosenCinema.getShowTime().get(i).getTime().getTime()));
@@ -86,7 +86,7 @@ public class CinemaUI {
                 String date = day + "-" + month + "-" + year + ";" + hour + ":" + min;
                 Date newDate = DateTime.StringToDate(date);
 
-                choosenCinema.updateCinemaTime(choseShow, chosenCineplex, newDate, chosenCineplex.getListOfMovies().get(GetNumberInput.getInt() - 1));
+                choosenCinema.updateCinemaTime(choseShow, chosenCineplex, newDate, cineplexes.getListOfMovies().get(GetNumberInput.getInt() - 1));
             }
         }
     }

@@ -7,6 +7,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * @author Chew Zhi Qi, Gan Hao Yi
+ * This is the Cinema class.
+ * It stores the type of the Cinema, and a list of ShowTime and the movie it is showing according to the ShowTime.
+ */
 public class Cinema {
     public enum CinemaType {
         Premium("Premium"),

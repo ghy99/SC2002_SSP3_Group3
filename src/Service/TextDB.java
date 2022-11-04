@@ -660,6 +660,20 @@ public class TextDB {
         return data;
     }
 
+    public static void UpdateAdmin(String fileName,ArrayList <Admin> admins) throws IOException {
+        List adm = new ArrayList();// to store Professors data
+
+        for (Admin admin : admins) {
+            StringBuilder st = new StringBuilder();
+            st.append(admin.getUsername().trim());
+            st.append(SEPARATOR);
+            st.append(admin.getPassword().trim());
+            adm.add(st.toString());
+        }
+        Update(fileName, adm);
+    }
+
+
     public static String getCurrentDirectory() {
         return CurrentDirectory;
     }

@@ -1,5 +1,9 @@
 package Movie;
 
+/**
+ * @author Eddy
+ * This class stores the different types of movies.
+ */
 public class MovieType {
 
     public enum Genre{

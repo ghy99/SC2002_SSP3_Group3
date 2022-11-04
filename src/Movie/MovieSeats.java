@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * @author Jue Lin
+ * This is the class for MovieSeats. It initializes the movie seats in each cinema and displays the seats.
+ */
 public class MovieSeats  {
    
   //enum Name = {PLATINUM, 2D};

@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import Cineplex.Cineplex;
+import Cineplex.*;
 import Customer.Customer;
 import Movie.MovieTicket;
 import Service.TextDB;
 import Service.GetNumberInput;
 
 public class CustomerUI {
-    public static void CustomerInterface(ArrayList<Cineplex> cineplex, ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
+    public static void CustomerInterface(AllCineplex cineplexes, ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         customer.printCustomerDetails();
@@ -29,7 +29,7 @@ public class CustomerUI {
             choice = GetNumberInput.getInt();
             switch (choice) {
                 case 1 -> {
-                    customer.setTicket(CineplexUI.CineplexInterface(cineplex));
+                    customer.setTicket(CineplexUI.CineplexInterface(cineplexes));
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
                     TextDB.WriteToTextDB(TextDB.Files.TransactionHistroy.toString(), customer, customer.getTicket());

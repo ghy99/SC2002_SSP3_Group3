@@ -6,6 +6,9 @@ import Service.TextDB;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class EditTicketPriceUI {
     public void EditTicket() throws IOException {
         Scanner sc = new Scanner(System.in);

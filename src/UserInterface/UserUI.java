@@ -1,7 +1,7 @@
 package UserInterface;
 
 import Admin.Admin;
-import Cineplex.Cineplex;
+import Cineplex.*;
 import Customer.Customer;
 import Service.TextDB;
 
@@ -13,6 +13,9 @@ import java.util.Scanner;
 
 import static UserInterface.AdminUI.AdminInterface;
 
+/**
+ * This is the User Interface class. Imported to call interface for logging in.
+ */
 public class UserUI {
     /**
      * A list of customers is loaded in this variable when database is accessed.
@@ -21,10 +24,10 @@ public class UserUI {
 
     /**
      * This is the User Interface. It is called in mainUI and it controls the interface for the Login option.
-     * @param cineplex This object is passed into the Customer Interface to start the ticket booking process.
+     * @param cineplexes This object is passed into the Customer Interface to start the ticket booking process.
      * @throws Exception This Exception is thrown if reading customer database causes error.
      */
-    public static void UserInterface(ArrayList<Cineplex> cineplex) throws Exception {
+    public static void UserInterface(AllCineplex cineplexes) throws Exception {
 //        String adminFile = "admin.txt";
 //        ArrayList<Admin> admins = new ArrayList<Admin>(); // to store list of admins
 //        ArrayList<Customer> customers = new ArrayList<Customer>(); // to store list of customers
@@ -44,7 +47,8 @@ public class UserUI {
                 System.out.println("Enter your password:");
                 number = sc.nextLine();
                 String temp = username.substring(username.lastIndexOf("admin/") +6);
-                AdminInterface(cineplex, Admin.login(temp,number) , temp, number);
+
+                AdminInterface(Admin.login(temp,number) , temp, number, cineplexes);
                 return;
             }
 
@@ -62,7 +66,7 @@ public class UserUI {
         } while (!checkCustomerName(username, number));
 
         // else, check if username exist in customer.txt or new username
-        CustomerUI.CustomerInterface(cineplex, customers, checkCustomerNumber(username, number));
+        CustomerUI.CustomerInterface(cineplexes, customers, checkCustomerNumber(username, number));
     }
 
     /**

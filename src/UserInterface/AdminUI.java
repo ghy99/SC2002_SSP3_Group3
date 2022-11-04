@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import Admin.*;
-import Cineplex.Cineplex;
+import Cineplex.*;
 import Movie.MovieTicket;
 import Service.*;
 import Review.*;
@@ -22,7 +22,10 @@ public class AdminUI {
      * @param passwordInput
      * @throws Exception
      */
-	public static void AdminInterface(ArrayList<Cineplex> cineplex, int loginFlag , String usernameInput , String passwordInput) throws Exception {
+
+	public static void AdminInterface(int loginFlag , String usernameInput , String passwordInput,
+                                      AllCineplex cineplexes) throws Exception {
+
         System.out.println("Welcome to the Admin Portal. ");
         //only success log in then can access other services
 
@@ -63,7 +66,7 @@ public class AdminUI {
                     admin.HolidayDateFunctions(choice2);
                 }
                 case 3 -> {
-                    MovieListingUI.MovieListingInterface();
+                    MovieListingUI.MovieListingInterface(cineplexes);
                 }
                 case 4 -> {
                 	System.out.println("4) Movie Listing by rank. Please select one of the following functions ");
