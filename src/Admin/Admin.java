@@ -196,18 +196,18 @@ public class Admin {
 
 	//implement function for MOVIES HERE
 
-	public void RankingFunctions(int choice2) throws IOException{
-		switch(choice2){
-			case 1->{
-				System.out.println("\t 1.Display Top 5 movie rankings by rating");
-				Review.RankingByRating();
-			}
-			case 2->{
-				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-				Review.RankingByTicketSales();
-			}
-		}
-	}
+//	public void RankingFunctions(int choice2) throws IOException{
+//		switch(choice2){
+//			case 1->{
+//				System.out.println("\t 1.Display Top 5 movie rankings by rating");
+//				Review.RankingByRating();
+//			}
+//			case 2->{
+//				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
+//				Review.RankingByTicketSales();
+//			}
+//		}
+//	}
 
 	public void SettingFunctions(int choice2) throws IOException, NoSuchAlgorithmException {
 		Scanner scan = new Scanner(System.in);

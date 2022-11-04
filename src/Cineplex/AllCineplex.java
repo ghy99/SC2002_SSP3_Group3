@@ -1,6 +1,7 @@
 package Cineplex;
 
 import Movie.Movie;
+import Service.GetNumberInput;
 import Service.TextDB;
 
 import java.io.File;
@@ -24,6 +25,7 @@ public class AllCineplex {
     public void setListOfMovies(ArrayList<Movie> listOfMovies) {
         this.listOfMovies = listOfMovies;
     }
+
     public void addMovies(Movie movie) throws IOException {
         this.listOfMovies.add(movie);
         TextDB.UpdateTextDB(filename, listOfMovies);
@@ -58,7 +60,7 @@ public class AllCineplex {
         }
 
         File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
-        if(!movieFile.exists())movieFile.createNewFile();
+        if (!movieFile.exists()) movieFile.createNewFile();
 
 
         ArrayList<Movie> movieList = db.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
@@ -71,7 +73,7 @@ public class AllCineplex {
     }
 
     /**
-     Done by : Eddy Cheng
+     * Done by : Eddy Cheng, Gan Hao Yi
      * This Method displays the list of cineplex(Branches) available.
      */
     public void displayCineplexList() {
@@ -82,15 +84,28 @@ public class AllCineplex {
     }
 
     /**
+     * Done by : Gan Hao Yi
      * This Method displays the List of Movies currently available. User will only see Movie Title.
      * After this method, user will be able to select which movie to display more details.
      */
     public void displayMovieList() {
         ArrayList<Movie> movielist = this.listOfMovies;
         for (int j = 0; j < movielist.size(); j++) {
-            System.out.printf("%d)\n", j + 1);
-            movielist.get(j).printMovieDetails();
+            System.out.printf("%d) %s\n", j + 1, movielist.get(j).getMovieTitle());
         }
-        System.out.println();
+        int choice = 0;
+        do {
+            System.out.println("Enter movie number to view more movie details. (Enter -1) to return to main page.");
+            choice = GetNumberInput.getInt() - 1;
+            if (choice == -2) {
+                break;
+            } else if (choice >= movielist.size()) {
+                continue;
+            }
+            else {
+                movielist.get(choice).printMovieDetails();
+                // PRINT MOVIE REVIEWS***************************************************
+            }
+        } while (choice >= 0);
     }
 }

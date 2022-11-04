@@ -105,7 +105,7 @@ public class TextDB {
                         if (t1.length > 2) {
                             StringBuilder sb = new StringBuilder();
                             int j = 1;
-                            while (i < t1.length) {
+                            while (j < t1.length) {
                                 sb.append(t1[j]);
                                 j++;
                             }
