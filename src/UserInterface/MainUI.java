@@ -76,26 +76,6 @@ public class MainUI {
                 case 5 -> {
                     UserUI.UserInterface(cineplexes);
                 }
-<<<<<<< Updated upstream
-
-//                case 6 -> {
-//                    List data = TextDB.Read("env.txt");
-//                    String env = (String) data.get(0);
-//                    int envInt = Integer.parseInt(env);
-//                    switch (envInt) {
-//                        case 1 -> {
-//                            Review.RankingByRating();
-//                        }
-//                        case 2 -> {
-//                            Review.RankingByTicketSales();
-//                        }
-//                        case 3 -> {
-//                            Review.RankingByRating();
-//                            Review.RankingByTicketSales();
-//                        }
-//                    }
-//                }
-=======
                 case 6 -> {
                     if (cineplexes.isRating() || cineplexes.isSale()) {
                         if (cineplexes.isRating() && cineplexes.isSale()) {
@@ -174,7 +154,6 @@ public class MainUI {
                     }
 
                 }
->>>>>>> Stashed changes
             }
         } while (option > 0);
     }

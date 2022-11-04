@@ -305,6 +305,7 @@ public class TextDB {
         return flags;
     }
 
+
     public static void WriteToTextDB(String fileName, Movie movie) throws IOException {
 
         List alw = new ArrayList();// to store Professors data
@@ -340,7 +341,6 @@ public class TextDB {
 
         Write(fileName, alw);
     }
-
     public static void WriteToTextDB(String fileName, Customer customer) throws IOException {
         List alw = new ArrayList();// to store Professors data
         StringBuilder st = new StringBuilder();
@@ -387,12 +387,12 @@ public class TextDB {
         Write(fileName, alw);
     }
 
-    public static void UpdateToTextDB(String fileName , Boolean isSale , Boolean isRating) throws IOException {
+    public static void UpdateToTextDB(String fileName , Settings setting) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
         StringBuilder st = new StringBuilder();
-        alw.add(isSale.toString());
-        alw.add(isRating.toString());
+        alw.add(String.valueOf(setting.isSale()) );
+        alw.add(String.valueOf(setting.isRating()));
 
         Update(fileName, alw);
     }

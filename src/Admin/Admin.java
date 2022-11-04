@@ -1,6 +1,6 @@
 package Admin;
 
-import Cineplex.Cineplex;
+import Cineplex.*;
 import Movie.Movie;
 import Movie.TicketCharges;
 import Service.GetNumberInput;
@@ -228,48 +228,40 @@ public class Admin {
 				holidayList.remove(i);
 			}
 		}
-<<<<<<< Updated upstream
-		TextDB textDB = new TextDB();
-=======
 
->>>>>>> Stashed changes
 		TextDB.Update("HolidayDates.txt",holidayList);
 
 	}
 
-<<<<<<< Updated upstream
-
-	//implement function for MOVIES HERE
-
-//	public void RankingFunctions(int choice2) throws IOException{
-//		switch(choice2){
-//			case 1->{
-//				System.out.println("\t 1.Display Top 5 movie rankings by rating");
-//				Review.RankingByRating();
-//			}
-//			case 2->{
-//				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-//				Review.RankingByTicketSales();
-//			}
-//		}
-//	}
 	/**
 	 * This function is used to get the users input on what they want to do in the setting menu
 	 * @param choice2 = the input of the function they want to do
 	 * @throws IOException is thrown if the reading of the input causes error
 	 * @throws NoSuchAlgorithmException is thrown if the function is not found
 	 */
-=======
->>>>>>> Stashed changes
-	public void SettingFunctions(int choice2) throws IOException, NoSuchAlgorithmException {
-		Scanner scan = new Scanner(System.in);
+	public void SettingFunctions(AllCineplex cineplex, int choice2) throws IOException, NoSuchAlgorithmException {
 		switch(choice2){
 			case 1->{
 				System.out.println("\t 1. Control the display of movie rankings to customers");
 				System.out.println("\t \t - Enter 1 to display by rating\n" +
 						"\t \t - Enter 2 to display by ticket sales\n" +
-						"\t \t - Enter 3 to display both\n");
-				ControlRankingDisplay();
+						"\t \t - Enter 3 to display both\n" +
+						"\t \t - Enter 4 to disable top raking display\n");
+				switch (GetNumberInput.getInt())
+				{
+					case 1 ->{
+						cineplex.setUserSort(false,true);
+					}
+					case 2->{
+						cineplex.setUserSort(true,false);
+					}
+					case 3 ->{
+						cineplex.setUserSort(true,true);
+					}
+					case 4 ->{
+						cineplex.setUserSort(false,false);
+					}
+				}
 			}
 			case 2->{
 				System.out.println("\t 2.Help new staffs to register new Admin Account");
@@ -277,18 +269,6 @@ public class Admin {
 			}
 
 		}
-	}
-
-	/**
-	 * This function is used for the admin to control how they want to display the rankings
-	 * @throws IOException if the user input read from the file causes error
-	 */
-	public void ControlRankingDisplay() throws IOException {
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		ArrayList<String> env = new ArrayList<>();
-		env.add(String.valueOf(choice));
-		TextDB.Update("env.txt",env);
 	}
 
 	/**

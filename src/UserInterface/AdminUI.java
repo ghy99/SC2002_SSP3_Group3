@@ -87,7 +87,7 @@ public class AdminUI {
                     System.out.println("\t 1.Control the display of movie rankings to customers");
                     System.out.println("\t 2.Help new staffs to register new Admin Account");
                     choice2 = GetNumberInput.getInt();
-                    admin.SettingFunctions(choice2);
+                    admin.SettingFunctions(cineplexes, choice2);
                 }
                 default -> {
                     System.out.println("Invalid Input. Try again.");

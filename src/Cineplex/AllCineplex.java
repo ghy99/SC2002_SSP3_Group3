@@ -1,12 +1,10 @@
 package Cineplex;
 
 import Movie.Movie;
-<<<<<<< Updated upstream
 import Service.GetNumberInput;
-=======
 import Review.AllReviews;
 import Review.Review;
->>>>>>> Stashed changes
+import Service.Settings;
 import Service.TextDB;
 
 import java.io.File;
@@ -14,8 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Set;
 
-public class AllCineplex {
+public class AllCineplex extends Settings {
     public  enum MovieSort{
         Top5Rating,
         Top5Sales
@@ -26,8 +25,6 @@ public class AllCineplex {
 
     private ArrayList<Movie> listOfMovies ;
 
-    private boolean isSale;
-    private boolean isRating;
     public AllCineplex() throws IOException {
         InitializeCineplexes();
     }
@@ -50,21 +47,6 @@ public class AllCineplex {
         return this.listOfMovies;
     }
 
-    public void setRating(boolean rating) {
-        isRating = rating;
-    }
-
-    public void setSale(boolean sale) {
-        isSale = sale;
-    }
-
-    public boolean isRating() {
-        return isRating;
-    }
-
-    public boolean isSale() {
-        return isSale;
-    }
 
     public void updateListOfMovies(int index, Movie movie) throws IOException {
         //write to file
