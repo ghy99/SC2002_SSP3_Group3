@@ -13,6 +13,9 @@ import java.util.Scanner;
 
 import static UserInterface.AdminUI.AdminInterface;
 
+/**
+ * This is the User Interface class. Imported to call interface for logging in.
+ */
 public class UserUI {
     /**
      * A list of customers is loaded in this variable when database is accessed.
