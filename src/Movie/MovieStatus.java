@@ -1,5 +1,5 @@
 package Movie;
-
+// To be deleted.
 public class MovieStatus{
 	
 	public enum CurrentMovieStatus{
