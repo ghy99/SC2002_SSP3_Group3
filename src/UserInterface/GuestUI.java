@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 
 public class GuestUI {
-    public static void UserInterface(ArrayList<Cineplex> cineplex) throws IOException {
+    public static void UserInterface(AllCineplex cineplexes) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("*************Entering guest mode***************");
@@ -36,7 +36,7 @@ public class GuestUI {
             } while (choice < -1);
             switch (choice) {
                 case 1 -> {
-                    customer.setTicket(CineplexUI.CineplexInterface(cineplex));
+                    customer.setTicket(CineplexUI.CineplexInterface(cineplexes));
                     String email;
                     do {
                         System.out.println("Please enter your email : (So that you will be able to check your transaction later)");

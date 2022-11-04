@@ -30,8 +30,8 @@ public class CineplexUnitTest {
             Cinema.CreateNewCinema(c,"cinema" , Cinema.CinemaType.Premium);
             if(Objects.equals(c.getCineplexName(), "Shaw Theatre"))
             {
-                c.setListOfMovies(movieList);
-                c.InitializeMovies();
+//                c.setListOfMovies(movieList);
+//                c.InitializeMovies();
                 for (Cinema z : c.getListOfCinemas())
                 {
 

@@ -21,6 +21,11 @@ import java.util.Scanner;
 import static Service.TextDB.ReadFromFile;
 import static Service.TextDB.UpdateAdmin;
 
+/**
+ * @author Jue Lin, Sanskkriti, Chew Zhi Qi, Hao Yi
+ * This is the Admin class.
+ * it stores the username and password of the current admin user.
+ */
 public class Admin {
 	private String username;
 	private String password;
@@ -64,7 +69,6 @@ public class Admin {
 			System.out.println(filledAdminList.get(i).getUsername() + filledAdminList.get(i).getPassword());
 		}
 
-
 		int flagNum = 0; //used to indicate if successfully logged in
 
 		String dataName;
@@ -82,8 +86,6 @@ public class Admin {
 		if(flagNum==0) {
 			System.out.println("Incorrect Username or Password.");
 		}
-
-
 
 		return flagNum;
 
@@ -204,7 +206,6 @@ public class Admin {
 				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
 				Review.RankingByTicketSales();
 			}
-
 		}
 	}
 
