@@ -1,6 +1,6 @@
 package Cineplex;
 
-import Movie.Movie;
+import Movie.*;
 import Service.TextDB;
 
 import java.io.File;
@@ -13,6 +13,9 @@ import java.util.*;
  * It stores the type of the Cinema, and a list of ShowTime and the movie it is showing according to the ShowTime.
  */
 public class Cinema {
+    /**
+     * This Enum stores the type of the Cinema. This affects the ticket price.
+     */
     public enum CinemaType {
         Premium("Premium"),
         Regular("Regular");
@@ -30,7 +33,11 @@ public class Cinema {
 
     private static final long HOUR = 3600 * 1000; // in milli-seconds.
 
-    // This will be for Cinema, to be declared in a list in cineplex
+    /**
+     * These variables will be used for Cinema, to be declared in a list in cineplex.
+     * It stores the Cinema Code, name of the Cinema, and the type of the Cinema.
+     * It will also store an ArrayList of ShowTime and Movies to be displayed in that Cinema for that day.
+     */
     private String cinemaCode;
     private String cinemaName;
     private CinemaType cinemaType;
@@ -64,27 +71,42 @@ public class Cinema {
         return cinemaCode;
     }
 
-    private void createSeats(Date time, Movie movie) {
+    /**
+     *
+     * @param time: The ShowTime of the movie slot.
+     * @param movie: The Movie that the Cinema is showing
+     * @param dim: Is the movie a 2D or 3D movie.
+     */
+    private void createSeats(Date time, Movie movie, MovieType.Dimension dim) {
 
         if (cinemaType == CinemaType.Premium) {
-            showTime.add(new ShowTime(6, 6, 2, 4, time, movie));
+            showTime.add(new ShowTime(6, 6, 2, 4, time, movie, dim));
         } else {
-            showTime.add(new ShowTime(3, 3, 1, 1, time, movie));
+            showTime.add(new ShowTime(3, 3, 1, 1, time, movie, dim));
         }
 
         showTime.sort(Comparator.comparing(ShowTime::getTimeHour));
     }
 
-    public void updateCinemaTime(int index,Cineplex cineplex, Date date, Movie movie) throws IOException {
+    /**
+     *
+     * @param index
+     * @param cineplex
+     * @param date
+     * @param movie
+     * @param dim
+     * @throws IOException
+     */
+    public void updateCinemaTime(int index,Cineplex cineplex, Date date, Movie movie, MovieType.Dimension dim) throws IOException {
         deleteCinemaTime(index);
-        createShowTime(cineplex,date, movie);
+        createShowTime(cineplex,date, movie, dim);
     }
 
     public void deleteCinemaTime(int index) {
         this.showTime.remove(index);
     }
 
-    public boolean addShowTime(Date date, Movie movie) {
+    public boolean addShowTime(Date date, Movie movie, MovieType.Dimension dim) {
         var temp = this.getShowTime();
         int i = 0;
         ShowTime currentSTDate = null;
@@ -102,7 +124,7 @@ public class Cinema {
             if (i - 1 > 0) {
                 currentSTDate = temp.get(i - 1);
                 if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
-                    this.createSeats(date, movie);
+                    this.createSeats(date, movie, dim);
                     System.out.println("Showtime create!");
                     return true;
                 }
@@ -113,18 +135,18 @@ public class Cinema {
                 }
             } else {
                 System.out.println("Showtime create!");
-                this.createSeats(date, movie);
+                this.createSeats(date, movie, dim);
                 return true;
             }
         }
-        this.createSeats(date, movie);
+        this.createSeats(date, movie, dim);
 
 
 
         return true;
     }
 
-    public boolean createShowTime(Cineplex cineplex, Date date, Movie movie ) throws IOException {
+    public boolean createShowTime(Cineplex cineplex, Date date, Movie movie, MovieType.Dimension dim) throws IOException {
         var temp = this.getShowTime();
         int i = 0;
         ShowTime currentSTDate = null;
@@ -142,7 +164,7 @@ public class Cinema {
             if (i - 1 > 0) {
                 currentSTDate = temp.get(i - 1);
                 if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
-                    this.createSeats(date, movie);
+                    this.createSeats(date, movie, dim);
                     System.out.println("Showtime create!");
                     return true;
                 }
@@ -153,11 +175,11 @@ public class Cinema {
                 }
             } else {
                 System.out.println("Showtime create!");
-                this.createSeats(date, movie);
+                this.createSeats(date, movie, dim);
                 return true;
             }
         }
-        this.createSeats(date, movie);
+        this.createSeats(date, movie, dim);
 
         TextDB.UpdateToTextDB( File.separator + cineplex.getCineplexName().replace(' ','_')+ File.separator+this.getCinemaName()+".txt" , this.showTime, null);
 
