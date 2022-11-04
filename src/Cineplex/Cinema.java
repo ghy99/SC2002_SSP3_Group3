@@ -1,7 +1,10 @@
 package Cineplex;
 
 import Movie.Movie;
+import Service.TextDB;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Cinema {
@@ -56,7 +59,7 @@ public class Cinema {
         return cinemaCode;
     }
 
-    private void createShowTime(Date time, Movie movie) {
+    private void createSeats(Date time, Movie movie) {
 
         if (cinemaType == CinemaType.Premium) {
             showTime.add(new ShowTime(6, 6, 2, 4, time, movie));
@@ -67,13 +70,13 @@ public class Cinema {
         showTime.sort(Comparator.comparing(ShowTime::getTimeHour));
     }
 
-    public void updateCinemaTime(int index, Date showTime, Movie movie) {
+    public void updateCinemaTime(int index,Cineplex cineplex, Date date, Movie movie) throws IOException {
         deleteCinemaTime(index);
-        addShowTime(showTime, movie);
+        createShowTime(cineplex,date, movie);
     }
 
     public void deleteCinemaTime(int index) {
-        listOfMovies.remove(index);
+        this.showTime.remove(index);
     }
 
     public boolean addShowTime(Date date, Movie movie) {
@@ -94,22 +97,68 @@ public class Cinema {
             if (i - 1 > 0) {
                 currentSTDate = temp.get(i - 1);
                 if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
-                    this.createShowTime(date, movie);
+                    this.createSeats(date, movie);
+                    System.out.println("Showtime create!");
                     return true;
                 }
                 else
                 {
+                    System.out.println("New showtime clash with previous showtime!");
                     return false;
                 }
             } else {
-                this.createShowTime(date, movie);
+                System.out.println("Showtime create!");
+                this.createSeats(date, movie);
                 return true;
             }
         }
-        this.createShowTime(date, movie);
+        this.createSeats(date, movie);
+
+
+
         return true;
     }
 
+    public boolean createShowTime(Cineplex cineplex, Date date, Movie movie ) throws IOException {
+        var temp = this.getShowTime();
+        int i = 0;
+        ShowTime currentSTDate = null;
+        if (temp.size() != 0) {
+            //Loop through all showtime
+            while (i < temp.size()) {
+                currentSTDate = temp.get(i);
+                if (currentSTDate.getTime().getTime() > date.getTime()) {
+                    break;
+                }
+                i++;
+            }
+            //if show time + 2 hours still smaller than time to be added
+
+            if (i - 1 > 0) {
+                currentSTDate = temp.get(i - 1);
+                if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
+                    this.createSeats(date, movie);
+                    System.out.println("Showtime create!");
+                    return true;
+                }
+                else
+                {
+                    System.out.println("New showtime clash with previous showtime!");
+                    return false;
+                }
+            } else {
+                System.out.println("Showtime create!");
+                this.createSeats(date, movie);
+                return true;
+            }
+        }
+        this.createSeats(date, movie);
+
+        TextDB.UpdateToTextDB( File.separator + cineplex.getCineplexName().replace(' ','_')+ File.separator+this.getCinemaName()+".txt" , this.showTime, null);
+
+
+        return true;
+    }
     public static void CreateNewCinema(Cineplex cineplex , String cinemaName , CinemaType cinemaType)
     {
         int cinemaAlpha = 'A';
