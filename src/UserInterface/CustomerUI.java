@@ -11,7 +11,19 @@ import Movie.MovieTicket;
 import Service.TextDB;
 import Service.GetNumberInput;
 
+/**
+ * This is the Customer User Interface. This is imported to call the Customer Interface to access their account.
+ * @authors GAN HAO YI, CHEW ZHI QI
+ */
 public class CustomerUI {
+    /**
+     * This is the Customer Interface for the customer to access their account and make changes to their details or
+        print their details and booking history.
+     * @param cineplexes = This object is passed into the Customer Interface to start the ticket booking process.
+     * @param customerArrayList = this is passed to update the customer details in the customers file.
+     * @param customer = This is passed to access the customer details.
+     * @throws IOException is thrown if there is an error in reading the customer file
+     */
     public static void CustomerInterface(AllCineplex cineplexes, ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);

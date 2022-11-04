@@ -12,7 +12,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * This is the Cinema Interface. Imported to call User interface to allow editing the showtime.
+ * @authors CHEW ZHI QI, GAN HAO YI
+ */
 public class CinemaUI {
+    /**
+     * This is the UserInterface. This allows the user to edit /add/update any showtime for any movie by accessing
+     * the cineplexes and each cinema in them and the movies that are showing at the cinemas
+     * @param cineplexes = stores the list of movies and the showtimes and showdates of the movies listed in the cinemas
+     * @throws IOException is thrown if there is an error in accessing the data from the cineplexes
+     */
     public static void UserInterface(AllCineplex cineplexes) throws IOException {
         int choseShow, userInput, day, month, year, hour, min;
 

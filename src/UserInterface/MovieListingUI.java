@@ -12,8 +12,17 @@ import Service.TextDB;
 
 import static Service.TextDB.readFromFile;
 
-
+/**
+ * This is the Movie Listing Interface.
+ * This is imported to call the interface for the admin to be able to add/edit/delete the movie listing
+ * @author GAN HAO YI, SANSKKRITI JAIN
+ */
 public class MovieListingUI {
+    /**
+     * This is the Movie Listing Interface for the admin to access the Movie database and make any changes
+     * @param cineplexes = includes the movies listed at the various cineplexes
+     * @throws Exception is thrown if there is an error in the implementation of any method.
+     */
     public static void MovieListingInterface(AllCineplex cineplexes) throws Exception {
         int num = -1;
         ArrayList<Movie> listOfMovies = cineplexes.getListOfMovies();
@@ -86,6 +95,12 @@ public class MovieListingUI {
         System.out.println();
     }
 
+    /**
+     * This function is used to read the data from the movies.txt database
+     * @param filename = the txt file that the database is retrieved from
+     * @return the movies list from the movies.txt database
+     * @throws IOException is thrown if reading the data from the file causes an error
+     */
     public static ArrayList<Movie> getMovieList(String filename) throws IOException {
         Movie temp = null;
         ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
@@ -93,6 +108,11 @@ public class MovieListingUI {
         return listOfMovies;
     }
 
+    /**
+     * This function is implemented to print the entire movies database
+     * @param listOfMovies = contains the movies list and all details
+     * @throws IOException is thrown if there is an error in reading the file contents
+     */
     public static void printMovieList(ArrayList<Movie> listOfMovies) throws IOException {
         for (int i = 0; i < listOfMovies.size(); i++) {
             System.out.printf("%d)\n", i + 1);
@@ -244,6 +264,12 @@ public class MovieListingUI {
                 synopsis, cast, cinemaType, genre, blockbuster, ratings);
     }
 
+    /**
+     * This function is used to get the admin user to modify any movie details in the Movies.txt database.
+     * @param listOfMovies = the movies list with all the details
+     * @param movie = movie whose details need to be changed
+     * @return the updated movie object
+     */
     public static Movie modifyMovie(ArrayList<Movie> listOfMovies, Movie movie) {
         Scanner sc = new Scanner(System.in);
 
@@ -375,6 +401,12 @@ public class MovieListingUI {
         return movie;
     }
 
+    /**
+     * This function is used to get the admin user to input the movie details that they want to
+       delete from the movies.txt database by changing the status to end of showing
+     * @param movie = the movie they want to delete
+     * @return the movie object
+     */
     public static Movie deleteMovie(Movie movie) {
         Scanner sc = new Scanner(System.in);
         System.out.println();

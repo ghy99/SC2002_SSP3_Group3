@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This is the Payment Interface Class. Imported to call interface for the making the payment
+ * @author GAN HAO YI, CHEW ZHI QI
+ */
 public class PaymentUI {
     public static String PaymentInterface(Customer customer) throws IOException {
         DateTime datetime = new DateTime();

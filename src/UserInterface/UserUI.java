@@ -15,6 +15,7 @@ import static UserInterface.AdminUI.AdminInterface;
 
 /**
  * This is the User Interface class. Imported to call interface for logging in.
+ * @authors GAN HAO YI, CHEW ZHI QI
  */
 public class UserUI {
     /**
@@ -71,8 +72,8 @@ public class UserUI {
 
     /**
      * This method checks that customer name exists in database
-     * @param name = name that user entered
-     * @param number = number that user entered
+     * @param name = name that user entered and used to check if the name exists
+     * @param number = number that user entered to match with the database
      * @return boolean result
      */
     public static boolean checkCustomerName(String name, String number) {
@@ -93,9 +94,9 @@ public class UserUI {
 
     /**
      * This method returns a Customer object if name and number that was entered matches a value in database
-     * @param name
-     * @param number
-     * @return
+     * @param name = the customers name
+     * @param number used to check if the number is correct and matches the value in the database.
+     * @return the customer object
      */
     public static Customer checkCustomerNumber(String name, String number) {
 
