@@ -13,10 +13,18 @@ import Service.GetNumberInput;
 import Service.TextDB;
 import Service.DateTime;
 
-
+/**
+ * This is the Cineplex user Interface. Imported to call interface to view the movies at the cineplexes.
+ * @authors CHEW ZHI QI, EDDY CHENG KUAN QUAN, GAN HAO YI
+ */
 public class CineplexUI {
-
-
+    /**
+     * This is the Cineplex Interface. This is used to get the customer to choose the cineplex they
+     * want and view the movies listed there (if any). they can choose the date and showtimes available for the movie
+     * @param cineplexes = stores the list of movies and the showtimes and showdates of the movies listed
+     * @return the object ticket
+     * @throws IOException is thrown if there is an error in reading from the file
+     */
     public static MovieTicket CineplexInterface(AllCineplex cineplexes) throws IOException {
 
         int choice = 0;

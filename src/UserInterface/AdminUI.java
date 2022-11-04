@@ -12,15 +12,15 @@ import Review.*;
 
 /**
  * This is the AdminUI class.it controls the Admin Interface.
- * @author Tan Jue Lin, Gan Hao Yi
+ * @author TAN JUE LIN, GAN HAO YI
  */
 public class AdminUI {
     /**
-     *
+     * This is the Admin Interface. This is used for the admin to choose the function that they want to perform
      * @param loginFlag This flag is to edit the access for customers to display Top 5 movies.
-     * @param usernameInput This input is for
-     * @param passwordInput
-     * @throws Exception
+     * @param usernameInput This input is for successful admin login by checking if the username exists in the database
+     * @param passwordInput This input is for successful login by checking if the corresponding password exists in the database
+     * @throws Exception is thrown if any interruption is detected in the reading admin database causes error
      */
 
 	public static void AdminInterface(int loginFlag , String usernameInput , String passwordInput,
@@ -88,23 +88,6 @@ public class AdminUI {
             }
         } while (choice < 10);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

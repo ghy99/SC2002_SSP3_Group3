@@ -12,8 +12,18 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-
+/**
+ * This is the Guest Interface class. Imported to call the User Interface for the customer to login without an account.
+ * @authors CHEW ZHI QI, GAN HAO YI
+ */
 public class GuestUI {
+
+    /**
+     * This is the User Interface function to allow the guest customer to make a movie booking without logging in
+     * @param cineplexes = show the list of movies showing in each cineplex
+     * @throws IOException is thrown if reading the input data or reading data from the file causes an error.
+     */
+
     public static void UserInterface(AllCineplex cineplexes) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);

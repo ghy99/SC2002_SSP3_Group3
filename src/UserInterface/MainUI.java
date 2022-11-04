@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Done by Gan Hao Yi & Eddy Cheng
+ * @authors GAN HAO YI, EDDY CHENG KUAN QUAN
  * Controls main through initializing everything needed.
  */
 public class MainUI {
@@ -28,10 +28,10 @@ public class MainUI {
     /**
      * This function represents the starting page when the app loads.
      * It shows the list of options user can use when the app starts.
-     *
      * @throws Exception when accessing env.txt to check for Customer / Guest rights to view
      *                   what kind of Top 5 listing method they are allowed to use.
      */
+
     public static void start() throws Exception {
         AllCineplex cineplexes = new AllCineplex();
 

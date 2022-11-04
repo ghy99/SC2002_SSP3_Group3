@@ -9,7 +9,12 @@ import Cineplex.ShowTime;
 import Movie.*;
 import Service.*;
 
+/**
+ * This is the Movie User Interface Class. Imported to call interface to get customer to select their seat
+ * @author EDDY CHENG KUAN QUAN, CHEW ZHI QI
+ */
 public class MovieUI {
+
     public static String MovieInterface(MovieTicket ticket , ShowTime showTime) {
         // can be used to implement timing
 
