@@ -1,98 +1,157 @@
 package Review;
+
+import Movie.Movie;
+import Service.TextDB;
+
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
-public class AllReviews
-{
-    public enum SortType {
+/**
+ * @author CHEW ZHI QI
+ * All review class contains a list of comments, overallRaing
+ */
+public class AllReviews {
+    /**
+     * Enum sort type by top 5 sale or top 5 rating
+     */
+    public enum ReviewSort {
         NewToOld,
         OldToNew,
         HighestToLowest,
         LowestToHigest;
     }
-    private static final DecimalFormat df = new DecimalFormat("0.00");
-    private ArrayList<Review> listOfReview = new ArrayList<>();
-    private float overallRating = 0;
 
+    /**
+     * List of review for each movie
+     */
+    private ArrayList<Review> listOfReview = new ArrayList<>();
+
+    /**
+     * @return Get list of review
+     */
     public ArrayList<Review> getListOfReview() {
         return listOfReview;
     }
 
-    public Boolean addReview(float rating , String review){
-        if(0 <= rating && rating <= 5) {
-            listOfReview.add(new Review(review,rating ));
-            return true;
+    /**
+     * Add review from db
+     *
+     * @param userName Name of reviwer
+     * @param rating   Rating
+     * @param review   Review
+     */
+    public void setReview(String userName, float rating, String review) {
+        listOfReview.add(new Review(userName, review, rating));
+    }
+
+    /**
+     * Add a new review
+     *
+     * @param userName Name of reviewer
+     * @param rating   Rating must be >= 0 and <=5
+     * @param review   Review
+     * @param movies   Movie to review
+     * @throws IOException
+     */
+    public void addReview(String userName, float rating, String review, ArrayList<Movie> movies) throws IOException {
+        if (Objects.equals(userName, "")) {
+            userName = "Unknown";
         }
-        else
-        {
+        if (0 <= rating && rating <= 5) {
+            listOfReview.add(new Review(userName, review, rating));
+            TextDB.UpdateTextDB(TextDB.Files.Movies.toString(), movies);
+            System.out.println("Rating added!");
+        } else {
             System.out.println("Rating not added! Please enter rating between 1-5!");
-            return false;
         }
     }
 
-    public void setOverallRating(float overallRating) {
-        this.overallRating = overallRating;
-    }
-
+    /**
+     * @return Float overall rating
+     */
     public float getOverallRating() {
         return getOverAllReviwerRating();
     }
 
-    public ArrayList<Review> sortReview(SortType sortType)
-    {
+    /**
+     * Sort review by type
+     *
+     * @param sortType Sort type
+     * @return
+     */
+    private ArrayList<Review> sortReview(ReviewSort sortType) {
         ArrayList<Review> tempReview = (ArrayList<Review>) this.listOfReview.clone();
 
-        switch (sortType)
-        {
+        switch (sortType) {
             case NewToOld -> {
+                System.out.println("##########Old to new review###########");
                 Collections.reverse(tempReview);
-                return tempReview;
-            }
-            case HighestToLowest -> {
-                tempReview.sort(Comparator.comparing(Review::getRating));
                 return tempReview;
             }
             case LowestToHigest -> {
+                System.out.println("####Lowest rating to highest review####");
+                tempReview.sort(Comparator.comparing(Review::getRating));
+                return tempReview;
+            }
+            case HighestToLowest -> {
+                System.out.println("####Higest rating to lowest review####");
                 tempReview.sort(Comparator.comparing(Review::getRating));
                 Collections.reverse(tempReview);
                 return tempReview;
             }
-            default -> {return this.listOfReview;}
+            default -> {
+                System.out.println("#########New to old review#########");
+                return this.listOfReview;
+            }
         }
     }
 
+    /**
+     * Calcuate overall review rating
+     *
+     * @return Float overall review rating
+     */
     private float getOverAllReviwerRating() {
-        if(listOfReview.size() < 1)
-        {
-            System.out.println("NA");
+        if (listOfReview.size() < 1) {
             return 0;
-        }
-        else {
+        } else {
             float oR = 0;
             for (Review review : listOfReview) {
                 oR += review.getRating();
             }
-            oR = oR/ listOfReview.size();
+            oR = oR / listOfReview.size();
 
-            return round(oR,1).floatValue();
+            return round(oR).floatValue();
         }
     }
 
-    public void printListOfReview() {
-        if(listOfReview.size() > 1)
-        {
-            for (Review review : listOfReview) {
-                System.out.println("Review Rating: " + String.format("%.1f", review.getRating()) + " Review: " + review.getReview());
-            }
+    /**
+     * Print sorted list with given sort type
+     * @param sortType Review sort type
+     */
+    public void printSortedReview(ReviewSort sortType) {
+
+        ArrayList<Review> tempReview = sortReview(sortType);
+
+        for (Review review : tempReview) {
+            System.out.println("Review Rating: " + review.getRating() + " Review: " + review.getReview());
         }
+        System.out.println();
     }
 
-    private static BigDecimal round(float d, int decimalPlace) {
+    /**
+     * Big decimal for rounding overall rating
+     * @param d
+     * @return
+     */
+    private static BigDecimal round(float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
-        bd = bd.setScale(decimalPlace);
+        bd = bd.remainder(BigDecimal.TEN).round(MathContext.DECIMAL32);
         return bd;
     }
 }

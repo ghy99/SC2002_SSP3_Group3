@@ -27,7 +27,7 @@ public class CineplexUnitTest {
         for(Cineplex c : cineplexes)
         {
             System.out.println(c.getCineplexName());
-            Cinema.CreateNewCinema(c,"cinema" , Cinema.CinemaType.Premium);
+            //Cinema.CreateNewCinema(c,"cinema" , Cinema.CinemaType.Premium);
             if(Objects.equals(c.getCineplexName(), "Shaw Theatre"))
             {
 //                c.setListOfMovies(movieList);

@@ -1,6 +1,6 @@
 package Admin;
 
-import Cineplex.Cineplex;
+import Cineplex.*;
 import Movie.Movie;
 import Movie.TicketCharges;
 import Service.GetNumberInput;
@@ -21,14 +21,20 @@ import static Service.TextDB.ReadFromFile;
 import static Service.TextDB.UpdateAdmin;
 
 /**
- * @author Jue Lin, Sanskkriti, Chew Zhi Qi, Hao Yi
- * This is the Admin class.
- * it stores the username and password of the current admin user.
+ * @author CHEW ZHI QI, GAN HAO YI, SANSKKRITI JAIN, TAN JUE LIN
+ * This is the Admin class. It stores the username and password of the current admin user.
  */
 public class Admin {
 	private String username;
 	private String password;
 
+	/**
+	 * This method is used to return the username and hashed password
+	 * @param username = username the admin has entered
+	 * @param password = password the admin has entered
+	 * @param hashed = used to keep the password secure
+	 * @throws NoSuchAlgorithmException This exception is thrown to ensure SHA256 is available
+	 */
 	public Admin(String username, String password, boolean hashed) throws NoSuchAlgorithmException {
 		this.username = username;
 		if(hashed)
@@ -39,15 +45,18 @@ public class Admin {
 		}
 	}
 
-	public Admin(String username, String password) throws NoSuchAlgorithmException{
-		this.username = username;
-		this.password = password;
-	}
-
+	/**
+	 * Accessor of Username
+	 * @return username as string
+	 */
 	public String getUsername(){
 		return username;
 	}
 
+	/**
+	 * Accessor of Password
+	 * @return password as string
+	 */
 	public String getPassword(){
 		return password;
 	}
@@ -56,17 +65,20 @@ public class Admin {
 		TextDB.WriteToTextDB(TextDB.Files.Admin.toString(), admin);
 	}
 
+	/**
+	 * This is a function for the user to login
+	 * @param username the username to be verified
+	 * @param password the password to be verified
+	 * @return boolean value depicting whether login was successful or not
+	 * @throws IOException if file not found
+	 * @throws NoSuchAlgorithmException if SHA256 algorithm not available
+	 */
 	public static int login(String username, String password) throws IOException, NoSuchAlgorithmException {
 		//fetch data of admin info from txt storage
 		ArrayList<Admin> emptyAdminList = new ArrayList<Admin>();
 		ArrayList<Admin> filledAdminList = ReadFromFile(emptyAdminList, "admin.txt");
 
 		password = SHA256.toString(password);
-
-		//for debugging checking output
-		for (int i = 0; i<filledAdminList.size();i++) {
-			System.out.println(filledAdminList.get(i).getUsername() + filledAdminList.get(i).getPassword());
-		}
 
 		int flagNum = 0; //used to indicate if successfully logged in
 
@@ -91,6 +103,10 @@ public class Admin {
 	}
 
 	//implement function for ticket prices HERE
+	/**
+	 * This function is to change the ticket pricing according
+	 * @throws IOException thrown if reading data from TicketPrice causes error
+	 */
 	public void EditTicket() throws IOException {
 		Scanner sc = new Scanner(System.in);
 		String file = "TicketPrice.txt";
@@ -136,6 +152,11 @@ public class Admin {
 		} while (cat != -1);
 	}
 
+	/**
+	 * This function is used to manage the add/edit and delete functions for the Holiday Dates
+	 * @param choice2 for the user to input what they want to do
+	 * @throws IOException to ensure the input has no error
+	 */
 	public void HolidayDateFunctions(int choice2) throws IOException {
 		Scanner scan = new Scanner(System.in);
 		switch(choice2){
@@ -162,10 +183,21 @@ public class Admin {
 		}
 	}
 
+	/**
+	 * This function is to add the date into the HolidayDates database
+	 * @param date = the user input of the date they want to add in the database
+	 * @throws IOException This Exception is thrown if reading file causes error.
+	 */
 	public void AddHoliday(String date) throws IOException {
 		TextDB.WriteToTextDB("HolidayDates.txt", date);
 	}
 
+	/**
+	 * This function is used to update/change any dates in the database
+	 * @param oldDate = the original data in the database before changing
+	 * @param newDate = the input that needs to be changed in the database
+	 * @throws IOException This Exception is thrown if reading file causes error.
+	 */
 	public void editHoliday(String oldDate, String newDate) throws IOException {
 		ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
 		for (int i = 0; i<holidayList.size();i++) {
@@ -174,12 +206,16 @@ public class Admin {
 				holidayList.add(i,newDate);
 			}
 		}
-
 		TextDB textDB = new TextDB();
 		TextDB.Update("HolidayDates.txt",holidayList);
 
 	}
 
+	/**
+	 * This function is used to delete any stored holiday date in the database
+	 * @param date = the users input of the date they want to delete from the database
+	 * @throws IOException this is thrown if the reading from the file results in error
+	 */
 	public void deleteHoliday(String date) throws IOException {
 		ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
 		for (int i = 0; i<holidayList.size();i++) {
@@ -188,36 +224,39 @@ public class Admin {
 			}
 		}
 
-		TextDB textDB = new TextDB();
 		TextDB.Update("HolidayDates.txt",holidayList);
 
 	}
 
-
-	//implement function for MOVIES HERE
-
-//	public void RankingFunctions(int choice2) throws IOException{
-//		switch(choice2){
-//			case 1->{
-//				System.out.println("\t 1.Display Top 5 movie rankings by rating");
-//				Review.RankingByRating();
-//			}
-//			case 2->{
-//				System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
-//				Review.RankingByTicketSales();
-//			}
-//		}
-//	}
-
-	public void SettingFunctions(int choice2) throws IOException, NoSuchAlgorithmException {
-		Scanner scan = new Scanner(System.in);
+	/**
+	 * This function is used to get the users input on what they want to do in the setting menu
+	 * @param choice2 = the input of the function they want to do
+	 * @throws IOException is thrown if the reading of the input causes error
+	 * @throws NoSuchAlgorithmException is thrown if the function is not found
+	 */
+	public void SettingFunctions(AllCineplex cineplex, int choice2) throws IOException, NoSuchAlgorithmException {
 		switch(choice2){
 			case 1->{
 				System.out.println("\t 1. Control the display of movie rankings to customers");
 				System.out.println("\t \t - Enter 1 to display by rating\n" +
 						"\t \t - Enter 2 to display by ticket sales\n" +
-						"\t \t - Enter 3 to display both\n");
-				ControlRankingDisplay();
+						"\t \t - Enter 3 to display both\n" +
+						"\t \t - Enter 4 to disable top raking display\n");
+				switch (GetNumberInput.getInt())
+				{
+					case 1 ->{
+						cineplex.setUserSort(false,true);
+					}
+					case 2->{
+						cineplex.setUserSort(true,false);
+					}
+					case 3 ->{
+						cineplex.setUserSort(true,true);
+					}
+					case 4 ->{
+						cineplex.setUserSort(false,false);
+					}
+				}
 			}
 			case 2->{
 				System.out.println("\t 2.Help new staffs to register new Admin Account");
@@ -227,14 +266,11 @@ public class Admin {
 		}
 	}
 
-	public void ControlRankingDisplay() throws IOException {
-		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		ArrayList<String> env = new ArrayList<>();
-		env.add(String.valueOf(choice));
-		TextDB.Update("env.txt",env);
-	}
-
+	/**
+	 * This function is used to create new admin accounts
+	 * @throws IOException is thrown to ensure theh
+	 * @throws NoSuchAlgorithmException
+	 */
 	private void CreateAdmin() throws IOException, NoSuchAlgorithmException {
 		String filename = "admin.txt";
 		ArrayList<Admin> AdminList = null;
@@ -248,31 +284,44 @@ public class Admin {
 		UpdateAdmin(filename, AdminList);
 	}
 
+	/**
+	 * This function is used to read the data from the Admin.txt database
+	 * @param filename = the file admin.txt that needs to be accessed
+	 * @return the new created admin list object
+	 * @throws IOException is thrown if the reading the content of the file causes error
+	 * @throws NoSuchAlgorithmException is thrown if accessing teh database causes error
+	 */
 	public static ArrayList<Admin> getAdminList(String filename) throws IOException, NoSuchAlgorithmException {
 		ArrayList<Admin> AdminList = new ArrayList<Admin>();
 		AdminList = ReadFromFile(AdminList, filename);
 		return AdminList;
 	}
 
-	private static Admin AddnewAdmin() throws IOException, NoSuchAlgorithmException {
+	/**
+	 * This is used to get the details from the admin of the new account they want to create
+	 * @return Admin Object with the new username and password
+	 * @throws NoSuchAlgorithmException is thrown if the reading the SHA256 algorithm causes an error
+	 */
+	private static Admin AddnewAdmin() throws  NoSuchAlgorithmException {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Create New Admin ");
+		System.out.println("Create New Admin");
 		String username, password;
 		System.out.println("\t Enter the new admin username");
 		username = scan.nextLine();
-
 		System.out.println("\t Enter the new admin password");
-		password = scan.nextLine();
-
-		return new Admin(username, password);
+		password = SHA256.toString(scan.nextLine());
+		return new Admin(username, password, true);
 	}
 
-
-
+	/**
+	 * This is used to create a default admin account in the main system
+	 * @param args = used to accept the given username and password as a String Array
+	 * @throws NoSuchAlgorithmException thrown if implementing the login causes error
+	 * @throws IOException is thrown if reading the given string value causes error
+	 */
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
 		System.out.println(Admin.login("ant" , "12345"));
 	}
-
 
 
 

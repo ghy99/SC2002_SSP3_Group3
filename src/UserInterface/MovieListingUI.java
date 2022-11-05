@@ -12,14 +12,20 @@ import Service.TextDB;
 
 import static Service.TextDB.readFromFile;
 
-
+/**
+ * This is the Movie Listing Interface.
+ * This is imported to call the interface for the admin to be able to add/edit/delete the movie listing
+ * @author GAN HAO YI, SANSKKRITI JAIN
+ */
 public class MovieListingUI {
+    /**
+     * This is the Movie Listing Interface for the admin to access the Movie database and make any changes
+     * @param cineplexes = includes the movies listed at the various cineplexes
+     * @throws Exception is thrown if there is an error in the implementation of any method.
+     */
     public static void MovieListingInterface(AllCineplex cineplexes) throws Exception {
         int num = -1;
-        String filename = "movies.txt";
-//		ArrayList<Movie> listOfMovies = getMovieList(filename);
         ArrayList<Movie> listOfMovies = cineplexes.getListOfMovies();
-        Scanner sc = new Scanner(System.in);
 
 //		System.out.println("Current list of movies:");
 //		printMovieList(listOfMovies);
@@ -31,64 +37,68 @@ public class MovieListingUI {
             System.out.println("1: Create a Movie Listing");
             System.out.println("2: Update a Movie Listing");
             System.out.println("3: Delete a Movie Listing");
-            System.out.println("4: Main Menu");
+            System.out.println("4: Main Menu (Select this to exit)");
             System.out.print("Please enter a choice: ");
             num = GetNumberInput.getInt();
 
-            if (num == 1) {
-//				Movie newMovie = createMovie();
-                cineplexes.addMovies(createMovie());
-//				ArrayList<Movie> movies = new ArrayList<Movie>();
-//				listOfMovies.add(newMovie);
-////				printMovieList(listOfMovies);
-//				printMovieList(movies);
-//				TextDB.UpdateTextDB(filename, listOfMovies);
-                // Add writeToDB for updates --> appending new movie
-            } else if (num == 2) {
-                System.out.println("-----------------------------------");
-                System.out.println("        Modify Movie Details       ");
-                System.out.println("-----------------------------------");
-                int choice;
-                System.out.println("Which movie would you like to edit?");
-                printMovieList(listOfMovies);
-                do {
-                    choice = GetNumberInput.getInt() - 1;
-                    if (choice < 0 || choice >= listOfMovies.size()) {
-                        System.out.println("Invalid choice. Try again!");
-                    }
-                } while (choice < 0 || choice >= listOfMovies.size());
+            switch(num) {
+                case 1 -> {
+                    Movie newMovie = createMovie();
+                    cineplexes.addMovies(newMovie);
+                    CinemaUI.UserInterface(cineplexes, 1, newMovie);
+                }
+                case 2 -> {
+                    System.out.println("-----------------------------------");
+                    System.out.println("        Modify Movie Details       ");
+                    System.out.println("-----------------------------------");
+                    int choice;
+                    System.out.println("Which movie would you like to edit?");
+                    printMovieList(listOfMovies);
+                    do {
+                        choice = GetNumberInput.getInt() - 1;
+                        if (choice < 0 || choice >= listOfMovies.size()) {
+                            System.out.println("Invalid choice. Try again!");
+                        }
+                    } while (choice < 0 || choice >= listOfMovies.size());
 
-                Movie movie = cineplexes.getListOfMovies().get(choice);
-                Movie newmovie = modifyMovie(listOfMovies, movie);
-                newmovie.printMovieDetails();
+                    Movie movie = cineplexes.getListOfMovies().get(choice);
+                    Movie newmovie = modifyMovie(listOfMovies, movie);
+                    newmovie.printMovieDetails();
 
-                cineplexes.updateListOfMovies(choice, newmovie);
-//                listOfMovies.set(choice, newmovie);
-//                TextDB.UpdateTextDB(filename, listOfMovies);
-                // Add writeToDB for updates --> overwriting old movie
-            } else if (num == 3) {
-                System.out.println("-----------------------------------");
-                System.out.println("           Removing Movie          ");
-                System.out.println("-----------------------------------");
-                int choice;
-                System.out.println("Which movie would you like to edit?");
-                printMovieList(listOfMovies);
-                do {
-                    choice = GetNumberInput.getInt() - 1;
-                    if (choice < 0 || choice >= listOfMovies.size()) {
-                        System.out.println("Invalid choice. Try again!");
+                    cineplexes.updateListOfMovies(choice, newmovie);
+                    System.out.printf("Would you like to update the ShowTime of this movie %s as well?\n", newmovie.getMovieTitle());
+                    System.out.println("1) Yes\n2) No");
+                    if (GetNumberInput.getInt() == 1) {
+                        CinemaUI.UserInterface(cineplexes, 2, newmovie);
                     }
-                } while (choice < 0 || choice >= listOfMovies.size());
-                Movie deletingMovie = deleteMovie(listOfMovies.get(choice));
-                cineplexes.updateListOfMovies(choice, deletingMovie);
-//                listOfMovies.set(choice, deletingMovie);
-//                TextDB.UpdateTextDB(filename, listOfMovies);
-                // Add write to DB for deleting movie --> changing showing status to EndOfShowing
+                }
+                case 3 -> {
+                    System.out.println("-----------------------------------");
+                    System.out.println("           Removing Movie          ");
+                    System.out.println("-----------------------------------");
+                    int choice;
+                    System.out.println("Which movie would you like to edit?");
+                    printMovieList(listOfMovies);
+                    do {
+                        choice = GetNumberInput.getInt() - 1;
+                        if (choice < 0 || choice >= listOfMovies.size()) {
+                            System.out.println("Invalid choice. Try again!");
+                        }
+                    } while (choice < 0 || choice >= listOfMovies.size());
+                    Movie deletingMovie = deleteMovie(listOfMovies.get(choice));
+                    cineplexes.removeMovie(choice, deletingMovie);
+                }
             }
         } while (num != 4);
         System.out.println();
     }
 
+    /**
+     * This function is used to read the data from the movies.txt database
+     * @param filename = the txt file that the database is retrieved from
+     * @return the movies list from the movies.txt database
+     * @throws IOException is thrown if reading the data from the file causes an error
+     */
     public static ArrayList<Movie> getMovieList(String filename) throws IOException {
         Movie temp = null;
         ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
@@ -96,6 +106,11 @@ public class MovieListingUI {
         return listOfMovies;
     }
 
+    /**
+     * This function is implemented to print the entire movies database
+     * @param listOfMovies = contains the movies list and all details
+     * @throws IOException is thrown if there is an error in reading the file contents
+     */
     public static void printMovieList(ArrayList<Movie> listOfMovies) throws IOException {
         for (int i = 0; i < listOfMovies.size(); i++) {
             System.out.printf("%d)\n", i + 1);
@@ -104,6 +119,10 @@ public class MovieListingUI {
         }
     }
 
+    /**
+     * This method creates a new movie and returns an ArrayList of 2 movies
+     * @return ArrayList of 2 movies, the first a 3D Movie, the second a 2D Movie.
+     */
     public static Movie createMovie() {
         Scanner sc = new Scanner(System.in);
         System.out.println("------------------------");
@@ -201,17 +220,17 @@ public class MovieListingUI {
 
 
         System.out.println();
-        System.out.println("Is the movie 3D?");
+        System.out.println("Is the movie a BLOCKBUSTER?");
         System.out.println("1: Yes");
         System.out.println("2: No");
         System.out.println("Enter your option:");
-        MovieType.Dimension movieDim;
+        MovieType.Blockbuster blockbuster;
         int dimChoice = GetNumberInput.getInt();
 //		sc.nextLine();
         if (dimChoice == 1) {
-            movieDim = MovieType.Dimension.valueOf("THREE_D");
+            blockbuster = MovieType.Blockbuster.BLOCKBUSTER;
         } else {
-            movieDim = MovieType.Dimension.valueOf("TWO_D");
+            blockbuster = MovieType.Blockbuster.NOTBLOCKBUSTER;
         }
 
 
@@ -240,9 +259,15 @@ public class MovieListingUI {
         } while (ratingchoice > 6 || ratingchoice < 1);
 
         return new Movie(movieTitle, moviestatus, director,
-                synopsis, cast, cinemaType, genre, movieDim, ratings);
+                synopsis, cast, genre, blockbuster, ratings);
     }
 
+    /**
+     * This function is used to get the admin user to modify any movie details in the Movies.txt database.
+     * @param listOfMovies = the movies list with all the details
+     * @param movie = movie whose details need to be changed
+     * @return the updated movie object
+     */
     public static Movie modifyMovie(ArrayList<Movie> listOfMovies, Movie movie) {
         Scanner sc = new Scanner(System.in);
 
@@ -300,17 +325,6 @@ public class MovieListingUI {
                     movie.setCast(casts);
                 }
                 case 6 -> {
-                    System.out.println("Enter new Cinema Type:");
-                    System.out.println("1: Regular");
-                    System.out.println("2: Premium");
-                    System.out.println("Enter your option:");
-                    switch (GetNumberInput.getInt() - 1) {
-                        case 1 -> movie.setTypeOfCinema(Cinema.CinemaType.Regular);
-                        case 2 -> movie.setTypeOfCinema(Cinema.CinemaType.Premium);
-                    }
-//					sc.nextLine();
-                }
-                case 7 -> {
                     System.out.println();
                     System.out.println("Select new Movie Genre:");
                     System.out.println("1: Action");
@@ -337,13 +351,13 @@ public class MovieListingUI {
                 }
                 case 8 -> {
                     System.out.println();
-                    System.out.println("Is the movie 3D?");
+                    System.out.println("Is the movie a BLOCKBUSTER?");
                     System.out.println("1: Yes");
                     System.out.println("2: No");
                     System.out.println("Enter your option:");
                     switch (GetNumberInput.getInt() - 1) {
-                        case 1 -> movie.setMovie3D(MovieType.Dimension.THREE_D);
-                        case 2 -> movie.setMovie3D(MovieType.Dimension.TWO_D);
+                        case 1 -> movie.setBlockBuster(MovieType.Blockbuster.BLOCKBUSTER);
+                        case 2 -> movie.setBlockBuster(MovieType.Blockbuster.NOTBLOCKBUSTER);
                     }
 //					sc.nextLine();
                 }
@@ -374,6 +388,12 @@ public class MovieListingUI {
         return movie;
     }
 
+    /**
+     * This function is used to get the admin user to input the movie details that they want to
+       delete from the movies.txt database by changing the status to end of showing
+     * @param movie = the movie they want to delete
+     * @return the movie object
+     */
     public static Movie deleteMovie(Movie movie) {
         Scanner sc = new Scanner(System.in);
         System.out.println();

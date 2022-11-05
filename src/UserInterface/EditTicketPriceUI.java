@@ -7,9 +7,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- *
+ *This is the Edit Ticket Price user Interface. Used to call the Edit Ticket Interface to Update the Ticket Prices.
+ * @authors GAN HAO YI
  */
 public class EditTicketPriceUI {
+    /**
+     * This is teh Edit Ticket interface that is used to update the ticket price according to different factors
+     * @throws IOException is thrown if there is an error when reading the file.
+     */
     public void EditTicket() throws IOException {
         Scanner sc = new Scanner(System.in);
         String file = "TicketPrice.txt";

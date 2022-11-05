@@ -1,19 +1,13 @@
 package UserInterface;
 
-import Movie.*;
 import Cineplex.*;
 import Service.GetNumberInput;
-import Service.TextDB;
-import Review.Review;
 
-import java.io.File;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+
 
 /**
- * Done by Gan Hao Yi & Eddy Cheng
+ * @authors GAN HAO YI, EDDY CHENG KUAN QUAN
  * Controls main through initializing everything needed.
  */
 public class MainUI {
@@ -28,14 +22,13 @@ public class MainUI {
     /**
      * This function represents the starting page when the app loads.
      * It shows the list of options user can use when the app starts.
-     *
      * @throws Exception when accessing env.txt to check for Customer / Guest rights to view
      *                   what kind of Top 5 listing method they are allowed to use.
      */
+
     public static void start() throws Exception {
         AllCineplex cineplexes = new AllCineplex();
 
-        Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Moblima!");
 
         int option = 1;
@@ -46,7 +39,13 @@ public class MainUI {
             System.out.println("3) Display List of Timing.");
             System.out.println("4) Book as guest.");
             System.out.println("5) Login with your Account.");
-            System.out.println("6) Display Movies by Ranking.");
+            if (cineplexes.isRating() || cineplexes.isSale()) {
+                System.out.println("6) Display Movies by Ranking.");
+                System.out.println("7) Add Review.");
+            } else {
+                System.out.println("6) Add Review.");
+            }
+
             option = GetNumberInput.getInt();
 
 //            sc.nextLine();
@@ -55,7 +54,7 @@ public class MainUI {
                     cineplexes.displayCineplexList();
                 }
                 case 2 -> {
-                    cineplexes.displayMovieList();
+                    cineplexes.displayMovieList(cineplexes.getListOfMovies());
                 }
                 case 3 -> {
                     System.out.println("Which cineplex would you like to view:");
@@ -71,24 +70,37 @@ public class MainUI {
                 case 5 -> {
                     UserUI.UserInterface(cineplexes);
                 }
+                case 6 -> {
+                    if (cineplexes.isRating() || cineplexes.isSale()) {
+                        if (cineplexes.isRating() && cineplexes.isSale()) {
+                            System.out.println("1) View by top 5 sale ");
+                            System.out.println("2) View by top 5 rating ");
+                            int userInput = GetNumberInput.getInt();
 
-//                case 6 -> {
-//                    List data = TextDB.Read("env.txt");
-//                    String env = (String) data.get(0);
-//                    int envInt = Integer.parseInt(env);
-//                    switch (envInt) {
-//                        case 1 -> {
-//                            Review.RankingByRating();
-//                        }
-//                        case 2 -> {
-//                            Review.RankingByTicketSales();
-//                        }
-//                        case 3 -> {
-//                            Review.RankingByRating();
-//                            Review.RankingByTicketSales();
-//                        }
-//                    }
-//                }
+                            switch (userInput) {
+                                case 1 -> {
+                                    cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);
+                                }
+                                case 2 -> {
+                                    cineplexes.printSortedList( AllCineplex.MovieSort.Top5Rating);
+                                }
+                            }
+
+                        } else if (cineplexes.isSale()) {
+                            cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);
+                        } else if (cineplexes.isRating()) {
+                            cineplexes.printSortedList(AllCineplex.MovieSort.Top5Rating);
+                        }
+                    } else {
+                        ReviewUI.UserInferface(cineplexes);
+                    }
+                }
+                case 7 -> {
+                    if (cineplexes.isRating() || cineplexes.isSale()) {
+                        ReviewUI.UserInferface(cineplexes);
+                    }
+
+                }
             }
         } while (option > 0);
     }

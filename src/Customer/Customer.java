@@ -10,14 +10,27 @@ import java.util.*;
 
 import static Service.TextDB.Files.Customers;
 
+/**
+ * Customer class store name , mobile number , email , ticket
+ */
 public class Customer {
+    /** Name */
     private String MovieGoerName;
+    /** Mobile number */
     private String MobileNumber;
+    /** Email */
     private String Email;
-    //Purchase History
+    /** Ticket */
     private MovieTicket Ticket;
 
-    public Customer(String movieGoerName, String mobileNumber, String email, boolean createAccount, boolean isGuest) throws IOException {
+    /**
+     * If new account
+     * @param movieGoerName User's name
+     * @param mobileNumber Mobile number
+     * @param email Email
+     * @param createAccount Is account created
+     */
+    public Customer(String movieGoerName, String mobileNumber, String email, boolean createAccount) throws IOException {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
@@ -29,6 +42,7 @@ public class Customer {
         }
     }
 
+    //
     public void setMovieGoerName(String name) throws IOException {
         this.MovieGoerName = name;
     }
@@ -61,21 +75,42 @@ public class Customer {
         return this.Ticket;
     }
 
+    /**
+     * Update User's name and store to db
+     * @param name New name
+     * @param customerArrayList customer list for update whole db
+     * @throws IOException
+     */
     public void updateMovieGoerName(String name, ArrayList<Customer> customerArrayList) throws IOException {
         this.setMovieGoerName(name);
         TextDB.UpdateToTextDB(Customers.toString(), customerArrayList);
     }
 
+    /**
+     * Update User's mobile number and store to db
+     * @param mobileNumber New mobile number
+     * @param customerArrayList customer list for update whole db
+     * @throws IOException
+     */
     public void updateMobileNumber(String mobileNumber, ArrayList<Customer> customerArrayList) throws IOException {
         this.setMobileNumber(mobileNumber);
         TextDB.UpdateToTextDB(Customers.toString(), customerArrayList);
     }
 
+    /**
+     * Update User's mobile number and store to db
+     * @param email New email
+     * @param customerArrayList customer list for update whole db
+     * @throws IOException
+     */
     public void updateEmail(String email, ArrayList<Customer> customerArrayList) throws IOException {
         this.setEmail(email);
         TextDB.UpdateToTextDB(Customers.toString(), customerArrayList);
     }
 
+    /**
+     * Print customer details with tickets
+     */
     public void printCustomerDetails() {
         System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\n", this.MovieGoerName, this.MobileNumber, this.Email);
         if (this.Ticket != null) {

@@ -3,34 +3,19 @@ import Cineplex.Cinema;
 import Review.*;
 import Service.TextDB;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ *  * @author CHEW ZHI QI, GAN HAO YI
+ *  * Movie class extneds from AllReview to link up each movie will have a list of reviews
+ */
 public class Movie extends AllReviews {
-    // Each Movie.Movie requires variables such as
-    // Movie.Movie Title
-    // Showing Status - Coming Soon, Preview, Now Showing
-    // Synopsis
-    // Director
-    // Cast, at least 2
-    // Overall Reviewer Rating (1 - 5)
-    // Past review, Reviewer Rating
-    private String movieTitle;
-    private MovieStatus showingStatus;
-    private String director;
-    private String synopsis;
-    private ArrayList<String> cast = new ArrayList<>();
 
-    private Cinema.CinemaType typeOfCinema;
-
-    private MovieType.Genre MovieGenre;
-
-    private MovieType.Dimension movie3D;
-
-    private MovieType.Class movieClass;
-
-    private int movieTotalSales = 0;
-
+    /**
+     * enum movie status
+     */
     public enum MovieStatus {
         ComingSoon,
         Preview,
@@ -38,34 +23,71 @@ public class Movie extends AllReviews {
         EndOfShowing
     }
 
+    /**
+     * Movies attribute title , show status , director , synopsis , cast , movie genre , blockbuster , movie class , movie total sale
+     */
+    private String movieTitle;
+    private MovieStatus showingStatus;
+    private String director;
+    private String synopsis;
+    private ArrayList<String> cast;
+
+    private MovieType.Genre MovieGenre;
+    private MovieType.Blockbuster BlockBuster;
+
+    private MovieType.Class movieClass;
+
+    private int movieTotalSales = 0;
+
+    /**
+     * Constructor for new movies
+     * @param movieTitle Movie title
+     * @param showingStatus Movie status
+     * @param director Movie director
+     * @param synopsis Movie synopsis
+     * @param cast List of movie cast
+     * @param moviecat Movie
+     * @param blockbuster Is Blockbuster
+     * @param movieClass Movie class
+     */
     public Movie(String movieTitle, MovieStatus showingStatus, String director,
                  String synopsis, ArrayList<String> cast,
-                 Cinema.CinemaType movietype, MovieType.Genre moviecat,
-                 MovieType.Dimension dimension, MovieType.Class movieClass) {
+                 MovieType.Genre moviecat,
+                 MovieType.Blockbuster blockbuster, MovieType.Class movieClass) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
         this.director = director;
         this.synopsis = synopsis;
         this.cast = cast;
-        this.typeOfCinema = movietype;
         this.MovieGenre = moviecat;
-        this.movie3D = dimension;
+        this.BlockBuster = blockbuster;
         this.movieClass = movieClass;
     }
 
+    /**
+     * Constructor for reading from DB
+     * @param movieTitle Movie title
+     * @param showingStatus Movie status
+     * @param director Movie director
+     * @param synopsis Movie synopsis
+     * @param cast List of movie cast
+     * @param moviecat Movie
+     * @param blockbuster Is Blockbuster
+     * @param movieClass Movie class
+     * @param movieTotalSales Movie sales
+     */
     public Movie(String movieTitle, MovieStatus showingStatus, String director,
                  String synopsis, ArrayList<String> cast,
-                 Cinema.CinemaType movietype, MovieType.Genre moviecat,
-                 MovieType.Dimension dimension, MovieType.Class movieClass,int movieTotalSales) {
+                  MovieType.Genre moviecat,
+                 MovieType.Blockbuster blockbuster, MovieType.Class movieClass,int movieTotalSales) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
         this.director = director;
         this.synopsis = synopsis;
         this.cast = cast;
-        this.typeOfCinema = movietype;
         this.MovieGenre = moviecat;
-        this.movie3D = dimension;
         this.movieClass = movieClass;
+        this.BlockBuster = blockbuster;
         this.movieTotalSales = movieTotalSales;
     }
 
@@ -87,9 +109,10 @@ public class Movie extends AllReviews {
     public ArrayList<String> getCast() {
         return this.cast;
     }
-    public Cinema.CinemaType getTypeOfCinema() { return this.typeOfCinema; }
     public MovieType.Genre getMovieGenre() { return this.MovieGenre; }
-    public MovieType.Dimension getMovie3D() { return this.movie3D; }
+    public MovieType.Blockbuster getBlockBuster() {
+        return BlockBuster;
+    }
     public MovieType.Class getMovieClass() {
         return this.movieClass;
     }
@@ -110,14 +133,11 @@ public class Movie extends AllReviews {
     public void setCast(ArrayList<String> cast) {
         this.cast = cast;
     }
-    public void setTypeOfCinema(Cinema.CinemaType typeOfCinema) {
-        this.typeOfCinema = typeOfCinema;
-    }
     public void setMovieGenre(MovieType.Genre movieGenre) {
         MovieGenre = movieGenre;
     }
-    public void setMovie3D(MovieType.Dimension movie3D) {
-        this.movie3D = movie3D;
+    public void setBlockBuster(MovieType.Blockbuster blockBuster) {
+        BlockBuster = blockBuster;
     }
     public void setMovieClass(MovieType.Class movieClass) {
         this.movieClass = movieClass;
@@ -130,11 +150,18 @@ public class Movie extends AllReviews {
         this.showingStatus = showingStatus;
     }
 
-    public void increaseMovieTotalSale()
-    {
+    /**
+     * Increase movie sale and update DB
+     * @param movies all list for movie to update db
+     */
+    public void increaseMovieTotalSale(ArrayList<Movie> movies) throws IOException {
         this.movieTotalSales++;
+        TextDB.UpdateToTextDB(TextDB.Files.Movies.toString(),movies , new Review("" ,"",0));
     }
 
+    /**
+     * Print movie details
+     */
     public void printMovieDetails() {
         System.out.printf("\t\tMovie Title: %s\n", this.movieTitle);
         System.out.printf("\t\tMovie Status: %s\n", this.showingStatus);
@@ -142,18 +169,16 @@ public class Movie extends AllReviews {
         System.out.println("\t\tMovie Synopsis:");
         printSynopsis();
         System.out.printf("\t\tMovie Casts: %s\n", this.cast);
-        System.out.printf("\t\tCinema Type: %s\n", this.typeOfCinema.toString());
         System.out.printf("\t\tMovie Category: %s\n", this.MovieGenre.toString());
-        if (Objects.equals(this.movie3D.toString(), "Three")) {
-            System.out.println("\t\tMovie is available in 3D!\n");
-        }
-        else {
-            System.out.println("\t\tMovie is available in 2D\n");
-        }
         System.out.printf("\t\tMinimum Age for Watching: %s\n", this.movieClass.toString());
-
+        if (Objects.equals(getBlockBuster(), MovieType.Blockbuster.BLOCKBUSTER)) {
+            System.out.printf("\t\t%s\n", this.getBlockBuster());
+        }
     }
 
+    /**
+     * Print synopsis
+     */
     public void printSynopsis() {
         String[] words = this.synopsis.split(" ");
         int count = 0;
