@@ -75,11 +75,11 @@ public class AdminUI {
 
                     if(GetNumberInput.getInt() == 1)
                     {
-                        cineplexes.sortReview(AllCineplex.MovieSort.Top5Rating);
+                        cineplexes.printSortedList(AllCineplex.MovieSort.Top5Rating);
                     }
                     else
                     {
-                        cineplexes.sortReview(AllCineplex.MovieSort.Top5Sales);
+                        cineplexes.printSortedList(AllCineplex.MovieSort.Top5Sales);
                     }
                 }
                 case 5-> {

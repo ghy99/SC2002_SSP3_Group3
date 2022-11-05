@@ -61,7 +61,7 @@ public class AllCineplex extends Settings {
         TextDB.UpdateTextDB(filename, this.listOfMovies);
     }
 
-    public ArrayList<Movie> sortReview(MovieSort sortType)
+    private ArrayList<Movie> sortReview(MovieSort sortType)
     {
         ArrayList<Movie> tempMovie = (ArrayList<Movie>) this.listOfMovies.clone();
 
@@ -79,6 +79,38 @@ public class AllCineplex extends Settings {
             }
             default -> {return this.listOfMovies;}
         }
+    }
+
+    public void printSortedList( MovieSort movieSort)
+    {
+        ArrayList<Movie> movies = sortReview(movieSort);
+
+        if(movieSort.equals(MovieSort.Top5Sales))
+        {
+            System.out.println("############Top 5 sale#############");
+            if (movies.size() > 5) {
+                for (int i = 0; i < 5; i++) {
+                    System.out.printf("%s %s %d \n", i + 1, movies.get(i).getMovieTitle() , movies.get(i).getMovieTotalSales() );
+                }
+            } else {
+                for (int i = 0; i < movies.size(); i++) {
+                    System.out.printf("%s %s %d \n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getMovieTotalSales() );
+                }
+            }
+        }
+        else {
+            System.out.println("############Top 5 rating############");
+            if (movies.size() > 5) {
+                for (int i = 0; i < 5; i++) {
+                    System.out.printf("%s %s %.1f \n", i + 1, movies.get(i).getMovieTitle() , movies.get(i).getOverallRating() );
+                }
+            } else {
+                for (int i = 0; i < movies.size(); i++) {
+                    System.out.printf("%s %s %.1f \n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getOverallRating() );
+                }
+            }
+        }
+        System.out.println();
     }
 
     public void InitializeCineplexes() throws IOException {
