@@ -1,8 +1,9 @@
 package Admin;
 
 import Cineplex.*;
-import Movie.Movie;
+import Movie.*;
 import Movie.TicketCharges;
+import Service.DateTime;
 import Service.GetNumberInput;
 import Service.SHA256;
 import Service.TextDB;
@@ -11,11 +12,7 @@ import Review.Review;
 import javax.swing.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 import static Service.TextDB.ReadFromFile;
 import static Service.TextDB.UpdateAdmin;
@@ -107,12 +104,13 @@ public class Admin {
 	 * This function is to change the ticket pricing according
 	 * @throws IOException thrown if reading data from TicketPrice causes error
 	 */
-	public void EditTicket() throws IOException {
+	public void EditTicket(AllCineplex cineplex) throws IOException {
 		Scanner sc = new Scanner(System.in);
-		String file = "TicketPrice.txt";
+
 		System.out.println("Tickets are charged in the following manner:");
-		TicketCharges charges = new TicketCharges();
-		charges.printTicketCharges();
+
+		cineplex.getTicketCharges().printTicketCharges();
+
 		int cat = 0;
 		do {
 			System.out.println("Select category that you want to change: (Enter -1 to exit)");
@@ -127,29 +125,65 @@ public class Admin {
 			System.out.println("Which do you want to edit:");
 			switch (cat) {
 				case 1 -> {
+					System.out.println("Please select age price to edit \n");
 					System.out.println("1) Student price");
 					System.out.println("2) Adult price");
 					System.out.println("3) Senior Citizen price");
+
+					int choice = GetNumberInput.getInt() - 1;
+					System.out.println("What is the new value:");
+					Double newvalue = GetNumberInput.getDouble();
+
+					System.out.println("Please select age price to edit \n");
+
+					cineplex.getTicketCharges().returnAge().get(choice).set(1, newvalue.toString()) ;
+					TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
 				}
 				case 2 -> {
 					System.out.println("1) Monday - Friday");
 					System.out.println("2) Saturday - Sunday");
 					System.out.println("3) Public Holiday");
+
+					int choice = GetNumberInput.getInt() - 1;
+					System.out.println("What is the new value:");
+					Double newvalue = GetNumberInput.getDouble();
+
+					System.out.println("Please select age price to edit \n");
+
+					cineplex.getTicketCharges().returnDay().get(choice).set(1, newvalue.toString()) ;
+					TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
 				}
 				case 3 -> {
 					System.out.println("1) 2D Movie");
 					System.out.println("2) 3D Movie");
+
+					int choice = GetNumberInput.getInt() - 1;
+					System.out.println("What is the new value:");
+					Double newvalue = GetNumberInput.getDouble();
+
+					System.out.println("Please select age price to edit \n");
+
+					cineplex.getTicketCharges().returnDim().get(choice).set(1, newvalue.toString()) ;
+					TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
 				}
 				case 4 -> {
 					System.out.println("1) Regular Cinema");
 					System.out.println("2) Premium Cinema");
+
+					int choice = GetNumberInput.getInt() - 1;
+					System.out.println("What is the new value:");
+					Double newvalue = GetNumberInput.getDouble();
+
+					System.out.println("Please select age price to edit \n");
+
+					cineplex.getTicketCharges().returnType().get(choice).set(1, newvalue.toString()) ;
+					TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
 				}
 			}
-			int choice = GetNumberInput.getInt();
-			System.out.println("What is the new value:");
-			Double newvalue = GetNumberInput.getDouble();
-			TextDB.UpdateToTextDB(file, cat, choice, newvalue);
+
 		} while (cat != -1);
+
+
 	}
 
 	/**
@@ -157,76 +191,47 @@ public class Admin {
 	 * @param choice2 for the user to input what they want to do
 	 * @throws IOException to ensure the input has no error
 	 */
-	public void HolidayDateFunctions(int choice2) throws IOException {
+	public void HolidayDateFunctions(AllCineplex cineplex,int choice2) throws IOException {
 		Scanner scan = new Scanner(System.in);
 		switch(choice2){
 			case 1->{
 				System.out.println("\t 1. Add Holiday Dates");
-				System.out.println("Input Date in YYYY-MM-DD format");
+				System.out.println("Input Date in DD-MM-YYYY format");
 				String date = scan.nextLine();
-				AddHoliday(date);
+
+				if(DateTime.StringToDateOnly(date) != null)cineplex.AddHoliday(date);
+				else System.out.println("Error time format holiday not added");
+
 			}
 			case 2->{
 				System.out.println("\t 2. Edit holiday dates");
-				System.out.println("Input Old Date to be edited in YYYY-MM-DD format");
-				String oldDate = scan.nextLine();
-				System.out.println("Input New Date in YYYY-MM-DD format");
+
+				System.out.println("\t 2. Select holiday dates to change");
+				for(int i = 0 ; i< cineplex.getHoliday().size(); i++)
+				{
+					System.out.printf("%d) %s \n", i + 1, cineplex.getHoliday().get(i));
+				}
+
+				int index = GetNumberInput.getInt() - 1;
+				System.out.println("Input New Date in DD-MM-YYYY format");
 				String newDate = scan.nextLine();
-				editHoliday(oldDate,newDate);
+				if(DateTime.StringToDateOnly(newDate) != null)cineplex.editHoliday(index,newDate);
+				else System.out.println("Error time format time not change");
 			}
 			case 3->{
 				System.out.println("\t 3. Delete Holiday Dates");
-				System.out.println("Input Date in YYYY-MM-DD format");
-				String date = scan.nextLine();
-				deleteHoliday(date);
+
+				System.out.println("\t 2. Select holiday dates to change");
+				for(int i = 0 ; i< cineplex.getHoliday().size(); i++)
+				{
+					System.out.printf("%d) %s \n", i  + 1, cineplex.getHoliday().get(i));
+				}
+				int index = GetNumberInput.getInt() - 1;
+				cineplex.deleteHoliday(index);
 			}
 		}
 	}
 
-	/**
-	 * This function is to add the date into the HolidayDates database
-	 * @param date = the user input of the date they want to add in the database
-	 * @throws IOException This Exception is thrown if reading file causes error.
-	 */
-	public void AddHoliday(String date) throws IOException {
-		TextDB.WriteToTextDB("HolidayDates.txt", date);
-	}
-
-	/**
-	 * This function is used to update/change any dates in the database
-	 * @param oldDate = the original data in the database before changing
-	 * @param newDate = the input that needs to be changed in the database
-	 * @throws IOException This Exception is thrown if reading file causes error.
-	 */
-	public void editHoliday(String oldDate, String newDate) throws IOException {
-		ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
-		for (int i = 0; i<holidayList.size();i++) {
-			if (oldDate.toString().equals(holidayList.get(i))) {
-				holidayList.remove(i);
-				holidayList.add(i,newDate);
-			}
-		}
-		TextDB textDB = new TextDB();
-		TextDB.Update("HolidayDates.txt",holidayList);
-
-	}
-
-	/**
-	 * This function is used to delete any stored holiday date in the database
-	 * @param date = the users input of the date they want to delete from the database
-	 * @throws IOException this is thrown if the reading from the file results in error
-	 */
-	public void deleteHoliday(String date) throws IOException {
-		ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
-		for (int i = 0; i<holidayList.size();i++) {
-			if (date.toString().equals(holidayList.get(i))) {
-				holidayList.remove(i);
-			}
-		}
-
-		TextDB.Update("HolidayDates.txt",holidayList);
-
-	}
 
 	/**
 	 * This function is used to get the users input on what they want to do in the setting menu
@@ -311,16 +316,6 @@ public class Admin {
 		System.out.println("\t Enter the new admin password");
 		password = SHA256.toString(scan.nextLine());
 		return new Admin(username, password, true);
-	}
-
-	/**
-	 * This is used to create a default admin account in the main system
-	 * @param args = used to accept the given username and password as a String Array
-	 * @throws NoSuchAlgorithmException thrown if implementing the login causes error
-	 * @throws IOException is thrown if reading the given string value causes error
-	 */
-	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-		System.out.println(Admin.login("ant" , "12345"));
 	}
 
 

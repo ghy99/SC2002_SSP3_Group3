@@ -27,6 +27,8 @@ public class TextDB {
         Customers(File.separator + "Customers.txt"),
         Admin(File.separator + "Admin.txt"),
         TransactionHistroy(File.separator + "TransactionHistory.txt"),
+        Holiday(File.separator + "HolidayDates.txt"),
+        TicketPrice(File.separator + "TicketPrice.txt"),
         Env(File.separator+"env.txt");
 
 
@@ -238,6 +240,19 @@ public class TextDB {
         return alr;
     }
 
+    public static ArrayList<String> ReadFromFile(String fileName, Settings settings) throws IOException {
+        ArrayList<String> oldData = (ArrayList<String>) Read(fileName);
+        ArrayList<String> holiday = new ArrayList<String>();
+
+        for (int i = 0; i < oldData.size(); i++) {
+            String string = (String) oldData.get(i);
+
+            holiday.add(string);
+        }
+
+        return holiday;
+    }
+
     public static ArrayList<Admin> ReadFromFile(ArrayList<Admin> adminList, String fileName) throws IOException, NoSuchAlgorithmException {
 
         // read String from text file
@@ -397,6 +412,17 @@ public class TextDB {
         StringBuilder st = new StringBuilder();
         alw.add(String.valueOf(setting.isSale()) );
         alw.add(String.valueOf(setting.isRating()));
+
+        Update(fileName, alw);
+    }
+
+    public static void UpdateToTextDB(String fileName , ArrayList<String> holiday , Settings settings) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        for (String h : holiday)
+        {
+            alw.add(h);
+        }
 
         Update(fileName, alw);
     }
@@ -671,7 +697,7 @@ public class TextDB {
         ArrayList<String[][]> ticketPrices = new ArrayList<>();
         ticketPrices = TextDB.readFromFile(fileName, (TicketCharges) null);
         String[][] changingCat = ticketPrices.get(cat - 1);
-        changingCat[choice - 1][1] = newTicketPrice.toString();
+        changingCat[choice][1] = newTicketPrice.toString();
         for (int i = 0; i < ticketPrices.size(); i++) {
             if (i == cat - 1) {
                 for (int j = 0; j < changingCat.length; j++) {
