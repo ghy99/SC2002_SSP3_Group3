@@ -45,8 +45,18 @@ public class AllCineplex extends Settings {
         //write to file
     }
 
-    public ArrayList<Movie> getListOfMovies() {
+    public ArrayList<Movie> getListOfMoviesforAdmin() {
         return this.listOfMovies;
+    }
+    public ArrayList<Movie> getListOfMovies() {
+        ArrayList<Movie> filteredMovies = new ArrayList<Movie>();
+        for (Movie movie : this.listOfMovies) {
+            if (movie.getShowingStatus() != Movie.MovieStatus.EndOfShowing) {
+                filteredMovies.add(movie);
+            }
+        }
+//        return this.listOfMovies;
+        return filteredMovies;
     }
 
 
@@ -144,7 +154,6 @@ public class AllCineplex extends Settings {
     }
 
     /**
-     * Done by : Gan Hao Yi
      * This Method displays the List of Movies currently available. User will only see Movie Title.
      * After this method, user will be able to select which movie to display more details.
      */

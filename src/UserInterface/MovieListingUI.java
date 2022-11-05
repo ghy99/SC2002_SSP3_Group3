@@ -25,7 +25,7 @@ public class MovieListingUI {
      */
     public static void MovieListingInterface(AllCineplex cineplexes) throws Exception {
         int num = -1;
-        ArrayList<Movie> listOfMovies = cineplexes.getListOfMovies();
+        ArrayList<Movie> listOfMovies = cineplexes.getListOfMoviesforAdmin();
 
 //		System.out.println("Current list of movies:");
 //		printMovieList(listOfMovies);
@@ -281,10 +281,10 @@ public class MovieListingUI {
             System.out.println("3: Change Director");
             System.out.println("4: Change Synopsis");
             System.out.println("5: Change Cast");
-            System.out.println("6: Change Cinema Type");
-            System.out.println("7: Change Movie Genre");
-            System.out.println("8: Change Movie Dimension");
-            System.out.println("9: Change Movie Ratings");
+//            System.out.println("6: Change Cinema Type");
+            System.out.println("6: Change Movie Genre");
+            System.out.println("7: Change Blockbuster status");
+            System.out.println("8: Change Movie Ratings");
             System.out.println("-1: Done Editing");
             System.out.println();
 
@@ -301,11 +301,11 @@ public class MovieListingUI {
                     System.out.println("2: Preview");
                     System.out.println("3: Now showing");
                     System.out.println("4: End of showing");
-                    switch (GetNumberInput.getInt() - 1) {
-                        case 1 -> movie.setShowingStatus(Movie.MovieStatus.ComingSoon);
-                        case 2 -> movie.setShowingStatus(Movie.MovieStatus.Preview);
-                        case 3 -> movie.setShowingStatus(Movie.MovieStatus.NowShowing);
-                        case 4 -> movie.setShowingStatus(Movie.MovieStatus.EndOfShowing);
+                    switch (GetNumberInput.getInt()) {
+                        case 1 -> movie.updateShowingStatus(Movie.MovieStatus.ComingSoon);
+                        case 2 -> movie.updateShowingStatus(Movie.MovieStatus.Preview);
+                        case 3 -> movie.updateShowingStatus(Movie.MovieStatus.NowShowing);
+                        case 4 -> movie.updateShowingStatus(Movie.MovieStatus.EndOfShowing);
                     }
 //					sc.nextLine();
                 }
@@ -349,7 +349,7 @@ public class MovieListingUI {
                     }
 //					sc.nextLine();
                 }
-                case 8 -> {
+                case 7 -> {
                     System.out.println();
                     System.out.println("Is the movie a BLOCKBUSTER?");
                     System.out.println("1: Yes");
@@ -361,7 +361,7 @@ public class MovieListingUI {
                     }
 //					sc.nextLine();
                 }
-                case 9 -> {
+                case 8 -> {
                     System.out.println(" Select new Movie Age Rating ");
                     System.out.println("1: G ");
                     System.out.println("2: PG");
@@ -383,8 +383,8 @@ public class MovieListingUI {
                     System.out.println("Exiting.");
                 }
             }
-
         } while (option != -1);
+
         return movie;
     }
 
