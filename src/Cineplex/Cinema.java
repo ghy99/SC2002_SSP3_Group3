@@ -3,7 +3,6 @@ package Cineplex;
 import Movie.*;
 import Service.TextDB;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -31,6 +30,9 @@ public class Cinema {
         }
     }
 
+    /**
+     * For adding two hours to the current time to make sure time is blocked out so movie don't clashed
+     */
     private static final long HOUR = 3600 * 1000; // in milli-seconds.
 
     /**
@@ -42,8 +44,9 @@ public class Cinema {
     private String cinemaName;
     private CinemaType cinemaType;
 
+    private String cinemaDir;
+
     private ArrayList<ShowTime> showTime = new ArrayList<>();
-    private ArrayList<Movie> listOfMovies = new ArrayList<>();
 
     public Cinema(String cinemaCode, String cinemaName, CinemaType cinemaType) {
         this.cinemaCode = cinemaCode;
@@ -71,6 +74,14 @@ public class Cinema {
         return cinemaCode;
     }
 
+    public void setCinemaDir(String dir){
+        this.cinemaDir = dir;
+    }
+
+    public String getCinemaDir() {
+        return cinemaDir;
+    }
+
     /**
      *
      * @param time: The ShowTime of the movie slot.
@@ -90,23 +101,36 @@ public class Cinema {
 
     /**
      *
-     * @param index
-     * @param cineplex
-     * @param date
-     * @param movie
-     * @param dim
+     * @param index Selected index Show time to remove
+     * @param cineplex Selected Cinema
+     * @param date Selected Date
+     * @param movie Selected Movie
+     * @param dim Selected Dimension
      * @throws IOException
      */
     public void updateCinemaTime(int index,Cineplex cineplex, Date date, Movie movie, MovieType.Dimension dim) throws IOException {
-        deleteCinemaTime(index);
-        createShowTime(cineplex,date, movie, dim);
-    }
-
-    public void deleteCinemaTime(int index) {
         this.showTime.remove(index);
+        createShowTime(cineplex,date,movie,dim);
     }
 
-    public boolean addShowTime(Date date, Movie movie, MovieType.Dimension dim) {
+    /**
+     * Reserve function if need to delete away showtime
+     * @param index Index to delete
+     * @throws IOException
+     */
+    public void deleteCinemaTime(int index) throws IOException {
+        this.showTime.remove(index);
+        TextDB.UpdateToTextDB(this.getCinemaDir() , this.showTime, null);
+    }
+
+    /**
+     * Create a new showtime by getting the cinema, date, movie, 2D/3D and write to DB
+     * @param cineplex Selected Cinema
+     * @param date Selected Date
+     * @param movie Selected Movie
+     * @param dim Selected Dimension
+     */
+    public void createShowTime(Cineplex cineplex, Date date, Movie movie, MovieType.Dimension dim) throws IOException {
         var temp = this.getShowTime();
         int i = 0;
         ShowTime currentSTDate = null;
@@ -126,84 +150,20 @@ public class Cinema {
                 if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
                     this.createSeats(date, movie, dim);
                     System.out.println("Showtime create!");
-                    return true;
                 }
                 else
                 {
                     System.out.println("New showtime clash with previous showtime!");
-                    return false;
                 }
             } else {
                 System.out.println("Showtime create!");
                 this.createSeats(date, movie, dim);
-                return true;
             }
         }
         this.createSeats(date, movie, dim);
 
-
-
-        return true;
+        TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, null);
     }
 
-    public boolean createShowTime(Cineplex cineplex, Date date, Movie movie, MovieType.Dimension dim) throws IOException {
-        var temp = this.getShowTime();
-        int i = 0;
-        ShowTime currentSTDate = null;
-        if (temp.size() != 0) {
-            //Loop through all showtime
-            while (i < temp.size()) {
-                currentSTDate = temp.get(i);
-                if (currentSTDate.getTime().getTime() > date.getTime()) {
-                    break;
-                }
-                i++;
-            }
-            //if show time + 2 hours still smaller than time to be added
-
-            if (i - 1 > 0) {
-                currentSTDate = temp.get(i - 1);
-                if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
-                    this.createSeats(date, movie, dim);
-                    System.out.println("Showtime create!");
-                    return true;
-                }
-                else
-                {
-                    System.out.println("New showtime clash with previous showtime!");
-                    return false;
-                }
-            } else {
-                System.out.println("Showtime create!");
-                this.createSeats(date, movie, dim);
-                return true;
-            }
-        }
-        this.createSeats(date, movie, dim);
-
-        TextDB.UpdateToTextDB( File.separator + cineplex.getCineplexName().replace(' ','_')+ File.separator+this.getCinemaName()+".txt" , this.showTime, null);
-
-
-        return true;
-    }
-    public static void CreateNewCinema(Cineplex cineplex , String cinemaName , CinemaType cinemaType)
-    {
-        int cinemaAlpha = 'A';
-
-        StringBuilder sb = new StringBuilder();
-        String temp = "";
-
-        for(Cinema c : cineplex.getListOfCinemas())
-        {
-            temp = String.valueOf(c.cinemaCode.charAt(0));
-            cinemaAlpha++;
-        }
-
-        sb.append(temp) ;
-        sb.append(cinemaType.ToString().charAt(0));
-        sb.append((char)++cinemaAlpha);
-
-        cineplex.addCinema(new Cinema(sb.toString()  , cinemaName , cinemaType));
-    }
 
 }

@@ -2,8 +2,6 @@ package Cineplex;
 
 import Movie.Movie;
 import Service.GetNumberInput;
-import Review.AllReviews;
-import Review.Review;
 import Service.Settings;
 import Service.TextDB;
 
@@ -12,8 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Set;
 
+/**
+ *  * @author CHEW ZHI QI, GAN HAO YI
+ *  * This is the Admin class inherits from Settings. It stores list of cineplex,list of movies and settings for the user.
+ */
 public class AllCineplex extends Settings {
     public  enum MovieSort{
         Top5Rating,

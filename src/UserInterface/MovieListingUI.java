@@ -261,7 +261,7 @@ public class MovieListingUI {
         } while (ratingchoice > 6 || ratingchoice < 1);
 
         return new Movie(movieTitle, moviestatus, director,
-                synopsis, cast, cinemaType, genre, blockbuster, ratings);
+                synopsis, cast, genre, blockbuster, ratings);
     }
 
     /**
@@ -327,17 +327,6 @@ public class MovieListingUI {
                     movie.setCast(casts);
                 }
                 case 6 -> {
-                    System.out.println("Enter new Cinema Type:");
-                    System.out.println("1: Regular");
-                    System.out.println("2: Premium");
-                    System.out.println("Enter your option:");
-                    switch (GetNumberInput.getInt() - 1) {
-                        case 1 -> movie.setTypeOfCinema(Cinema.CinemaType.Regular);
-                        case 2 -> movie.setTypeOfCinema(Cinema.CinemaType.Premium);
-                    }
-//					sc.nextLine();
-                }
-                case 7 -> {
                     System.out.println();
                     System.out.println("Select new Movie Genre:");
                     System.out.println("1: Action");

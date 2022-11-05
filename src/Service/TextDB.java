@@ -64,7 +64,7 @@ public class TextDB {
             String email = star.nextToken().trim();
 
             // create Professor object from file data
-            Customer customer = new Customer(movieGoerName, mobileNumber, email, false, false);
+            Customer customer = new Customer(movieGoerName, mobileNumber, email, false);
             // add to Professors list
             customers.add(customer);
         }
@@ -87,7 +87,6 @@ public class TextDB {
             String[] temp = star.nextToken().trim().split(",");
             ArrayList<String> casts = new ArrayList<>();
             Collections.addAll(casts, temp);
-            Cinema.CinemaType type = Cinema.CinemaType.valueOf(star.nextToken().trim());
             MovieType.Genre genre = MovieType.Genre.valueOf(star.nextToken().trim());
             MovieType.Blockbuster blockbuster = MovieType.Blockbuster.valueOf(star.nextToken().trim());
             MovieType.Class movieClass = MovieType.Class.valueOf(star.nextToken().trim());
@@ -95,7 +94,7 @@ public class TextDB {
 
 
             Movie movie = new Movie(
-                    title, status, director, synopsis, casts, type, genre, blockbuster, movieClass, movieTotalSales
+                    title, status, director, synopsis, casts, genre, blockbuster, movieClass, movieTotalSales
             );
 
             while (!Objects.equals(listofMovies.get(i), "]")) {
@@ -324,8 +323,6 @@ public class TextDB {
             if (i + 1 < movie.getCast().size()) st.append(",");
         }
         st.append(SEPARATOR);
-        st.append(movie.getTypeOfCinema().toString().trim());
-        st.append(SEPARATOR);
         st.append(movie.getMovieGenre().toString().trim());
         st.append(SEPARATOR);
         st.append(movie.getBlockBuster().toString().trim());
@@ -373,13 +370,13 @@ public class TextDB {
 
         st.append(SEPARATOR);
 
-        for (int i = 0; i < cineplex.getListOfCinemas().size(); i++) {
+        for (int i = 0; i < cineplex.getNoOfCinemas(); i++) {
             Cinema cinema = cineplex.getListOfCinemas().get(i);
             st.append(cinema.getCinemaName().trim());
             st.append(':');
             st.append(cinema.getCinemaType().toString().trim());
 
-            if (i + 1 < cineplex.getListOfCinemas().size()) st.append(',');
+            if (i + 1 < cineplex.getNoOfCinemas()) st.append(',');
 
         }
         alw.add(st.toString());
@@ -414,8 +411,6 @@ public class TextDB {
                 st.append(movie.getCast().get(i));
                 if (i + 1 < movie.getCast().size()) st.append(",");
             }
-            st.append(SEPARATOR);
-            st.append(movie.getTypeOfCinema().toString().trim());
             st.append(SEPARATOR);
             st.append(movie.getMovieGenre().toString().trim());
             st.append(SEPARATOR);
@@ -522,8 +517,6 @@ public class TextDB {
                 st.append(movie.getCast().get(i));
                 if (i + 1 < movie.getCast().size()) st.append(",");
             }
-            st.append(SEPARATOR);
-            st.append(movie.getTypeOfCinema().toString().trim());
             st.append(SEPARATOR);
             st.append(movie.getMovieGenre().toString().trim());
             st.append(SEPARATOR);

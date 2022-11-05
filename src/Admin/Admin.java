@@ -80,11 +80,6 @@ public class Admin {
 
 		password = SHA256.toString(password);
 
-		//for debugging checking output
-		for (int i = 0; i<filledAdminList.size();i++) {
-			System.out.println(filledAdminList.get(i).getUsername() + filledAdminList.get(i).getPassword());
-		}
-
 		int flagNum = 0; //used to indicate if successfully logged in
 
 		String dataName;

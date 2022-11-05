@@ -164,9 +164,11 @@ public class CineplexUI {
                     ticket.setChosenMovie(allST.get(selectShowtime).getMovie().getMovieTitle());
                     ticket.setMovieDateTime(DateTime.convertTime(allST.get(selectShowtime).getTime().getTime()));
                     ticket.setTID(new DateTime().ToTID(cinemas.get(selectShowtime).getCinemaCode()));
+                    System.out.println("Ticket Created.");
                     break;
                 }
-                movielist.get(selectMovie).increaseMovieTotalSale(); //increase sales of movie
+                movielist.get(selectMovie).increaseMovieTotalSale(cineplexes.getListOfMovies()); //increase sales of movie
+
                 System.out.println("\nMoving to MovieUI!\n");
                 ticket.setSeatID(MovieUI.MovieInterface(ticket , allST.get(selectShowtime))); // set ticket seats. change return type to ticket?
 

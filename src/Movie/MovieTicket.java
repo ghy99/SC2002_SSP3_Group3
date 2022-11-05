@@ -12,17 +12,14 @@ import java.time.*;
 import java.util.Hashtable;
 import java.util.Set;
 
+/**
+ *  * @author CHEW ZHI QI, GAN HAO YI
+ *  * Movie Ticket class just for reading from db / writing to db
+ */
 public class MovieTicket {
-    // Linked to each Cinema
-    // Diff category such as
-    // Different ticket prices based on:
-        // type of movie - Action, Romance, Horror
-        // Cinema Class - Gold, Premium, Platinum, Regular
-        // Age of buyer - Elderly, Adult, Child
-        // Day of the week - weekday, weekend, public holiday
-    // text file format:
-        // Student, Adult, Senior Citizen | Weekday, Weekend, Public Holiday | 2D, 3D | Regular, Platinum
-        // Blockbusters + $1
+    /**
+     * Movie ticket properties email, choosenCineplex, cinema, movie, TID, SeatID, MovieDateTime
+     */
     private String Email;
     private String ChosenCineplex;
     private String Cinema;
@@ -31,14 +28,10 @@ public class MovieTicket {
     private String SeatID;
     private String MovieDateTime;
 
+    /**
+     *
+     */
     public MovieTicket() {
-        System.out.println("Ticket Created.");
-    }
-    public MovieTicket(String cineplex, String movie, String seatid, String moviedatetime) {
-        this.ChosenCineplex = cineplex;
-        this.Movie = movie;
-        this.SeatID = seatid;
-        this.MovieDateTime = moviedatetime;
     }
 
     public MovieTicket(String email ,String chosenCineplex, String cinema, String movie, String TID, String seatID, String movieDateTime) {

@@ -28,7 +28,7 @@ public class GuestUI {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("*************Entering guest mode***************");
-        Customer customer = new Customer("", "", "", false, true);
+        Customer customer = new Customer("", "", "", false);
 
         do {
             System.out.println("\nWhat would you like to do?");

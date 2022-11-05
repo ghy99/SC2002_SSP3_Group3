@@ -35,7 +35,7 @@ public class CinemaUI {
         Cineplex chosenCineplex = cineplexes.getCineplexes().get(GetNumberInput.getInt() - 1);
 
         System.out.println("Please enter which cinema showtime to edit :");
-        for (int i = 0; i < chosenCineplex.getListOfCinemas().size(); i++) {
+        for (int i = 0; i < chosenCineplex.getNoOfCinemas(); i++) {
             System.out.printf("%s) %s %s %s" + "\n", i + 1, chosenCineplex.getListOfCinemas().get(i).getCinemaCode(), chosenCineplex.getListOfCinemas().get(i).getCinemaName(), chosenCineplex.getListOfCinemas().get(i).getCinemaType());
         }
 
