@@ -1,16 +1,10 @@
 package UserInterface;
 
-import Movie.*;
 import Cineplex.*;
 import Service.GetNumberInput;
-import Service.TextDB;
-import Review.Review;
 
-import java.io.File;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+
 
 /**
  * @authors GAN HAO YI, EDDY CHENG KUAN QUAN
@@ -85,64 +79,17 @@ public class MainUI {
 
                             switch (userInput) {
                                 case 1 -> {
-                                    System.out.println("############Top 5 sale#############");
-
-                                    ArrayList<Movie> temp = cineplexes.sortReview(AllCineplex.MovieSort.Top5Sales);
-
-                                    if (temp.size() > 5) {
-                                        for (int i = 0; i < 5; i++) {
-                                            System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
-                                        }
-                                    } else {
-                                        for (int i = 0; i < temp.size(); i++) {
-                                            System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
-                                        }
-                                    }
-                                    System.out.println();
+                                    cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);
                                 }
                                 case 2 -> {
-                                    System.out.println("############Top 5 rating############");
-                                    ArrayList<Movie> temp = cineplexes.sortReview(AllCineplex.MovieSort.Top5Rating);
-
-                                    if (temp.size() > 5) {
-                                        for (int i = 0; i < 5; i++) {
-                                            System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
-                                        }
-                                    } else {
-                                        for (int i = 0; i < temp.size(); i++) {
-                                            System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
-                                        }
-                                    }
-                                    System.out.println();
+                                    cineplexes.printSortedList( AllCineplex.MovieSort.Top5Rating);
                                 }
                             }
 
                         } else if (cineplexes.isSale()) {
-                            System.out.println("############Top 5 sale#############");
-                            ArrayList<Movie> temp = cineplexes.sortReview(AllCineplex.MovieSort.Top5Sales);
-                            if (temp.size() > 5) {
-                                for (int i = 0; i < 5; i++) {
-                                    System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
-                                }
-                            } else {
-                                for (int i = 0; i < temp.size(); i++) {
-                                    System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
-                                }
-                            }
-                            System.out.println();
+                            cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);
                         } else if (cineplexes.isRating()) {
-                            System.out.println("############Top 5 rating############");
-                            ArrayList<Movie> temp = cineplexes.sortReview(AllCineplex.MovieSort.Top5Rating);
-                            if (temp.size() > 5) {
-                                for (int i = 0; i < 5; i++) {
-                                    System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
-                                }
-                            } else {
-                                for (int i = 0; i < temp.size(); i++) {
-                                    System.out.printf("%s %s", i + 1, temp.get(i).getMovieTitle() + "\n");
-                                }
-                            }
-                            System.out.println();
+                            cineplexes.printSortedList(AllCineplex.MovieSort.Top5Rating);
                         }
                     } else {
                         ReviewUI.UserInferface(cineplexes);
