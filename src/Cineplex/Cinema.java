@@ -134,35 +134,32 @@ public class Cinema {
         var temp = this.getShowTime();
         int i = 0;
         ShowTime currentSTDate = null;
-        if (temp.size() != 0) {
             //Loop through all showtime
-            while (i < temp.size()) {
-                currentSTDate = temp.get(i);
-                if (currentSTDate.getTime().getTime() > date.getTime()) {
-                    break;
-                }
-                i++;
+        while (i < temp.size()) {
+            currentSTDate = temp.get(i);
+            if (currentSTDate.getTime().getTime() > date.getTime()) {
+                break;
             }
-            //if show time + 2 hours still smaller than time to be added
-
-            if (i - 1 > 0) {
-                currentSTDate = temp.get(i - 1);
-                if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
-                    this.createSeats(date, movie, dim);
-                    System.out.println("Showtime created!");
-                }
-                else
-                {
-                    System.out.println("New showtime clash with previous showtime!");
-                }
-            } else {
-                System.out.println("Showtime created!");
-                this.createSeats(date, movie, dim);
-            }
+            i++;
         }
-        this.createSeats(date, movie, dim);
+        //if show time + 2 hours still smaller than time to be added
 
-        TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, dim);
+        if (i - 1 > 0) {
+            currentSTDate = temp.get(i - 1);
+            if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
+                this.createSeats(date, movie, dim);
+                System.out.println("Showtime created!");
+                TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, dim);
+            }
+            else
+            {
+                System.out.println("New showtime clash with previous showtime!");
+            }
+        } else {
+            System.out.println("Showtime created!");
+            this.createSeats(date, movie, dim);
+            TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, dim);
+        }
     }
 
 

@@ -200,7 +200,7 @@ public class CineplexUI {
                 ticket.setSeatID(MovieUI.MovieInterface(ticket , specificST.get(selectShowtime))); // set ticket seats. change return type to ticket?
 
                 TextDB.UpdateToTextDB(File.separator + cineplexes.getCineplexes().get(selectCineplex).getCineplexName().replace(' ','_')+ File.separator+cinemas.get(selectShowtime).getCinemaName()+".txt" ,
-                        movielist.get(selectMovie) , cinemas.get(selectShowtime).getShowTime());
+                        cinemas.get(selectShowtime).getShowTime(), specificST.get(selectShowtime).getDimension());
 
                 break;
             }

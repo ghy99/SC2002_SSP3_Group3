@@ -27,11 +27,7 @@ public class CinemaUI {
         switch (choice) {
             case 1 -> { // create new movie timing for all cineplex
                 System.out.printf("\n\nYou have created a new movie: %s.\nCreating ShowTime for each Cineplex.\n", movie.getMovieTitle());
-                System.out.println("How many ShowTime would you like to create? (Max 5 at a time):");
-                int newshowtimes = GetNumberInput.getInt();
-                for (int i = 0; i < newshowtimes; i++) {
-                    addNewShowTime(cineplexes, movie);
-                }
+                addNewShowTime(cineplexes, movie);
             }
             case 2 -> { // update movie timing
                 UpdateShowTime(cineplexes, movie);
@@ -155,81 +151,85 @@ public class CinemaUI {
     public static void addNewShowTime(AllCineplex cineplexes, Movie movie) throws IOException {
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
             Cineplex chosenCineplex = cineplexes.getCineplexes().get(i);
-            System.out.printf("Creating ShowTime for Cineplex %s", chosenCineplex);
+            System.out.printf("Creating ShowTime for Cineplex %s\n", chosenCineplex.getCineplexName());
             for (int j = 0; j < chosenCineplex.getListOfCinemas().size(); j++) {
                 Cinema chosenCinema = chosenCineplex.getListOfCinemas().get(j);
-                System.out.printf("Creating ShowTime for Cinema %s", chosenCinema);
+                System.out.printf("Creating ShowTime for Cinema %s\n", chosenCinema.getCinemaName());
+                System.out.println("How many ShowTime would you like to create? (Max 5 at a time):");
+                int newshowtimes = GetNumberInput.getInt();
+                for (int k = 0; k < newshowtimes; k++) {
+                    System.out.printf("ShowTime %d\n", k + 1);
+                    Date newDate = null;
 
-                Date newDate = null;
-
-                // input date
-                do {
-                    // Add show time
-                    System.out.println("Please enter year (2022-):");
-                    int year = GetNumberInput.getInt();
-                    if (year < 2022) {
-                        System.out.println("Invalid Year. Starting over date input.");
-                        continue;
-                    }
-                    System.out.println("Please enter month (1-12):");
-                    int month = GetNumberInput.getInt();
-                    if (month < 1 || month > 12) {
-                        System.out.println("Invalid month. Starting over date input.");
-                        continue;
-                    }
-                    System.out.println("Please enter day (1-30/31) :");
-                    int day = GetNumberInput.getInt();
-                    if (day < 1 || day > 31) {
-                        System.out.println("Invalid day. Starting over date input.");
-                        continue;
-                    }
-                    if (month == 2 && day > 28) {
-                        System.out.println("Invalid day. Starting over date input.");
-                        continue;
-                    }
-                    System.out.println("Please enter hour (0-24):");
-                    int hour = GetNumberInput.getInt();
-                    if (hour < 1 || hour > 24) {
-                        System.out.println("Invalid hour. Starting over date input.");
-                        continue;
-                    }
-                    System.out.println("Please enter minutes (0-59):");
-                    int min = GetNumberInput.getInt();
-                    if (min < 1 || min > 59) {
-                        System.out.println("Invalid minutes. Starting over date input.");
-                        continue;
-                    }
-
-                    String date = day + "-" + month + "-" + year + ";" + hour + ":" + min;
-                    newDate = DateTime.StringToDate(date);
-                } while (newDate == null);
-
-                // select 2D / 3D movie for this Cinema.
-                int three_d = 0;
-                MovieType.Dimension dim = null;
-                do {
-                    System.out.println("Will this Cinema show the movie in 3D?");
-                    System.out.println("1) Yes\n2) No");
-                    three_d = GetNumberInput.getInt();
-                    if (three_d != 1 && three_d != 2) continue;
-                    switch (three_d) {
-                        case 1 -> {
-                            // 3D
-                            dim = MovieType.Dimension.THREE_D;
+                    // input date
+                    do {
+                        // Add show time
+                        System.out.println("Please enter year (2022-):");
+                        int year = GetNumberInput.getInt();
+                        if (year < 2022) {
+                            System.out.println("Invalid Year. Starting over date input.");
+                            continue;
                         }
-                        case 2 -> {
-                            // 2D
-                            dim = MovieType.Dimension.TWO_D;
+                        System.out.println("Please enter month (1-12):");
+                        int month = GetNumberInput.getInt();
+                        if (month < 1 || month > 12) {
+                            System.out.println("Invalid month. Starting over date input.");
+                            continue;
                         }
-                    }
-                } while (dim == null);
-                chosenCinema.createShowTime(chosenCineplex, newDate, movie, dim);
-                System.out.println("New ShowTime has been created:");
+                        System.out.println("Please enter day (1-30/31) :");
+                        int day = GetNumberInput.getInt();
+                        if (day < 1 || day > 31) {
+                            System.out.println("Invalid day. Starting over date input.");
+                            continue;
+                        }
+                        if (month == 2 && day > 28) {
+                            System.out.println("Invalid day. Starting over date input.");
+                            continue;
+                        }
+                        System.out.println("Please enter hour (0-24):");
+                        int hour = GetNumberInput.getInt();
+                        if (hour < 1 || hour > 24) {
+                            System.out.println("Invalid hour. Starting over date input.");
+                            continue;
+                        }
+                        System.out.println("Please enter minutes (0-59):");
+                        int min = GetNumberInput.getInt();
+                        if (min < 1 || min > 59) {
+                            System.out.println("Invalid minutes. Starting over date input.");
+                            continue;
+                        }
+
+                        String date = day + "-" + month + "-" + year + ";" + hour + ":" + min;
+                        newDate = DateTime.StringToDate(date);
+                    } while (newDate == null);
+
+                    // select 2D / 3D movie for this Cinema.
+                    int three_d = 0;
+                    MovieType.Dimension dim = null;
+                    do {
+                        System.out.println("Will this Cinema show the movie in 3D?");
+                        System.out.println("1) Yes\n2) No");
+                        three_d = GetNumberInput.getInt();
+                        if (three_d != 1 && three_d != 2) continue;
+                        switch (three_d) {
+                            case 1 -> {
+                                // 3D
+                                dim = MovieType.Dimension.THREE_D;
+                            }
+                            case 2 -> {
+                                // 2D
+                                dim = MovieType.Dimension.TWO_D;
+                            }
+                        }
+                    } while (dim == null);
+                    chosenCinema.createShowTime(chosenCineplex, newDate, movie, dim);
+                    System.out.println("New ShowTime has been created:");
+                }
                 for (int k = 0; k < chosenCinema.getShowTime().size(); k++) {
                     System.out.printf(
-                            "\n%s) %s %s\n", k + 1,
-                            chosenCinema.getShowTime().get(k).getMovie().getMovieTitle(),
-                            DateTime.convertTime(chosenCinema.getShowTime().get(k).getTime().getTime())
+                        "\n%s) %s %s\n", k + 1,
+                        chosenCinema.getShowTime().get(k).getMovie().getMovieTitle(),
+                        DateTime.convertTime(chosenCinema.getShowTime().get(k).getTime().getTime())
                     );
                 }
             }
@@ -253,12 +253,12 @@ public class CinemaUI {
         for (int i = 0; i < chosenCineplex.getNoOfCinemas(); i++) {
             System.out.printf("%s) %s %s %s" + "\n", i + 1, chosenCineplex.getListOfCinemas().get(i).getCinemaCode(), chosenCineplex.getListOfCinemas().get(i).getCinemaName(), chosenCineplex.getListOfCinemas().get(i).getCinemaType());
         }
-        Cinema choosenCinema = chosenCineplex.getListOfCinemas().get(GetNumberInput.getInt() - 1);
+        Cinema chosenCinema = chosenCineplex.getListOfCinemas().get(GetNumberInput.getInt() - 1);
 
 
-        System.out.printf("Current showtime in %s" + "\n", choosenCinema.getCinemaName());
-        for (int i = 0; i < choosenCinema.getShowTime().size(); i++) {
-            System.out.printf("%s) %s %s" + "\n", i + 1, choosenCinema.getShowTime().get(i).getMovie().getMovieTitle(), DateTime.convertTime(choosenCinema.getShowTime().get(i).getTime().getTime()));
+        System.out.printf("Current showtime in %s" + "\n", chosenCinema.getCinemaName());
+        for (int i = 0; i < chosenCinema.getShowTime().size(); i++) {
+            System.out.printf("%s) %s %s" + "\n", i + 1, chosenCinema.getShowTime().get(i).getMovie().getMovieTitle(), DateTime.convertTime(chosenCinema.getShowTime().get(i).getTime().getTime()));
         }
 
 
@@ -305,10 +305,17 @@ public class CinemaUI {
             newDate = DateTime.StringToDate(date);
         } while (newDate == null);
 
-        choosenCinema.updateCinemaTime(
+        chosenCinema.updateCinemaTime(
                 chosenShow, chosenCineplex, newDate,
                 movie,
-                choosenCinema.getShowTime().get(chosenShow).getDimension()
+                chosenCinema.getShowTime().get(chosenShow).getDimension()
         );
+        for (int k = 0; k < chosenCinema.getShowTime().size(); k++) {
+            System.out.printf(
+                    "\n%s) %s %s\n", k + 1,
+                    chosenCinema.getShowTime().get(k).getMovie().getMovieTitle(),
+                    DateTime.convertTime(chosenCinema.getShowTime().get(k).getTime().getTime())
+            );
+        }
     }
 }

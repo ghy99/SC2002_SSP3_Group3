@@ -132,7 +132,7 @@ public class Cineplex {
         System.out.printf("%s", this.cineplexName);
         ArrayList<Movie> movielist = listOfMovies;
         ArrayList<Cinema> listOfCinemas = this.listOfCinemas;
-        for (int j = 0; j < listOfCinemas.size(); j++) {
+        for (int j = 0; j < movielist.size(); j++) {
             System.out.printf("\n\t%s\n", movielist.get(j).getMovieTitle()); // movie
             ArrayList<ShowTime> allST = new ArrayList<>();
             for (Cinema c : listOfCinemas) {
@@ -164,6 +164,7 @@ public class Cineplex {
                         System.out.printf("\n\t\t %s \t%s", previousString, timeFormat.format(allST.get(k).getTime()));
                     }
                 }
+                System.out.println();
             }
         }
     }

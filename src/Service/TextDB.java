@@ -509,7 +509,6 @@ public class TextDB {
     public static void UpdateTextDB(String fileName, ArrayList<Movie> movies) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
-
         for (Movie movie : movies) {
             StringBuilder st = new StringBuilder();
             st.append(movie.getMovieTitle().trim());
@@ -527,11 +526,28 @@ public class TextDB {
             st.append(SEPARATOR);
             st.append(movie.getMovieGenre().toString().trim());
             st.append(SEPARATOR);
+            st.append(movie.getBlockBuster().toString().trim());
+            st.append(SEPARATOR);
             st.append(movie.getMovieClass().toString().trim());
             st.append(SEPARATOR);
             st.append(String.valueOf(movie.getMovieTotalSales()));
+
+
             alw.add(st.toString());
+            alw.add("[");
+            for (Review review : movie.getListOfReview())
+            {
+                st = new StringBuilder();
+                st.append(review.getUserName());
+                st.append(SEPARATOR);
+                st.append(review.getRating());
+                st.append(SEPARATOR);
+                st.append(review.getReview());
+                alw.add(st.toString());
+            }
+            alw.add("]");
         }
+
         Update(fileName, alw);
     }
 
