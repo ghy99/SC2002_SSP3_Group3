@@ -122,10 +122,6 @@ public class AllCineplex extends Settings {
     }
 
     public void InitializeCineplexes() throws IOException {
-        Boolean[] env = TextDB.ReadFromFile(File.separator + TextDB.Files.Env.toString());
-        setSale(env[0]);
-        setRating(env[1]);
-        System.out.println("EVN variable loaded!! \n\n");
         System.out.println("Initializing Cineplexes...\n...\n...");
         try {
             this.cineplexes = TextDB.readFromFile(File.separator + TextDB.Files.Cineplex.toString());

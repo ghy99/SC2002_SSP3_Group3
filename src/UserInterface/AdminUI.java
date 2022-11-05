@@ -55,7 +55,7 @@ public class AdminUI {
             switch (choice) {
                 case 1 -> {
                 	System.out.println("1) Ticket Prices, Please select one of the following functions");
-                    admin.EditTicket();
+                    admin.EditTicket(cineplexes);
                 }
                 case 2 -> {
                     System.out.println("2) Holiday Dates, Please select one of the following functions");
@@ -63,7 +63,7 @@ public class AdminUI {
                     System.out.println("\t 2. Edit Holiday Dates");
                     System.out.println("\t 3. Delete Holiday Dates");
                     choice2 = GetNumberInput.getInt();
-                    admin.HolidayDateFunctions(choice2);
+                    admin.HolidayDateFunctions(cineplexes,choice2);
                 }
                 case 3 -> {
                     MovieListingUI.MovieListingInterface(cineplexes);

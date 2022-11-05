@@ -26,7 +26,24 @@ public class DateTime extends Date {
         try {
              dt = sf.parse(dateTime);
         } catch (ParseException e) {
-            e.printStackTrace();
+            return null;
+        }
+
+        return dt;
+    }
+
+    /**
+     * Convert datetime format to Date
+     * @param dateTime dd-MM-yyyy;HH:mm
+     * @return Date with the passed in dateime
+     */
+    public static Date StringToDateOnly(String date)
+    {
+        Date dt = null;
+        try {
+            dt = sf1.parse(date);
+        } catch (ParseException e) {
+            return null;
         }
 
         return dt;
@@ -39,7 +56,7 @@ public class DateTime extends Date {
      */
     public static String convertTime(long time){
         Date date = new Date(time);
-        return sf.format(date);
+        return sf1.format(date);
     }
 
     /**

@@ -54,7 +54,7 @@ public class MainUI {
                     cineplexes.displayCineplexList();
                 }
                 case 2 -> {
-                    cineplexes.displayMovieList(cineplexes.getListOfMovies());
+                    AllCineplex.displayMovieList(cineplexes.getListOfMovies());
                 }
                 case 3 -> {
                     System.out.println("Which cineplex would you like to view:");
