@@ -154,7 +154,6 @@ public class Cineplex {
                 SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
                 String previousString = dateFormat.format(allST.get(0).getTime());
                 System.out.printf("\t\t %s ", previousString);
-                //previousString = allST.get(0).getTime();
                 for (int k = 0; k < allST.size(); k++) {
                     if (Objects.equals(previousString, dateFormat.format(allST.get(k).getTime()))) {
                         previousString = "";

@@ -21,6 +21,7 @@ public class AllReviews {
      */
     public enum ReviewSort {
         NewToOld,
+        OldToNew,
         HighestToLowest,
         LowestToHigest;
     }
@@ -89,19 +90,23 @@ public class AllReviews {
 
         switch (sortType) {
             case NewToOld -> {
+                System.out.println("##########Old to new review###########");
                 Collections.reverse(tempReview);
                 return tempReview;
             }
-            case HighestToLowest -> {
+            case LowestToHigest -> {
+                System.out.println("####Lowest rating to highest review####");
                 tempReview.sort(Comparator.comparing(Review::getRating));
                 return tempReview;
             }
-            case LowestToHigest -> {
+            case HighestToLowest -> {
+                System.out.println("####Higest rating to lowest review####");
                 tempReview.sort(Comparator.comparing(Review::getRating));
                 Collections.reverse(tempReview);
                 return tempReview;
             }
             default -> {
+                System.out.println("#########New to old review#########");
                 return this.listOfReview;
             }
         }
@@ -137,6 +142,7 @@ public class AllReviews {
         for (Review review : tempReview) {
             System.out.println("Review Rating: " + review.getRating() + " Review: " + review.getReview());
         }
+        System.out.println();
     }
 
     /**
