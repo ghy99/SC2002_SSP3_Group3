@@ -37,59 +37,57 @@ public class MovieListingUI {
             System.out.println("1: Create a Movie Listing");
             System.out.println("2: Update a Movie Listing");
             System.out.println("3: Delete a Movie Listing");
-            System.out.println("4: Main Menu");
+            System.out.println("4: Main Menu (Select this to exit)");
             System.out.print("Please enter a choice: ");
             num = GetNumberInput.getInt();
 
-            if (num == 1) {
-				Movie newMovie = createMovie();
-                cineplexes.addMovies(newMovie);
-//				ArrayList<Movie> movies = new ArrayList<Movie>();
-//				listOfMovies.add(newMovie);
-////				printMovieList(listOfMovies);
-//				printMovieList(movies);
-//				TextDB.UpdateTextDB(filename, listOfMovies);
-                // Add writeToDB for updates --> appending new movie
-            } else if (num == 2) {
-                System.out.println("-----------------------------------");
-                System.out.println("        Modify Movie Details       ");
-                System.out.println("-----------------------------------");
-                int choice;
-                System.out.println("Which movie would you like to edit?");
-                printMovieList(listOfMovies);
-                do {
-                    choice = GetNumberInput.getInt() - 1;
-                    if (choice < 0 || choice >= listOfMovies.size()) {
-                        System.out.println("Invalid choice. Try again!");
-                    }
-                } while (choice < 0 || choice >= listOfMovies.size());
+            switch(num) {
+                case 1 -> {
+                    Movie newMovie = createMovie();
+                    cineplexes.addMovies(newMovie);
+                    CinemaUI.UserInterface(cineplexes, 1, newMovie);
+                }
+                case 2 -> {
+                    System.out.println("-----------------------------------");
+                    System.out.println("        Modify Movie Details       ");
+                    System.out.println("-----------------------------------");
+                    int choice;
+                    System.out.println("Which movie would you like to edit?");
+                    printMovieList(listOfMovies);
+                    do {
+                        choice = GetNumberInput.getInt() - 1;
+                        if (choice < 0 || choice >= listOfMovies.size()) {
+                            System.out.println("Invalid choice. Try again!");
+                        }
+                    } while (choice < 0 || choice >= listOfMovies.size());
 
-                Movie movie = cineplexes.getListOfMovies().get(choice);
-                Movie newmovie = modifyMovie(listOfMovies, movie);
-                newmovie.printMovieDetails();
+                    Movie movie = cineplexes.getListOfMovies().get(choice);
+                    Movie newmovie = modifyMovie(listOfMovies, movie);
+                    newmovie.printMovieDetails();
 
-                cineplexes.updateListOfMovies(choice, newmovie);
-//                listOfMovies.set(choice, newmovie);
-//                TextDB.UpdateTextDB(filename, listOfMovies);
-                // Add writeToDB for updates --> overwriting old movie
-            } else if (num == 3) {
-                System.out.println("-----------------------------------");
-                System.out.println("           Removing Movie          ");
-                System.out.println("-----------------------------------");
-                int choice;
-                System.out.println("Which movie would you like to edit?");
-                printMovieList(listOfMovies);
-                do {
-                    choice = GetNumberInput.getInt() - 1;
-                    if (choice < 0 || choice >= listOfMovies.size()) {
-                        System.out.println("Invalid choice. Try again!");
+                    cineplexes.updateListOfMovies(choice, newmovie);
+                    System.out.printf("Would you like to update the ShowTime of this movie %s as well?\n", newmovie.getMovieTitle());
+                    System.out.println("1) Yes\n2) No");
+                    if (GetNumberInput.getInt() == 1) {
+                        CinemaUI.UserInterface(cineplexes, 2, newmovie);
                     }
-                } while (choice < 0 || choice >= listOfMovies.size());
-                Movie deletingMovie = deleteMovie(listOfMovies.get(choice));
-                cineplexes.updateListOfMovies(choice, deletingMovie);
-//                listOfMovies.set(choice, deletingMovie);
-//                TextDB.UpdateTextDB(filename, listOfMovies);
-                // Add write to DB for deleting movie --> changing showing status to EndOfShowing
+                }
+                case 3 -> {
+                    System.out.println("-----------------------------------");
+                    System.out.println("           Removing Movie          ");
+                    System.out.println("-----------------------------------");
+                    int choice;
+                    System.out.println("Which movie would you like to edit?");
+                    printMovieList(listOfMovies);
+                    do {
+                        choice = GetNumberInput.getInt() - 1;
+                        if (choice < 0 || choice >= listOfMovies.size()) {
+                            System.out.println("Invalid choice. Try again!");
+                        }
+                    } while (choice < 0 || choice >= listOfMovies.size());
+                    Movie deletingMovie = deleteMovie(listOfMovies.get(choice));
+                    cineplexes.removeMovie(choice, deletingMovie);
+                }
             }
         } while (num != 4);
         System.out.println();

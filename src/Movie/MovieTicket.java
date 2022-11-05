@@ -14,7 +14,8 @@ import java.util.Set;
 
 /**
  *  * @author CHEW ZHI QI, GAN HAO YI
- *  * Movie Ticket class just for reading from db / writing to db
+ *  * Movie Ticket class for reading from db / writing to db
+ *  Movie Ticket is used to calculate ticket price as well.
  */
 public class MovieTicket {
     /**
@@ -26,7 +27,13 @@ public class MovieTicket {
     private String Movie;
     private String TID;
     private String SeatID;
-    private String MovieDateTime;
+    private Date MovieDateTime;
+
+    private IndividualSeats.SeatType seattype;
+    private Cinema.CinemaType cinematype;
+    private int age;
+    private MovieType.Dimension dim;
+    private MovieType.Blockbuster blockbuster;
 
     /**
      *
@@ -34,7 +41,11 @@ public class MovieTicket {
     public MovieTicket() {
     }
 
-    public MovieTicket(String email ,String chosenCineplex, String cinema, String movie, String TID, String seatID, String movieDateTime) {
+    public MovieTicket(
+            String email ,String chosenCineplex, String cinema, String movie,
+            String TID, String seatID, Date movieDateTime,
+            IndividualSeats.SeatType seattype, Cinema.CinemaType cinType, int age,
+            MovieType.Dimension dim, MovieType.Blockbuster blockbuster) {
         this.Email = email;
         this.ChosenCineplex = chosenCineplex;
         this.Cinema = cinema;
@@ -42,6 +53,11 @@ public class MovieTicket {
         this.TID = TID;
         this.SeatID = seatID;
         this.MovieDateTime = movieDateTime;
+        this.seattype = seattype;
+        this.cinematype = cinType;
+        this.age = age;
+        this.dim = dim;
+        this.blockbuster = blockbuster;
     }
 
     public void setChosenCineplex(String cineplex) {
@@ -70,10 +86,10 @@ public class MovieTicket {
     public void setCinema(String cinema) {
         this.Cinema = cinema;
     }
-    public String getShowtime(){
+    public Date getShowtime(){
         return this.MovieDateTime;
     }
-    public void setMovieDateTime(String movieDateTime) {
+    public void setMovieDateTime(Date movieDateTime) {
         this.MovieDateTime = movieDateTime;
     }
     public String getTID() {
@@ -89,6 +105,46 @@ public class MovieTicket {
 
     public void setSeatID(String seat) {
         this.SeatID = seat;
+    }
+
+    public IndividualSeats.SeatType getSeattype() {
+        return seattype;
+    }
+
+    public void setSeattype(IndividualSeats.SeatType seattype) {
+        this.seattype = seattype;
+    }
+
+    public Cinema.CinemaType getCinematype() {
+        return cinematype;
+    }
+
+    public void setCinematype(Cinema.CinemaType cinematype) {
+        this.cinematype = cinematype;
+    }
+
+    public MovieType.Blockbuster getBlockbuster() {
+        return blockbuster;
+    }
+
+    public void setBlockbuster(MovieType.Blockbuster blockbuster) {
+        this.blockbuster = blockbuster;
+    }
+
+    public MovieType.Dimension getDim() {
+        return dim;
+    }
+
+    public void setDim(MovieType.Dimension dim) {
+        this.dim = dim;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getEmail() {
@@ -110,12 +166,8 @@ public class MovieTicket {
 	    		return true;
 	    	}
 	    }
-    	
     	return false;
-    	
     }
-
-
 
     public static double CalculatePrice(MovieTicket ticket) throws IOException {
         System.out.println("Calculate Price\n");

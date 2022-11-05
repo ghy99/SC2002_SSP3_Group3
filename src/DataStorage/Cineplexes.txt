@@ -1,3 +1,3 @@
-Shaw Theatre | APA:cinema1:Premium, ARB:cinema2:Regular, APC:cinema3:Premium, ARD:cinema4:Regular
-Cathay Cineplex | BPA:cinema1:Premium, BRB:cinema2:Regular, BRC:cinema3:Regular, BRD:cinema4:Regular
-Golden Village | CPA:cinema1:Premium, CRB:cinema2:Regular, CRC:cinema3:Regular, CPD:cinema4:Premium
+Moblima JEM | APA:cinema1:Premium, ARB:cinema2:Regular, APC:cinema3:Premium, ARD:cinema4:Regular
+Moblima JEWEL | BPA:cinema1:Premium, BRB:cinema2:Regular, BRC:cinema3:Regular, BRD:cinema4:Regular
+Moblima Orchard | CPA:cinema1:Premium, CRB:cinema2:Regular, CRC:cinema3:Regular, CPD:cinema4:Premium

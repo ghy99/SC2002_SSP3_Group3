@@ -1,9 +1,0 @@
-ganhaoyi.100@gmail.com|ARB202211030112|Shaw Theatre|cinema2|The Notebook|19-08-2022;10:34|A3
-ant@hotmail.com|ARB202211030113|Shaw Theatre|cinema2|The Notebook|19-08-2022;10:34|A5
-haoyi0708@gmail.com|APA202211041013|Shaw Theatre|cinema1|Avengers|06-11-2022;01:34|E5
-ganhaoyi.100@gmail.com|APA202211042101|Shaw Theatre|cinema1|Avengers|19-11-2022;01:34|B3
-ganhaoyi.100@gmail.com|APC202211042338|Shaw Theatre|cinema3|The Notebook|06-11-2022;01:34|F3
-ganhaoyi.100@gmail.com|APC202211042354|Shaw Theatre|cinema3|The Notebook|06-11-2022;01:34|D3
-ganhaoyi.100@gmail.com|APA202211050006|Shaw Theatre|cinema1|Avengers|09-11-2022;05:34|E3
-ganhaoyi.100@gmail.com|APA202211050039|Shaw Theatre|cinema1|Avengers|09-11-2022;05:34|C5
-ganhaoyi.100@gmail.com|APA202211050107|Shaw Theatre|cinema1|Avengers|09-11-2022;05:34|A1

@@ -24,7 +24,7 @@ public class AllCineplex extends Settings {
     private final String filename = "movies.txt";
     private ArrayList<Cineplex> cineplexes;
 
-    private ArrayList<Movie> listOfMovies ;
+    private ArrayList<Movie> listOfMovies;
 
     public AllCineplex() throws IOException {
         InitializeCineplexes();
@@ -40,7 +40,7 @@ public class AllCineplex extends Settings {
 
     public void addMovies(Movie movie) throws IOException {
         this.listOfMovies.add(movie);
-        TextDB.UpdateTextDB(filename, listOfMovies);
+        TextDB.WriteToTextDB(filename, movie);
         //write to file
     }
 

@@ -189,7 +189,7 @@ public class CineplexUI {
 
                     ticket.setCinema(cinemas.get(selectShowtime).getCinemaName());
                     ticket.setChosenMovie(specificST.get(selectShowtime).getMovie().getMovieTitle());
-                    ticket.setMovieDateTime(DateTime.convertTime(specificST.get(selectShowtime).getTime().getTime()));
+                    ticket.setMovieDateTime(specificST.get(selectShowtime).getTime());
                     ticket.setTID(new DateTime().ToTID(cinemas.get(selectShowtime).getCinemaCode()));
                     System.out.println("Ticket Created.");
                     break;
