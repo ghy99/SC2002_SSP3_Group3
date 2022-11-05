@@ -91,9 +91,9 @@ public class Cinema {
     private void createSeats(Date time, Movie movie, MovieType.Dimension dim) {
 
         if (cinemaType == CinemaType.Premium) {
-            showTime.add(new ShowTime(6, 6, 2, 4, time, movie, dim));
+            showTime.add(new ShowTime(5, 8, 3,2, 5, time, movie, dim));
         } else {
-            showTime.add(new ShowTime(3, 3, 1, 1, time, movie, dim));
+            showTime.add(new ShowTime(13,16,10,2,13, time, movie, dim));
         }
 
         showTime.sort(Comparator.comparing(ShowTime::getTimeHour));

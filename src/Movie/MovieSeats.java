@@ -1,16 +1,16 @@
 package Movie;
 
 // Draw out matrix for movie theatres
-    // Need to block out rows / columns for aisle
-    // Different Seat Types such as
-    // Wheelchair
-    // Free Single seat
-    // Occupied Single seat
-    // Free Couple seat
-    // Occupied Couple seat
-    // Elite seats
-        // Gold / Platinum / Ultima(?) seats
-    // System does not allow unoccupied seats between selected seats
+// Need to block out rows / columns for aisle
+// Different Seat Types such as
+// Wheelchair
+// Free Single seat
+// Occupied Single seat
+// Free Couple seat
+// Occupied Couple seat
+// Elite seats
+// Gold / Platinum / Ultima(?) seats
+// System does not allow unoccupied seats between selected seats
 
 
 import Cineplex.Cinema;
@@ -26,7 +26,7 @@ import java.util.Objects;
  * This is the class for MovieSeats. It initializes the movie seats in each cinema and displays the seats.
  */
 public class MovieSeats  {
-   
+
   //enum Name = {PLATINUM, 2D};
   private int row;
   private int col;
@@ -52,12 +52,12 @@ public class MovieSeats  {
     this.startRow = 65+row-1;
   }
 
-     public MovieSeats() {
+  public MovieSeats() {
 
-     }
+  }
 
-     public void seatsCreation(){ //Set up seats layout.
-    
+  public void seatsCreation(){ //Set up seats layout.
+
     //ClassOfCinema class calls movieSeat.seatsCreation() in Main
     //eg: ClassOfCinema Platinum = new ClassOfCinema(PLATINUM)
     //    Platinum.createSeats()
@@ -71,24 +71,24 @@ public class MovieSeats  {
       this.seats[i][this.col - 1] = seats[i][0];
       startRow--;
     }
-    
+
     //store col labels (1,2,3,4...)
     for(int j=1; j<this.col-2; j++) {
       if(j>9){
-        this.seats[0][j] = " " + Integer.toString(j) + ""; 
+        this.seats[0][j] = " " + Integer.toString(j) + "";
       } else {
         this.seats[0][j] = " " + Integer.toString(j) + " "; }
-      
+
     }
-    
+
     //create labels for seats
     for(int i=1; i<this.row; i++) {
       for (int j = 1; j < this.col - 1; j++) {
         this.seats[i][j] = "  |";
       }
     }
-    
-    //create aisle (must be after creating labels for seats). 
+
+    //create aisle (must be after creating labels for seats).
     //set col 3 and 6 as aisle
     for(int i=1; i<this.row; i++) {
       this.seats[i][aisleOne] = "@ |";
@@ -113,9 +113,9 @@ public class MovieSeats  {
           System.out.print("    ");
         }
         else {
-            System.out.print(this.seats[i][j] );
+          System.out.print(this.seats[i][j] );
         }
-    }
+      }
       System.out.println();
       System.out.println("-----------------------");
     }
@@ -135,21 +135,21 @@ public class MovieSeats  {
 
     //printSeats(); //show current seats available
     //int rows = this.row -(i - '0'-16); //i-'0' convert to integer; '0' = 48; -16 to ...
-      int rows = (17+this.row-1) - (i - '0');
-      if (j >= this.col-2 || j <= 0 || rows <= 0 || rows >= this.row||this.seats[rows][j+1] == " X|" || this.seats[rows][j+1] == "@ |"){
-          printSeats();
-          System.out.println("Sorry, seat: " + i + j + " is not available.");
-          return 0; //return 0 to calling method (from classOfCinema class), which will ask user to re-select another Seat
-      }
-      else {
-          this.seats[rows][j+1] = " X|"; //mark seat as booked
-          System.out.println("Updated seats:");
-          printSeats();
-          System.out.println("Successfully booked seat: " + i + j + ".Thank you!");
-          System.out.println("");
-          return 1; //return 1 to calling method to say seat is successfully booked
-      }
-	}
+    int rows = (17+this.row-1) - (i - '0');
+    if (j >= this.col-2 || j <= 0 || rows <= 0 || rows >= this.row||this.seats[rows][j+1] == " X|" || this.seats[rows][j+1] == "@ |"){
+      printSeats();
+      System.out.println("Sorry, seat: " + i + j + " is not available.");
+      return 0; //return 0 to calling method (from classOfCinema class), which will ask user to re-select another Seat
+    }
+    else {
+      this.seats[rows][j+1] = " X|"; //mark seat as booked
+      System.out.println("Updated seats:");
+      printSeats();
+      System.out.println("Successfully booked seat: " + i + j + ".Thank you!");
+      System.out.println("");
+      return 1; //return 1 to calling method to say seat is successfully booked
+    }
+  }
 
   public String[][] getSeats() {
     return seats;
@@ -172,11 +172,11 @@ public class MovieSeats  {
 }
 
 
-	
 
 
 
 
-  
 
-  
+
+
+

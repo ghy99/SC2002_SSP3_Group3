@@ -371,7 +371,7 @@ public class MovieSeatsNew  {
         //aiya, for now, jus set regular to be new MovieSeatsNew(13,16,10,2,13);
         //and premium to be new MovieSeatsNew(5,8,3,2,5);
 
-        MovieSeatsNew movieseat = new MovieSeatsNew(5,8,3,2,5);
+        MovieSeatsNew movieseat = new MovieSeatsNew(13,16,10,2,13);
         movieseat.SeatsCreation();
         movieseat.PrintSeats();
         ArrayList<String> seatsSelected = movieseat.SelectSeats();
@@ -380,6 +380,8 @@ public class MovieSeatsNew  {
         for(int i = 0; i<bookedList.size();i++){
             System.out.println("Bookedlist" +bookedList.get(i));
         }
+
+
 
 
         movieseat.PrintSeats();
