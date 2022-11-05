@@ -30,7 +30,7 @@ Anthony's Solo Battle|NowShowing|Hao Yi|Student Anthony attempts to fix everyone
 Anthony's Adventures|ComingSoon|Hao Yi|Anthony faces SC2002's Prof LiFang's last minute project updates.|Anthony, LiFang|Action|NOTBLOCKBUSTER|G|0
 [
 ]
-Finding Sanskkriti|Preview|Hao Yi|Unable to find Sanskkriti. She cannot be contacted.|Hao Yi, Anthony, Sanskkriti|Romance|NOTBLOCKBUSTER|G|0
+Finding Sanskkriti|EndOfShowing|Hao Yi|Unable to find Sanskkriti. She cannot be contacted.|Hao Yi, Anthony, Sanskkriti|Romance|NOTBLOCKBUSTER|G|0
 [
 ]
 JueLin Revisits for loops|NowShowing|Hao Yi and Anthony|JueLin returns from her Algorithm to face another Algorithm in SC2002!|JueLin, Prof LiFang|Comedy|NOTBLOCKBUSTER|G|0
