@@ -48,7 +48,8 @@ public class MainUI {
 //            sc.nextLine();
             switch (option) {
                 case 1 -> {
-                    cineplexes.displayCineplexList();
+                    //cineplexes.displayCineplexList();
+                    cineplexes.getCineplexes().get(0).getListOfCinemas().get(0).getShowTime().get(0).PrintSeats();
                 }
                 case 2 -> {
                     AllCineplex.displayMovieList(cineplexes.getListOfMovies());

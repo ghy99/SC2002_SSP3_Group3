@@ -40,8 +40,8 @@ public class CineplexUnitTest {
                         for (ShowTime st : z.getShowTime())
                         {
                             System.out.println((DateTime.convertTime(st.getTime().getTime()) ));
-                            st.printSeats();
-                            st.checkSeats('B',1);
+//                            st.printSeats();
+//                            st.checkSeats('B',1);
 
                         }
 

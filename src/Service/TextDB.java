@@ -29,7 +29,7 @@ public class TextDB {
         TransactionHistory(File.separator + "TransactionHistory.txt"),
         Holiday(File.separator + "HolidayDates.txt"),
         TicketPrice(File.separator + "TicketPrice.txt"),
-        Env(File.separator+"env.txt");
+        Env(File.separator + "env.txt");
 
 
         public final String Files;
@@ -111,9 +111,9 @@ public class TextDB {
                                 sb.append(t1[j]);
                                 j++;
                             }
-                            movie.setReview(t1[0],Float.parseFloat(t1[1]), sb.toString());
+                            movie.setReview(t1[0], Float.parseFloat(t1[1]), sb.toString());
                         } else {
-                            movie.setReview(t1[0],Float.parseFloat(t1[1]), t1[2]);
+                            movie.setReview(t1[0], Float.parseFloat(t1[1]), t1[2]);
                         }
                     }
                 }
@@ -163,35 +163,49 @@ public class TextDB {
             String time = star.nextToken().trim();
             MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
             int[] aisle = new int[2];
-            int count = 0;
+            int count = 0, counter = 0;
+            int dobuleCout = 0, columnCount = 0;
+            ArrayList<String> selectedSits = new ArrayList<>();
             //Read the 2d array seats
             while (!Objects.equals(listOfShowTime.get(i), "]")) {
                 if (i + 1 < listOfShowTime.size()) {
                     i++;
                     if (!Objects.equals(listOfShowTime.get(i), "]") && !Objects.equals(listOfShowTime.get(i), "[")) {
                         String[] t1 = listOfShowTime.get(i).split(","); //seperate line by ","
-                        temp.add(new ArrayList<>()); //add in new row
-                        ArrayList<String> currentRow = temp.get(rowCount);//get the column that just created
+                        columnCount = t1.length;
                         //For each val seperated by ","
-                        for (String s : t1) {
+                        for (int j = 0; j < t1.length; j++) {
                             //Check is current column an aisle
-                            if (Objects.equals(s, "@ |") && count < 2) {
-                                aisle[count++] = rowCount;
+                            if (Objects.equals(t1[j], "@") && count < 2) {
+                                aisle[count++] = j;
                             }
-                            if (Objects.equals(s, "null")) {
-                                currentRow.add(null);
-                            } else {
-                                currentRow.add(s);
+                            if ((Objects.equals(t1[j], " |") || Objects.equals(t1[j], "X|")) && dobuleCout == 0) {
+                                dobuleCout = rowCount - 1;
+                            }
+                            if (Objects.equals(t1[j], "X") || Objects.equals(t1[j], "X|")) {
+                                StringBuilder sb = new StringBuilder();
+                                sb.append((char)(i - 1));
+                                sb.append(j + 1);
+                                selectedSits.add(sb.toString());
                             }
                         }
                         rowCount++;
                     }
                 }
             }
+
+            for (int z = 0; z< selectedSits.size();z++)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.append ( (char)((65 + rowCount ) - selectedSits.get(z).charAt(0)));
+                sb.append(selectedSits.get(z).charAt(1));
+                selectedSits.set(z ,sb.toString() );
+            }
+
             //Refrence the current Showtime to our list of movies in cinexplex
             for (Movie m : movie) {
                 if (Objects.equals(m.getMovieTitle(), movieName)) {
-                    alr.add(new ShowTime(DateTime.StringToDate(time), m, temp, aisle, dim));
+                    alr.add(new ShowTime(DateTime.StringToDate(time), m, selectedSits, rowCount, columnCount, dobuleCout, aisle, dim));
                 }
             }
         }
@@ -294,7 +308,7 @@ public class TextDB {
             Date date = DateTime.StringToDate(star.nextToken().trim());
             String seatID = star.nextToken().trim();
             IndividualSeats.SeatType seattype = IndividualSeats.SeatType.valueOf(star.nextToken().trim());
-            Cinema.CinemaType cinType =Cinema.CinemaType.valueOf(star.nextToken().trim());
+            Cinema.CinemaType cinType = Cinema.CinemaType.valueOf(star.nextToken().trim());
             int age = Integer.parseInt(star.nextToken().trim());
             MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
             MovieType.Blockbuster blockbuster = MovieType.Blockbuster.valueOf(star.nextToken().trim());
@@ -320,7 +334,7 @@ public class TextDB {
         Boolean[] flags = new Boolean[2];
 
         for (int i = 0; i < oldData.size(); i++) {
-          flags[i] = Boolean.parseBoolean(oldData.get(i)) ;
+            flags[i] = Boolean.parseBoolean(oldData.get(i));
         }
 
         return flags;
@@ -360,6 +374,7 @@ public class TextDB {
 
         Write(fileName, alw);
     }
+
     public static void WriteToTextDB(String fileName, Customer customer) throws IOException {
         List alw = new ArrayList();// to store Professors data
         StringBuilder st = new StringBuilder();
@@ -406,21 +421,20 @@ public class TextDB {
         Write(fileName, alw);
     }
 
-    public static void UpdateToTextDB(String fileName , Settings setting) throws IOException {
+    public static void UpdateToTextDB(String fileName, Settings setting) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
         StringBuilder st = new StringBuilder();
-        alw.add(String.valueOf(setting.isSale()) );
+        alw.add(String.valueOf(setting.isSale()));
         alw.add(String.valueOf(setting.isRating()));
 
         Update(fileName, alw);
     }
 
-    public static void UpdateToTextDB(String fileName , ArrayList<String> holiday , Settings settings) throws IOException {
+    public static void UpdateToTextDB(String fileName, ArrayList<String> holiday, Settings settings) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
-        for (String h : holiday)
-        {
+        for (String h : holiday) {
             alw.add(h);
         }
 
@@ -456,8 +470,7 @@ public class TextDB {
 
             alw.add(st.toString());
             alw.add("[");
-            for (Review review : movie.getListOfReview())
-            {
+            for (Review review : movie.getListOfReview()) {
                 st = new StringBuilder();
                 st.append(review.getUserName());
                 st.append(SEPARATOR);
@@ -472,34 +485,58 @@ public class TextDB {
         Update(fileName, alw);
     }
 
-//    public static void UpdateToTextDB(String fileName, ArrayList<ShowTime> showTimes, MovieType.Dimension dim) throws IOException {
-//        List alw = new ArrayList();// to store Professors data
-//
-//        for (int a = 0; a < showTimes.size(); a++) {
-//            StringBuilder st = new StringBuilder();
-//            st.append(showTimes.get(a).getMovie().getMovieTitle());
-//            st.append(SEPARATOR);
-//            st.append(DateTime.convertTime(showTimes.get(a).getTime().getTime()));
-//            st.append(SEPARATOR);
-//            st.append(dim.toString());
-//            alw.add(st.toString());
-//            alw.add("[");
-//
-//            for (String[] row : showTimes.get(a).getSeats()) {
-//                st = new StringBuilder();
-//                for (int i = 0; i < row.length; i++) {
-//                    st.append(row[i]);
-//                    if (i + 1 < row.length) st.append(",");
-//                }
-//                alw.add(st.toString());
-//            }
-//
-//            alw.add("]");
-//        }
-//
-//
-//        Update(fileName, alw);
-//    }
+    public static void UpdateToTextDB(String fileName, ArrayList<ShowTime> showTimes, MovieType.Dimension dim) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        for (int a = 0; a < showTimes.size(); a++) {
+            StringBuilder st = new StringBuilder();
+            st.append(showTimes.get(a).getMovie().getMovieTitle());
+            st.append(SEPARATOR);
+            st.append(DateTime.convertTime(showTimes.get(a).getTime().getTime()));
+            st.append(SEPARATOR);
+            st.append(dim.toString());
+            alw.add(st.toString());
+            alw.add("[");
+
+
+            for (int i = 0; i < showTimes.get(a).getArray2D().size(); i++) {
+                st = new StringBuilder();
+                for (int j = 0; j < showTimes.get(a).getArray2D().get(i).size(); j++) {
+                    if (showTimes.get(a).getArray2D().get(i).get(j).getSeatType() == IndividualSeats.SeatType.SingleSeat) {
+                        if (showTimes.get(a).getArray2D().get(i).get(j).getSeatOccupied()) {
+                            st.append("X");
+                        } else {
+                            st.append(" ");
+                        }
+                    }
+
+                    if (showTimes.get(a).getArray2D().get(i).get(j).getSeatType() == IndividualSeats.SeatType.DoubleSeat) {
+                        if (showTimes.get(a).getArray2D().get(i).get(j).getSeatOccupied()) {
+                            st.append("X|");
+                        } else {
+                            st.append(" |");
+                        }
+                    }
+
+                    if(showTimes.get(a).getArray2D().get(i).get(j).getSeatType() == IndividualSeats.SeatType.Aisle)
+                    {
+                        st.append("@");
+                    }
+
+
+                    if (i + 1 <showTimes.get(a).getArray2D().get(i).size()) st.append(",");
+                }
+
+
+                alw.add(st.toString());
+            }
+
+            alw.add("]");
+        }
+
+
+        Update(fileName, alw);
+    }
 
     public static void WriteToTextDB(String fileName, int cat, int choice, Double newTicketPrice) throws IOException {
         List alw = new ArrayList();
@@ -561,8 +598,7 @@ public class TextDB {
 
             alw.add(st.toString());
             alw.add("[");
-            for (Review review : movie.getListOfReview())
-            {
+            for (Review review : movie.getListOfReview()) {
                 st = new StringBuilder();
                 st.append(review.getUserName());
                 st.append(SEPARATOR);
@@ -660,33 +696,58 @@ public class TextDB {
         }
     }
 
-//    public static void UpdateToTextDB(String fileName, Movie movie, ArrayList<ShowTime> showTimes) throws IOException {
-//        List alw = new ArrayList();// to store Professors data
-//
-//        for (ShowTime showTime : showTimes) {
-//            StringBuilder st = new StringBuilder();
-//            st.append(showTime.getMovie().getMovieTitle());
-//            st.append(SEPARATOR);
-//            st.append(DateTime.convertTime(showTime.getTime().getTime()));
-//            st.append(SEPARATOR);
-//            st.append(showTime.getDimension());
-//            alw.add(st.toString());
-//            alw.add("[");
-//
-//            for (String[] row : showTime.getSeats()) {
-//                st = new StringBuilder();
-//                for (int i = 0; i < row.length; i++) {
-//                    st.append(row[i]);
-//                    if (i + 1 < row.length) st.append(",");
-//                }
-//                alw.add(st.toString());
-//            }
-//
-//            alw.add("]");
-//        }
-//
-//        Update(fileName, alw);
-//    }
+    public static void UpdateToTextDB(String fileName, Movie movie, ArrayList<ShowTime> showTimes) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        for (int a = 0; a < showTimes.size(); a++) {
+            StringBuilder st = new StringBuilder();
+            st.append(showTimes.get(a).getMovie().getMovieTitle());
+            st.append(SEPARATOR);
+            st.append(DateTime.convertTime(showTimes.get(a).getTime().getTime()));
+            st.append(SEPARATOR);
+            st.append(showTimes.get(a).getDimension().toString());
+            alw.add(st.toString());
+            alw.add("[");
+
+
+            for (int i = 0; i < showTimes.get(a).getArray2D().size(); i++) {
+                st = new StringBuilder();
+                for (int j = 0; j < showTimes.get(a).getArray2D().get(i).size(); j++) {
+                    if (showTimes.get(a).getArray2D().get(i).get(j).getSeatType() == IndividualSeats.SeatType.SingleSeat) {
+                        if (showTimes.get(a).getArray2D().get(i).get(j).getSeatOccupied()) {
+                            st.append("X");
+                        } else {
+                            st.append(" ");
+                        }
+                    }
+
+                    if (showTimes.get(a).getArray2D().get(i).get(j).getSeatType() == IndividualSeats.SeatType.DoubleSeat) {
+                        if (showTimes.get(a).getArray2D().get(i).get(j).getSeatOccupied()) {
+                            st.append("X|");
+                        } else {
+                            st.append(" |");
+                        }
+                    }
+
+                    if(showTimes.get(a).getArray2D().get(i).get(j).getSeatType() == IndividualSeats.SeatType.Aisle)
+                    {
+                        st.append("@");
+                    }
+
+
+                    if (j + 1 <showTimes.get(a).getArray2D().get(i).size()) st.append(",");
+                }
+
+
+                alw.add(st.toString());
+            }
+
+            alw.add("]");
+        }
+
+
+        Update(fileName, alw);
+    }
 
     /*
     TEST THIS FUNCTION WHEN I COME BACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -738,7 +799,7 @@ public class TextDB {
         return data;
     }
 
-    public static void UpdateAdmin(String fileName,ArrayList <Admin> admins) throws IOException {
+    public static void UpdateAdmin(String fileName, ArrayList<Admin> admins) throws IOException {
         List adm = new ArrayList();// to store Professors data
 
         for (Admin admin : admins) {

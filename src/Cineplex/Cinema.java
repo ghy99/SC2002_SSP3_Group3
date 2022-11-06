@@ -110,7 +110,7 @@ public class Cinema {
      */
     public void updateCinemaTime(int index,Cineplex cineplex, Date date, Movie movie, MovieType.Dimension dim) throws IOException {
         this.showTime.remove(index);
-        createShowTime(cineplex,date,movie,dim);
+        createShowTime(date,movie,dim);
     }
 
     /**
@@ -130,7 +130,7 @@ public class Cinema {
      * @param movie Selected Movie
      * @param dim Selected Dimension
      */
-    public void createShowTime(Cineplex cineplex, Date date, Movie movie, MovieType.Dimension dim) throws IOException {
+    public void createShowTime( Date date, Movie movie, MovieType.Dimension dim) throws IOException {
         var temp = this.getShowTime();
         int i = 0;
         ShowTime currentSTDate = null;
