@@ -126,7 +126,7 @@ public class Admin {
 
                     int choice = GetNumberInput.getInt(1, 3, -1);
                     System.out.println("What is the new value:");
-                    Double newvalue = GetNumberInput.getDouble(0, -1);
+                    Double newvalue = GetNumberInput.getDouble(0, 100, -1);
 
                     System.out.println("Please select age price to edit \n");
 
@@ -140,7 +140,7 @@ public class Admin {
 
                     int choice = GetNumberInput.getInt(1, 3, -1);
                     System.out.println("What is the new value:");
-                    Double newvalue = GetNumberInput.getDouble(0, -1);
+                    Double newvalue = GetNumberInput.getDouble(0, 100, -1);
 
                     System.out.println("Please select age price to edit \n");
 
@@ -153,7 +153,7 @@ public class Admin {
 
                     int choice = GetNumberInput.getInt(1, 2, -1);
                     System.out.println("What is the new value:");
-                    Double newvalue = GetNumberInput.getDouble(0, -1);
+                    Double newvalue = GetNumberInput.getDouble(0, 100, -1);
 
                     System.out.println("Please select age price to edit \n");
 
@@ -166,7 +166,7 @@ public class Admin {
 
                     int choice = GetNumberInput.getInt(1, 2, -1);
                     System.out.println("What is the new value:");
-                    Double newvalue = GetNumberInput.getDouble(0, -1);
+                    Double newvalue = GetNumberInput.getDouble(0, 100, -1);
 
                     System.out.println("Please select age price to edit \n");
 

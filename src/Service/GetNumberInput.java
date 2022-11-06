@@ -44,7 +44,7 @@ public class GetNumberInput {
      * @param exit - Value to enter to exit loop
      * @return a double value Choice
      */
-    public static double getDouble(double range1, int exit) {
+    public static double getDouble(double range1, double range2, int exit) {
         Scanner sc = new Scanner(System.in);
         double choice;
         do {
@@ -58,10 +58,10 @@ public class GetNumberInput {
                 System.out.println("Break condition fulfilled. Exiting.");
                 break;
             }
-            if (choice < range1) {
+            if (choice < range1 || choice > range2) {
                 System.out.printf("Value out of range! Please enter a value above %.1f\n", range1);
             }
-        } while (choice < range1);
+        } while (choice < range1 || choice > range2);
         return choice;
     }
 

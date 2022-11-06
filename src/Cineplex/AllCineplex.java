@@ -171,7 +171,7 @@ public class AllCineplex extends Settings {
                 System.out.printf("%d) %s\n", j + 1, movielist.get(j).getMovieTitle());
             }
             System.out.println("Enter movie number to view more movie details. (Enter -1) to return to main page.");
-            choice = GetNumberInput.getInt(1, movielist.size()) - 1;
+            choice = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
             if (choice == -2) {
                 break;
             } else if (choice >= movielist.size()) {
@@ -179,12 +179,12 @@ public class AllCineplex extends Settings {
             } else {
                 movielist.get(choice).printMovieDetails();
 
-                System.out.println("\tIn what order would you like to see the reviews?  (Enter -1) to return to main page.");
+                System.out.println("\tIn what order would you like to see the reviews?  (Enter -1 to return to main page.");
                 System.out.println("\t1) Newest to oldest");
                 System.out.println("\t2) Oldest to newest");
                 System.out.println("\t3) Highest rating to lowest rating");
                 System.out.println("\t4) Lowest rating to highest rating");
-                switch (GetNumberInput.getInt(1, 4)) {
+                switch (GetNumberInput.getInt(1, 4, -1)) {
                     case 1 -> {
                         movielist.get(choice).printSortedReview(AllReviews.ReviewSort.NewToOld);
                     }
