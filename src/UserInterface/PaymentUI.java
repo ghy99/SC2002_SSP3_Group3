@@ -12,8 +12,20 @@ import java.util.Scanner;
  * @author GAN HAO YI, CHEW ZHI QI
  */
 public class PaymentUI {
+    /**
+     * This method is the Payment Interface where customer's ticket price is calculated and the payment process is completed.
+     * @param customer - tells me ticket information. (Might have to pass in Arraylist of Ticket.
+     * @return change this to void.
+     * @throws IOException
+     */
     public static String PaymentInterface(Customer customer) throws IOException {
-        DateTime datetime = new DateTime();
+        // Check if movie is a blockbuster. If yes, +$1, else, no charge.
+        // Get movie date, check holiday, if not holiday, check weekday / weekend, calc ticket price (Compare to settings.ticketcharges)
+        // Check Cinema type (Regular Premium), check movie Dimensions(2D, 3D), calc ticket price (Compare to settings.ticketcharges)
+        // Get number of tickets.
+        // get movie genre, if movie genre < NC16, ask for how many children / adult / senior citizen price, cap at number of tickets.
+        //                  if movie genre >= NC16, ask for adult / senior citizen price, cap at number of tickets.
+        // Count number of seats booked, compare to age price, sum up and return price.
         MovieTicket currTicket = customer.getTicket();
         double ticketPrice = MovieTicket.CalculatePrice(currTicket); // Get movie datetime
         System.out.printf("Your Ticket Price is: %.2f\n", ticketPrice);

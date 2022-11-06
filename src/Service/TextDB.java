@@ -21,7 +21,6 @@ import Review.*;
 public class TextDB {
 
     public enum Files {
-
         Cineplex(File.separator + "Cineplexes.txt"),
         Movies(File.separator + "Movies.txt"),
         Customers(File.separator + "Customers.txt"),
@@ -31,13 +30,10 @@ public class TextDB {
         TicketPrice(File.separator + "TicketPrice.txt"),
         Env(File.separator + "env.txt");
 
-
         public final String Files;
-
         Files(String files) {
             this.Files = files;
         }
-
         @Override
         public String toString() {
             return Files;
@@ -49,7 +45,6 @@ public class TextDB {
     private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString() + File.separator + "src" + File.separator + "DataStorage" + File.separator;
 
     public static ArrayList<Customer> readFromFile(String fileName, ArrayList<Customer> customers, Customer temp) throws IOException {
-
         // read String from text file
         ArrayList stringArray = (ArrayList) Read(fileName);
 
