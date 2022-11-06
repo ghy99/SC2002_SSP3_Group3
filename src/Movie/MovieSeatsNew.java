@@ -97,7 +97,7 @@ public class MovieSeatsNew  {
         for (int i = 0; i < this.array2D.size() ; i++) { //each row
             endRowIDNum = (65+ this.rows-1) - i; //go backwards from the last row
             endRowIDChar = (char)endRowIDNum;
-            //System.out.println("Here" + endRowIDChar);
+
             for (int j = 0; j < this.array2D.get(i).size(); j++) { //for each row, under each column
                 String seatID = String.valueOf(endRowIDChar)+String.valueOf(j+1);
                 this.array2D.get(i).get(j).setSeatID(seatID);
@@ -112,27 +112,14 @@ public class MovieSeatsNew  {
 
 
     public void PrintSeats(){
-//        System.out.print("  ");
-//        for (int i = 0; i<this.rows+2;i++){
-//            if(i==10){
-//                System.out.print((i+1));
-//            } else {
-//                System.out.print(" " + (i + 1) + " ");
-//            }
-//        }
-//
-//        System.out.println("");
 
         int endRowIDNum;
         char endRowIDChar;
-
-
 
         for (int i = 0; i < this.array2D.size() ; i++) {
 
             endRowIDNum = (65+ this.rows-1) - i;
             endRowIDChar = (char)endRowIDNum;
-            System.out.print(endRowIDChar+" ");
 
             for (int j = 0; j < this.array2D.get(i).size(); j++) {
 
@@ -286,25 +273,24 @@ public class MovieSeatsNew  {
         endRowIDChar = (char)endRowIDNum; //changes for when the number of rows changes
 
         ArrayList<String> overallList = new ArrayList<String>();
-        //overallList.add("");
 
 
         for (int k = 0; k<seatsSelected.size();k++){
             char rowLetterChar = seatsSelected.get(k).charAt(0);
             String rowLetterString = String.valueOf(rowLetterChar);
-            System.out.println("row Letter" + String.valueOf(rowLetterString));
+            //System.out.println("row Letter" + String.valueOf(rowLetterString));
 
-//            int d= (endRowIDChar -'0');
-//            System.out.println("LOOK" + d);
             int c = (endRowIDChar -'0') - (rowLetterChar - '0'); //gives the relative position
-            System.out.println("row Letter" + c);
+            //System.out.println("row Letter" + c);
 
             String colnum = right(seatsSelected.get(k),seatsSelected.get(k).length() - 1);
-            System.out.println("HERE"+colnum);
+            //System.out.println("HERE"+colnum);
             int colnumInt = Integer.parseInt(colnum)-1;
+
+            //checks if each seat selected is a doubleseat
             if(Objects.equals(this.array2D.get(c).get(colnumInt).getSeatType(), IndividualSeats.SeatType.DoubleSeat)){
 
-                if(colnumInt<aisleOne||colnumInt>aisleTwo){
+                if(colnumInt<aisleOne||colnumInt>aisleTwo){  //if its a doubleseat, check if its before or after aisle
 
 
                     if(colnumInt%2==0){
@@ -337,7 +323,7 @@ public class MovieSeatsNew  {
                     }
                 }
 
-            } else {
+            } else { //else means a single seat is selected
                 this.array2D.get(c).get(Integer.parseInt(colnum)-1).setOccupied(true);
                 overallList = checkCounter(c,Integer.parseInt(colnum)-1,overallList);
 
@@ -346,7 +332,9 @@ public class MovieSeatsNew  {
 
         }
 
-        return overallList;
+        return overallList; //returns all the seats that are booked.
+        // OverallList and seatsSelected lists are different.
+        // OverallList includes the counterparts of the doubleseats that was not taken into account when booking
     }
 
 
@@ -371,7 +359,7 @@ public class MovieSeatsNew  {
         //aiya, for now, jus set regular to be new MovieSeatsNew(13,16,10,2,13);
         //and premium to be new MovieSeatsNew(5,8,3,2,5);
 
-        MovieSeatsNew movieseat = new MovieSeatsNew(5,8,3,2,5);
+        MovieSeatsNew movieseat = new MovieSeatsNew(13,16,10,2,13);
         movieseat.SeatsCreation();
         movieseat.PrintSeats();
         ArrayList<String> seatsSelected = movieseat.SelectSeats();
@@ -380,6 +368,8 @@ public class MovieSeatsNew  {
         for(int i = 0; i<bookedList.size();i++){
             System.out.println("Bookedlist" +bookedList.get(i));
         }
+
+
 
 
         movieseat.PrintSeats();
