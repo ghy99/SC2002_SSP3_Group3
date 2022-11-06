@@ -28,13 +28,12 @@ public class DateTime extends Date {
         } catch (ParseException e) {
             return null;
         }
-
         return dt;
     }
 
     /**
      * Convert datetime format to Date
-     * @param dateTime dd-MM-yyyy;HH:mm
+     * @param date dd-MM-yyyy;HH:mm
      * @return Date with the passed in dateime
      */
     public static Date StringToDateOnly(String date)
@@ -79,5 +78,4 @@ public class DateTime extends Date {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
         return cinemaCode + dateFormatter.format(super.getTime());
     }
-
 }

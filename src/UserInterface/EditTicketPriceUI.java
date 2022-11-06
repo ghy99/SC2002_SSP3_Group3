@@ -5,6 +5,9 @@ import Service.GetNumberInput;
 import Service.TextDB;
 import java.io.IOException;
 import java.util.Scanner;
+/**
+ * To be deleted
+ */
 
 /**
  *This is the Edit Ticket Price user Interface. Used to call the Edit Ticket Interface to Update the Ticket Prices.
@@ -28,7 +31,7 @@ public class EditTicketPriceUI {
             System.out.println("2) Day of the week");
             System.out.println("3) Movie Dimension");
             System.out.println("4) Type of Cinema");
-            cat = GetNumberInput.getInt();
+            cat = GetNumberInput.getInt(1, 4, -1);
             if (cat == -1) {
                 break;
             }
@@ -53,10 +56,11 @@ public class EditTicketPriceUI {
                     System.out.println("2) Premium Cinema");
                 }
             }
-            int choice = GetNumberInput.getInt();
-            System.out.println("What is the new value:");
-            Double newvalue = GetNumberInput.getDouble();
-            TextDB.UpdateToTextDB(file, cat, choice, newvalue);
+            int choice = GetNumberInput.getInt(1, 4, -1);
+            if (choice == -1) continue;
+//            System.out.println("What is the new value:");
+//            Double newvalue = GetNumberInput.getDouble(0, 1000000);
+//            TextDB.UpdateToTextDB(file, cat, choice, newvalue);
         } while (cat != -1);
     }
 }

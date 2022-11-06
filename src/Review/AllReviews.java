@@ -86,7 +86,6 @@ public class AllReviews {
      */
     private ArrayList<Review> sortReview(ReviewSort sortType) {
         ArrayList<Review> tempReview = (ArrayList<Review>) this.listOfReview.clone();
-
         switch (sortType) {
             case NewToOld -> {
                 System.out.println("##########Old to new review###########");

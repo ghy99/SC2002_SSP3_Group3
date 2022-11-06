@@ -1,13 +1,9 @@
 package UserInterface;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import Admin.*;
 import Cineplex.*;
-import Movie.MovieTicket;
 import Service.*;
-import Review.*;
 
 
 /**
@@ -22,15 +18,10 @@ public class AdminUI {
      * @param passwordInput This input is for successful login by checking if the corresponding password exists in the database
      * @throws Exception is thrown if any interruption is detected in the reading admin database causes error
      */
-
-	public static void AdminInterface(int loginFlag , String usernameInput , String passwordInput,
-                                      AllCineplex cineplexes) throws Exception {
+	public static void AdminInterface(int loginFlag, String usernameInput,
+                                      String passwordInput, AllCineplex cineplexes) throws Exception {
 
         System.out.println("Welcome to the Admin Portal. ");
-        //only success log in then can access other services
-
-        Scanner scan = new Scanner(System.in);
-
         if (loginFlag == 0){
             System.out.println("Please go back to the main portal to re-login");
             return;
@@ -50,7 +41,7 @@ public class AdminUI {
             System.out.println("\t 5) Other Settings");
             System.out.println("\tEnter '11' to exit!");
 
-            choice = GetNumberInput.getInt();
+            choice = GetNumberInput.getInt(1, 5, 11);
 
             switch (choice) {
                 case 1 -> {
@@ -58,22 +49,22 @@ public class AdminUI {
                     admin.EditTicket(cineplexes);
                 }
                 case 2 -> {
-                    System.out.println("2) Holiday Dates, Please select one of the following functions");
-                    System.out.println("\t 1. Add Holiday Dates");
-                    System.out.println("\t 2. Edit Holiday Dates");
-                    System.out.println("\t 3. Delete Holiday Dates");
-                    choice2 = GetNumberInput.getInt();
+                    System.out.println("2) Holiday Dates, Please select one of the following functions (Enter -1 to exit):");
+                    System.out.println("\t1) Add Holiday Dates");
+                    System.out.println("\t2) Edit Holiday Dates");
+                    System.out.println("\t3) Delete Holiday Dates");
+                    choice2 = GetNumberInput.getInt(1, 3, -1);
                     admin.HolidayDateFunctions(cineplexes,choice2);
                 }
                 case 3 -> {
                     MovieListingUI.MovieListingInterface(cineplexes);
                 }
                 case 4 -> {
-                	System.out.println("4) Movie Listing by rank. Please select one of the following functions ");
-                    System.out.println("\t 1.Display Top 5 movie rankings by rating");
-                    System.out.println("\t 2.Display Top 5 movie rankings by ticket sales");
+                	System.out.println("4) Movie Listing by rank. Please select one of the following functions (Enter -1 to exit):");
+                    System.out.println("\t1) Display Top 5 movie rankings by rating");
+                    System.out.println("\t2) Display Top 5 movie rankings by ticket sales");
 
-                    if(GetNumberInput.getInt() == 1)
+                    if(GetNumberInput.getInt(1, 2, -1) == 1)
                     {
                         cineplexes.printSortedList(AllCineplex.MovieSort.Top5Rating);
                     }
@@ -83,10 +74,10 @@ public class AdminUI {
                     }
                 }
                 case 5-> {
-                    System.out.println("5) Other Settings. Please select one of the following functions ");
-                    System.out.println("\t 1.Control the display of movie rankings to customers");
-                    System.out.println("\t 2.Help new staffs to register new Admin Account");
-                    choice2 = GetNumberInput.getInt();
+                    System.out.println("5) Other Settings. Please select one of the following functions (Enter -1 to exit):");
+                    System.out.println("\t1) Control the display of movie rankings to customers");
+                    System.out.println("\t2) Help new staffs to register new Admin Account");
+                    choice2 = GetNumberInput.getInt(1, 2, -1);
                     admin.SettingFunctions(cineplexes, choice2);
                 }
                 default -> {
@@ -95,7 +86,6 @@ public class AdminUI {
             }
         } while (choice < 10);
     }
-
 }
 
 

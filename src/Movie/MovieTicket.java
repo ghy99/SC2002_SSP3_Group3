@@ -1,6 +1,6 @@
 package Movie;
 import Cineplex.*;
-import Service.DateTime;
+import Service.*;
 import Service.TextDB;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,8 +13,8 @@ import java.util.Hashtable;
 import java.util.Set;
 
 /**
- *  * @author CHEW ZHI QI, GAN HAO YI
- *  * Movie Ticket class for reading from db / writing to db
+ *  @author CHEW ZHI QI, GAN HAO YI
+ *  Movie Ticket class for reading from db / writing to db
  *  Movie Ticket is used to calculate ticket price as well.
  */
 public class MovieTicket {
@@ -28,19 +28,30 @@ public class MovieTicket {
     private String TID;
     private String SeatID;
     private Date MovieDateTime;
-
     private IndividualSeats.SeatType seattype;
     private Cinema.CinemaType cinematype;
     private int age;
     private MovieType.Dimension dim;
     private MovieType.Blockbuster blockbuster;
 
-    /**
-     *
-     */
     public MovieTicket() {
     }
 
+    /**
+     * Constructor
+     * @param email
+     * @param chosenCineplex
+     * @param cinema
+     * @param movie
+     * @param TID
+     * @param seatID
+     * @param movieDateTime
+     * @param seattype
+     * @param cinType
+     * @param age
+     * @param dim
+     * @param blockbuster
+     */
     public MovieTicket(
             String email ,String chosenCineplex, String cinema, String movie,
             String TID, String seatID, Date movieDateTime,
@@ -66,14 +77,12 @@ public class MovieTicket {
     public String getChosenCineplex() {
         return this.ChosenCineplex;
     }
-
     public String getChosenMovie() {
         return this.Movie;
     }
     public void setChosenMovie(String movie) {
         this.Movie = movie;
     }
-
     public String getMovieSeats(){
         return this.SeatID;
     }
@@ -98,23 +107,18 @@ public class MovieTicket {
     public void setTID(String TID) {
         this.TID = TID;
     }
-
     public String getSeatID() {
         return SeatID;
     }
-
     public void setSeatID(String seat) {
         this.SeatID = seat;
     }
-
     public IndividualSeats.SeatType getSeattype() {
         return seattype;
     }
-
     public void setSeattype(IndividualSeats.SeatType seattype) {
         this.seattype = seattype;
     }
-
     public Cinema.CinemaType getCinematype() {
         return cinematype;
     }
@@ -172,7 +176,8 @@ public class MovieTicket {
     public static double CalculatePrice(MovieTicket ticket) throws IOException {
         System.out.println("Calculate Price\n");
         System.out.println("Initializing Prices to compare\n");
-        TicketCharges charges = new TicketCharges();
+        Settings settings = new Settings();
+        TicketCharges charges = settings.getTicketCharges();
         int userAge = 20;
         int day = 2;
         int dim = 2;
@@ -201,7 +206,6 @@ public class MovieTicket {
     }
 
     public void printTicket() {
-
         System.out.printf("CINEPLEX: %s\n", this.ChosenCineplex);
         System.out.printf("MOVIE: %s\n", this.getChosenMovie());
         System.out.printf("MOVIE DATE:TIME: %s\n", this.getShowtime());

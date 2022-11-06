@@ -12,7 +12,6 @@ import java.util.List;
  * Setting class to hold environmental global variable
  */
 public class Settings {
-
     /**
      * Flag for user be able to see top 5 sale movie
      */
@@ -21,9 +20,7 @@ public class Settings {
      * Flag for user be able to see top 5 rating movie
      */
     private boolean isRating;
-
     private ArrayList<String> holiday;
-
     private TicketCharges ticketCharges;
 
     public Settings() throws IOException {
@@ -104,29 +101,23 @@ public class Settings {
 
     /**
      * This function is used to delete any stored holiday date in the database
-     * @param date = the users input of the date they want to delete from the database
+     * @param index = the users input of the date they want to delete from the database
      * @throws IOException this is thrown if the reading from the file results in error
      */
     public void deleteHoliday(int index) throws IOException {
         this.holiday.remove(index);
-
         TextDB.UpdateToTextDB(TextDB.Files.Holiday.toString(), this.holiday,this);
-
     }
 
     /**
      * This function is used to update/change any dates in the database
-     * @param oldDate = the original data in the database before changing
-     * @param newDate = the input that needs to be changed in the database
+     * @param index = the original data in the database before changing
+     * @param date = the input that needs to be changed in the database
      * @throws IOException This Exception is thrown if reading file causes error.
      */
     public void editHoliday(int index , String date) throws IOException {
-
         this.holiday.remove(index);
         this.holiday.add(date);
         TextDB.WriteToTextDB(TextDB.Files.Holiday.toString(), date);
-
     }
-
-
 }

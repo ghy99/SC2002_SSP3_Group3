@@ -1,4 +1,5 @@
 package UserInterface;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -26,33 +27,30 @@ public class CineplexUI {
      * @throws IOException is thrown if there is an error in reading from the file
      */
     public static MovieTicket CineplexInterface(AllCineplex cineplexes) throws IOException {
-
         int choice = 0;
         ArrayList<ShowTime> allST = new ArrayList<>();
         ArrayList<Cinema> cinemas = new ArrayList<>();
         ArrayList<ShowTime> specificST = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         MovieTicket ticket = new MovieTicket();
-        for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
-            System.out.printf("\t%d: Cineplex Name: %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
-        }
         int selectCineplex = -1;
         int selectShowtime = -1;
         int selectDate = -1;
-
+        for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
+            System.out.printf("\t%d: Cineplex Name: %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
+        }
         while (selectCineplex >= -1) {
             System.out.println("Select your Cineplex: ");
-            selectCineplex = sc.nextInt() - 1;
+            selectCineplex = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
             while (selectCineplex  < 0 || selectCineplex >= cineplexes.getCineplexes().size()){
                 System.out.println("The number you keyed is out of range, please key again!");
                 System.out.println("Select your Cineplex: ");
-                selectCineplex = sc.nextInt() - 1; // error checking for correct cineplex
+                selectCineplex = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1; // error checking for correct cineplex
             }
             ticket.setChosenCineplex(cineplexes.getCineplexes().get(selectCineplex).getCineplexName()); // setting user's chosen Cineplex
             ArrayList<Movie> movielist = cineplexes.getListOfMovies();
             if (movielist.size() == 0) {
                 System.out.printf("%s is not showing any movies at this moment. Please select another Cineplex.\n\n", cineplexes.getCineplexes().get(selectCineplex).getCineplexName());
-//                return  null;
             }
             else {
                 for (int i = 0; i < movielist.size(); i++) {
@@ -60,15 +58,12 @@ public class CineplexUI {
                     movielist.get(i).printMovieDetails();
                 }
                 System.out.println("Select your Movie from the list above: ");
-                int selectMovie = GetNumberInput.getInt() - 1;
+                int selectMovie = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
                 while (selectMovie  < 0 || selectMovie >= movielist.size()){
                     System.out.println("The number you keyed is out of range, please key again!");
                     System.out.println("Select your Movie from the list above: ");
-                    selectMovie = GetNumberInput.getInt() - 1;
+                    selectMovie = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
                 }
-
-
-
                 //Ask for showtime
                 while (selectShowtime >= -1) {
                     ArrayList<Cinema> listOfCinemas = cineplexes.getCineplexes().get(selectCineplex).getListOfCinemas();
@@ -85,8 +80,6 @@ public class CineplexUI {
                         }
                     }
 
-
-
                     String selectedDate = "";
                     int dateChecking = -1;
                     while(dateChecking == -1) {
@@ -99,34 +92,29 @@ public class CineplexUI {
                             STDate = STDate.plusDays(1);
                         }
                         System.out.println("Select your date from the list above: ");
-                        selectDate = sc.nextInt() - 1;
+                        selectDate = GetNumberInput.getInt(1, 7, -1) - 1;
                         while (selectDate  < 0 || selectDate >= STDates.size()){
                             System.out.println("The number you keyed is out of range, please key again!");
                             System.out.println("Select your date from the list above: ");
-                            selectDate = sc.nextInt() - 1; // error checking for correct cineplex
+                            selectDate = GetNumberInput.getInt(1, 7, -1) - 1; // error checking for correct cineplex
                         }
-
-
                         selectedDate = STDates.get(selectDate);
-
                             for (int z = 0; z < allST.size(); z++) {
                                 if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(z).getTime().getTime()))) {
                                     dateChecking++;
                                     break;
                                 }
                             }
-
                             if(dateChecking == -1) {
                                 System.out.printf("%s no showtime for this movies on %s. Please select another Date.\n\n", cineplexes.getCineplexes().get(selectCineplex).getCineplexName(), selectedDate);
                             }
-
                     }
                     int three_d = 0;
                     MovieType.Dimension dim = null;
                     do {
                         System.out.println("Would you like to watch the movie in 3D?");
                         System.out.println("1) Yes\n2) No");
-                        three_d = GetNumberInput.getInt();
+                        three_d = GetNumberInput.getInt(1, 2, -1);
                         if (three_d != 1 && three_d != 2) continue;
                         switch (three_d) {
                             case 1 -> {
@@ -158,7 +146,6 @@ public class CineplexUI {
                         int count = 1;
                         for(int i = 0; i < allST.size(); i++)
                         {
-
                             if (Objects.equals(selectedDate, DateTime.convertDate( allST.get(i).getTime().getTime())) &&
                                     Objects.equals(allST.get(i).getDimension(), dim)){
                                 System.out.printf("%s) %s %s %s\n", count++, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle() , DateTime.convertTime( allST.get(i).getTime().getTime()));
@@ -171,15 +158,13 @@ public class CineplexUI {
                         System.out.printf("%s is no showtime for this movies. Please select another Date.\n\n", cineplexes.getCineplexes().get(selectCineplex).getCineplexName());
                         return null;
                     }
-
-
                     System.out.println("Select your Showtime from the list above: ");
-                    selectShowtime = GetNumberInput.getInt() - 1;
+                    selectShowtime = GetNumberInput.getInt(1, allST.size(), -1) - 1;
 
                     while (selectShowtime  < 0 || selectShowtime >= size){
                         System.out.println("The number you keyed is out of range, please key again!");
                         System.out.println("Select your Showtime from the list above: ");
-                        selectShowtime = GetNumberInput.getInt() - 1; // error checking for correct cineplex
+                        selectShowtime = GetNumberInput.getInt(1, allST.size(), -1) - 1; // error checking for correct cineplex
                     }
 
                     System.out.println("\n\nYou have selected the following movie: ");
@@ -199,8 +184,8 @@ public class CineplexUI {
                 System.out.println("\nMoving to MovieUI!\n");
                 ticket.setSeatID(MovieUI.MovieInterface(ticket , specificST.get(selectShowtime))); // set ticket seats. change return type to ticket?
 
-                TextDB.UpdateToTextDB(File.separator + cineplexes.getCineplexes().get(selectCineplex).getCineplexName().replace(' ','_')+ File.separator+cinemas.get(selectShowtime).getCinemaName()+".txt" ,
-                        cinemas.get(selectShowtime).getShowTime(), specificST.get(selectShowtime).getDimension());
+//                TextDB.UpdateToTextDB(File.separator + cineplexes.getCineplexes().get(selectCineplex).getCineplexName().replace(' ','_')+ File.separator+cinemas.get(selectShowtime).getCinemaName()+".txt" ,
+//                        cinemas.get(selectShowtime).getShowTime(), specificST.get(selectShowtime).getDimension());
 
                 break;
             }

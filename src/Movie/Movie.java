@@ -1,18 +1,16 @@
 package Movie;
-import Cineplex.Cinema;
+
 import Review.*;
 import Service.TextDB;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 /**
  *  * @author CHEW ZHI QI, GAN HAO YI
- *  * Movie class extneds from AllReview to link up each movie will have a list of reviews
+ *  * Movie class extends from AllReview to link up each movie will have a list of reviews
  */
 public class Movie extends AllReviews {
-
     /**
      * enum movie status
      */
@@ -24,31 +22,28 @@ public class Movie extends AllReviews {
     }
 
     /**
-     * Movies attribute title , show status , director , synopsis , cast , movie genre , blockbuster , movie class , movie total sale
+     * Movies attributes: Movie title, Movie showing status, Movie director, Movie synopsis,
+     * Movie casts, Movie genre, blockbuster, Movie genre (Class), Movie's total sale
      */
     private String movieTitle;
     private MovieStatus showingStatus;
     private String director;
     private String synopsis;
     private ArrayList<String> cast;
-
     private MovieType.Genre MovieGenre;
     private MovieType.Blockbuster BlockBuster;
-
     private MovieType.Class movieClass;
-
     private int movieTotalSales = 0;
-
     /**
      * Constructor for new movies
-     * @param movieTitle Movie title
-     * @param showingStatus Movie status
-     * @param director Movie director
-     * @param synopsis Movie synopsis
-     * @param cast List of movie cast
+     * @param movieTitle Movie Title
+     * @param showingStatus Movie's Showing Status
+     * @param director Movie Director
+     * @param synopsis Movie Synopsis
+     * @param cast List of Movie Casts
      * @param moviecat Movie
      * @param blockbuster Is Blockbuster
-     * @param movieClass Movie class
+     * @param movieClass Movie Genre
      */
     public Movie(String movieTitle, MovieStatus showingStatus, String director,
                  String synopsis, ArrayList<String> cast,
@@ -66,20 +61,22 @@ public class Movie extends AllReviews {
 
     /**
      * Constructor for reading from DB
-     * @param movieTitle Movie title
-     * @param showingStatus Movie status
-     * @param director Movie director
-     * @param synopsis Movie synopsis
-     * @param cast List of movie cast
+     * @param movieTitle Movie Title
+     * @param showingStatus Movie's Showing Status
+     * @param director Movie Director
+     * @param synopsis Movie Synopsis
+     * @param cast List of Movie Casts
      * @param moviecat Movie
      * @param blockbuster Is Blockbuster
-     * @param movieClass Movie class
+     * @param movieClass Movie Genre
      * @param movieTotalSales Movie sales
      */
-    public Movie(String movieTitle, MovieStatus showingStatus, String director,
-                 String synopsis, ArrayList<String> cast,
-                  MovieType.Genre moviecat,
-                 MovieType.Blockbuster blockbuster, MovieType.Class movieClass,int movieTotalSales) {
+    public Movie(
+            String movieTitle, MovieStatus showingStatus, String director,
+            String synopsis, ArrayList<String> cast,
+            MovieType.Genre moviecat,
+            MovieType.Blockbuster blockbuster, MovieType.Class movieClass,int movieTotalSales
+    ) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
         this.director = director;
@@ -91,18 +88,15 @@ public class Movie extends AllReviews {
         this.movieTotalSales = movieTotalSales;
     }
 
-
     public String getMovieTitle() {
         return this.movieTitle;
     }
     public MovieStatus getShowingStatus() {
         return this.showingStatus;
     }
-
     public String getDirector() {
         return director;
     }
-
     public String getSynopsis() {
         return this.synopsis;
     }
@@ -145,7 +139,6 @@ public class Movie extends AllReviews {
     public void setMovieTotalSales(int movieTotalSales) {
         this.movieTotalSales = movieTotalSales;
     }
-
     public void updateShowingStatus(MovieStatus showingStatus) {
         this.showingStatus = showingStatus;
     }

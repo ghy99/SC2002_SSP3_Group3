@@ -20,22 +20,23 @@ public class MovieUI {
 
         Scanner sc = new Scanner(System.in);
 
-        showTime.printSeats();
+//        showTime.printSeats();
        String movieseats;
 
         // display movie timings.
         // display movie seats.
-        char row, col;
-        do {
-            System.out.println("Select your Movie Seats:");
-            movieseats = sc.next();
-            row = movieseats.charAt(0);
-            col = movieseats.charAt(1);
-        } while(showTime.checkSeats(row, Integer.parseInt(String.valueOf(col))) != 1);
+//        char row, col;
+//        do {
+//            System.out.println("Select your Movie Seats:");
+//            movieseats = sc.next();
+//            row = movieseats.charAt(0);
+//            col = movieseats.charAt(1);
+//        } while(showTime.checkSeats(row, Integer.parseInt(String.valueOf(col))) != 1);
 
     
-        System.out.println("Selected movie seat ID(" + row +""+ col +")" );
-        // return type ticket?
-        return movieseats;
+//        System.out.println("Selected movie seat ID(" + row +""+ col +")" );
+//        // return type ticket?
+//        return movieseats;
+        return null;
     }
 }

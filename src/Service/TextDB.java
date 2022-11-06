@@ -26,7 +26,7 @@ public class TextDB {
         Movies(File.separator + "Movies.txt"),
         Customers(File.separator + "Customers.txt"),
         Admin(File.separator + "Admin.txt"),
-        TransactionHistroy(File.separator + "TransactionHistory.txt"),
+        TransactionHistory(File.separator + "TransactionHistory.txt"),
         Holiday(File.separator + "HolidayDates.txt"),
         TicketPrice(File.separator + "TicketPrice.txt"),
         Env(File.separator+"env.txt");
