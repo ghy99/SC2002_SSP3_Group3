@@ -472,34 +472,34 @@ public class TextDB {
         Update(fileName, alw);
     }
 
-//    public static void UpdateToTextDB(String fileName, ArrayList<ShowTime> showTimes, MovieType.Dimension dim) throws IOException {
-//        List alw = new ArrayList();// to store Professors data
-//
-//        for (int a = 0; a < showTimes.size(); a++) {
-//            StringBuilder st = new StringBuilder();
-//            st.append(showTimes.get(a).getMovie().getMovieTitle());
-//            st.append(SEPARATOR);
-//            st.append(DateTime.convertTime(showTimes.get(a).getTime().getTime()));
-//            st.append(SEPARATOR);
-//            st.append(dim.toString());
-//            alw.add(st.toString());
-//            alw.add("[");
-//
-//            for (String[] row : showTimes.get(a).getSeats()) {
-//                st = new StringBuilder();
-//                for (int i = 0; i < row.length; i++) {
-//                    st.append(row[i]);
-//                    if (i + 1 < row.length) st.append(",");
-//                }
-//                alw.add(st.toString());
-//            }
-//
-//            alw.add("]");
-//        }
-//
-//
-//        Update(fileName, alw);
-//    }
+    public static void UpdateToTextDB(String fileName, ArrayList<ShowTime> showTimes, MovieType.Dimension dim) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        for (int a = 0; a < showTimes.size(); a++) {
+            StringBuilder st = new StringBuilder();
+            st.append(showTimes.get(a).getMovie().getMovieTitle());
+            st.append(SEPARATOR);
+            st.append(DateTime.convertTime(showTimes.get(a).getTime().getTime()));
+            st.append(SEPARATOR);
+            st.append(dim.toString());
+            alw.add(st.toString());
+            alw.add("[");
+
+            for (String[] row : showTimes.get(a).getSeats()) {
+                st = new StringBuilder();
+                for (int i = 0; i < row.length; i++) {
+                    st.append(row[i]);
+                    if (i + 1 < row.length) st.append(",");
+                }
+                alw.add(st.toString());
+            }
+
+            alw.add("]");
+        }
+
+
+        Update(fileName, alw);
+    }
 
     public static void WriteToTextDB(String fileName, int cat, int choice, Double newTicketPrice) throws IOException {
         List alw = new ArrayList();
@@ -660,33 +660,33 @@ public class TextDB {
         }
     }
 
-//    public static void UpdateToTextDB(String fileName, Movie movie, ArrayList<ShowTime> showTimes) throws IOException {
-//        List alw = new ArrayList();// to store Professors data
-//
-//        for (ShowTime showTime : showTimes) {
-//            StringBuilder st = new StringBuilder();
-//            st.append(showTime.getMovie().getMovieTitle());
-//            st.append(SEPARATOR);
-//            st.append(DateTime.convertTime(showTime.getTime().getTime()));
-//            st.append(SEPARATOR);
-//            st.append(showTime.getDimension());
-//            alw.add(st.toString());
-//            alw.add("[");
-//
-//            for (String[] row : showTime.getSeats()) {
-//                st = new StringBuilder();
-//                for (int i = 0; i < row.length; i++) {
-//                    st.append(row[i]);
-//                    if (i + 1 < row.length) st.append(",");
-//                }
-//                alw.add(st.toString());
-//            }
-//
-//            alw.add("]");
-//        }
-//
-//        Update(fileName, alw);
-//    }
+    public static void UpdateToTextDB(String fileName, Movie movie, ArrayList<ShowTime> showTimes) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+        for (ShowTime showTime : showTimes) {
+            StringBuilder st = new StringBuilder();
+            st.append(showTime.getMovie().getMovieTitle());
+            st.append(SEPARATOR);
+            st.append(DateTime.convertTime(showTime.getTime().getTime()));
+            st.append(SEPARATOR);
+            st.append(showTime.getDimension());
+            alw.add(st.toString());
+            alw.add("[");
+
+            for (String[] row : showTime.getSeats()) {
+                st = new StringBuilder();
+                for (int i = 0; i < row.length; i++) {
+                    st.append(row[i]);
+                    if (i + 1 < row.length) st.append(",");
+                }
+                alw.add(st.toString());
+            }
+
+            alw.add("]");
+        }
+
+        Update(fileName, alw);
+    }
 
     /*
     TEST THIS FUNCTION WHEN I COME BACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
