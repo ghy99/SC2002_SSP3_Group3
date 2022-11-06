@@ -85,8 +85,6 @@ public class CineplexUI {
                         }
                     }
 
-
-
                     String selectedDate = "";
                     int dateChecking = -1;
                     while(dateChecking == -1) {

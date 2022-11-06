@@ -56,7 +56,7 @@ public class DateTime extends Date {
      */
     public static String convertTime(long time){
         Date date = new Date(time);
-        return sf1.format(date);
+        return sf.format(date);
     }
 
     /**

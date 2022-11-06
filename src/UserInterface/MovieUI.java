@@ -20,7 +20,7 @@ public class MovieUI {
 
         Scanner sc = new Scanner(System.in);
 
-        showTime.printSeats();
+        showTime.PrintSeats();
        String movieseats;
 
         // display movie timings.
@@ -29,12 +29,10 @@ public class MovieUI {
         do {
             System.out.println("Select your Movie Seats:");
             movieseats = sc.next();
-            row = movieseats.charAt(0);
-            col = movieseats.charAt(1);
-        } while(showTime.checkSeats(row, Integer.parseInt(String.valueOf(col))) != 1);
+        } while(showTime.CheckSeat(movieseats) != true);
 
     
-        System.out.println("Selected movie seat ID(" + row +""+ col +")" );
+        System.out.println("Selected movie seat ID(" + movieseats.charAt(0) +""+ movieseats.charAt(1) +")" );
         // return type ticket?
         return movieseats;
     }

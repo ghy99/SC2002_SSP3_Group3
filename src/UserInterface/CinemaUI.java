@@ -222,7 +222,7 @@ public class CinemaUI {
                             }
                         }
                     } while (dim == null);
-                    chosenCinema.createShowTime(chosenCineplex, newDate, movie, dim);
+                    chosenCinema.createShowTime(newDate, movie, dim);
                     System.out.println("New ShowTime has been created:");
                 }
                 for (int k = 0; k < chosenCinema.getShowTime().size(); k++) {
