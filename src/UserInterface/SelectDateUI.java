@@ -51,8 +51,11 @@ public class SelectDateUI {
             }
             System.out.println("Select your date from the list above: ");
             selectDate = GetNumberInput.getInt(1, 7, -1) - 1;
-
+            if (selectDate < 0) {
+                return null;
+            }
             selectedDate = STDates.get(selectDate);
+
             for (int z = 0; z < allST.size(); z++) {
                 if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(z).getTime().getTime()))) {
                     dateChecking++;

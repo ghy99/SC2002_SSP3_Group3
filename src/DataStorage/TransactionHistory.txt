@@ -17,3 +17,15 @@ ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;0
 ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|C6|SingleSeat|Premium|TWO_D|BLOCKBUSTER
 00000000|APA202211071726|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|B8|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
 00000000|APA202211071726|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|B9|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ant@hotmail.com|ARB202211071734|Moblima JEM|cinema2|test|11-11-2022;11:11|A1|DoubleSeat|Regular|THREE_D|NOTBLOCKBUSTER
+ant@hotmail.com|ARB202211071734|Moblima JEM|cinema2|test|11-11-2022;11:11|A2|Aisle|Regular|THREE_D|NOTBLOCKBUSTER
+ant@hotmail.com|APA202211071740|Moblima JEM|cinema1|mymovie|11-11-2022;11:11|A1|DoubleSeat|Premium|THREE_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071740|Moblima JEM|cinema1|mymovie|11-11-2022;11:11|A2|Aisle|Premium|THREE_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071742|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|A1|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071742|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|A2|Aisle|Premium|TWO_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071742|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|B2|Aisle|Premium|TWO_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071742|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|B1|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071742|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|A4|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071742|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|A5|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ant@hotmail.com|ARB202211071748|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|A1|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+ant@hotmail.com|ARB202211071748|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|A2|Aisle|Regular|TWO_D|BLOCKBUSTER

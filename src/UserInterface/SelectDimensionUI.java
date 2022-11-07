@@ -82,7 +82,7 @@ public class SelectDimensionUI {
         System.out.printf("Movie Timing: %s\n", DateTime.convertTime(specificST.get(selectShowtime).getTime().getTime()));
 
         res.add(specificST.get(selectShowtime));
-        res.add(cinemas.get(selectShowtime));
+        res.add(specificCin.get(selectShowtime));
 
         return res;
 
