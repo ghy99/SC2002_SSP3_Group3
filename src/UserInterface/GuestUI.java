@@ -10,6 +10,7 @@ import Service.TextDB;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -40,10 +41,28 @@ public class GuestUI {
             choice = GetNumberInput.getInt(1, 2, 11);
             switch (choice) {
                 case 1 -> {
-                    customer.setTicket(CineplexUI.CineplexInterface(cineplexes));
+                    ArrayList<Object> sTnC = null, sSTnC = null;
+                    ArrayList<MovieTicket> allMovieTicket = null;
+                    Cineplex choosenCineplex = CineplexUI.CineplexInterface(cineplexes);
+
+                    Movie chosenMovie = MovieUI.MovieInterface(cineplexes.getListOfMovies());
+                    do {
+                        sTnC = SelectDateUI.SelectDateInterFace(choosenCineplex , chosenMovie);
+                    }while (sTnC == null);
+
+                    do {
+                        sSTnC = SelectDimensionUI.SelectDimensionUserInterface(choosenCineplex, sTnC);
+                    }while (sSTnC == null);
+
+                    do {
+                        allMovieTicket = SelectSeatsUI.SelectSeatsUserInterface(customer, choosenCineplex, chosenMovie ,sSTnC);
+                    }while (allMovieTicket == null);
+
                     String name, number, email;
                     do {
                         System.out.println("Please enter your email : (So that you will be able to check your transaction later)");
+
+
                         email = sc.nextLine();
                     } while (Objects.equals(email, ""));
                     customer.setEmail(email);

@@ -696,7 +696,7 @@ public class TextDB {
         }
     }
 
-    public static void UpdateToTextDB(String fileName, Movie movie, ArrayList<ShowTime> showTimes) throws IOException {
+    public static void UpdateToTextDB(String fileName, MovieSeatsNew movie, ArrayList<ShowTime> showTimes) throws IOException {
         List alw = new ArrayList();// to store Professors data
 
         for (int a = 0; a < showTimes.size(); a++) {

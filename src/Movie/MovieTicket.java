@@ -34,8 +34,7 @@ public class MovieTicket {
     private MovieType.Dimension dim;
     private MovieType.Blockbuster blockbuster;
 
-    public MovieTicket() {
-    }
+
 
     /**
      * Constructor

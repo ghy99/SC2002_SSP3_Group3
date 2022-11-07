@@ -42,7 +42,7 @@ public class CustomerUI {
             choice = GetNumberInput.getInt(1, 6, 11);
             switch (choice) {
                 case 1 -> {
-                    customer.setTicket(CineplexUI.CineplexInterface(cineplexes));
+                    //customer.setTicket(CineplexUI.CineplexInterface(cineplexes));
                     customer.printCustomerDetails();
                     System.out.println("Moving to payment (Not implemented yet).");
                     TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, customer.getTicket());
