@@ -33,23 +33,23 @@ public class MovieTicket {
 
     /**
      * Constructor
-     * @param email
-     * @param chosenCineplex
-     * @param cinema
-     * @param movie
-     * @param TID
-     * @param seatID
-     * @param movieDateTime
-     * @param seattype
-     * @param cinType
-     * @param age
+     * @param email - User email for tracking
+     * @param chosenCineplex - User's selected Cineplex to watch movie
+     * @param cinema - Which Cinema they are watching movie in
+     * @param movie - Which Movie they are watching
+     * @param TID - Transaction ID
+     * @param seatID - Seat ID
+     * @param movieDateTime - Date Time of movie
+     * @param seattype - Single / Double Seat
+     * @param cinType - Type of Cinema: Premium or Regular
+     * @param age -
      * @param dim
      * @param blockbuster
      */
     public MovieTicket(
             String email ,String chosenCineplex, String cinema, String movie,
             String TID, String seatID, Date movieDateTime,
-            IndividualSeats.SeatType seattype, Cinema.CinemaType cinType, int age,
+            IndividualSeats.SeatType seattype, Cinema.CinemaType cinType,
             MovieType.Dimension dim, MovieType.Blockbuster blockbuster) {
         this.Email = email;
         this.ChosenCineplex = chosenCineplex;
@@ -60,7 +60,6 @@ public class MovieTicket {
         this.MovieDateTime = movieDateTime;
         this.seattype = seattype;
         this.cinematype = cinType;
-        this.age = age;
         this.dim = dim;
         this.blockbuster = blockbuster;
     }
@@ -137,66 +136,12 @@ public class MovieTicket {
         this.dim = dim;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getEmail() {
         return Email;
     }
 
     public void setEmail(String email) {
         Email = email;
-    }
-
-    public boolean checkHoliday() throws IOException {
-    	LocalDate tdyDate = LocalDate.now();
-
-    	ArrayList<String> holidayList = (ArrayList<String>) TextDB.Read("HolidayDates.txt"); //extract list of holiday dates from storage
-    	
-    	for (int i = 0; i<holidayList.size();i++) {
-	    	if (tdyDate.toString().equals(holidayList.get(i))) {
-	    		System.out.println(tdyDate.toString());
-	    		return true;
-	    	}
-	    }
-    	return false;
-    }
-
-    public static double CalculatePrice(MovieTicket ticket) throws IOException {
-        System.out.println("Calculate Price\n");
-        System.out.println("Initializing Prices to compare\n");
-        Settings settings = new Settings();
-        TicketCharges charges = settings.getTicketCharges();
-        int userAge = 20;
-        int day = 2;
-        int dim = 2;
-        int type = 1;
-        double ageCost = charges.getPriceByAge(userAge); // get user age
-        double dayCost = charges.getPriceByDay(day); // change to get day of week through datetime
-        double dimCost = charges.getPriceByDim(dim); // get dimension of movie
-        double typeCost = charges.getPriceByType(type); // get cinema type
-        if (ageCost == -1) {
-            System.out.println("Age is invalid. please enter a new value.");
-            return -1;
-        }
-        if (dayCost == -1) {
-            System.out.println("Day of the week is invalid. please enter a new value.");
-            return -1;
-        }
-        if (dimCost == -1) {
-            System.out.println("Movie Dimension is invalid. please enter a new value.");
-            return -1;
-        }
-        if (typeCost == -1) {
-            System.out.println("Cinema Type is invalid. please enter a new value.");
-            return -1;
-        }
-        return ageCost + dayCost + dimCost + typeCost;
     }
 
     public void printTicket() {

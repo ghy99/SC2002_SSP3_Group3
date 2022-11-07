@@ -96,9 +96,15 @@ public class TicketCharges {
     }
 
     public double getPriceByAge(int userage) {
-        for (int i = 0; i < priceByAge.size(); i++) {
-            if (userage < Integer.parseInt(priceByAge.get(i).get(0))) {
-                return Double.parseDouble(priceByAge.get(i).get(1));
+        switch (userage) {
+            case 1 -> {
+                return Double.parseDouble(priceByAge.get(0).get(1));
+            }
+            case 2 -> {
+                return Double.parseDouble(priceByAge.get(1).get(1));
+            }
+            case 3 -> {
+                return Double.parseDouble(priceByAge.get(2).get(1));
             }
         }
         return -1;
@@ -115,9 +121,9 @@ public class TicketCharges {
 
     public double getPriceByDim(int dim) {
         for (int i = 0; i < priceByMovieDim.size(); i++) {
-            if (dim == 2) {
+            if (dim == 0) {
                 return Double.parseDouble(priceByMovieDim.get(0).get(1));
-            } else if (dim == 3) {
+            } else if (dim == 1) {
                 return Double.parseDouble(priceByMovieDim.get(1).get(1));
             }
         }

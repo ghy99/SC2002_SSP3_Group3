@@ -304,13 +304,12 @@ public class TextDB {
             String seatID = star.nextToken().trim();
             IndividualSeats.SeatType seattype = IndividualSeats.SeatType.valueOf(star.nextToken().trim());
             Cinema.CinemaType cinType = Cinema.CinemaType.valueOf(star.nextToken().trim());
-            int age = Integer.parseInt(star.nextToken().trim());
             MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
             MovieType.Blockbuster blockbuster = MovieType.Blockbuster.valueOf(star.nextToken().trim());
 
             MovieTicket movieTicket = new MovieTicket(
                     email, choosenCineplex, choosenCinema, choosenMovie,
-                    seatID, tid, date, seattype, cinType, age, dim, blockbuster);
+                    seatID, tid, date, seattype, cinType, dim, blockbuster);
 
             if (Objects.equals(email, "")) {
                 movieTicketList.add(movieTicket);
@@ -638,8 +637,6 @@ public class TextDB {
         st.append(ticket.getSeattype());
         st.append(SEPARATOR);
         st.append(ticket.getCinematype());
-        st.append(SEPARATOR);
-        st.append(ticket.getAge());
         st.append(SEPARATOR);
         st.append(ticket.getDim());
         st.append(SEPARATOR);

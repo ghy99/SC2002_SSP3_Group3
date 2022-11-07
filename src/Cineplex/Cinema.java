@@ -16,8 +16,9 @@ public class Cinema {
      * This Enum stores the type of the Cinema. This affects the ticket price.
      */
     public enum CinemaType {
-        Premium("Premium"),
-        Regular("Regular");
+        Regular("Regular"),
+        Premium("Premium");
+
 
         public final String CinemaType;
 

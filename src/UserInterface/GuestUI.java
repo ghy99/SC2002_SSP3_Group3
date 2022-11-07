@@ -72,6 +72,7 @@ public class GuestUI {
                     customer.setEmail(email);
                     customer.printCustomerDetails();
                     customer.createCustomerAccount(customer);
+                    PaymentUI.PaymentInterface(cineplexes, customer, allMovieTicket, choosenCineplex, chosenMovie ,sSTnC);
                     TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, customer.getTicket());
                     System.out.println("Moving to payment (Not implemented yet).");
                     customer.getTicket().printTicket();
