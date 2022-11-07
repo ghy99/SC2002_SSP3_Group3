@@ -15,3 +15,5 @@ ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;0
 ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|A8|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
 ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|A9|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
 ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|C6|SingleSeat|Premium|TWO_D|BLOCKBUSTER
+00000000|APA202211071726|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|B8|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+00000000|APA202211071726|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|B9|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
