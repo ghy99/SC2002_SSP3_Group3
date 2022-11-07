@@ -14,6 +14,11 @@ package Movie;
 // System does not allow unoccupied seats between selected seats
 
 
+import Cineplex.*;
+import Service.GetNumberInput;
+import Service.TextDB;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -208,19 +213,39 @@ public class MovieSeatsNew {
         Scanner scan = new Scanner(System.in);
         ArrayList<String> seatsSelected = new ArrayList<String>();
         System.out.println("Please input number of seats to be select");
-        int num = scan.nextInt();
-        scan.nextLine();
+        int num = GetNumberInput.getInt(1, 99, -1);
+        int i = 0;
+        boolean isSeat = true;
 
-        for (int i = 0; i < num; i++) {
-            System.out.println("Select a seat");
-            String SeatID = scan.nextLine();
+        while (i < num) {
+            String SeatID = "";
 
-            boolean bookedStatus = true;
-            while (bookedStatus == true) {
-                bookedStatus = CheckSeat(SeatID);
-                if (bookedStatus == false) {
+            while (isSeat) {
+                System.out.println("Select a seat");
+                SeatID = scan.nextLine();
+                if (SeatID.length() == 2 || SeatID.length() == 3) {
+                    String right = right(SeatID, SeatID.length() - 1);
+                    if (Character.isAlphabetic(SeatID.charAt(0))) {
+                        if ((int) SeatID.charAt(0) > 64 && (int) SeatID.charAt(0) < (65 + this.rows - 1)) {
+                            if (Integer.parseInt(right) >= 0 && Integer.parseInt(right) < this.cols) {
+                                isSeat = false;
+
+                            }
+                        }
+                    }
+                }
+                if (isSeat) {
+                    System.out.print("Invalid seat!");
+                }
+            }
+            Boolean isSeatAva = true;
+            while (isSeatAva) {//seat ava
+                if (!CheckSeat(SeatID)) {
+                    i++;
                     System.out.println(SeatID + " is selected");
                     seatsSelected.add(SeatID);
+                    isSeat = true;
+                    isSeatAva = false;
                 } else {
                     System.out.println(SeatID + " is not available. Please reselect another seat");
                     SeatID = scan.nextLine();
@@ -229,8 +254,8 @@ public class MovieSeatsNew {
         }
 
         System.out.println("The seats selected are:");
-        for (int i = 0; i < num; i++) {
-            System.out.print(seatsSelected.get(i) + " ");
+        for (int j = 0; j < num; j++) {
+            System.out.print(seatsSelected.get(j) + " ");
         }
 
         return seatsSelected;
@@ -259,7 +284,7 @@ public class MovieSeatsNew {
     }
 
 
-    public ArrayList<String> BookSeats(ArrayList<String> seatsSelected) {
+    public ArrayList<String> BookSeats(ArrayList<String> seatsSelected, Boolean isWrite, Cinema cinema) throws IOException {
 
         int endRowIDNum;
         char endRowIDChar;
@@ -325,7 +350,7 @@ public class MovieSeatsNew {
             }
 
         }
-
+        if(isWrite) TextDB.UpdateToTextDB(cinema.getCinemaDir(), this, cinema.getShowTime());
         return overallList; //returns all the seats that are booked.
         // OverallList and seatsSelected lists are different.
         // OverallList includes the counterparts of the doubleseats that was not taken into account when booking
@@ -333,75 +358,12 @@ public class MovieSeatsNew {
 
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-//        System.out.println("Input row then column, only EVEN NUM PLSSSS");
-//        int rows = scan.nextInt();
-//        int cols = scan.nextInt();
-//        System.out.println("starting from what row you want double seats");
-//        int rowDoubleOne = scan.nextInt(); //make this versatile LATER
-//
-//
-//        System.out.println("what column you want aisle"); //asileOne must be from 3 columns onwards
-//        int aisleOne = scan.nextInt() - 1;
-//        System.out.println("select another column you want aisle"); //asileTwo must be second last 3rd column
-//        int aisleTwo = scan.nextInt() - 1;
+        MovieSeatsNew movieSeatsNew = new MovieSeatsNew(5, 5, 4, 2, 3);
+        movieSeatsNew.SeatsCreation();
+        movieSeatsNew.PrintSeats();
 
-        //aiya, for now, jus set regular to be new MovieSeatsNew(13,16,10,2,13);
-        //and premium to be new MovieSeatsNew(5,8,3,2,5);
+        System.out.println(movieSeatsNew.SelectSeats());
 
-        MovieSeatsNew movieseat = new MovieSeatsNew(13, 16, 10, 2, 13);
-        movieseat.SeatsCreation();
-        //movieseat.PrintSeats();
-        for (int i = 0; i < movieseat.array2D.size(); i++) {
-            for (int j = 0; j < movieseat.array2D.get(i).size(); j++) {
-                if (movieseat.array2D.get(i).get(j).getSeatType() == IndividualSeats.SeatType.SingleSeat) {
-                    if (movieseat.array2D.get(i).get(j).getSeatOccupied()) {
-                        System.out.print("X");
-                    } else {
-                        System.out.print(" ");
-                    }
-                }
-
-                if (movieseat.array2D.get(i).get(j).getSeatType() == IndividualSeats.SeatType.DoubleSeat) {
-                    if (movieseat.array2D.get(i).get(j).getSeatOccupied()) {
-                        System.out.print("X|");
-                    } else {
-                        System.out.print(" |");
-                    }
-                }
-
-                if(movieseat.array2D.get(i).get(j).getSeatType() == IndividualSeats.SeatType.Aisle)
-                {
-                    System.out.print("@");
-                }
-
-
-                if(j + 1 < movieseat.array2D.get(i).size()) System.out.print(",");
-            }
-
-
-            System.out.println();
-        }
-
-//        ArrayList<String> seatsSelected = movieseat.SelectSeats();
-//        ArrayList<String> bookedList;
-//        bookedList= movieseat.BookSeats(seatsSelected);
-//        for(int i = 0; i<bookedList.size();i++){
-//            System.out.println("Bookedlist" +bookedList.get(i));
-//        }
-//
-//
-//
-//
-//        movieseat.PrintSeats();
-//        //testing 2nd round
-//        seatsSelected = movieseat.SelectSeats();
-//        movieseat.BookSeats(seatsSelected);
-//        movieseat.PrintSeats();
-//
-//        bookedList= movieseat.BookSeats(seatsSelected);
-//        for(int i = 0; i<bookedList.size();i++){
-//            System.out.println("Bookedlist" +bookedList.get(i));
     }
 
 

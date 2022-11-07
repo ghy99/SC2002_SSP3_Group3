@@ -147,8 +147,8 @@ public class Movie extends AllReviews {
      * Increase movie sale and update DB
      * @param movies all list for movie to update db
      */
-    public void increaseMovieTotalSale(ArrayList<Movie> movies) throws IOException {
-        this.movieTotalSales++;
+    public void increaseMovieTotalSale(ArrayList<Movie> movies , int ticketnum) throws IOException {
+        this.movieTotalSales += ticketnum;
         TextDB.UpdateToTextDB(TextDB.Files.Movies.toString(),movies , new Review("" ,"",0));
     }
 
