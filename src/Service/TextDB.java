@@ -181,7 +181,7 @@ public class TextDB {
                             }
                             if (Objects.equals(t1[j], "X") || Objects.equals(t1[j], "X|")) {
                                 StringBuilder sb = new StringBuilder();
-                                sb.append((char)(i - 1));
+                                sb.append((char)(rowCount  + 1));
                                 sb.append(j + 1);
                                 selectedSits.add(sb.toString());
                             }
