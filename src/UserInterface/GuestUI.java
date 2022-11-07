@@ -30,7 +30,7 @@ public class GuestUI {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("************* Entering Guest Mode ***************");
-        Customer customer = new Customer("", "", "", false);
+        Customer customer = new Customer();
 
         do {
             System.out.println("\nWhat would you like to do?");
@@ -71,11 +71,12 @@ public class GuestUI {
                     customer.setMobileNumber(number);
                     customer.setEmail(email);
                     customer.printCustomerDetails();
-                    customer.createCustomerAccount(customer);
+                    cineplexes.createCustomerAccount(customer); // Not checking if customer created account
                     PaymentUI.PaymentInterface(cineplexes, customer, allMovieTicket, choosenCineplex, chosenMovie ,sSTnC);
-                    TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, customer.getTicket());
-                    System.out.println("Moving to payment (Not implemented yet).");
-                    customer.getTicket().printTicket();
+                    for (MovieTicket tix : allMovieTicket) {
+                        TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
+                        tix.printTicket();
+                    }
                 }
                 case 2 -> {
                     System.out.println("Please give input your email that used to booked:");

@@ -23,26 +23,20 @@ public class Customer {
     private String Email;
     private int age;
     /** Ticket */
-    private MovieTicket Ticket;
+    private ArrayList<MovieTicket> Ticket;
 
     /**
      * If new account
      * @param movieGoerName User's name
      * @param mobileNumber Mobile number
      * @param email Email
-     * @param createAccount Is account created
      */
-    public Customer(String movieGoerName, String mobileNumber, String email, boolean createAccount) throws IOException {
+    public Customer(String movieGoerName, String mobileNumber, String email) throws IOException {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
-
-
-        if(createAccount)
-        {
-            TextDB.WriteToTextDB(File.separator + Customers.toString(), this);
-        }
     }
+    public Customer() {}
 
     //
     public void setMovieGoerName(String name) throws IOException {
@@ -57,7 +51,7 @@ public class Customer {
         this.Email = email;
     }
 
-    public void setTicket(MovieTicket tix) {
+    public void setTicket(ArrayList<MovieTicket> tix) {
         this.Ticket = tix;
     }
 
@@ -73,7 +67,7 @@ public class Customer {
         return Email;
     }
 
-    public MovieTicket getTicket() {
+    public ArrayList<MovieTicket> getTicket() {
         return this.Ticket;
     }
 
@@ -117,12 +111,10 @@ public class Customer {
         System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\n", this.MovieGoerName, this.MobileNumber, this.Email);
         if (this.Ticket != null) {
             System.out.println("Ticket:\n");
-            this.getTicket().printTicket();
+            for (MovieTicket ticket : this.Ticket) {
+                ticket.printTicket();
+            }
         }
     }
-    public void createCustomerAccount(Customer customer) throws IOException {
-        TextDB.WriteToTextDB("Customers.txt", customer);
-        System.out.println("An account has been created for you!");
-        System.out.println("You may login from the main page with the name and phone number that you entered. Thank you.");
-    }
+
 }

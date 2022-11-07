@@ -3,10 +3,12 @@ package UserInterface;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 import Cineplex.*;
 import Customer.Customer;
+import Movie.Movie;
 import Movie.MovieTicket;
 import Service.TextDB;
 import Service.GetNumberInput;
@@ -42,13 +44,29 @@ public class CustomerUI {
             choice = GetNumberInput.getInt(1, 6, 11);
             switch (choice) {
                 case 1 -> {
-                    //customer.setTicket(CineplexUI.CineplexInterface(cineplexes));
+                    ArrayList<Object> sTnC = null, sSTnC = null;
+                    ArrayList<MovieTicket> allMovieTicket = null;
+                    Cineplex choosenCineplex = CineplexUI.CineplexInterface(cineplexes);
+
+                    Movie chosenMovie = MovieUI.MovieInterface(cineplexes.getListOfMovies());
+                    do {
+                        sTnC = SelectDateUI.SelectDateInterFace(choosenCineplex , chosenMovie);
+                    }while (sTnC == null);
+
+                    do {
+                        sSTnC = SelectDimensionUI.SelectDimensionUserInterface(choosenCineplex, sTnC);
+                    }while (sSTnC == null);
+
+                    do {
+                        allMovieTicket = SelectSeatsUI.SelectSeatsUserInterface(customer, choosenCineplex, chosenMovie ,sSTnC);
+                    }while (allMovieTicket == null);
+
                     customer.printCustomerDetails();
-                    System.out.println("Moving to payment (Not implemented yet).");
-                    TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, customer.getTicket());
-                    customer.getTicket().printTicket();
-//                   PaymentUI.PaymentInterface(customer); // CHANGE TID TO DOUBLE / STRING. INT CANT CONTAIN.
-                    //customer.setTID(PaymentUI.PaymentInterface(customer));
+                    PaymentUI.PaymentInterface(cineplexes, customer, allMovieTicket, choosenCineplex, chosenMovie ,sSTnC);
+                    for (MovieTicket tix : allMovieTicket) {
+                        TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
+                        tix.printTicket();
+                    }
                 }
                 case 2 -> {
                     System.out.println("Enter your new name: ");

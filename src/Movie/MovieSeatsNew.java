@@ -350,7 +350,10 @@ public class MovieSeatsNew {
             }
 
         }
-        if(isWrite) TextDB.UpdateToTextDB(cinema.getCinemaDir(), this, cinema.getShowTime());
+        if(isWrite) {
+            System.out.println("Writing seats to DB!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            TextDB.UpdateToTextDB(cinema.getCinemaDir(), this, cinema.getShowTime());
+        }
         return overallList; //returns all the seats that are booked.
         // OverallList and seatsSelected lists are different.
         // OverallList includes the counterparts of the doubleseats that was not taken into account when booking

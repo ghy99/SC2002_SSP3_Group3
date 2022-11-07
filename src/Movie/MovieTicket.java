@@ -42,7 +42,6 @@ public class MovieTicket {
      * @param movieDateTime - Date Time of movie
      * @param seattype - Single / Double Seat
      * @param cinType - Type of Cinema: Premium or Regular
-     * @param age -
      * @param dim
      * @param blockbuster
      */
@@ -146,11 +145,11 @@ public class MovieTicket {
 
     public void printTicket() {
         System.out.printf("CINEPLEX: %s\n", this.ChosenCineplex);
+        System.out.printf("CINEMA: %s\n", this.Cinema);
         System.out.printf("MOVIE: %s\n", this.getChosenMovie());
         System.out.printf("MOVIE DATE:TIME: %s\n", this.getShowtime());
         System.out.printf("SEAT: %s\n", this.SeatID);
-        System.out.printf("TIME: %s\n", this.MovieDateTime);
-        System.out.printf("TICKET ID: %s\n", this.getTID());
+        System.out.printf("Transaction ID: %s\n", this.getTID());
         System.out.println();
     }
 }

@@ -26,21 +26,12 @@ public class PaymentUI {
     ) throws IOException {
         ShowTime specificST = (ShowTime) sSTnC.get(0);
         Cinema cinema = (Cinema) sSTnC.get(1);
-        // Check if movie is a blockbuster. If yes, +$1, else, no charge.
-        // Get movie date, check holiday, if not holiday, check weekday / weekend, calc ticket price (Compare to settings.ticketcharges)
-        // Check Cinema type (Regular Premium), check movie Dimensions(2D, 3D), calc ticket price (Compare to settings.ticketcharges)
-        // Get number of tickets.
-        // get movie genre, if movie genre < NC16, ask for how many children / adult / senior citizen price, cap at number of tickets.
-        //                  if movie genre >= NC16, ask for adult / senior citizen price, cap at number of tickets.
-        // Count number of seats booked, compare to age price, sum up and return price.
-
-        // Number of tickets by age
         int student = 0, adult = 0, senior = 0;
         if (checkGenre(cineplexes, chosenMovie)) {
             System.out.println("How many student tickets (Enter 0 if no students):");
             student = GetNumberInput.getInt(0, allMovieTicket.size(), -1);
             if (student == -1) student = 0;
-            if (allMovieTicket.size() - student == 0) {
+            if (allMovieTicket.size() - student != 0) {
                 System.out.println("How many senior citizen tickets (Enter 0 if no senior citizens):");
                 senior = GetNumberInput.getInt(0, allMovieTicket.size() - student, -1);
                 if (senior == -1) senior = 0;
@@ -83,6 +74,12 @@ public class PaymentUI {
         System.out.print("Payment done! Your transaction ID is: ");
     }
 
+    /**
+     * this method checks if the selected date is a weekend or weekday.
+     * @param cineplexes - get the price of when it is a weekday / weekend
+     * @param showtime - check date of showtime if it is a weekday / weekend
+     * @return - price of a weekday / weekend
+     */
     public static double checkWeekend(AllCineplex cineplexes, Date showtime) {
         int day = DateTime.getDayNumberOld(showtime) - 1;
         double price = cineplexes.getTicketCharges().getPriceByDay(day);
@@ -90,6 +87,12 @@ public class PaymentUI {
         return price;
     }
 
+    /**
+     * This method checks if selected date is a holiday.
+     * @param holidaylist - get a list of holiday dates
+     * @param showtime - check date of showtime if it is a holiday
+     * @return true if holiday, else false
+     */
     public static boolean checkHoliday(ArrayList<String> holidaylist, Date showtime) {
         for (String holiday : holidaylist) {
             if (Objects.equals(holiday, DateTime.convertDate(showtime.getTime()))) {
@@ -99,6 +102,12 @@ public class PaymentUI {
         return false;
     }
 
+    /**
+     * This method checks the genre of the movie.
+     * If it is rated below NC16, it will not charge student price, only adult / senior citizen.
+     * @param movie - To get the rating of the movie.
+     * @return returns true if it is below NC16, else false
+     */
     public static boolean checkGenre(AllCineplex cineplexes, Movie movie) {
         MovieType.Class rating = movie.getMovieClass();
         switch (rating) {
@@ -109,38 +118,5 @@ public class PaymentUI {
                 return false;
             }
         }
-    }
-
-    public static double CalculatePrice(AllCineplex cineplexes, Customer customer, ArrayList<MovieTicket> allMovieTicket,
-                                        Cineplex choosenCineplex, Movie chosenMovie, ArrayList<Object> sSTnC) throws IOException {
-        System.out.println("Calculate Price\n");
-        System.out.println("Initializing Prices to compare\n");
-        Settings settings = new Settings();
-        TicketCharges charges = cineplexes.getTicketCharges();
-        int userAge = 20;
-        int day = 2;
-        int dim = 2;
-        int type = 1;
-        double ageCost = charges.getPriceByAge(userAge); // get user age
-        double dayCost = charges.getPriceByDay(day); // change to get day of week through datetime
-        double dimCost = charges.getPriceByDim(dim); // get dimension of movie
-        double typeCost = charges.getPriceByType(type); // get cinema type
-        if (ageCost == -1) {
-            System.out.println("Age is invalid. please enter a new value.");
-            return -1;
-        }
-        if (dayCost == -1) {
-            System.out.println("Day of the week is invalid. please enter a new value.");
-            return -1;
-        }
-        if (dimCost == -1) {
-            System.out.println("Movie Dimension is invalid. please enter a new value.");
-            return -1;
-        }
-        if (typeCost == -1) {
-            System.out.println("Cinema Type is invalid. please enter a new value.");
-            return -1;
-        }
-        return ageCost + dayCost + dimCost + typeCost;
     }
 }

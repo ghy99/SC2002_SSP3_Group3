@@ -1,7 +1,7 @@
 package Service;
 
 
-import Customer.Customer;
+import Customer.*;
 import Admin.*;
 import Cineplex.Cinema;
 import Cineplex.Cineplex;
@@ -19,6 +19,8 @@ import Movie.*;
 import Review.*;
 
 public class TextDB {
+
+
 
     public enum Files {
         Cineplex(File.separator + "Cineplexes.txt"),
@@ -61,7 +63,7 @@ public class TextDB {
             String email = star.nextToken().trim();
 
             // create Professor object from file data
-            Customer customer = new Customer(movieGoerName, mobileNumber, email, false);
+            Customer customer = new Customer(movieGoerName, mobileNumber, email);
             // add to Professors list
             customers.add(customer);
         }
@@ -309,7 +311,7 @@ public class TextDB {
 
             MovieTicket movieTicket = new MovieTicket(
                     email, choosenCineplex, choosenCinema, choosenMovie,
-                    seatID, tid, date, seattype, cinType, dim, blockbuster);
+                    tid, seatID, date, seattype, cinType, dim, blockbuster);
 
             if (Objects.equals(email, "")) {
                 movieTicketList.add(movieTicket);
@@ -630,7 +632,7 @@ public class TextDB {
         st.append(SEPARATOR);
         st.append(ticket.getChosenMovie());
         st.append(SEPARATOR);
-        st.append(DateTime.convertDate(ticket.getShowtime().getTime()));
+        st.append(DateTime.convertTime(ticket.getShowtime().getTime()));
         st.append(SEPARATOR);
         st.append(ticket.getSeatID());
         st.append(SEPARATOR);

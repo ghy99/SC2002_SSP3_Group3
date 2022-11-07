@@ -19,6 +19,7 @@ public class SelectDimensionUI {
         ArrayList<Cinema> cinemas = (ArrayList<Cinema>) sTnC.get(1);
         String selectedDate = (String) sTnC.get(2);
         ArrayList<ShowTime> specificST = new ArrayList<>();
+        ArrayList<Cinema> specificCin = new ArrayList<Cinema>();
         ArrayList<Object> res=  new ArrayList<>();
 
         MovieType.Dimension dim = null;
@@ -58,6 +59,7 @@ public class SelectDimensionUI {
                 if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(i).getTime().getTime())) && Objects.equals(allST.get(i).getDimension(), dim)) {
                     System.out.printf("%s) %s %s %s\n", count++, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle(), DateTime.convertTime(allST.get(i).getTime().getTime()));
                     specificST.add(allST.get(i));
+                    specificCin.add(cinemas.get(i));
                     size++;
                 }
             }
@@ -66,7 +68,7 @@ public class SelectDimensionUI {
             return null;
         }
         System.out.println("Select your Showtime from the list above: ");
-        selectShowtime = GetNumberInput.getInt(1, allST.size(), -1) - 1;
+        selectShowtime = GetNumberInput.getInt(1, size, -1) - 1;
 
         while (selectShowtime < 0 || selectShowtime >= size) {
             System.out.println("The number you keyed is out of range, please key again!");
@@ -76,7 +78,7 @@ public class SelectDimensionUI {
 
         System.out.println("\n\nYou have selected the following movie: ");
         allST.get(selectShowtime).getMovie().printMovieDetails();
-        System.out.printf("\nCinema Room: %s\n", cinemas.get(selectShowtime).getCinemaName());
+        System.out.printf("\nCinema Room: %s\n", specificCin.get(selectShowtime).getCinemaName());
         System.out.printf("Movie Timing: %s\n", DateTime.convertTime(specificST.get(selectShowtime).getTime().getTime()));
 
         res.add(specificST.get(selectShowtime));

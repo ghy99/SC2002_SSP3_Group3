@@ -1,5 +1,6 @@
 package Cineplex;
 
+import Customer.Customer;
 import Movie.Movie;
 import Review.AllReviews;
 import Service.GetNumberInput;
@@ -156,6 +157,18 @@ public class AllCineplex extends Settings {
             System.out.printf("\t%d) %s\n", i + 1, this.cineplexes.get(i).getCineplexName());
         }
         System.out.println();
+    }
+
+    /**
+     * This method adds a newly created customer account into the database.
+     * @param customer - New customer
+     * @throws IOException - Exception if opening customers.txt has error.
+     */
+    public void createCustomerAccount(Customer customer) throws IOException {
+        this.getCustomerlist().add(customer);
+        TextDB.WriteToTextDB("Customers.txt", customer);
+        System.out.println("An account has been created for you!");
+        System.out.println("You may login from the main page with the name and phone number that you entered. Thank you.");
     }
 
     /**

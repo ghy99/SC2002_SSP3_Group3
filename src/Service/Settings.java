@@ -1,12 +1,10 @@
 package Service;
 
+import Customer.*;
 import Movie.TicketCharges;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Setting class to hold environmental global variable
@@ -23,15 +21,27 @@ public class Settings {
     private ArrayList<String> holiday;
     private TicketCharges ticketCharges;
 
+    private ArrayList<Customer> customerlist = new ArrayList<Customer>();
+
     public Settings() throws IOException {
         Boolean[] env = TextDB.ReadFromFile(File.separator + TextDB.Files.Env.toString());
         setSale(env[0]);
         setRating(env[1]);
         System.out.println("EVN variable loaded!! \n\n");
 
+        Customer temp = new Customer();
         holiday = TextDB.ReadFromFile(TextDB.Files.Holiday.toString() , this);
-
+        TextDB.readFromFile(TextDB.Files.Customers.toString(), this.customerlist, temp);
         ticketCharges = new TicketCharges();
+    }
+
+    public ArrayList<Customer> getCustomerlist() {
+        return customerlist;
+    }
+
+    public void addCustomer(Customer customer) {
+        this.customerlist.add(customer);
+
     }
 
     /**

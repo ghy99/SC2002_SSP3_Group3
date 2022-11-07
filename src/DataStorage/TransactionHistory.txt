@@ -1,0 +1,17 @@
+ant@hotmail.com|APA202211071606|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B8|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071606|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B9|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+ant@hotmail.com|APA202211071606|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|L5|SingleSeat|Regular|TWO_D|BLOCKBUSTER
+juelin@gmail.com|APA202211071611|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|A6|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+juelin@gmail.com|APA202211071611|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|A7|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+juelin@gmail.com|APA202211071611|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|F8|SingleSeat|Regular|TWO_D|BLOCKBUSTER
+juelin@gmail.com|APA202211071615|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B4|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+juelin@gmail.com|APA202211071615|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B5|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+juelin@gmail.com|APA202211071615|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|I4|SingleSeat|Regular|TWO_D|BLOCKBUSTER
+eddy@gmail.com|APA202211071644|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|A4|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+eddy@gmail.com|APA202211071644|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|A5|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
+eddy@gmail.com|APA202211071644|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|H4|SingleSeat|Regular|TWO_D|BLOCKBUSTER
+ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|B10|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|B11|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|A8|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|A9|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
+ganhaoyi.100@gmail.com|APA202211071720|Moblima JEM|cinema1|Avengers|08-11-2022;03:50|C6|SingleSeat|Premium|TWO_D|BLOCKBUSTER
