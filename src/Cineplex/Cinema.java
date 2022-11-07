@@ -149,7 +149,7 @@ public class Cinema {
             if (currentSTDate.getTime().getTime() + 2 * HOUR < date.getTime()) {
                 this.createSeats(date, movie, dim);
                 System.out.println("Showtime created!");
-//                TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, dim);
+                TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, dim);
             }
             else
             {
@@ -158,9 +158,8 @@ public class Cinema {
         } else {
             System.out.println("Showtime created!");
             this.createSeats(date, movie, dim);
-//            TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, dim);
+           TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, dim);
         }
     }
-
 
 }
