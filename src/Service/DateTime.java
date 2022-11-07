@@ -2,6 +2,7 @@ package Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -14,7 +15,6 @@ public class DateTime extends Date {
      */
     public static final SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy;HH:mm");
     public static final SimpleDateFormat sf1 = new SimpleDateFormat("dd-MM-yyyy");
-
     /**
      * Convert datetime format to Date
      * @param dateTime dd-MM-yyyy;HH:mm
@@ -77,5 +77,11 @@ public class DateTime extends Date {
     public String ToTID(String cinemaCode) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
         return cinemaCode + dateFormatter.format(super.getTime());
+    }
+
+    public static int getDayNumberOld(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.DAY_OF_WEEK);
     }
 }

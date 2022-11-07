@@ -9,16 +9,12 @@ import Service.GetNumberInput;
  * Controls main through initializing everything needed.
  */
 public class MainUI {
-
-
-
     /**
      * This function represents the starting page when the app loads.
      * It shows the list of options user can use when the app starts.
      * @throws Exception when accessing env.txt to check for Customer / Guest rights to view
      * What kind of Top 5 listing method they are allowed to use.
      */
-
     public static void start() throws Exception {
         AllCineplex cineplexes = new AllCineplex();
 
@@ -45,7 +41,6 @@ public class MainUI {
                 System.out.println("Exiting...");
                 break;
             }
-//            sc.nextLine();
             switch (option) {
                 case 1 -> {
                     cineplexes.displayCineplexList();
@@ -73,7 +68,6 @@ public class MainUI {
                             System.out.println("1) View by top 5 sale ");
                             System.out.println("2) View by top 5 rating ");
                             int userInput = GetNumberInput.getInt(1, 2, -1);
-
                             switch (userInput) {
                                 case 1 -> {
                                     cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);

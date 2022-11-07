@@ -3,6 +3,7 @@ package Customer;
 import Cineplex.Cineplex;
 import Movie.*;
 import Service.TextDB;
+import UserInterface.CustomerUI;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class Customer {
     private String MobileNumber;
     /** Email */
     private String Email;
+    private int age;
     /** Ticket */
     private MovieTicket Ticket;
 
@@ -118,5 +120,9 @@ public class Customer {
             this.getTicket().printTicket();
         }
     }
-
+    public void createCustomerAccount(Customer customer) throws IOException {
+        TextDB.WriteToTextDB("Customers.txt", customer);
+        System.out.println("An account has been created for you!");
+        System.out.println("You may login from the main page with the name and phone number that you entered. Thank you.");
+    }
 }

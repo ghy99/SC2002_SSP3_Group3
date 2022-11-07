@@ -66,10 +66,14 @@ public class MovieListingUI {
                     newmovie.printMovieDetails();
 
                     cineplexes.updateListOfMovies(choice, newmovie);
-                    System.out.printf("Would you like to update the ShowTime of this movie %s as well?\n", newmovie.getMovieTitle());
+                    System.out.printf("Would you like to change the ShowTime of this movie %s as well?\n", newmovie.getMovieTitle());
                     System.out.println("1) Yes\n2) No");
-                    if (GetNumberInput.getInt(1, 2, -1) == 1) {
-                        CinemaUI.UserInterface(cineplexes, 2, newmovie);
+                    int showtimechoice = GetNumberInput.getInt(1, 2, -1);
+                    if (showtimechoice == 1) {
+                        System.out.printf("Would you like to add or update the ShowTime of this movie %s?\n", newmovie.getMovieTitle());
+                        System.out.println("1) Add\n2) Update");
+                        showtimechoice = GetNumberInput.getInt(1, 2, -1);
+                        CinemaUI.UserInterface(cineplexes, showtimechoice, newmovie);
                     }
                 }
                 case 3 -> {

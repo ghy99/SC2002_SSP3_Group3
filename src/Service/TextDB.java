@@ -21,7 +21,6 @@ import Review.*;
 public class TextDB {
 
     public enum Files {
-
         Cineplex(File.separator + "Cineplexes.txt"),
         Movies(File.separator + "Movies.txt"),
         Customers(File.separator + "Customers.txt"),
@@ -31,13 +30,10 @@ public class TextDB {
         TicketPrice(File.separator + "TicketPrice.txt"),
         Env(File.separator + "env.txt");
 
-
         public final String Files;
-
         Files(String files) {
             this.Files = files;
         }
-
         @Override
         public String toString() {
             return Files;
@@ -49,7 +45,6 @@ public class TextDB {
     private static final String CurrentDirectory = CurrentRelativePath.toAbsolutePath().toString() + File.separator + "src" + File.separator + "DataStorage" + File.separator;
 
     public static ArrayList<Customer> readFromFile(String fileName, ArrayList<Customer> customers, Customer temp) throws IOException {
-
         // read String from text file
         ArrayList stringArray = (ArrayList) Read(fileName);
 
@@ -309,13 +304,12 @@ public class TextDB {
             String seatID = star.nextToken().trim();
             IndividualSeats.SeatType seattype = IndividualSeats.SeatType.valueOf(star.nextToken().trim());
             Cinema.CinemaType cinType = Cinema.CinemaType.valueOf(star.nextToken().trim());
-            int age = Integer.parseInt(star.nextToken().trim());
             MovieType.Dimension dim = MovieType.Dimension.valueOf(star.nextToken().trim());
             MovieType.Blockbuster blockbuster = MovieType.Blockbuster.valueOf(star.nextToken().trim());
 
             MovieTicket movieTicket = new MovieTicket(
                     email, choosenCineplex, choosenCinema, choosenMovie,
-                    seatID, tid, date, seattype, cinType, age, dim, blockbuster);
+                    seatID, tid, date, seattype, cinType, dim, blockbuster);
 
             if (Objects.equals(email, "")) {
                 movieTicketList.add(movieTicket);
@@ -643,8 +637,6 @@ public class TextDB {
         st.append(ticket.getSeattype());
         st.append(SEPARATOR);
         st.append(ticket.getCinematype());
-        st.append(SEPARATOR);
-        st.append(ticket.getAge());
         st.append(SEPARATOR);
         st.append(ticket.getDim());
         st.append(SEPARATOR);
