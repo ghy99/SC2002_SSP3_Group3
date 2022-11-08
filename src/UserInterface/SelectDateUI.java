@@ -1,12 +1,12 @@
 package UserInterface;
 
-import Cineplex.*;
+import Cineplex.Cinema;
+import Cineplex.Cineplex;
 import Cineplex.ShowTime;
 import Movie.Movie;
-import Movie.MovieTicket;
-import Movie.MovieType;
 import Service.DateTime;
 import Service.GetNumberInput;
+import Service.Settings;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,9 +14,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class SelectDateUI {
-
     public static ArrayList<Object> SelectDateInterFace(Cineplex cineplex , Movie movie) {
-
+        System.out.println(Settings.ANSI_CYAN);
+        System.out.println("*************************************************");
+        System.out.println("*              Select Date of Movie             *");
+        System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
         String selectedDate = "";
         int selectDate = -1;
         int dateChecking = -1;
@@ -25,7 +28,6 @@ public class SelectDateUI {
         ArrayList<Cinema> cinemas = new ArrayList<>();
 
         //Add all showtime and cinema for the specific movie into list
-
         ArrayList<Cinema> listOfCinemas = cineplex.getListOfCinemas();
         //filter out showtime
         for (Cinema c : listOfCinemas) {
@@ -56,8 +58,8 @@ public class SelectDateUI {
             }
             selectedDate = STDates.get(selectDate);
 
-            for (int z = 0; z < allST.size(); z++) {
-                if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(z).getTime().getTime()))) {
+            for (ShowTime showTime : allST) {
+                if (Objects.equals(selectedDate, DateTime.convertDate(showTime.getTime().getTime()))) {
                     dateChecking++;
                     break;
                 }
@@ -67,12 +69,10 @@ public class SelectDateUI {
                 return null;
             }
         }
-
         res.add(allST);
         res.add(cinemas);
         res.add(selectedDate);
 
         return res;
     }
-
 }

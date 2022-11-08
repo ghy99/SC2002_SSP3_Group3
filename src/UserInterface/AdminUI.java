@@ -1,8 +1,10 @@
 package UserInterface;
 
-import Admin.*;
-import Cineplex.*;
-import Service.*;
+import Admin.Admin;
+import Cineplex.AllCineplex;
+import Cineplex.Cineplex;
+import Service.GetNumberInput;
+import Service.Settings;
 
 /**
  * This is the AdminUI class.it controls the Admin Interface.

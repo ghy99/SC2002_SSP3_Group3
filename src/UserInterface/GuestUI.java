@@ -1,9 +1,13 @@
 package UserInterface;
 
-import Cineplex.*;
+import Cineplex.AllCineplex;
+import Cineplex.Cineplex;
 import Customer.Customer;
-import Movie.*;
-import Service.*;
+import Movie.Movie;
+import Movie.MovieTicket;
+import Service.Settings;
+import Service.TextDB;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
