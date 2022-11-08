@@ -234,7 +234,30 @@ public class MovieListingUI {
             }
         } while (ratings == null);
 
-        return new Movie(movieTitle, moviestatus, director, synopsis, cast, genre, blockbuster, ratings);
+        String date;
+        String confirmDate = "";
+        Scanner scan = new Scanner(System.in);
+
+
+        do {
+            System.out.println("Please enter start date.");
+            date = scan.nextLine();
+            if (DateTime.StringToDateOnly(date) != null) {
+                confirmDate = DateTime.convertDate(DateTime.StringToDateOnly(date).getTime());
+                if(date.equals(confirmDate) == true){
+                    System.out.println("Date: " + date + " is added.");
+                    break;
+                } else {
+                    System.out.println("Invalid date: " +  date + " is entered. Please try again.");
+                }
+
+            } else
+                System.out.println("Error time format holiday not added");
+
+        } while (DateTime.StringToDateOnly(date) == null || !date.equals(confirmDate));
+
+        return new Movie(movieTitle, moviestatus, director,
+                synopsis, cast, genre, blockbuster, ratings, DateTime.StringToDateOnly(date) );
     }
 
     /**

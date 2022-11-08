@@ -88,10 +88,11 @@ public class TextDB {
             MovieType.Blockbuster blockbuster = MovieType.Blockbuster.valueOf(star.nextToken().trim());
             MovieType.Class movieClass = MovieType.Class.valueOf(star.nextToken().trim());
             int movieTotalSales = Integer.parseInt(star.nextToken().trim());
+            Date movieStartDte = DateTime.StringToDateOnly(star.nextToken().trim());
 
 
             Movie movie = new Movie(
-                    title, status, director, synopsis, casts, genre, blockbuster, movieClass, movieTotalSales
+                    title, status, director, synopsis, casts, genre, blockbuster, movieClass, movieTotalSales,movieStartDte
             );
 
             while (!Objects.equals(listofMovies.get(i), "]")) {
@@ -360,6 +361,8 @@ public class TextDB {
         st.append(movie.getMovieClass().toString().trim());
         st.append(SEPARATOR);
         st.append(String.valueOf(movie.getMovieTotalSales()));
+        st.append(SEPARATOR);
+        st.append(String.valueOf(DateTime.convertDate(movie.getStartDate().getTime())));
 
 
         alw.add(st.toString());
@@ -460,6 +463,8 @@ public class TextDB {
             st.append(movie.getMovieClass().toString().trim());
             st.append(SEPARATOR);
             st.append(String.valueOf(movie.getMovieTotalSales()));
+            st.append(SEPARATOR);
+            st.append(String.valueOf(DateTime.convertDate(movie.getStartDate().getTime())));
 
 
             alw.add(st.toString());
@@ -588,6 +593,8 @@ public class TextDB {
             st.append(movie.getMovieClass().toString().trim());
             st.append(SEPARATOR);
             st.append(String.valueOf(movie.getMovieTotalSales()));
+            st.append(SEPARATOR);
+            st.append(String.valueOf(DateTime.convertDate(movie.getStartDate().getTime())));
 
 
             alw.add(st.toString());

@@ -9,9 +9,8 @@ import Service.TextDB;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * * @author CHEW ZHI QI, GAN HAO YI
@@ -126,6 +125,7 @@ public class AllCineplex extends Settings {
     /**
      * This method initializes the cineplex. It reads the cineplex names stored
      * and load it into the Cineplex ArrayList.
+     *
      * @throws IOException to check if Cineplexes.txt exist.
      */
     public void InitializeCineplexes() throws IOException {
@@ -141,12 +141,54 @@ public class AllCineplex extends Settings {
         // movie instance
         ArrayList<Movie> movieList = TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
 
+        this.setListOfMovies(movieList);
+        updateUpdateMovieStat();
+
         for (Cineplex cineplex : this.cineplexes) {
-            setListOfMovies(movieList);
             cineplex.InitializeMovies(this.listOfMovies);
         }
 
         System.out.println("Cineplexes are initialized\n");
+        dailyTask();
+    }
+
+    private void updateUpdateMovieStat() throws IOException {
+        for (Movie currMovie : this.getListOfMovies()) {
+            if (currMovie.getShowingStatus() != Movie.MovieStatus.EndOfShowing) {
+                Date currDate = new Date();
+                if (currMovie.getStartDate().getTime() <= currDate.getTime()) {//show time
+                    currMovie.setShowingStatus(Movie.MovieStatus.NowShowing);
+                } else if (currMovie.getStartDate().getTime() - currDate.getTime() < 604800000) {
+                    currMovie.setShowingStatus(Movie.MovieStatus.Preview);
+                } else {//coming
+                    currMovie.setShowingStatus(Movie.MovieStatus.ComingSoon);
+
+                }
+            }
+        }
+
+        TextDB.UpdateTextDB(filename, this.listOfMovies);
+    }
+
+    private void dailyTask() {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+// every night at 2am you run your task
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("task happens");
+                try {
+                    updateUpdateMovieStat();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, today.getTime(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)); // period: 1 day
+        System.out.println(today.getTime());
     }
 
     /**
@@ -162,6 +204,7 @@ public class AllCineplex extends Settings {
 
     /**
      * This method adds a newly created customer account into the database.
+     *
      * @param customer - New customer
      * @throws IOException - Exception if opening customers.txt has error.
      */
