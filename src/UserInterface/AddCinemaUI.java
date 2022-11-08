@@ -12,16 +12,13 @@ public class AddCinemaUI {
     public static void AddCinemaInterface(Cineplex cineplex , AllCineplex cineplexes) throws IOException {
         Scanner sc = new Scanner(System.in);
         String cinema = "" ;
-        System.out.println(Settings.ANSI_CYAN);
-        System.out.println("*************************************************");
-        System.out.println("*         Welcome to the Customer Portal        *");
-        System.out.println("*************************************************");
-        System.out.println(Settings.ANSI_RESET);
-        System.out.println("5) Add Cinema (Enter -1 to exit):");
 
-        System.out.println("\t Please enter cinema name:");
+        System.out.println("Adding Cinema:");
+
+        System.out.printf("\nPlease enter Cinema number (Range: %d onwards):", cineplex.getNoOfCinemas());
         do {
-            if(cinema.equals("-1")) break;
+            if(cinema.equals("-1")) continue;
+            if (Integer.parseInt(cinema) < cineplex.getNoOfCinemas()) continue;
             cinema = sc.nextLine();
         }while (Objects.equals(cinema, ""));
 

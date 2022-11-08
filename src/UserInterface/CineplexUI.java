@@ -12,6 +12,7 @@ import java.util.Scanner;
 import Cineplex.*;
 import Movie.*;
 import Service.GetNumberInput;
+import Service.Settings;
 import Service.TextDB;
 import Service.DateTime;
 
@@ -29,16 +30,22 @@ public class CineplexUI {
      * @return the object ticket
      * @throws IOException is thrown if there is an error in reading from the file
      */
-    public static Cineplex CineplexInterface(AllCineplex cineplexes) throws IOException {
+    public static Cineplex CineplexInterface(AllCineplex cineplexes) {
+        System.out.println(Settings.ANSI_CYAN);
+        System.out.println("*************************************************");
+        System.out.println("*               Cineplex Interface              *");
+        System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
         int selectCineplex = -1;
         ArrayList<MovieTicket> tickets = null;
+        System.out.println("\nSelect your Cineplex: ");
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
             System.out.printf("\t%d: Cineplex Name: %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
         }
-        System.out.println("Select your Cineplex: ");
         selectCineplex = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
-
-        if(selectCineplex != -1) return  cineplexes.getCineplexes().get(selectCineplex);
-        else return null;
+        if(selectCineplex != -1)
+            return  cineplexes.getCineplexes().get(selectCineplex);
+        else
+            return null;
     }
 }
