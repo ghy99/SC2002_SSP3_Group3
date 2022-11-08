@@ -1,11 +1,13 @@
 package UserInterface;
 
-import java.io.IOException;
-import java.util.ArrayList;
 
-import Cineplex.*;
-import Movie.*;
-import Service.*;
+import Cineplex.AllCineplex;
+import Cineplex.Cineplex;
+import Movie.MovieTicket;
+import Service.GetNumberInput;
+import Service.Settings;
+
+import java.util.ArrayList;
 
 /**
  * This is the Cineplex user Interface. Imported to call interface to view the movies at the cineplexes.
@@ -17,9 +19,8 @@ public class CineplexUI {
      * This is the Cineplex Interface. This is used to get the customer to choose the cineplex they
      * want and view the movies listed there (if any). they can choose the date and showtimes available for the movie
      *
-     * @param cineplexes = stores the list of movies and the showtimes and showdates of the movies listed
+     * @param cineplexes - stores the list of movies and the showtimes and showdates of the movies listed
      * @return the object ticket
-     * @throws IOException is thrown if there is an error in reading from the file
      */
     public static Cineplex CineplexInterface(AllCineplex cineplexes) {
         System.out.println(Settings.ANSI_CYAN);

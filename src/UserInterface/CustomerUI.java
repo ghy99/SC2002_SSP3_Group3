@@ -1,14 +1,19 @@
 package UserInterface;
 
+
+import Cineplex.AllCineplex;
+import Cineplex.Cineplex;
+import Customer.Customer;
+import Movie.Movie;
+import Movie.MovieTicket;
+import Service.GetNumberInput;
+import Service.Settings;
+import Service.TextDB;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-
-import Cineplex.*;
-import Customer.Customer;
-import Movie.*;
-import Service.*;
 
 /**
  * This is the Customer User Interface. This is imported to call the Customer Interface to access their account.
@@ -20,12 +25,13 @@ public class CustomerUI {
      * This is the Customer Interface for the customer to access their account and make changes to their details or
      * print their details and booking history.
      *
-     * @param cineplexes        = This object is passed into the Customer Interface to start the ticket booking process.
-     * @param customerArrayList = this is passed to update the customer details in the customers file.
-     * @param customer          = This is passed to access the customer details.
+     * @param cineplexes        - This object is passed into the Customer Interface to start the ticket booking process.
+     * @param customerArrayList - this is passed to update the customer details in the customers file.
+     * @param customer          - This is passed to access the customer details.
      * @throws IOException is thrown if there is an error in reading the customer file
      */
-    public static void CustomerInterface(AllCineplex cineplexes, ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
+    public static void CustomerInterface(AllCineplex cineplexes, ArrayList<Customer> customerArrayList,
+                                         Customer customer) throws IOException {
         System.out.println(Settings.ANSI_CYAN);
         System.out.println("*************************************************");
         System.out.println("*         Welcome to the Customer Portal        *");

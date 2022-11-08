@@ -6,8 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- *  * @author CHEW ZHI QI, Eddy
- *  * Datetime class inherit from date class
+ * * @author CHEW ZHI QI, EDDY CHENG KUAN QUAN, GAN HAO YI
+ * * Datetime class inherit from date class
  */
 public class DateTime extends Date {
     /**
@@ -15,16 +15,17 @@ public class DateTime extends Date {
      */
     public static final SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy;HH:mm");
     public static final SimpleDateFormat sf1 = new SimpleDateFormat("dd-MM-yyyy");
+
     /**
      * Convert datetime format to Date
+     *
      * @param dateTime dd-MM-yyyy;HH:mm
      * @return Date with the passed in dateime
      */
-    public static Date StringToDate(String dateTime)
-    {
+    public static Date StringToDate(String dateTime) {
         Date dt = null;
         try {
-             dt = sf.parse(dateTime);
+            dt = sf.parse(dateTime);
         } catch (ParseException e) {
             return null;
         }
@@ -33,11 +34,11 @@ public class DateTime extends Date {
 
     /**
      * Convert datetime format to Date
+     *
      * @param date dd-MM-yyyy;HH:mm
      * @return Date with the passed in dateime
      */
-    public static Date StringToDateOnly(String date)
-    {
+    public static Date StringToDateOnly(String date) {
         Date dt = null;
         try {
             dt = sf1.parse(date);
@@ -50,29 +51,32 @@ public class DateTime extends Date {
 
     /**
      * Convert from long to string datetime format dd-MM-yyyy;HH:mm
+     *
      * @param time time in milliseconds
      * @return String dd-MM-yyyy;HH:mm
      */
-    public static String convertTime(long time){
+    public static String convertTime(long time) {
         Date date = new Date(time);
         return sf.format(date);
     }
 
     /**
      * Convert from long to string time format HH:mm
+     *
      * @param time time in milliseconds
      * @return String HH:mm
      */
-    public static String convertDate(long time){
+    public static String convertDate(long time) {
         Date date = new Date(time);
         return sf1.format(date);
     }
 
     /**
      * Current date time to TID
+     *
      * @param cinemaCode Cinema code
      * @return XXXYYYYMMDDhhmm (Y : year, M : month, D : day, h : hour, m :
-     *minutes, XXX : cinema code in letters)
+     * minutes, XXX : cinema code in letters)
      */
     public String ToTID(String cinemaCode) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmm");

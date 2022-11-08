@@ -1,11 +1,4 @@
-import Movie.*;
-import Service.DateTime;
-import Service.TextDB;
 import UserInterface.*;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * @author Gan Hao Yi
@@ -18,6 +11,5 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         MainUI.start();
-        return;
     }
 }

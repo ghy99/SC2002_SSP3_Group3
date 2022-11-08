@@ -1,4 +1,4 @@
-package Service;//package Service;
+package Service;
 
 import java.util.Scanner;
 
@@ -10,9 +10,10 @@ import java.util.Scanner;
 public class GetNumberInput {
     /**
      * this gets an Integer input, accounting for error inputs as well
+     *
      * @param range1 - Lower range limit
      * @param range2 - Upper range limit
-     * @param exit - Value to enter to exit loop
+     * @param exit   - Value to enter to exit loop
      * @return an integer value Choice
      */
     public static int getInt(int range1, int range2, int exit) {
@@ -27,6 +28,7 @@ public class GetNumberInput {
             choice = sc.nextInt();
             sc.nextLine();
             if (choice == exit) {
+                System.out.println("Exiting...");
                 break;
             }
             if (choice < range1 || choice > range2) {
@@ -39,8 +41,9 @@ public class GetNumberInput {
     /**
      * this gets a Double input, accounting for error input below 0.
      * Mainly used for ticket price edition.
+     *
      * @param range1 - Lower range limit
-     * @param exit - Value to enter to exit loop
+     * @param exit   - Value to enter to exit loop
      * @return a double value Choice
      */
     public static double getDouble(double range1, double range2, int exit) {
@@ -54,7 +57,7 @@ public class GetNumberInput {
             choice = sc.nextDouble();
             sc.nextLine();
             if (choice == exit) {
-                System.out.println("Break condition fulfilled. Exiting.");
+                System.out.println("Exiting...");
                 break;
             }
             if (choice < range1 || choice > range2) {
@@ -63,5 +66,4 @@ public class GetNumberInput {
         } while (choice < range1 || choice > range2);
         return choice;
     }
-
 }
