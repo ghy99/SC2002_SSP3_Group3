@@ -1,8 +1,8 @@
 package UserInterface;
 
-import Admin.Admin;
 import Cineplex.*;
 import Service.GetNumberInput;
+import Service.Settings;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -12,6 +12,11 @@ public class AddCinemaUI {
     public static void AddCinemaInterface(Cineplex cineplex , AllCineplex cineplexes) throws IOException {
         Scanner sc = new Scanner(System.in);
         String cinema = "" ;
+        System.out.println(Settings.ANSI_CYAN);
+        System.out.println("*************************************************");
+        System.out.println("*         Welcome to the Customer Portal        *");
+        System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
         System.out.println("5) Add Cinema (Enter -1 to exit):");
 
         System.out.println("\t Please enter cinema name:");

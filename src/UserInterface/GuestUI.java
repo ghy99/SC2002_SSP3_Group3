@@ -71,6 +71,7 @@ public class GuestUI {
             TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
             tix.printTicket();
         }
+        chosenMovie.increaseMovieTotalSale(cineplexes.getListOfMovies(), allMovieTicket.size());
     }
 }
 
