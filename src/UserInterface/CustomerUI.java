@@ -120,6 +120,6 @@ public class CustomerUI {
                 }
                 default -> System.out.println("Invalid Input. Try again.");
             }
-        } while (choice > 6 || choice < 1);
+        } while (choice < 6 && choice > 1);
     }
 }
