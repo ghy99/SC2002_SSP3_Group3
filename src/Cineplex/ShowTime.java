@@ -3,6 +3,7 @@ package Cineplex;
 import Movie.Movie;
 import Movie.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
  * Showtime class inherit from MovieSeats.
  * For each showtime consist of time, movie instance, dimension, list of seasts
  */
-public class ShowTime extends MovieSeats{
+public class ShowTime extends MovieSeatsNew{
     /**
      * Date
      */
@@ -36,12 +37,12 @@ public class ShowTime extends MovieSeats{
      * @param movie Movie of the new showtime
      * @param dim Dimension of the new showtime
      */
-    public ShowTime(int row, int col, int aisleOne, int aisleTwo , Date time , Movie movie, MovieType.Dimension dim) {
-        super(row, col, aisleOne, aisleTwo);
+    public ShowTime(int row, int col, int rowDoubleOne, int aisleOne, int aisleTwo , Date time , Movie movie, MovieType.Dimension dim) {
+        super(row, col, rowDoubleOne, aisleOne,aisleTwo);
         this.time = time;
         this.movie = movie;
         this.dimension = dim;
-        seatsCreation();
+        SeatsCreation();
     }
 
     /**
@@ -52,24 +53,16 @@ public class ShowTime extends MovieSeats{
      * @param aisle Aisle 1 and 2
      * @param dim Dimension of the new showtime
      */
-    public ShowTime(Date time , Movie movie , ArrayList<ArrayList<String>> seats , int[] aisle, MovieType.Dimension dim) {
-        super(seats.size() , seats.get(0).size() ,aisle );
+    public ShowTime(Date time , Movie movie , ArrayList<String> seats, int row , int column , int sitDouble , int[] aisle, MovieType.Dimension dim) throws IOException {
+        super(row, column, sitDouble ,aisle[0], aisle[1] );
 
-        String[][] seat = new String[seats.size()][seats.get(0).size()];
 
         this.time = time;
         this.movie = movie;
         this.dimension = dim;
+        SeatsCreation();
 
-        for (int i =0;i<seats.size();i++)
-        {
-            for(int j =0;j<seats.get(i).size();j++)
-            {
-                seat[i][j] = seats.get(i).get(j);
-            }
-        }
-
-        super.setSeats(seat);
+        super.BookSeats(seats, false, null);
     }
 
 

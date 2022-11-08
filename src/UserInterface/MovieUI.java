@@ -1,41 +1,44 @@
 package UserInterface;
+
 import java.util.Scanner;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Cineplex.Cinema;
-import Cineplex.ShowTime;
+import Cineplex.*;
 import Movie.*;
 import Service.*;
 
 /**
  * This is the Movie User Interface Class. Imported to call interface to get customer to select their seat
+ *
  * @author EDDY CHENG KUAN QUAN, CHEW ZHI QI
  */
 public class MovieUI {
 
-    public static String MovieInterface(MovieTicket ticket , ShowTime showTime) {
-        // can be used to implement timing
+    public static Movie MovieInterface(ArrayList<Movie> movielist) {
 
-        Scanner sc = new Scanner(System.in);
+        int selectMovie = 0;
 
-        showTime.printSeats();
-       String movieseats;
+        if (movielist.size() == 0) {
+            System.out.printf("There is not showing any movies at this moment.\n\n");
 
-        // display movie timings.
-        // display movie seats.
-        char row, col;
-        do {
-            System.out.println("Select your Movie Seats:");
-            movieseats = sc.next();
-            row = movieseats.charAt(0);
-            col = movieseats.charAt(1);
-        } while(showTime.checkSeats(row, Integer.parseInt(String.valueOf(col))) != 1);
+            return null;
+        } else {
+            for (int i = 0; i < movielist.size(); i++) {
+                System.out.printf("%d)\n", i + 1);
+                movielist.get(i).printMovieDetails();
+            }
+            System.out.println("Select your Movie from the list above: ");
+            selectMovie = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
+            while (selectMovie < 0 || selectMovie >= movielist.size()) {
+                System.out.println("The number you keyed is out of range, please key again!");
+                System.out.println("Select your Movie from the list above: ");
+                selectMovie = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
+            }
+        }
 
-    
-        System.out.println("Selected movie seat ID(" + row +""+ col +")" );
-        // return type ticket?
-        return movieseats;
+        return movielist.get(selectMovie);
     }
+
 }

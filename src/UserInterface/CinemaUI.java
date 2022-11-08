@@ -22,125 +22,15 @@ public class CinemaUI {
      * @throws IOException is thrown if there is an error in accessing the data from the cineplexes
      */
     public static void UserInterface(AllCineplex cineplexes, int choice, Movie movie) throws IOException {
-        int choseShow, userInput, day, month, year, hour, min;
-
         switch (choice) {
             case 1 -> { // create new movie timing for all cineplex
                 System.out.printf("\n\nYou have created a new movie: %s.\nCreating ShowTime for each Cineplex.\n", movie.getMovieTitle());
                 addNewShowTime(cineplexes, movie);
             }
-            case 2 -> { // update movie timing
-                UpdateShowTime(cineplexes, movie);
-            }
+            case 2 -> // update movie timing
+                    UpdateShowTime(cineplexes, movie);
         }
     }
-    // Change this to add new movie to all cineplexes if choice is 1, if choice is 2, need to select which cineplex to update movie timing.
-    //Get cineplex to edit
-//        System.out.println("Please enter which cineplex showtime to edit :");
-//        for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
-//            System.out.printf("%s) %s", i + 1, cineplexes.getCineplexes().get(i).getCineplexName() + "\n");
-//        }
-//
-//        Cineplex chosenCineplex = cineplexes.getCineplexes().get(GetNumberInput.getInt() - 1);
-
-    // Change this to add new movie to all cinema if choice is 1, if choice is 2, need to select which cinema to update movie timing.
-//        System.out.println("Please enter which cinema showtime to edit :");
-//        for (int i = 0; i < chosenCineplex.getNoOfCinemas(); i++) {
-//            System.out.printf("%s) %s %s %s" + "\n", i + 1, chosenCineplex.getListOfCinemas().get(i).getCinemaCode(), chosenCineplex.getListOfCinemas().get(i).getCinemaName(), chosenCineplex.getListOfCinemas().get(i).getCinemaType());
-//        }
-//
-//        Cinema choosenCinema = chosenCineplex.getListOfCinemas().get(GetNumberInput.getInt() - 1);
-
-
-//        System.out.println("1)\tAdd showtime\n2)\tUpdate showtime:");
-//        userInput = GetNumberInput.getInt();
-
-    // Change this to if choice is 1, don't print this, if choice is 2, need to check movie, get cineplex, get cinema,
-    // check for this movie, then select which showtime to edit.
-//        System.out.printf("Current showtime in %s" + "\n", choosenCinema.getCinemaName());
-//        for (int i = 0; i < choosenCinema.getShowTime().size(); i++) {
-//            System.out.printf("%s) %s %s" + "\n", i + 1, choosenCinema.getShowTime().get(i).getMovie().getMovieTitle(), DateTime.convertTime(choosenCinema.getShowTime().get(i).getTime().getTime()));
-//        }
-
-//        switch (choice) {
-//            case 1 -> {
-//                System.out.println("Please enter day :");
-//                day = GetNumberInput.getInt();
-//                System.out.println("Please enter month :");
-//                month = GetNumberInput.getInt();
-//                System.out.println("Please enter year :");
-//                year = GetNumberInput.getInt();
-//                System.out.println("Please enter hour :");
-//                hour = GetNumberInput.getInt();
-//                System.out.println("Please enter minutes :");
-//                min = GetNumberInput.getInt();
-//
-//                String date = day + "-" + month + "-" + year + ";" + hour + ":" + min;
-//                Date newDate = DateTime.StringToDate(date);
-//
-//                System.out.println("Please enter movie to add showtime:");
-//                for (int i = 0; i < cineplexes.getListOfMovies().size(); i++) {
-//                    System.out.printf("%s) %s" + "\n", i + 1, cineplexes.getListOfMovies().get(i).getMovieTitle());
-//                }
-//
-//                int three_d = 0;
-//                MovieType.Dimension dim = null;
-//                do {
-//                    System.out.println("Would you like to watch the movie in 3D?");
-//                    System.out.println("1) Yes\n2) No");
-//                    three_d = GetNumberInput.getInt();
-//                    if (three_d != 1 && three_d != 2) continue;
-//                    switch (three_d) {
-//                        case 1 -> {
-//                            // 3D
-//                            dim = MovieType.Dimension.THREE_D;
-//                        }
-//                        case 2 -> {
-//                            // 2D
-//                            dim = MovieType.Dimension.TWO_D;
-//                        }
-//                    }
-//                } while (dim == null);
-
-//                choosenCinema.createShowTime(chosenCineplex, newDate, cineplexes.getListOfMovies().get(GetNumberInput.getInt() - 1), dim);
-//
-//                for (int i = 0; i < choosenCinema.getShowTime().size(); i++) {
-//                    System.out.printf("%s) %s %s" + "\n", i + 1,
-//                            choosenCinema.getShowTime().get(i).getMovie().getMovieTitle(),
-//                            DateTime.convertTime(choosenCinema.getShowTime().get(i).getTime().getTime())
-//                    );
-//                }
-
-//            }
-//            case 2 -> {
-
-//                System.out.println("Please enter showtime to add showtime:");
-//                choseShow = GetNumberInput.getInt() - 1;
-//
-//                System.out.println("Please enter day :");
-//                day = GetNumberInput.getInt();
-//                System.out.println("Please enter month :");
-//                month = GetNumberInput.getInt();
-//                System.out.println("Please enter year :");
-//                year = GetNumberInput.getInt();
-//                System.out.println("Please enter hour :");
-//                hour = GetNumberInput.getInt();
-//                System.out.println("Please enter minutes :");
-//                min = GetNumberInput.getInt();
-//
-//                String date = day + "-" + month + "-" + year + ";" + hour + ":" + min;
-//                Date newDate = DateTime.StringToDate(date);
-//
-//
-//
-//                choosenCinema.updateCinemaTime(
-//                        choseShow, chosenCineplex, newDate,
-//                        cineplexes.getListOfMovies().get(GetNumberInput.getInt() - 1),
-//                        choosenCinema.getShowTime().get(choseShow).getDimension()
-//                );
-//            }
-//        }
-//    }
 
     /**
      * This method adds new ShowTimes to each cinema that each cineplex has.
@@ -155,29 +45,28 @@ public class CinemaUI {
             for (int j = 0; j < chosenCineplex.getListOfCinemas().size(); j++) {
                 Cinema chosenCinema = chosenCineplex.getListOfCinemas().get(j);
                 System.out.printf("Creating ShowTime for Cinema %s\n", chosenCinema.getCinemaName());
-                System.out.println("How many ShowTime would you like to create? (Max 5 at a time):");
-                int newshowtimes = GetNumberInput.getInt();
+                System.out.println("How many ShowTime would you like to create? (0 - 5 at a time, Enter -1 to exit):");
+                int newshowtimes = GetNumberInput.getInt(0, 5, -1);
                 for (int k = 0; k < newshowtimes; k++) {
                     System.out.printf("ShowTime %d\n", k + 1);
                     Date newDate = null;
-
                     // input date
                     do {
                         // Add show time
-                        System.out.println("Please enter year (2022-):");
-                        int year = GetNumberInput.getInt();
+                        System.out.println("Please enter year (2022-2023):");
+                        int year = GetNumberInput.getInt(2022, 2023, -1);
                         if (year < 2022) {
                             System.out.println("Invalid Year. Starting over date input.");
                             continue;
                         }
                         System.out.println("Please enter month (1-12):");
-                        int month = GetNumberInput.getInt();
+                        int month = GetNumberInput.getInt(1, 12, -1);
                         if (month < 1 || month > 12) {
                             System.out.println("Invalid month. Starting over date input.");
                             continue;
                         }
                         System.out.println("Please enter day (1-30/31) :");
-                        int day = GetNumberInput.getInt();
+                        int day = GetNumberInput.getInt(1, 31, -1);
                         if (day < 1 || day > 31) {
                             System.out.println("Invalid day. Starting over date input.");
                             continue;
@@ -187,18 +76,17 @@ public class CinemaUI {
                             continue;
                         }
                         System.out.println("Please enter hour (0-24):");
-                        int hour = GetNumberInput.getInt();
+                        int hour = GetNumberInput.getInt(0, 24, -1);
                         if (hour < 1 || hour > 24) {
                             System.out.println("Invalid hour. Starting over date input.");
                             continue;
                         }
                         System.out.println("Please enter minutes (0-59):");
-                        int min = GetNumberInput.getInt();
+                        int min = GetNumberInput.getInt(0, 59, -1);
                         if (min < 1 || min > 59) {
                             System.out.println("Invalid minutes. Starting over date input.");
                             continue;
                         }
-
                         String date = day + "-" + month + "-" + year + ";" + hour + ":" + min;
                         newDate = DateTime.StringToDate(date);
                     } while (newDate == null);
@@ -209,7 +97,7 @@ public class CinemaUI {
                     do {
                         System.out.println("Will this Cinema show the movie in 3D?");
                         System.out.println("1) Yes\n2) No");
-                        three_d = GetNumberInput.getInt();
+                        three_d = GetNumberInput.getInt(1, 2, -1);
                         if (three_d != 1 && three_d != 2) continue;
                         switch (three_d) {
                             case 1 -> {
@@ -222,7 +110,7 @@ public class CinemaUI {
                             }
                         }
                     } while (dim == null);
-                    chosenCinema.createShowTime(chosenCineplex, newDate, movie, dim);
+                    chosenCinema.createShowTime(newDate, movie, dim);
                     System.out.println("New ShowTime has been created:");
                 }
                 for (int k = 0; k < chosenCinema.getShowTime().size(); k++) {
@@ -246,40 +134,38 @@ public class CinemaUI {
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
             System.out.printf("%s) %s", i + 1, cineplexes.getCineplexes().get(i).getCineplexName() + "\n");
         }
-        Cineplex chosenCineplex = cineplexes.getCineplexes().get(GetNumberInput.getInt() - 1);
+        Cineplex chosenCineplex = cineplexes.getCineplexes().get(GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1);
 
 
         System.out.println("Please enter which cinema showtime to edit :");
         for (int i = 0; i < chosenCineplex.getNoOfCinemas(); i++) {
             System.out.printf("%s) %s %s %s" + "\n", i + 1, chosenCineplex.getListOfCinemas().get(i).getCinemaCode(), chosenCineplex.getListOfCinemas().get(i).getCinemaName(), chosenCineplex.getListOfCinemas().get(i).getCinemaType());
         }
-        Cinema chosenCinema = chosenCineplex.getListOfCinemas().get(GetNumberInput.getInt() - 1);
+        Cinema chosenCinema = chosenCineplex.getListOfCinemas().get(GetNumberInput.getInt(1, chosenCineplex.getNoOfCinemas(), -1) - 1);
 
 
         System.out.printf("Current showtime in %s" + "\n", chosenCinema.getCinemaName());
         for (int i = 0; i < chosenCinema.getShowTime().size(); i++) {
             System.out.printf("%s) %s %s" + "\n", i + 1, chosenCinema.getShowTime().get(i).getMovie().getMovieTitle(), DateTime.convertTime(chosenCinema.getShowTime().get(i).getTime().getTime()));
         }
-
-
         System.out.println("Please enter showtime to add showtime:");
-        int chosenShow = GetNumberInput.getInt() - 1;
+        int chosenShow = GetNumberInput.getInt(1, chosenCinema.getShowTime().size(), -1) - 1;
         Date newDate = null;
         do {
-            System.out.println("Please enter year (2022-):");
-            int year = GetNumberInput.getInt();
+            System.out.println("Please enter year (2022-2023):");
+            int year = GetNumberInput.getInt(2022, 2023, -1);
             if (year < 2022) {
                 System.out.println("Invalid Year. Starting over date input.");
                 continue;
             }
             System.out.println("Please enter month (1-12):");
-            int month = GetNumberInput.getInt();
+            int month = GetNumberInput.getInt(1, 12, -1);
             if (month < 1 || month > 12) {
                 System.out.println("Invalid month. Starting over date input.");
                 continue;
             }
             System.out.println("Please enter day (1-30/31) :");
-            int day = GetNumberInput.getInt();
+            int day = GetNumberInput.getInt(1, 31, -1);
             if (day < 1 || day > 31) {
                 System.out.println("Invalid day. Starting over date input.");
                 continue;
@@ -289,13 +175,13 @@ public class CinemaUI {
                 continue;
             }
             System.out.println("Please enter hour (0-24):");
-            int hour = GetNumberInput.getInt();
+            int hour = GetNumberInput.getInt(0, 24, -1);
             if (hour < 1 || hour > 24) {
                 System.out.println("Invalid hour. Starting over date input.");
                 continue;
             }
             System.out.println("Please enter minutes (0-59):");
-            int min = GetNumberInput.getInt();
+            int min = GetNumberInput.getInt(0, 59, -1);
             if (min < 1 || min > 59) {
                 System.out.println("Invalid minutes. Starting over date input.");
                 continue;

@@ -1,5 +1,6 @@
 package Cineplex;
 
+import Customer.Customer;
 import Movie.Movie;
 import Review.AllReviews;
 import Service.GetNumberInput;
@@ -121,6 +122,11 @@ public class AllCineplex extends Settings {
         System.out.println();
     }
 
+    /**
+     * This method initializes the cineplex. It reads the cineplex names stored
+     * and load it into the Cineplex ArrayList.
+     * @throws IOException to check if Cineplexes.txt exist.
+     */
     public void InitializeCineplexes() throws IOException {
         System.out.println("Initializing Cineplexes...\n...\n...");
         try {
@@ -154,6 +160,18 @@ public class AllCineplex extends Settings {
     }
 
     /**
+     * This method adds a newly created customer account into the database.
+     * @param customer - New customer
+     * @throws IOException - Exception if opening customers.txt has error.
+     */
+    public void createCustomerAccount(Customer customer) throws IOException {
+        this.getCustomerlist().add(customer);
+        TextDB.WriteToTextDB("Customers.txt", customer);
+        System.out.println("An account has been created for you!");
+        System.out.println("You may login from the main page with the name and phone number that you entered. Thank you.");
+    }
+
+    /**
      * This Method displays the List of Movies currently available. User will only see Movie Title.
      * After this method, user will be able to select which movie to display more details.
      */
@@ -166,7 +184,7 @@ public class AllCineplex extends Settings {
                 System.out.printf("%d) %s\n", j + 1, movielist.get(j).getMovieTitle());
             }
             System.out.println("Enter movie number to view more movie details. (Enter -1) to return to main page.");
-            choice = GetNumberInput.getInt() - 1;
+            choice = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
             if (choice == -2) {
                 break;
             } else if (choice >= movielist.size()) {
@@ -174,12 +192,12 @@ public class AllCineplex extends Settings {
             } else {
                 movielist.get(choice).printMovieDetails();
 
-                System.out.println("\tIn what order would you like to see the reviews?  (Enter -1) to return to main page.");
+                System.out.println("\tIn what order would you like to see the reviews?  (Enter -1 to return to main page.");
                 System.out.println("\t1) Newest to oldest");
                 System.out.println("\t2) Oldest to newest");
                 System.out.println("\t3) Highest rating to lowest rating");
                 System.out.println("\t4) Lowest rating to highest rating");
-                switch (GetNumberInput.getInt()) {
+                switch (GetNumberInput.getInt(1, 4, -1)) {
                     case 1 -> {
                         movielist.get(choice).printSortedReview(AllReviews.ReviewSort.NewToOld);
                     }

@@ -15,6 +15,7 @@ import static UserInterface.AdminUI.AdminInterface;
 
 /**
  * This is the User Interface class. Imported to call interface for logging in.
+ *
  * @authors GAN HAO YI, CHEW ZHI QI
  */
 public class UserUI {
@@ -25,6 +26,7 @@ public class UserUI {
 
     /**
      * This is the User Interface. It is called in mainUI and it controls the interface for the Login option.
+     *
      * @param cineplexes This object is passed into the Customer Interface to start the ticket booking process.
      * @throws Exception This Exception is thrown if reading customer database causes error.
      */
@@ -47,9 +49,9 @@ public class UserUI {
             else if (username.lastIndexOf("admin/") >= 0) {
                 System.out.println("Enter your password:");
                 number = sc.nextLine();
-                String temp = username.substring(username.lastIndexOf("admin/") +6);
+                String temp = username.substring(username.lastIndexOf("admin/") + 6);
 
-                AdminInterface(Admin.login(temp,number) , temp, number, cineplexes);
+                AdminInterface(Admin.login(temp, number), temp, number, cineplexes);
                 return;
             }
 
@@ -72,7 +74,7 @@ public class UserUI {
 
     /**
      * This method checks that customer name exists in database
-     * @param name = name that user entered and used to check if the name exists
+     * @param name   = name that user entered and used to check if the name exists
      * @param number = number that user entered to match with the database
      * @return boolean result
      */
@@ -94,17 +96,15 @@ public class UserUI {
 
     /**
      * This method returns a Customer object if name and number that was entered matches a value in database
-     * @param name = the customers name
+     * @param name   = the customers name
      * @param number used to check if the number is correct and matches the value in the database.
      * @return the customer object
      */
     public static Customer checkCustomerNumber(String name, String number) {
-
-//        ArrayList<Customer> customers = new ArrayList<Customer>();
         for (Customer customer : customers) {
             if (
                     Objects.equals(customer.getMovieGoerName(), name)
-                            && Objects.equals(customer.getMobileNumber(), number)
+                    && Objects.equals(customer.getMobileNumber(), number)
             ) {
                 return customer;
             }

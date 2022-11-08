@@ -3,29 +3,18 @@ package UserInterface;
 import Cineplex.*;
 import Service.GetNumberInput;
 
-import java.io.IOException;
-
 
 /**
  * @authors GAN HAO YI, EDDY CHENG KUAN QUAN
  * Controls main through initializing everything needed.
  */
 public class MainUI {
-
-    /**
-     * This method initializes the cineplex. It reads the cineplex names stored
-     * and load it into the Cineplex ArrayList.
-     * @throws IOException to check if Cineplexes.txt exist.
-     */
-
-
     /**
      * This function represents the starting page when the app loads.
      * It shows the list of options user can use when the app starts.
      * @throws Exception when accessing env.txt to check for Customer / Guest rights to view
-     *                   what kind of Top 5 listing method they are allowed to use.
+     * What kind of Top 5 listing method they are allowed to use.
      */
-
     public static void start() throws Exception {
         AllCineplex cineplexes = new AllCineplex();
 
@@ -33,7 +22,7 @@ public class MainUI {
 
         int option = 1;
         do {
-            System.out.println("Select option:");
+            System.out.println("Select option (Enter -1 to exit):");
             System.out.println("1) Display List of Cineplexes.");
             System.out.println("2) Display List of Movies.");
             System.out.println("3) Display List of Timing.");
@@ -46,9 +35,12 @@ public class MainUI {
                 System.out.println("6) Add Review.");
             }
 
-            option = GetNumberInput.getInt();
+            option = GetNumberInput.getInt(1, 7, -1);
 
-//            sc.nextLine();
+            if (option == -1) {
+                System.out.println("Exiting...");
+                break;
+            }
             switch (option) {
                 case 1 -> {
                     cineplexes.displayCineplexList();
@@ -59,9 +51,9 @@ public class MainUI {
                 case 3 -> {
                     System.out.println("Which cineplex would you like to view:");
                     for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
-                        System.out.printf("%d) Branch %s\n", i, cineplexes.getCineplexes().get(i).getCineplexName());
+                        System.out.printf("%d) Branch %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
                     }
-                    int choice = GetNumberInput.getInt();
+                    int choice = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
                     cineplexes.getCineplexes().get(choice).displayMovieTimings(cineplexes.getListOfMovies());
                 }
                 case 4 -> {
@@ -75,8 +67,7 @@ public class MainUI {
                         if (cineplexes.isRating() && cineplexes.isSale()) {
                             System.out.println("1) View by top 5 sale ");
                             System.out.println("2) View by top 5 rating ");
-                            int userInput = GetNumberInput.getInt();
-
+                            int userInput = GetNumberInput.getInt(1, 2, -1);
                             switch (userInput) {
                                 case 1 -> {
                                     cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);
@@ -84,8 +75,10 @@ public class MainUI {
                                 case 2 -> {
                                     cineplexes.printSortedList( AllCineplex.MovieSort.Top5Rating);
                                 }
+                                case -1 -> {
+                                    System.out.println("Exiting...");
+                                }
                             }
-
                         } else if (cineplexes.isSale()) {
                             cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);
                         } else if (cineplexes.isRating()) {
@@ -99,7 +92,6 @@ public class MainUI {
                     if (cineplexes.isRating() || cineplexes.isSale()) {
                         ReviewUI.UserInferface(cineplexes);
                     }
-
                 }
             }
         } while (option > 0);
