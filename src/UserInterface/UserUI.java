@@ -1,16 +1,15 @@
 package UserInterface;
 
 import Admin.Admin;
-import Cineplex.*;
+import Cineplex.AllCineplex;
 import Customer.Customer;
+import Service.GetNumberInput;
+import Service.Settings;
 import Service.TextDB;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-
 import static UserInterface.AdminUI.AdminInterface;
 
 /**
@@ -31,45 +30,75 @@ public class UserUI {
      * @throws Exception This Exception is thrown if reading customer database causes error.
      */
     public static void UserInterface(AllCineplex cineplexes) throws Exception {
-//        String adminFile = "admin.txt";
-//        ArrayList<Admin> admins = new ArrayList<Admin>(); // to store list of admins
-//        ArrayList<Customer> customers = new ArrayList<Customer>(); // to store list of customers
-//        Customer customer = null;
         Scanner sc = new Scanner(System.in);
         String username, number;
+        System.out.println(Settings.ANSI_CYAN);
+        System.out.println("*************************************************");
+        System.out.println("*                Login Interface                *");
+        System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
+        System.out.println("Select an option:");
+        System.out.println("\t1) Login\n\t2) Create an account");
+        int choice = GetNumberInput.getInt(1,2 , -1);
+        if (choice == -1) return;
+        switch(choice) {
+            case 1 -> {
+                customers = TextDB.readFromFile(TextDB.Files.Customers.toString(), customers, null);
+                do {
+                    System.out.println("Enter your Username: (input -1 to go back to menu)");
+                    username = sc.nextLine();
 
-        customers = TextDB.readFromFile(TextDB.Files.Customers.toString(), customers, null);
-        do {
-            System.out.println("Enter your Username: (input -1 to go back to menu)");
-            username = sc.nextLine();
+                    if (Objects.equals(username, "-1")) {
+                        return;
+                    } else if (username.lastIndexOf("admin/") >= 0) {
+                        System.out.println("Enter your password:");
+                        number = sc.nextLine();
+                        String temp = username.substring(username.lastIndexOf("admin/") + 6);
 
-            if (Objects.equals(username, "-1")) {
-                return;
+                        AdminInterface(Admin.login(temp, number), temp, number, cineplexes);
+                        return;
+                    }
+                    System.out.println("Enter your phone number: (input -1 to go back to menu)");
+                    number = sc.nextLine();
+
+                    if (Objects.equals(number, "-1")) {
+                        return;
+                    }
+
+                    // if username exist but wrong password keep asking for password
+                } while (!checkCustomerName(username, number));
+
+                // else, check if username exist in customer.txt or new username
+                CustomerUI.CustomerInterface(cineplexes, customers, checkCustomerNumber(username, number));
             }
-            else if (username.lastIndexOf("admin/") >= 0) {
-                System.out.println("Enter your password:");
-                number = sc.nextLine();
-                String temp = username.substring(username.lastIndexOf("admin/") + 6);
+            case 2 -> {
+                System.out.println("\nCreating an Account:");
+                String name;
+                do {
+                    System.out.println("Enter your Username:");
+                    name = sc.nextLine();
+                } while (Objects.equals(name, ""));
 
-                AdminInterface(Admin.login(temp, number), temp, number, cineplexes);
-                return;
+                String newnumber;
+                do {
+                    System.out.println("Enter your phone number:");
+                    newnumber = sc.nextLine();
+                } while (Objects.equals(newnumber, ""));
+
+                String newEmail;
+                do {
+                    System.out.println("Enter your email:");
+                    newEmail = sc.nextLine();
+                } while (Objects.equals(newEmail, ""));
+
+                Customer customer = new Customer();
+                customer.setMovieGoerName(name);
+                customer.setMobileNumber(newnumber);
+                customer.setEmail(newEmail);
+                customer.printCustomerDetails();
+                cineplexes.createCustomerAccount(customer); // Not checking if customer created account
             }
-
-            // Add if statement to check if username exist in admin.txt
-            //System.out.println("Enter your password:");
-//        String password = sc.nextLine();
-            System.out.println("Enter your phone number: (input -1 to go back to menu)");
-            number = sc.nextLine();
-
-            if (Objects.equals(number, "-1")) {
-                return;
-            }
-
-            // if username exist but wrong password keep asking for password
-        } while (!checkCustomerName(username, number));
-
-        // else, check if username exist in customer.txt or new username
-        CustomerUI.CustomerInterface(cineplexes, customers, checkCustomerNumber(username, number));
+        }
     }
 
     /**

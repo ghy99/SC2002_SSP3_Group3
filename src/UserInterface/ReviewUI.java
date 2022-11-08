@@ -24,6 +24,7 @@ public class ReviewUI {
         }
         int selectedMovie = GetNumberInput.getInt(1, cineplexes.getListOfMovies().size(), -1)-1;
         if (selectedMovie == -1) return;
+
         System.out.printf("What is your rating for this Movie %s (0.0-5.0):", cineplexes.getListOfMovies().get(selectedMovie));
         float rating = (float) GetNumberInput.getDouble(0, 5, -1);
         if (rating == -1) return;
