@@ -1,9 +1,4 @@
 package Movie;
-
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
-
 /**
  * @author Gan Hao Yi
  * This is the object class for each Seat in the Cinema.
@@ -25,9 +20,6 @@ public class IndividualSeats {
         //@Override
         public String SeatTypeToString() { return SeatType; };
     }
-
-
-
     /**
      * SeatID is the seatID required for booking.
      * seatType shows if the seat is a single or a double seat.
@@ -35,14 +27,11 @@ public class IndividualSeats {
      */
     private String seatID;
     private SeatType seatType;
-
     private boolean isOccupied;
-
     public IndividualSeats (String seatid, SeatType seatType, boolean occupied) {
         this.seatID = seatid;
         this.seatType = seatType;
         this.isOccupied = occupied;
-
     }
 
     public void setSeatID(String seatID) {
@@ -61,7 +50,4 @@ public class IndividualSeats {
         return seatType;
     }
     public boolean getSeatOccupied() { return isOccupied; };
-
-
-
 }

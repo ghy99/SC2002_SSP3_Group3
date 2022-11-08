@@ -55,6 +55,4 @@ public class Review {
     public float getRating() {
         return rating;
     }
-
-
 }

@@ -12,15 +12,15 @@ public class ReviewUI {
         System.out.println("Please enter username:");
         String userName = sc.nextLine();
 
-        System.out.println("Please select a movie to review:");
+        System.out.println("Please select a movie to review (Enter -1 to exit):");
         for(int i = 0; i < cineplexes.getListOfMovies().size(); i++)
         {
             System.out.printf("%s) %s" + "\n", i+1 ,cineplexes.getListOfMovies().get(i).getMovieTitle());
         }
-        int selectedMovie = GetNumberInput.getInt()-1;
-
+        int selectedMovie = GetNumberInput.getInt(1, cineplexes.getListOfMovies().size(), -1)-1;
+        if (selectedMovie == -1) return;
         System.out.println("Please input you rating (0.0-5.0):");
-        float rating = (float) GetNumberInput.getDouble();
+        float rating = (float) GetNumberInput.getDouble(0, 5, -1);
 
         System.out.println("Please input you review:");
         String reviews = sc.nextLine();

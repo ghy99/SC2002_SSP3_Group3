@@ -25,7 +25,7 @@ public class MovieListingUI {
      */
     public static void MovieListingInterface(AllCineplex cineplexes) throws Exception {
         int num = -1;
-        ArrayList<Movie> listOfMovies = cineplexes.getListOfMovies();
+        ArrayList<Movie> listOfMovies = cineplexes.getListOfMoviesforAdmin();
 
 //		System.out.println("Current list of movies:");
 //		printMovieList(listOfMovies);
@@ -39,7 +39,7 @@ public class MovieListingUI {
             System.out.println("3: Delete a Movie Listing");
             System.out.println("4: Main Menu (Select this to exit)");
             System.out.print("Please enter a choice: ");
-            num = GetNumberInput.getInt();
+            num = GetNumberInput.getInt(1, 4, -1);
 
             switch(num) {
                 case 1 -> {
@@ -55,7 +55,7 @@ public class MovieListingUI {
                     System.out.println("Which movie would you like to edit?");
                     printMovieList(listOfMovies);
                     do {
-                        choice = GetNumberInput.getInt() - 1;
+                        choice = GetNumberInput.getInt(1, listOfMovies.size(), -1) - 1;
                         if (choice < 0 || choice >= listOfMovies.size()) {
                             System.out.println("Invalid choice. Try again!");
                         }
@@ -66,10 +66,14 @@ public class MovieListingUI {
                     newmovie.printMovieDetails();
 
                     cineplexes.updateListOfMovies(choice, newmovie);
-                    System.out.printf("Would you like to update the ShowTime of this movie %s as well?\n", newmovie.getMovieTitle());
+                    System.out.printf("Would you like to change the ShowTime of this movie %s as well?\n", newmovie.getMovieTitle());
                     System.out.println("1) Yes\n2) No");
-                    if (GetNumberInput.getInt() == 1) {
-                        CinemaUI.UserInterface(cineplexes, 2, newmovie);
+                    int showtimechoice = GetNumberInput.getInt(1, 2, -1);
+                    if (showtimechoice == 1) {
+                        System.out.printf("Would you like to add or update the ShowTime of this movie %s?\n", newmovie.getMovieTitle());
+                        System.out.println("1) Add\n2) Update");
+                        showtimechoice = GetNumberInput.getInt(1, 2, -1);
+                        CinemaUI.UserInterface(cineplexes, showtimechoice, newmovie);
                     }
                 }
                 case 3 -> {
@@ -80,7 +84,7 @@ public class MovieListingUI {
                     System.out.println("Which movie would you like to edit?");
                     printMovieList(listOfMovies);
                     do {
-                        choice = GetNumberInput.getInt() - 1;
+                        choice = GetNumberInput.getInt(1, listOfMovies.size(), -1) - 1;
                         if (choice < 0 || choice >= listOfMovies.size()) {
                             System.out.println("Invalid choice. Try again!");
                         }
@@ -136,7 +140,7 @@ public class MovieListingUI {
 
 
         System.out.println();
-        System.out.println("Select option for Movie Status: ");
+        System.out.println("Select option for Movie Status (Enter -1 to exit): ");
         System.out.println("1: Coming soon!");
         System.out.println("2: Preview");
         System.out.println("3: Now showing");
@@ -144,8 +148,11 @@ public class MovieListingUI {
         Movie.MovieStatus moviestatus = null;
         int statuschoice = 0;
         do {
-            statuschoice = GetNumberInput.getInt();
-//			sc.nextLine();
+            statuschoice = GetNumberInput.getInt(1, 4, -1);
+            if (statuschoice == -1) {
+                System.out.println("Try again.");
+                continue;
+            }
             switch (statuschoice) {
                 case 1 -> moviestatus = Movie.MovieStatus.ComingSoon;
                 case 2 -> moviestatus = Movie.MovieStatus.Preview;
@@ -179,15 +186,20 @@ public class MovieListingUI {
         System.out.println("1: Regular");
         System.out.println("2: Premium");
         System.out.println("Enter your option:");
-        Cinema.CinemaType cinemaType;
-        int cinChoice = GetNumberInput.getInt();
-//		sc.nextLine();
-        if (cinChoice == 1) {
-            cinemaType = Cinema.CinemaType.Regular;
-        } else {
-            cinemaType = Cinema.CinemaType.Premium;
-        }
+        Cinema.CinemaType cinemaType = null;
 
+        int cinChoice;
+        do {
+            cinChoice = GetNumberInput.getInt(1, 2, -1);
+            if (cinChoice == -1) {
+                System.out.println("Try again.");
+            }
+            else if (cinChoice == 1) {
+                cinemaType = Cinema.CinemaType.Regular;
+            } else {
+                cinemaType = Cinema.CinemaType.Premium;
+            }
+        } while (cinemaType == null);
 
         System.out.println();
         System.out.println("Select Movie Genre:");
@@ -203,17 +215,18 @@ public class MovieListingUI {
         MovieType.Genre genre = null;
         int genrechoice;
         do {
-            genrechoice = GetNumberInput.getInt();
+            genrechoice = GetNumberInput.getInt(1, 9, -1);
 //			sc.nextLine();
             switch (genrechoice) {
                 case 1 -> genre = MovieType.Genre.Action;
                 case 2 -> genre = MovieType.Genre.Comedy;
                 case 3 -> genre = MovieType.Genre.Drama;
-                case 4 -> genre = MovieType.Genre.Fantasy;
-                case 5 -> genre = MovieType.Genre.Mystery;
-                case 6 -> genre = MovieType.Genre.Romance;
-                case 7 -> genre = MovieType.Genre.Thriller;
-                case 8 -> genre = MovieType.Genre.Western;
+                case 4 -> genre = MovieType.Genre.Horror;
+                case 5 -> genre = MovieType.Genre.Fantasy;
+                case 6 -> genre = MovieType.Genre.Mystery;
+                case 7 -> genre = MovieType.Genre.Romance;
+                case 8 -> genre = MovieType.Genre.Thriller;
+                case 9 -> genre = MovieType.Genre.Western;
             }
             if (genre == null) continue;
         } while (genrechoice > 8 || genrechoice < 1);
@@ -224,14 +237,19 @@ public class MovieListingUI {
         System.out.println("1: Yes");
         System.out.println("2: No");
         System.out.println("Enter your option:");
-        MovieType.Blockbuster blockbuster;
-        int dimChoice = GetNumberInput.getInt();
-//		sc.nextLine();
-        if (dimChoice == 1) {
-            blockbuster = MovieType.Blockbuster.BLOCKBUSTER;
-        } else {
-            blockbuster = MovieType.Blockbuster.NOTBLOCKBUSTER;
-        }
+        MovieType.Blockbuster blockbuster = null;
+        int dimChoice;
+        do {
+            dimChoice = GetNumberInput.getInt(1, 2, -1);
+            if (dimChoice == 1) {
+                blockbuster = MovieType.Blockbuster.BLOCKBUSTER;
+            } else if (dimChoice == 2) {
+                blockbuster = MovieType.Blockbuster.NOTBLOCKBUSTER;
+            }
+            else {
+                System.out.println("Try again.");
+            }
+        } while (blockbuster == null);
 
 
         System.out.println();
@@ -246,7 +264,7 @@ public class MovieListingUI {
         MovieType.Class ratings = null;
 
         do {
-            ratingchoice = GetNumberInput.getInt();
+            ratingchoice = GetNumberInput.getInt(1, 6, -1);
 //			sc.nextLine();
             switch (ratingchoice) {
                 case 1 -> ratings = MovieType.Class.G;
@@ -256,7 +274,7 @@ public class MovieListingUI {
                 case 5 -> ratings = MovieType.Class.M18;
                 case 6 -> ratings = MovieType.Class.R21;
             }
-        } while (ratingchoice > 6 || ratingchoice < 1);
+        } while (ratings == null);
 
         return new Movie(movieTitle, moviestatus, director,
                 synopsis, cast, genre, blockbuster, ratings);
@@ -281,33 +299,30 @@ public class MovieListingUI {
             System.out.println("3: Change Director");
             System.out.println("4: Change Synopsis");
             System.out.println("5: Change Cast");
-            System.out.println("6: Change Cinema Type");
-            System.out.println("7: Change Movie Genre");
-            System.out.println("8: Change Movie Dimension");
-            System.out.println("9: Change Movie Ratings");
+            System.out.println("6: Change Movie Genre");
+            System.out.println("7: Change Blockbuster status");
+            System.out.println("8: Change Movie Ratings");
             System.out.println("-1: Done Editing");
             System.out.println();
 
-            option = GetNumberInput.getInt();
-//			sc.nextLine();
+            option = GetNumberInput.getInt(1, 8, -1);
             switch (option) {
                 case 1 -> {
                     System.out.println("Enter new Movie Title:");
                     movie.setMovieTitle(sc.nextLine());
                 }
                 case 2 -> {
-                    System.out.println("Select new option for Movie Status: ");
+                    System.out.println("Select new option for Movie Status (Enter -1 to exit): ");
                     System.out.println("1: Coming soon!");
                     System.out.println("2: Preview");
                     System.out.println("3: Now showing");
                     System.out.println("4: End of showing");
-                    switch (GetNumberInput.getInt() - 1) {
-                        case 1 -> movie.setShowingStatus(Movie.MovieStatus.ComingSoon);
-                        case 2 -> movie.setShowingStatus(Movie.MovieStatus.Preview);
-                        case 3 -> movie.setShowingStatus(Movie.MovieStatus.NowShowing);
-                        case 4 -> movie.setShowingStatus(Movie.MovieStatus.EndOfShowing);
+                    switch (GetNumberInput.getInt(1, 4, -1)) {
+                        case 1 -> movie.updateShowingStatus(Movie.MovieStatus.ComingSoon);
+                        case 2 -> movie.updateShowingStatus(Movie.MovieStatus.Preview);
+                        case 3 -> movie.updateShowingStatus(Movie.MovieStatus.NowShowing);
+                        case 4 -> movie.updateShowingStatus(Movie.MovieStatus.EndOfShowing);
                     }
-//					sc.nextLine();
                 }
                 case 3 -> {
                     System.out.println("Enter new Director Name:");
@@ -326,7 +341,7 @@ public class MovieListingUI {
                 }
                 case 6 -> {
                     System.out.println();
-                    System.out.println("Select new Movie Genre:");
+                    System.out.println("Select new Movie Genre (Enter -1 if no change):");
                     System.out.println("1: Action");
                     System.out.println("2: Comedy");
                     System.out.println("3: Drama");
@@ -336,7 +351,7 @@ public class MovieListingUI {
                     System.out.println("7: Romance");
                     System.out.println("8: Thriller");
                     System.out.println("9: Western");
-                    switch (GetNumberInput.getInt() - 1) {
+                    switch (GetNumberInput.getInt(1, 9, -1)) {
                         case 1 -> movie.setMovieGenre(MovieType.Genre.Action);
                         case 2 -> movie.setMovieGenre(MovieType.Genre.Comedy);
                         case 3 -> movie.setMovieGenre(MovieType.Genre.Drama);
@@ -347,21 +362,19 @@ public class MovieListingUI {
                         case 8 -> movie.setMovieGenre(MovieType.Genre.Thriller);
                         case 9 -> movie.setMovieGenre(MovieType.Genre.Western);
                     }
-//					sc.nextLine();
                 }
-                case 8 -> {
+                case 7 -> {
                     System.out.println();
-                    System.out.println("Is the movie a BLOCKBUSTER?");
+                    System.out.println("Is the movie a BLOCKBUSTER? (Enter -1 if no change)");
                     System.out.println("1: Yes");
                     System.out.println("2: No");
                     System.out.println("Enter your option:");
-                    switch (GetNumberInput.getInt() - 1) {
+                    switch (GetNumberInput.getInt(1, 2, -1)) {
                         case 1 -> movie.setBlockBuster(MovieType.Blockbuster.BLOCKBUSTER);
                         case 2 -> movie.setBlockBuster(MovieType.Blockbuster.NOTBLOCKBUSTER);
                     }
-//					sc.nextLine();
                 }
-                case 9 -> {
+                case 8 -> {
                     System.out.println(" Select new Movie Age Rating ");
                     System.out.println("1: G ");
                     System.out.println("2: PG");
@@ -369,7 +382,7 @@ public class MovieListingUI {
                     System.out.println("4: NC16");
                     System.out.println("5: M18");
                     System.out.println("6: R21");
-                    switch (GetNumberInput.getInt() - 1) {
+                    switch (GetNumberInput.getInt(1, 6, -1)) {
                         case 1 -> movie.setMovieClass(MovieType.Class.G);
                         case 2 -> movie.setMovieClass(MovieType.Class.PG);
                         case 3 -> movie.setMovieClass(MovieType.Class.PG13);
@@ -377,13 +390,11 @@ public class MovieListingUI {
                         case 5 -> movie.setMovieClass(MovieType.Class.M18);
                         case 6 -> movie.setMovieClass(MovieType.Class.R21);
                     }
-//					sc.nextLine();
                 }
                 case -1 -> {
                     System.out.println("Exiting.");
                 }
             }
-
         } while (option != -1);
         return movie;
     }

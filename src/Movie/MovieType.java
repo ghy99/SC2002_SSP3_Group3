@@ -53,7 +53,4 @@ public class MovieType {
         this.movieType = movieType;
 
     }
-
-
-    
 }

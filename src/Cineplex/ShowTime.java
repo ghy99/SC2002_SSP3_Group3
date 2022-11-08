@@ -3,6 +3,7 @@ package Cineplex;
 import Movie.Movie;
 import Movie.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -52,25 +53,17 @@ public class ShowTime extends MovieSeatsNew{
      * @param aisle Aisle 1 and 2
      * @param dim Dimension of the new showtime
      */
-//    public ShowTime(Date time , Movie movie , ArrayList<ArrayList<String>> seats , int[] aisle, MovieType.Dimension dim) {
-//        super(seats.size() , seats.get(0).size() ,aisle );
-//
-//        String[][] seat = new String[seats.size()][seats.get(0).size()];
-//
-//        this.time = time;
-//        this.movie = movie;
-//        this.dimension = dim;
-//
-//        for (int i =0;i<seats.size();i++)
-//        {
-//            for(int j =0;j<seats.get(i).size();j++)
-//            {
-//                seat[i][j] = seats.get(i).get(j);
-//            }
-//        }
-//
-//        super.setSeats(seat);
-//    }
+    public ShowTime(Date time , Movie movie , ArrayList<String> seats, int row , int column , int sitDouble , int[] aisle, MovieType.Dimension dim) throws IOException {
+        super(row, column, sitDouble ,aisle[0], aisle[1] );
+
+
+        this.time = time;
+        this.movie = movie;
+        this.dimension = dim;
+        SeatsCreation();
+
+        super.BookSeats(seats, false, null);
+    }
 
 
     /**

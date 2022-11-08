@@ -3,6 +3,7 @@ package Customer;
 import Cineplex.Cineplex;
 import Movie.*;
 import Service.TextDB;
+import UserInterface.CustomerUI;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,27 +21,22 @@ public class Customer {
     private String MobileNumber;
     /** Email */
     private String Email;
+    private int age;
     /** Ticket */
-    private MovieTicket Ticket;
+    private ArrayList<MovieTicket> Ticket;
 
     /**
      * If new account
      * @param movieGoerName User's name
      * @param mobileNumber Mobile number
      * @param email Email
-     * @param createAccount Is account created
      */
-    public Customer(String movieGoerName, String mobileNumber, String email, boolean createAccount) throws IOException {
+    public Customer(String movieGoerName, String mobileNumber, String email) throws IOException {
         MovieGoerName = movieGoerName;
         MobileNumber = mobileNumber;
         Email = email;
-
-
-        if(createAccount)
-        {
-            TextDB.WriteToTextDB(File.separator + Customers.toString(), this);
-        }
     }
+    public Customer() {}
 
     //
     public void setMovieGoerName(String name) throws IOException {
@@ -55,7 +51,7 @@ public class Customer {
         this.Email = email;
     }
 
-    public void setTicket(MovieTicket tix) {
+    public void setTicket(ArrayList<MovieTicket> tix) {
         this.Ticket = tix;
     }
 
@@ -71,7 +67,7 @@ public class Customer {
         return Email;
     }
 
-    public MovieTicket getTicket() {
+    public ArrayList<MovieTicket> getTicket() {
         return this.Ticket;
     }
 
@@ -115,7 +111,9 @@ public class Customer {
         System.out.printf("Name:\t%s\nNumber:\t%s\nEmail:\t%s\n", this.MovieGoerName, this.MobileNumber, this.Email);
         if (this.Ticket != null) {
             System.out.println("Ticket:\n");
-            this.getTicket().printTicket();
+            for (MovieTicket ticket : this.Ticket) {
+                ticket.printTicket();
+            }
         }
     }
 
