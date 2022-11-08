@@ -38,6 +38,7 @@ public class CineplexUI {
         System.out.println("Select your Cineplex: ");
         selectCineplex = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
 
-        return  cineplexes.getCineplexes().get(selectCineplex);
+        if(selectCineplex != -1) return  cineplexes.getCineplexes().get(selectCineplex);
+        else return null;
     }
 }

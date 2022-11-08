@@ -16,12 +16,14 @@ import java.util.Scanner;
 
 /**
  * This is the Guest Interface class. Imported to call the User Interface for the customer to login without an account.
+ *
  * @authors CHEW ZHI QI, GAN HAO YI
  */
 public class GuestUI {
 
     /**
      * This is the User Interface function to allow the guest customer to make a movie booking without logging in
+     *
      * @param cineplexes = show the list of movies showing in each cineplex
      * @throws IOException is thrown if reading the input data or reading data from the file causes an error.
      */
@@ -29,55 +31,47 @@ public class GuestUI {
     public static void UserInterface(AllCineplex cineplexes) throws IOException {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
-        System.out.println("************* Entering Guest Mode ***************");
+        System.out.println("************* Booking movie in Guest Mode ***************");
         Customer customer = new Customer();
 
+
+        ArrayList<Object> sTnC = null, sSTnC = null;
+        ArrayList<MovieTicket> allMovieTicket = null;
+        Cineplex choosenCineplex = CineplexUI.CineplexInterface(cineplexes);
+
+        Movie chosenMovie = MovieUI.MovieInterface(cineplexes.getListOfMovies());
         do {
-            System.out.println("\nWhat would you like to do?");
-            System.out.println("\t1) Select Cineplex.");
-            System.out.println("\tEnter '11' to exit!");
+            sTnC = SelectDateUI.SelectDateInterFace(choosenCineplex, chosenMovie);
+        } while (sTnC == null);
 
-            choice = GetNumberInput.getInt(1, 1, 11);
-            switch (choice) {
-                case 1 -> {
-                    ArrayList<Object> sTnC = null, sSTnC = null;
-                    ArrayList<MovieTicket> allMovieTicket = null;
-                    Cineplex choosenCineplex = CineplexUI.CineplexInterface(cineplexes);
+        do {
+            sSTnC = SelectDimensionUI.SelectDimensionUserInterface(choosenCineplex, sTnC);
+        } while (sSTnC == null);
 
-                    Movie chosenMovie = MovieUI.MovieInterface(cineplexes.getListOfMovies());
-                    do {
-                        sTnC = SelectDateUI.SelectDateInterFace(choosenCineplex , chosenMovie);
-                    }while (sTnC == null);
+        do {
+            allMovieTicket = SelectSeatsUI.SelectSeatsUserInterface(customer, choosenCineplex, chosenMovie, sSTnC);
+        } while (allMovieTicket == null);
 
-                    do {
-                        sSTnC = SelectDimensionUI.SelectDimensionUserInterface(choosenCineplex, sTnC);
-                    }while (sSTnC == null);
-
-                    do {
-                        allMovieTicket = SelectSeatsUI.SelectSeatsUserInterface(customer, choosenCineplex, chosenMovie ,sSTnC);
-                    }while (allMovieTicket == null);
-
-                    String name, number, email;
-                    do {
-                        System.out.println("Please enter your name:");
-                        name = sc.nextLine();
-                        System.out.println("Please enter your number:");
-                        number = sc.nextLine();
-                        System.out.println("Please enter your email: (So that you will be able to check your transaction later)");
-                        email = sc.nextLine();
-                    } while (Objects.equals(email, ""));
-                    customer.setMovieGoerName(name);
-                    customer.setMobileNumber(number);
-                    customer.setEmail(email);
-                    customer.printCustomerDetails();
-                    cineplexes.createCustomerAccount(customer); // Not checking if customer created account
-                    PaymentUI.PaymentInterface(cineplexes, customer, allMovieTicket, choosenCineplex, chosenMovie ,sSTnC);
-                    for (MovieTicket tix : allMovieTicket) {
-                        TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
-                        tix.printTicket();
-                    }
-                }
-            }
-        } while (choice < 10);
+        String name, number, email;
+        do {
+            System.out.println("Please enter your name:");
+            name = sc.nextLine();
+            System.out.println("Please enter your number:");
+            number = sc.nextLine();
+            System.out.println("Please enter your email: (So that you will be able to check your transaction later)");
+            email = sc.nextLine();
+        } while (Objects.equals(email, ""));
+        customer.setMovieGoerName(name);
+        customer.setMobileNumber(number);
+        customer.setEmail(email);
+        customer.printCustomerDetails();
+        cineplexes.createCustomerAccount(customer); // Not checking if customer created account
+        PaymentUI.PaymentInterface(cineplexes, customer, allMovieTicket, choosenCineplex, chosenMovie, sSTnC);
+        for (MovieTicket tix : allMovieTicket) {
+            TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
+            tix.printTicket();
+        }
     }
 }
+
+
