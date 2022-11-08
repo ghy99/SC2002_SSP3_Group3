@@ -2,6 +2,7 @@ package UserInterface;
 
 import Cineplex.*;
 import Service.GetNumberInput;
+import Service.Settings;
 
 
 /**
@@ -12,12 +13,13 @@ public class MainUI {
     /**
      * This function represents the starting page when the app loads.
      * It shows the list of options user can use when the app starts.
+     *
      * @throws Exception when accessing env.txt to check for Customer / Guest rights to view
-     * What kind of Top 5 listing method they are allowed to use.
+     *                   What kind of Top 5 listing method they are allowed to use.
      */
     public static void start() throws Exception {
         AllCineplex cineplexes = new AllCineplex();
-
+        cineplexes.clearScreen();
         System.out.println("Welcome to Moblima!");
 
         int option = 1;
@@ -41,17 +43,21 @@ public class MainUI {
                 System.out.println("Exiting...");
                 break;
             }
+            cineplexes.clearScreen();
             switch (option) {
                 case 1 -> {
+                    System.out.println("Displaying List of Cineplex.");
                     cineplexes.displayCineplexList();
                 }
                 case 2 -> {
+                    System.out.println("Displaying List of Movies.");
                     AllCineplex.displayMovieList(cineplexes.getListOfMovies());
                 }
                 case 3 -> {
+                    System.out.println("Displaying List of Timing.");
                     System.out.println("Which cineplex would you like to view:");
                     for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
-                        System.out.printf("%d) Branch %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
+                        System.out.printf("\t%d) Branch %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
                     }
                     int choice = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
                     cineplexes.getCineplexes().get(choice).displayMovieTimings(cineplexes.getListOfMovies());
@@ -63,24 +69,25 @@ public class MainUI {
                     UserUI.UserInterface(cineplexes);
                 }
                 case 6 -> {
+                    System.out.println("Displaying Movies by Ranking.");
                     if (cineplexes.isRating() || cineplexes.isSale()) {
                         if (cineplexes.isRating() && cineplexes.isSale()) {
-                            System.out.println("1) View by top 5 sale ");
-                            System.out.println("2) View by top 5 rating ");
+                            System.out.println("\t1) View by top 5 sale ");
+                            System.out.println("\t2) View by top 5 rating ");
                             int userInput = GetNumberInput.getInt(1, 2, -1);
                             switch (userInput) {
                                 case 1 -> {
-                                    cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);
+                                    cineplexes.printSortedList(AllCineplex.MovieSort.Top5Sales);
                                 }
                                 case 2 -> {
-                                    cineplexes.printSortedList( AllCineplex.MovieSort.Top5Rating);
+                                    cineplexes.printSortedList(AllCineplex.MovieSort.Top5Rating);
                                 }
                                 case -1 -> {
                                     System.out.println("Exiting...");
                                 }
                             }
                         } else if (cineplexes.isSale()) {
-                            cineplexes.printSortedList( AllCineplex.MovieSort.Top5Sales);
+                            cineplexes.printSortedList(AllCineplex.MovieSort.Top5Sales);
                         } else if (cineplexes.isRating()) {
                             cineplexes.printSortedList(AllCineplex.MovieSort.Top5Rating);
                         }

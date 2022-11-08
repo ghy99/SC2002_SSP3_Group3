@@ -20,7 +20,6 @@ public class AdminUI {
      */
 	public static void AdminInterface(int loginFlag, String usernameInput,
                                       String passwordInput, AllCineplex cineplexes) throws Exception {
-
         System.out.println("Welcome to the Admin Portal. ");
         if (loginFlag == 0){
             System.out.println("Please go back to the main portal to re-login");
@@ -32,24 +31,22 @@ public class AdminUI {
         int choice2 = 0;
 
 		do {
-            System.out.println(" ");
+            System.out.println();
 			System.out.println("Choose the following options for admin services");
-			System.out.println("\t 1) Ticket Prices");
-            System.out.println("\t 2) Holiday Dates");
-            System.out.println("\t 3) Movie's Functions");
-            System.out.println("\t 4) Movie Listing by rank");
-            System.out.println("\t 5) Other Settings");
-            System.out.println("\tEnter '11' to exit!");
+			System.out.println("\t1) Ticket Prices");
+            System.out.println("\t2) Holiday Dates");
+            System.out.println("\t3) Movie's Functions");
+            System.out.println("\t4) Movie Listing by rank");
+            System.out.println("\t5) Other Settings");
 
             choice = GetNumberInput.getInt(1, 5, 11);
-
+            cineplexes.clearScreen();
             switch (choice) {
                 case 1 -> {
-                	System.out.println("1) Ticket Prices, Please select one of the following functions");
                     admin.EditTicket(cineplexes);
                 }
                 case 2 -> {
-                    System.out.println("2) Holiday Dates, Please select one of the following functions (Enter -1 to exit):");
+                    System.out.println("2) Holiday Dates, Please select one of the following functions:");
                     System.out.println("\t1) Add Holiday Dates");
                     System.out.println("\t2) Edit Holiday Dates");
                     System.out.println("\t3) Delete Holiday Dates");

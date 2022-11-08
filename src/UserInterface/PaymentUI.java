@@ -23,7 +23,7 @@ public class PaymentUI {
      */
     public static void PaymentInterface(AllCineplex cineplexes, Customer customer, ArrayList<MovieTicket> allMovieTicket,
                                         Cineplex choosenCineplex, Movie chosenMovie, ArrayList<Object> sSTnC
-    ) throws IOException {
+    ) {
         ShowTime specificST = (ShowTime) sSTnC.get(0);
         Cinema cinema = (Cinema) sSTnC.get(1);
         int student = 0, adult = 0, senior = 0;
@@ -53,20 +53,18 @@ public class PaymentUI {
         System.out.printf("\t%d Senior Citizen tickets\n", senior);
         double holidayprice = checkHoliday(cineplexes.getHoliday(), specificST.getTime()) ?
                 cineplexes.getTicketCharges().getPriceByDay(7) : checkWeekend(cineplexes, specificST.getTime());
-
         double cintypeprice = cineplexes.getTicketCharges().getPriceByType(cinema.getCinemaType().ordinal());
-
         double moviedimprice = cineplexes.getTicketCharges().getPriceByDim(specificST.getDimension().ordinal());
-        double ticketPrice = 0;
-
         double studentprice = (cineplexes.getTicketCharges().getPriceByAge(1)
                 + holidayprice + cintypeprice + moviedimprice) * student;
         double adultprice = (cineplexes.getTicketCharges().getPriceByAge(2)
                 + holidayprice + cintypeprice + moviedimprice) * adult;
         double seniorprice = (cineplexes.getTicketCharges().getPriceByAge(3)
                 + holidayprice + cintypeprice + moviedimprice) * senior;
-
         double ticketprice = studentprice + adultprice + seniorprice;
+        if (chosenMovie.getBlockBuster() == MovieType.Blockbuster.BLOCKBUSTER) {
+            ticketprice = ticketprice + allMovieTicket.size();
+        }
 
         System.out.printf("Your Ticket Price is: %.2f\n", ticketprice);
         System.out.println("Ticket cost will automatically be deducted from your registered PayLah account.");

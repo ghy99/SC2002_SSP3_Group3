@@ -58,10 +58,6 @@ public class Admin {
         return password;
     }
 
-    public void addAdmin(Admin admin) throws IOException, NoSuchAlgorithmException {
-        TextDB.WriteToTextDB(TextDB.Files.Admin.toString(), admin);
-    }
-
     /**
      * This is a function for the user to login
      *
@@ -75,11 +71,8 @@ public class Admin {
         //fetch data of admin info from txt storage
         ArrayList<Admin> emptyAdminList = new ArrayList<Admin>();
         ArrayList<Admin> filledAdminList = ReadFromFile(emptyAdminList, "admin.txt");
-
         password = SHA256.toString(password);
-
         int flagNum = 0; //used to indicate if successfully logged in
-
         String dataName;
         String dataPassword;
 
@@ -97,11 +90,8 @@ public class Admin {
         return flagNum;
     }
 
-    //implement function for ticket prices HERE
-
     /**
-     * This function is to change the ticket pricing according
-     *
+     * This function is to change the ticket pricing charges
      * @throws IOException thrown if reading data from TicketPrice causes error
      */
     public void EditTicket(AllCineplex cineplex) throws IOException {
@@ -110,83 +100,73 @@ public class Admin {
 
         int cat = 0;
         do {
-            System.out.println("Select category that you want to change: (Enter -1 to exit)");
+            System.out.println("Select category that you want to change:");
             System.out.println("1) Age");
             System.out.println("2) Day of the week");
             System.out.println("3) Movie Dimension");
             System.out.println("4) Type of Cinema");
-            System.out.println("Which do you want to edit:");
+            System.out.println("\nWhich do you want to edit:");
             cat = GetNumberInput.getInt(1, 4, -1);
             switch (cat) {
                 case 1 -> {
-                    System.out.println("Please select age price to edit \n");
-                    System.out.println("1) Student price");
-                    System.out.println("2) Adult price");
-                    System.out.println("3) Senior Citizen price");
+                    System.out.println("Please select the price of different age to edit\n");
+                    System.out.println("\t1) Student price");
+                    System.out.println("\t2) Adult price");
+                    System.out.println("\t3) Senior Citizen price");
 
-                    int choice = GetNumberInput.getInt(1, 3, -1);
-                    System.out.println("What is the new value:");
+                    int choice = GetNumberInput.getInt(1, 3, -1) - 1;
+                    System.out.println("What is the new value: (Range: 0 - 100)");
                     Double newvalue = GetNumberInput.getDouble(0, 100, -1);
-
-                    System.out.println("Please select age price to edit \n");
 
                     cineplex.getTicketCharges().returnAge().get(choice).set(1, newvalue.toString());
                     TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
                 }
                 case 2 -> {
-                    System.out.println("1) Monday - Friday");
-                    System.out.println("2) Saturday - Sunday");
-                    System.out.println("3) Public Holiday");
+                    System.out.println("Please select the price of the type of day to edit\n");
+                    System.out.println("\t1) Monday - Friday");
+                    System.out.println("\t2) Saturday - Sunday");
+                    System.out.println("\t3) Public Holiday");
 
-                    int choice = GetNumberInput.getInt(1, 3, -1);
-                    System.out.println("What is the new value:");
+                    int choice = GetNumberInput.getInt(1, 3, -1) - 1;
+                    System.out.println("What is the new value: (Range 0 - 100)");
                     Double newvalue = GetNumberInput.getDouble(0, 100, -1);
-
-                    System.out.println("Please select age price to edit \n");
 
                     cineplex.getTicketCharges().returnDay().get(choice).set(1, newvalue.toString());
                     TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
                 }
                 case 3 -> {
-                    System.out.println("1) 2D Movie");
-                    System.out.println("2) 3D Movie");
+                    System.out.println("Please select the price of the type of Movie to edit\n");
+                    System.out.println("\t1) 2D Movie");
+                    System.out.println("\t2) 3D Movie");
 
-                    int choice = GetNumberInput.getInt(1, 2, -1);
+                    int choice = GetNumberInput.getInt(1, 2, -1) - 1;
                     System.out.println("What is the new value:");
                     Double newvalue = GetNumberInput.getDouble(0, 100, -1);
-
-                    System.out.println("Please select age price to edit \n");
 
                     cineplex.getTicketCharges().returnDim().get(choice).set(1, newvalue.toString());
                     TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
                 }
                 case 4 -> {
-                    System.out.println("1) Regular Cinema");
-                    System.out.println("2) Premium Cinema");
+                    System.out.println("Please select the price of the type of Cinema to edit\n");
+                    System.out.println("\t1) Regular Cinema");
+                    System.out.println("\t2) Premium Cinema");
 
-                    int choice = GetNumberInput.getInt(1, 2, -1);
+                    int choice = GetNumberInput.getInt(1, 2, -1) - 1;
                     System.out.println("What is the new value:");
                     Double newvalue = GetNumberInput.getDouble(0, 100, -1);
-
-                    System.out.println("Please select age price to edit \n");
 
                     cineplex.getTicketCharges().returnType().get(choice).set(1, newvalue.toString());
                     TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
                 }
                 case -1 -> {
                     System.out.println("Exiting...");
-                    break;
                 }
             }
-
         } while (cat != -1);
-
-
     }
 
     /**
-     * This function is used to manage the add/edit and delete functions for the Holiday Dates
-     *
+     * This function is used to manage the add / edit / delete functions for the Holiday Dates
      * @param choice2 for the user to input what they want to do
      * @throws IOException to ensure the input has no error
      */
@@ -243,10 +223,8 @@ public class Admin {
         }
     }
 
-
     /**
      * This function is used to get the users input on what they want to do in the setting menu
-     *
      * @param choice2 = the input of the function they want to do
      * @throws IOException              is thrown if the reading of the input causes error
      * @throws NoSuchAlgorithmException is thrown if the function is not found

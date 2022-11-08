@@ -130,4 +130,10 @@ public class Settings {
         this.holiday.add(date);
         TextDB.WriteToTextDB(TextDB.Files.Holiday.toString(), date);
     }
+
+    public void clearScreen() {
+        for (int i = 0; i < 30; i++) {
+            System.out.println();
+        }
+    }
 }

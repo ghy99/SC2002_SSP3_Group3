@@ -27,7 +27,6 @@ public class GetNumberInput {
             choice = sc.nextInt();
             sc.nextLine();
             if (choice == exit) {
-                System.out.println("Break condition fulfilled. Exiting.");
                 break;
             }
             if (choice < range1 || choice > range2) {
