@@ -31,18 +31,3 @@ JueLin Revisits for loops|Preview|Hao Yi and Anthony|JueLin returns from her Alg
 Jue Lin Solves Her For Loops|Preview|Jue Lin|Jue Lin beats her for loops and movie seats are implemented|JueLin, Moblima|Comedy|NOTBLOCKBUSTER|R21|0|10-11-2022
 [
 ]
-<<<<<<< Updated upstream
-=======
-test|Preview|Jue Lin|Jue Lin beats her for loops and movie seats are implemented|JueLin, Moblima|Comedy|NOTBLOCKBUSTER|R21|1|10-11-2022
-[
-]
-1|Preview|test|test|test|Action|BLOCKBUSTER|G|0|10-11-2022
-[
-]
-mymovie|Preview|you|test|test|Action|BLOCKBUSTER|G|0|10-11-2022
-[
-]
-Test|Preview|test|te|test|Action|BLOCKBUSTER|G|0|11-11-2022
-[
-]
->>>>>>> Stashed changes

@@ -249,9 +249,6 @@ public class MovieListingUI {
             }
         } while (ratings == null);
 
-<<<<<<< Updated upstream
-        return new Movie(movieTitle, moviestatus, director, synopsis, cast, genre, blockbuster, ratings);
-=======
         String date;
         String confirmDate = "";
         Scanner scan = new Scanner(System.in);
@@ -276,7 +273,6 @@ public class MovieListingUI {
 
         return new Movie(movieTitle, moviestatus, director,
                 synopsis, cast, genre, blockbuster, ratings, DateTime.StringToDateOnly(date) );
->>>>>>> Stashed changes
     }
 
     /**
