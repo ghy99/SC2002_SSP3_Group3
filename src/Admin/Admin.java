@@ -1,17 +1,8 @@
 package Admin;
 
 import Cineplex.*;
-import Movie.*;
-import Movie.TicketCharges;
-import Service.DateTime;
-import Service.GetNumberInput;
-import Service.SHA256;
-import Service.TextDB;
-import Review.Review;
-
-import javax.swing.*;
+import Service.*;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
@@ -28,7 +19,6 @@ public class Admin {
 
     /**
      * This method is used to return the username and hashed password
-     *
      * @param username = username the admin has entered
      * @param password = password the admin has entered
      * @param hashed   = used to keep the password secure
@@ -45,7 +35,6 @@ public class Admin {
 
     /**
      * Accessor of Username
-     *
      * @return username as string
      */
     public String getUsername() {
@@ -54,7 +43,6 @@ public class Admin {
 
     /**
      * Accessor of Password
-     *
      * @return password as string
      */
     public String getPassword() {
@@ -63,7 +51,6 @@ public class Admin {
 
     /**
      * This is a function for the user to login
-     *
      * @param username the username to be verified
      * @param password the password to be verified
      * @return boolean value depicting whether login was successful or not
@@ -79,11 +66,11 @@ public class Admin {
         String dataName;
         String dataPassword;
 
-        for (int i = 0; i < filledAdminList.size(); i++) {
-            dataName = filledAdminList.get(i).getUsername();
-            dataPassword = filledAdminList.get(i).getPassword();
+        for (Admin admin : filledAdminList) {
+            dataName = admin.getUsername();
+            dataPassword = admin.getPassword();
             if (username.equals(dataName) && password.equals(dataPassword)) {
-                System.out.println("Welcome " + username + ". You have logged in successfully to the admin portal.");
+                System.out.println("Welcome " + username + ". You have successfully logged in to the admin portal.");
                 flagNum = 1; //logged in successfully
             }
         }
@@ -99,21 +86,22 @@ public class Admin {
      * @throws IOException thrown if reading data from TicketPrice causes error
      */
     public void EditTicket(AllCineplex cineplex) throws IOException {
-        System.out.println("Tickets are charged in the following manner:");
+        System.out.println("*************************************************");
+        System.out.println("*            Ticket Price Interface             *");
+        System.out.println("*************************************************");
+        System.out.println("\nTickets are charged in the following manner:");
         cineplex.getTicketCharges().printTicketCharges();
-
         int cat = 0;
         do {
-            System.out.println("Select category that you want to change:");
+            System.out.println("\nSelect category that you want to change:");
             System.out.println("1) Age");
             System.out.println("2) Day of the week");
             System.out.println("3) Movie Dimension");
             System.out.println("4) Type of Cinema");
-            System.out.println("\nWhich do you want to edit:");
             cat = GetNumberInput.getInt(1, 4, -1);
             switch (cat) {
                 case 1 -> {
-                    System.out.println("Please select the price of different age to edit\n");
+                    System.out.println("\nPlease select the price of different age to edit:");
                     System.out.println("\t1) Student price");
                     System.out.println("\t2) Adult price");
                     System.out.println("\t3) Senior Citizen price");
@@ -126,7 +114,7 @@ public class Admin {
                     TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
                 }
                 case 2 -> {
-                    System.out.println("Please select the price of the type of day to edit\n");
+                    System.out.println("\nPlease select the price of the type of day to edit:");
                     System.out.println("\t1) Monday - Friday");
                     System.out.println("\t2) Saturday - Sunday");
                     System.out.println("\t3) Public Holiday");
@@ -139,7 +127,7 @@ public class Admin {
                     TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
                 }
                 case 3 -> {
-                    System.out.println("Please select the price of the type of Movie to edit\n");
+                    System.out.println("\nPlease select the price of the type of Movie to edit:");
                     System.out.println("\t1) 2D Movie");
                     System.out.println("\t2) 3D Movie");
 
@@ -151,7 +139,7 @@ public class Admin {
                     TextDB.UpdateToTextDB(TextDB.Files.TicketPrice.toString(), cat, choice, newvalue);
                 }
                 case 4 -> {
-                    System.out.println("Please select the price of the type of Cinema to edit\n");
+                    System.out.println("\nPlease select the price of the type of Cinema to edit:");
                     System.out.println("\t1) Regular Cinema");
                     System.out.println("\t2) Premium Cinema");
 
@@ -175,9 +163,12 @@ public class Admin {
      * @throws IOException to ensure the input has no error
      */
     public void HolidayDateFunctions(AllCineplex cineplex) throws IOException {
+        System.out.println("*************************************************");
+        System.out.println("*             Edit Holiday Interface            *");
+        System.out.println("*************************************************");
         System.out.println("Current list of Holiday:");
         printHoliday(cineplex);
-        System.out.println("Holiday Dates, Please select one of the following functions:");
+        System.out.println("\nHoliday Dates, Please select one of the following functions:");
         System.out.println("\t1) Add Holiday Dates");
         System.out.println("\t2) Edit Holiday Dates");
         System.out.println("\t3) Delete Holiday Dates");
@@ -224,8 +215,6 @@ public class Admin {
                         } else {
                             System.out.println("Invalid date: " + newDate + " is entered. Please try again.");
                         }
-
-
                     } else System.out.println("Invalid date is entered.\nHoliday is not edited.");
                 } while (DateTime.StringToDateOnly(newDate) == null || !newDate.equals(confirmDate));
             }
@@ -249,18 +238,20 @@ public class Admin {
      * @throws NoSuchAlgorithmException is thrown if the function is not found
      */
     public void SettingFunctions(AllCineplex cineplex) throws IOException, NoSuchAlgorithmException {
-        System.out.println("Settings\n");
-        System.out.println("select one of the following functions:");
+        System.out.println("*************************************************");
+        System.out.println("*               Settings Interface              *");
+        System.out.println("*************************************************");
+        System.out.println("\nSelect one of the following functions:");
         System.out.println("\t1) Control the display of movie rankings to customers");
-        System.out.println("\t2) Help new staffs to register new Admin Account");
+        System.out.println("\t2) Register new Administration Account");
         int choice2 = GetNumberInput.getInt(1, 2, -1);
         switch (choice2) {
             case 1 -> {
-                System.out.println("\t 1. Control the display of movie rankings to customers (Enter -1 to exit):");
-                System.out.println("\t\t1) Display by rating\n");
-                System.out.println("\t\t2) Display by ticket sales\n");
-                System.out.println("\t\t3) Display both\n");
-                System.out.println("\t\t4) Disable top raking display\n");
+                System.out.println("\nControl the display of movie rankings to customers:");
+                System.out.println("\t1) Display by rating");
+                System.out.println("\t2) Display by ticket sales");
+                System.out.println("\t3) Display both");
+                System.out.println("\t4) Disable top rating display");
                 switch (GetNumberInput.getInt(1, 4, -1)) {
                     case 1 -> {
                         cineplex.setUserSort(false, true);
@@ -275,19 +266,22 @@ public class Admin {
                         cineplex.setUserSort(false, false);
                     }
                     case -1 -> {
-                        System.out.println("\n-1 was selected. Exiting...\n");
+                        System.out.println("\nExiting...\n");
                     }
                 }
             }
             case 2 -> {
-                System.out.println("\t2) Help new staffs to register new Admin Account");
+                System.out.println("\nRegistering New Administration Account");
                 CreateAdmin();
             }
         }
     }
 
+    /**
+     * Print list of holiday
+     * @param cineplex - Get global list of cineplex to print
+     */
     public void printHoliday(AllCineplex cineplex){
-
         for (int i = 0; i < cineplex.getHoliday().size(); i++) {
             System.out.printf("\t%d) %s\n", i + 1, cineplex.getHoliday().get(i));
         }
@@ -295,16 +289,15 @@ public class Admin {
 
     /**
      * This function is used to create new admin accounts
-     *
-     * @throws IOException              is thrown to ensure the
-     * @throws NoSuchAlgorithmException
+     * @throws IOException              is thrown to ensure admin database exists.
+     * @throws NoSuchAlgorithmException ensure that hash algorithm exists.
      */
     private void CreateAdmin() throws IOException, NoSuchAlgorithmException {
         String filename = "admin.txt";
         ArrayList<Admin> AdminList = null;
+        Admin newAdmin = null;
 
         AdminList = getAdminList(filename);
-        Admin newAdmin = null;
         newAdmin = AddnewAdmin();
         AdminList.add(newAdmin);
         UpdateAdmin(filename, AdminList);
@@ -312,7 +305,6 @@ public class Admin {
 
     /**
      * This function is used to read the data from the Admin.txt database
-     *
      * @param filename = the file admin.txt that needs to be accessed
      * @return the new created admin list object
      * @throws IOException              is thrown if the reading the content of the file causes error
@@ -320,23 +312,22 @@ public class Admin {
      */
     public static ArrayList<Admin> getAdminList(String filename) throws IOException, NoSuchAlgorithmException {
         ArrayList<Admin> AdminList = new ArrayList<Admin>();
-        AdminList = ReadFromFile(AdminList, filename);
+        ReadFromFile(AdminList, filename);
         return AdminList;
     }
 
     /**
      * This is used to get the details from the admin of the new account they want to create
-     *
      * @return Admin Object with the new username and password
      * @throws NoSuchAlgorithmException is thrown if the reading the SHA256 algorithm causes an error
      */
     private static Admin AddnewAdmin() throws NoSuchAlgorithmException {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Create New Admin");
+        System.out.println("Creating New Admin:");
         String username, password;
-        System.out.println("\t Enter the new admin username");
+        System.out.println("\tEnter the new Admin username");
         username = scan.nextLine();
-        System.out.println("\t Enter the new admin password");
+        System.out.println("\tEnter the new Admin password");
         password = SHA256.toString(scan.nextLine());
         return new Admin(username, password, true);
     }

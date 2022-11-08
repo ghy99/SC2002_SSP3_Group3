@@ -1,6 +1,5 @@
 package UserInterface;
 
-import java.util.*;
 import Admin.*;
 import Cineplex.*;
 import Service.*;
@@ -20,19 +19,17 @@ public class AdminUI {
      */
 	public static void AdminInterface(int loginFlag, String usernameInput,
                                       String passwordInput, AllCineplex cineplexes) throws Exception {
-        System.out.println("Welcome to the Admin Portal. ");
         if (loginFlag == 0){
             System.out.println("Please go back to the main portal to re-login");
             return;
         }
-
+        System.out.println("*************************************************");
+        System.out.println("*          Welcome to the Admin Portal          *");
+        System.out.println("*************************************************");
         Admin admin = new Admin(usernameInput, passwordInput , true);
         int choice = 0;
-        int choice2 = 0;
-
 		do {
-            System.out.println();
-			System.out.println("Choose the following options for admin services");
+			System.out.println("\nChoose the following options for Admin services:");
 			System.out.println("\t1) Ticket Prices");
             System.out.println("\t2) Holiday Dates");
             System.out.println("\t3) Movie's Functions");
@@ -53,7 +50,10 @@ public class AdminUI {
                     MovieListingUI.MovieListingInterface(cineplexes);
                 }
                 case 4 -> {
-                	System.out.println("4) Movie Listing by rank. Please select one of the following functions (Enter -1 to exit):");
+                    System.out.println("*************************************************");
+                	System.out.println("*            List Movies by Ranking             *");
+                    System.out.println("*************************************************");
+                    System.out.println("\nPlease select one of the following functions:");
                     System.out.println("\t1) Display Top 5 movie rankings by rating");
                     System.out.println("\t2) Display Top 5 movie rankings by ticket sales");
 

@@ -49,6 +49,7 @@ public class AllCineplex extends Settings {
     public ArrayList<Movie> getListOfMoviesforAdmin() {
         return this.listOfMovies;
     }
+
     public ArrayList<Movie> getListOfMovies() {
         ArrayList<Movie> filteredMovies = new ArrayList<Movie>();
         for (Movie movie : this.listOfMovies) {
