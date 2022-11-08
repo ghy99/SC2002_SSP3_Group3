@@ -1,12 +1,8 @@
 Avengers|NowShowing|ChickenMan|Group of people comes together to fight purple grape.|Metal Frisbee, Metal Boy, New Axe, Arrows, Russian|Action|BLOCKBUSTER|PG13|5
 [
-you|5.0|test
-me|3.1|tesreview
-test|4.1|test review
 ]
 IT|NowShowing|ClownMan|Group of kids fight a child predator.|Child 1, Child 2, Child 3, Child 4|Horror|NOTBLOCKBUSTER|G|0
 [
-Lie|1.0|yoooooo
 ]
 The Notebook|Preview|RomanticPerson|Something about a notebook.|Pen, Paper, Notebook|Romance|NOTBLOCKBUSTER|R21|100
 [
@@ -16,7 +12,6 @@ Transformers: Dark of the Moon|NowShowing|Michael Bay|Cars and Trucks fight Plan
 ]
 Train to Busan|ComingSoon|Yeon Sang-ho|Seok-Woo is a fund manager in Seoul. He is separated from his wife and lives with his daughter Soo-An. Seok-Woo doesn't spend much time with his daughter or show affection to her. On the night before Soo-An's birthday, Soo-An insists on seeing her mother for her birthday. Seok-Woo has no other choce, but to take her to Busan. Early next morning, they board the KTX train for Busan at Seoul Station. Before the KTX train leaves Seoul Station, a zombie-like girl jumps onto the train. The train is infected with a horrific virus that is spreading like wildfire. Seok-Woo, Soo-An and the other passengers on the KTX train must now fight for their lives.|Gong Yoo, Jung Yu-Mi, Ma Dong-Seok, Kim Soo-Ahn, Kim Eui-Sung, Choi Woo-Sik, Ahn So-Hee|Mystery|BLOCKBUSTER|M18|0
 [
-test|4.1|4.1ters review  this
 ]
 Jujutsu Kaisen|ComingSoon|Gege Akutami|Yuji Itadori, a kind-hearted teenager, joins his school's Occult Club for fun, but discovers that its members are actual sorcerers who can manipulate the energy between beings for their own use. He hears about a cursed talisman - the finger of Sukuna, a demon - and its being targeted by other cursed beings.|Itadori Yuji, Fushiguro Megumi, Kugisaki Nobara, Gojo Satoru, Yuta Okkotsu, Inumaki Toge, Zen'in Maki, Panda|Action|NOTBLOCKBUSTER|PG13|0
 [
@@ -34,14 +29,5 @@ JueLin Revisits for loops|NowShowing|Hao Yi and Anthony|JueLin returns from her 
 [
 ]
 Jue Lin Solves Her For Loops|Preview|Jue Lin|Jue Lin beats her for loops and movie seats are implemented|JueLin, Moblima|Comedy|NOTBLOCKBUSTER|R21|0
-[
-]
-test|Preview|Jue Lin|Jue Lin beats her for loops and movie seats are implemented|JueLin, Moblima|Comedy|NOTBLOCKBUSTER|R21|1
-[
-]
-1|ComingSoon|test|test|test|Action|BLOCKBUSTER|G|0
-[
-]
-mymovie|ComingSoon|you|test|test|Action|BLOCKBUSTER|G|0
 [
 ]
