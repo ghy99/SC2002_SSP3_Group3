@@ -24,9 +24,11 @@ public class AdminUI {
             System.out.println("Please go back to the main portal to re-login");
             return;
         }
+        System.out.println(Settings.ANSI_CYAN);
         System.out.println("*************************************************");
         System.out.println("*          Welcome to the Admin Portal          *");
         System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
         Admin admin = new Admin(usernameInput, passwordInput, true);
         int choice = 0;
         do {
@@ -38,7 +40,8 @@ public class AdminUI {
             System.out.println("\t5) Add Cinema");
             System.out.println("\t6) Other Settings");
 
-            choice = GetNumberInput.getInt(1, 5, 11);
+            choice = GetNumberInput.getInt(1, 6, -1);
+            if (choice == -1) break;
             cineplexes.clearScreen();
             switch (choice) {
                 case 1 -> {
@@ -51,9 +54,11 @@ public class AdminUI {
                     MovieListingUI.MovieListingInterface(cineplexes);
                 }
                 case 4 -> {
+                    System.out.println(Settings.ANSI_CYAN);
                     System.out.println("*************************************************");
                     System.out.println("*            List Movies by Ranking             *");
                     System.out.println("*************************************************");
+                    System.out.println(Settings.ANSI_RESET);
                     System.out.println("\nPlease select one of the following functions:");
                     System.out.println("\t1) Display Top 5 movie rankings by rating");
                     System.out.println("\t2) Display Top 5 movie rankings by ticket sales");
@@ -75,6 +80,6 @@ public class AdminUI {
                 case 6 -> admin.SettingFunctions(cineplexes);
                 default -> System.out.println("Invalid Input. Try again.");
             }
-        } while (choice < 10);
+        } while (choice < 6 && choice > 0);
     }
 }

@@ -2,6 +2,7 @@ package UserInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import Cineplex.*;
@@ -25,9 +26,11 @@ public class CustomerUI {
      * @throws IOException is thrown if there is an error in reading the customer file
      */
     public static void CustomerInterface(AllCineplex cineplexes, ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
+        System.out.println(Settings.ANSI_CYAN);
         System.out.println("*************************************************");
         System.out.println("*         Welcome to the Customer Portal        *");
         System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         customer.printCustomerDetails();
@@ -70,8 +73,11 @@ public class CustomerUI {
                     }
                 }
                 case 2 -> {
-                    System.out.println("Enter your new name: ");
-                    String newName = sc.nextLine();
+                    String newName;
+                    do {
+                        System.out.println("Enter your new name: ");
+                        newName = sc.nextLine();
+                    } while (Objects.equals(newName, ""));
                     customer.updateMovieGoerName(newName, customerArrayList);
                 }
                 case 3 -> {

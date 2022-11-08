@@ -86,9 +86,11 @@ public class Admin {
      * @throws IOException thrown if reading data from TicketPrice causes error
      */
     public void EditTicket(AllCineplex cineplex) throws IOException {
+        System.out.println(Settings.ANSI_CYAN);
         System.out.println("*************************************************");
         System.out.println("*            Ticket Price Interface             *");
         System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
         System.out.println("\nTickets are charged in the following manner:");
         cineplex.getTicketCharges().printTicketCharges();
         int cat = 0;
@@ -163,9 +165,11 @@ public class Admin {
      * @throws IOException to ensure the input has no error
      */
     public void HolidayDateFunctions(AllCineplex cineplex) throws IOException {
+        System.out.println(Settings.ANSI_CYAN);
         System.out.println("*************************************************");
         System.out.println("*             Edit Holiday Interface            *");
         System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
         System.out.println("Current list of Holiday:");
         printHoliday(cineplex);
         System.out.println("\nHoliday Dates, Please select one of the following functions:");
@@ -238,9 +242,11 @@ public class Admin {
      * @throws NoSuchAlgorithmException is thrown if the function is not found
      */
     public void SettingFunctions(AllCineplex cineplex) throws IOException, NoSuchAlgorithmException {
+        System.out.println(Settings.ANSI_CYAN);
         System.out.println("*************************************************");
         System.out.println("*               Settings Interface              *");
         System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
         System.out.println("\nSelect one of the following functions:");
         System.out.println("\t1) Control the display of movie rankings to customers");
         System.out.println("\t2) Register new Administration Account");

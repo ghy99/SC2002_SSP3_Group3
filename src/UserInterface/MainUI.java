@@ -20,7 +20,11 @@ public class MainUI {
     public static void start() throws Exception {
         AllCineplex cineplexes = new AllCineplex();
         cineplexes.clearScreen();
-        System.out.println("Welcome to Moblima!");
+        System.out.println(Settings.ANSI_CYAN);
+        System.out.println("*************************************************");
+        System.out.println("*              Welcome to Moblima!              *");
+        System.out.println("*************************************************");
+        System.out.println(Settings.ANSI_RESET);
 
         int option = 1;
         do {

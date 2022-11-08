@@ -2,9 +2,10 @@ package UserInterface;
 
 import java.io.IOException;
 import java.util.*;
+
 import Cineplex.*;
 import Movie.*;
-import Service.GetNumberInput;
+import Service.*;
 
 /**
  * This is the Movie Listing Interface.
@@ -69,7 +70,7 @@ public class MovieListingUI {
                     System.out.println("*                Removing Movie                 *");
                     System.out.println("*************************************************");
                     int choice;
-                    System.out.println("\nWhich movie would you like to edit?");
+                    System.out.println("\nWhich movie would you like to remove?");
                     printMovieList(listOfMovies);
                     choice = GetNumberInput.getInt(1, listOfMovies.size(), -1) - 1;
                     if (choice == -2) break;
@@ -105,13 +106,13 @@ public class MovieListingUI {
         System.out.println("*************************************************");
         System.out.println("*               Create New Movie                *");
         System.out.println("*************************************************");
-
-        String movieTitle = null, director = null, synopsis = null;
+        String movieTitle = null, director = null, synopsis = null, casts = null;
         do {
             System.out.print("\nEnter movie title: "); //movie title
             movieTitle = sc.nextLine();
-        } while (movieTitle == null);
-        System.out.println("\nSelect option for Movie Status (Enter -1 to exit): ");
+        } while (Objects.equals(movieTitle, ""));
+
+        System.out.println("\nSelect option for Movie Status:");
         System.out.println("\t1) Coming soon!");
         System.out.println("\t2) Preview");
         System.out.println("\t3) Now showing");
@@ -133,16 +134,24 @@ public class MovieListingUI {
             if (moviestatus == null) continue;
         } while (statuschoice > 4 || statuschoice < 1);
 
-        System.out.print("\nEnter the name of the Movie Director: ");
-        director = sc.nextLine();
+        do {
+            System.out.print("\nEnter the name of the Movie Director: ");
+            director = sc.nextLine();
+        } while (Objects.equals(director, ""));
 
-        System.out.print("\nEnter Movie Synopsis: ");
-        synopsis = sc.nextLine();
+        do {
+            System.out.print("\nEnter Movie Synopsis: ");
+            synopsis = sc.nextLine();
+        } while (Objects.equals(synopsis, ""));
 
         // set cast
+        do {
+            System.out.println("\nEnter casts, separate with semicolon(,):");
+            casts = sc.nextLine();
+        } while (Objects.equals(casts, ""));
+
         ArrayList<String> cast = null;
-        System.out.print("\nEnter casts, separate with semicolon(,)");
-        String[] castArray = sc.nextLine().split(",");
+        String[] castArray = casts.split(",");
         cast = new ArrayList<>();
         Collections.addAll(cast, castArray);
 
@@ -237,27 +246,24 @@ public class MovieListingUI {
         String date;
         String confirmDate = "";
         Scanner scan = new Scanner(System.in);
-
-
         do {
             System.out.println("Please enter start date.");
             date = scan.nextLine();
             if (DateTime.StringToDateOnly(date) != null) {
                 confirmDate = DateTime.convertDate(DateTime.StringToDateOnly(date).getTime());
-                if(date.equals(confirmDate) == true){
+                if (date.equals(confirmDate)) {
                     System.out.println("Date: " + date + " is added.");
                     break;
                 } else {
-                    System.out.println("Invalid date: " +  date + " is entered. Please try again.");
+                    System.out.println("Invalid date: " + date + " is entered. Please try again.");
                 }
-
             } else
-                System.out.println("Error time format holiday not added");
+                System.out.println("Invalid date is entered.\nStart Date is not added.");
 
         } while (DateTime.StringToDateOnly(date) == null || !date.equals(confirmDate));
 
         return new Movie(movieTitle, moviestatus, director,
-                synopsis, cast, genre, blockbuster, ratings, DateTime.StringToDateOnly(date) );
+                synopsis, cast, genre, blockbuster, ratings, DateTime.StringToDateOnly(date));
     }
 
     /**
