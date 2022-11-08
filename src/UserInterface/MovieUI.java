@@ -35,6 +35,7 @@ public class MovieUI {
                 }
                 System.out.println("Select your Movie from the list above:");
                 selectMovie = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
+                if (selectMovie < -1) continue;
                 System.out.println("\nThis is the movie you have selected.\n");
                 movielist.get(selectMovie).printMovieDetails();
                 System.out.println("\n\nWould you like to choose another movie?");
