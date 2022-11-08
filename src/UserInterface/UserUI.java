@@ -18,8 +18,6 @@ import static UserInterface.AdminUI.AdminInterface;
  * @authors GAN HAO YI, CHEW ZHI QI
  */
 public class UserUI {
-
-
     /**
      * This is the User Interface. It is called in mainUI and it controls the interface for the Login option.
      *
@@ -99,7 +97,7 @@ public class UserUI {
      *
      * @param name       = name that user entered and used to check if the name exists
      * @param number     = number that user entered to match with the database
-     * @param cineplexes
+     * @param cineplexes = Get List of Customers
      * @return boolean result
      */
     public static boolean checkCustomerName(String name, String number, AllCineplex cineplexes) {
@@ -121,7 +119,7 @@ public class UserUI {
      * This method returns a Customer object if name and number that was entered matches a value in database
      *
      * @param name   = the customers name
-     * @param number used to check if the number is correct and matches the value in the database.
+     * @param number = used to check if the number is correct and matches the value in the database.
      * @return the customer object
      */
     public static Customer checkCustomerNumber(String name, String number , AllCineplex cineplexes) {

@@ -1,6 +1,5 @@
 package UserInterface;
 
-
 import Cineplex.AllCineplex;
 import Cineplex.Cineplex;
 import Movie.MovieTicket;

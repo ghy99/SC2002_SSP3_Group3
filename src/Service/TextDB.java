@@ -1,6 +1,5 @@
 package Service;
 
-
 import Customer.*;
 import Admin.*;
 import Cineplex.*;
@@ -12,7 +11,10 @@ import java.util.*;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 
-
+/**
+ * @authors CHEW ZHI QI, GAN HAO YI
+ * This Class controls the Reading / Writing / Updating to the Database.
+ */
 public class TextDB {
     /**
      * Enum text files name for our Textdb
