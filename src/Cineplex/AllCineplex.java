@@ -57,7 +57,7 @@ public class AllCineplex extends Settings {
         if (!movieFile.exists()) movieFile.createNewFile();
 
         // movie instance
-        TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
+        TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
 
         updateUpdateMovieStat();
 
