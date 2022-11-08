@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-
-=======
 ant@hotmail.com|APA202211071606|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B8|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
 ant@hotmail.com|APA202211071606|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B9|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
 ant@hotmail.com|APA202211071606|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|L5|SingleSeat|Regular|TWO_D|BLOCKBUSTER
@@ -39,4 +36,3 @@ ant@hotmail.com|ARB202211081033|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B5
 ant@hotmail.com|ARB202211081033|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|D7|SingleSeat|Regular|TWO_D|BLOCKBUSTER
 eddy@hotmail.com|ARB202211081310|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B1|DoubleSeat|Regular|TWO_D|BLOCKBUSTER
 eddy@hotmail.com|ARB202211081310|Moblima JEM|cinema2|Avengers|08-11-2022;03:50|B2|Aisle|Regular|TWO_D|BLOCKBUSTER
->>>>>>> Stashed changes
