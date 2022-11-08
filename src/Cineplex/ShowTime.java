@@ -1,7 +1,8 @@
 package Cineplex;
 
 import Movie.Movie;
-import Movie.*;
+import Movie.MovieSeatsNew;
+import Movie.MovieType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,10 +10,10 @@ import java.util.Date;
 
 /**
  * @author  Chew Zhi Qi , Gan Hao Yi
- * Showtime class inherit from MovieSeats.
+ * ShowTime class inheriting from MovieSeats.
  * For each showtime consist of time, movie instance, dimension, list of seasts
  */
-public class ShowTime extends MovieSeatsNew{
+public class ShowTime extends MovieSeatsNew {
     /**
      * Date
      */
@@ -28,7 +29,7 @@ public class ShowTime extends MovieSeatsNew{
     private MovieType.Dimension dimension;
 
     /**
-     * Constructing a new showtime
+     * ShowTime Constructor
      * @param row Amount of role
      * @param col Amount of column
      * @param aisleOne Index of first aisle should be at
@@ -46,7 +47,7 @@ public class ShowTime extends MovieSeatsNew{
     }
 
     /**
-     * When read from db construct seats
+     * Construct Seats when reading from Database
      * @param time Time of the new showtime
      * @param movie Movie of the new showtime
      * @param seats Current seats allocation
@@ -55,16 +56,12 @@ public class ShowTime extends MovieSeatsNew{
      */
     public ShowTime(Date time , Movie movie , ArrayList<String> seats, int row , int column , int sitDouble , int[] aisle, MovieType.Dimension dim) throws IOException {
         super(row, column, sitDouble ,aisle[0], aisle[1] );
-
-
         this.time = time;
         this.movie = movie;
         this.dimension = dim;
         SeatsCreation();
-
         super.BookSeats(seats, false, null);
     }
-
 
     /**
      * @return Current showtime dimension
@@ -93,5 +90,4 @@ public class ShowTime extends MovieSeatsNew{
     public Long getTimeHour() {
         return time.getTime();
     }
-
 }

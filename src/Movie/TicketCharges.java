@@ -1,6 +1,7 @@
 package Movie;
 
 import Service.TextDB;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,81 +21,136 @@ public class TicketCharges {
     private ArrayList<ArrayList<String>> priceByMovieDim = new ArrayList<ArrayList<String>>();
     private ArrayList<ArrayList<String>> priceByCinemaType = new ArrayList<ArrayList<String>>();
 
-    private Boolean blockbuster;
-
+    /**
+     * TicketCharges Constructor.
+     * This Constructor reads the default price from database and stores it in this TicketCharges Object.
+     *
+     * @throws IOException - Check TicketPrice database if it exists.
+     */
     public TicketCharges() throws IOException {
         ArrayList<String[][]> ticketPrices = new ArrayList<>();
         String filename = "TicketPrice.txt";
         ticketPrices = TextDB.readFromFile(filename, (TicketCharges) null);
         for (int i = 0; i < ticketPrices.size(); i++) {
-            if (i == 0) {
-                String[][] temp = ticketPrices.get(i);
-                for (int j = 0; j < temp.length; j++) {
-                    ArrayList<String> age = new ArrayList<String>();
-                    age.add(temp[j][0]);
-                    age.add(temp[j][1]);
-                    setPriceByAge(age);
+            switch (i) {
+                case 0 -> {
+                    String[][] temp = ticketPrices.get(i);
+                    for (String[] strings : temp) {
+                        ArrayList<String> age = new ArrayList<String>();
+                        age.add(strings[0]);
+                        age.add(strings[1]);
+                        setPriceByAge(age);
+                    }
                 }
-            } else if (i == 1) {
-                String[][] temp = ticketPrices.get(i);
-                for (int j = 0; j < temp.length; j++) {
-                    ArrayList<String> day = new ArrayList<String>();
-                    day.add(temp[j][0]);
-                    day.add(temp[j][1]);
-                    setPriceByDay(day);
+                case 1 -> {
+                    String[][] temp = ticketPrices.get(i);
+                    for (String[] strings : temp) {
+                        ArrayList<String> day = new ArrayList<String>();
+                        day.add(strings[0]);
+                        day.add(strings[1]);
+                        setPriceByDay(day);
+                    }
                 }
-            } else if (i == 2) {
-                String[][] temp = ticketPrices.get(i);
-                for (int j = 0; j < temp.length; j++) {
-                    ArrayList<String> Dim = new ArrayList<String>();
-                    Dim.add(temp[j][0]);
-                    Dim.add(temp[j][1]);
-                    setPriceByMovieDim(Dim);
+                case 2 -> {
+                    String[][] temp = ticketPrices.get(i);
+                    for (String[] strings : temp) {
+                        ArrayList<String> Dim = new ArrayList<String>();
+                        Dim.add(strings[0]);
+                        Dim.add(strings[1]);
+                        setPriceByMovieDim(Dim);
+                    }
                 }
-            } else if (i == 3) {
-                String[][] temp = ticketPrices.get(i);
-                for (int j = 0; j < temp.length; j++) {
-                    ArrayList<String> Type = new ArrayList<String>();
-                    Type.add(temp[j][0]);
-                    Type.add(temp[j][1]);
-                    setPriceByCinemaType(Type);
+                case 3 -> {
+                    String[][] temp = ticketPrices.get(i);
+                    for (String[] strings : temp) {
+                        ArrayList<String> Type = new ArrayList<String>();
+                        Type.add(strings[0]);
+                        Type.add(strings[1]);
+                        setPriceByCinemaType(Type);
+                    }
                 }
             }
         }
     }
 
+    /**
+     * Get Method
+     *
+     * @return - Returns an ArrayList of price by Age
+     */
     public ArrayList<ArrayList<String>> returnAge() {
         return priceByAge;
     }
 
+    /**
+     * Get Method
+     *
+     * @return - Returns an ArrayList of price by Day of the Week
+     */
     public ArrayList<ArrayList<String>> returnDay() {
         return priceByDay;
     }
 
+    /**
+     * Get Method
+     *
+     * @return - Returns an ArrayList of price by Dimension of Movie (2D / 3D)
+     */
     public ArrayList<ArrayList<String>> returnDim() {
         return priceByMovieDim;
     }
 
+    /**
+     * Get Method
+     *
+     * @return - Returns an ArrayList of price by Type of Cinema (Regular / Premium)
+     */
     public ArrayList<ArrayList<String>> returnType() {
         return priceByCinemaType;
     }
 
+    /**
+     * Set Method
+     *
+     * @param age - ArrayList of Price by Age
+     */
     public void setPriceByAge(ArrayList<String> age) {
         this.priceByAge.add(age);
     }
 
+    /**
+     * Set Method
+     *
+     * @param day - ArrayList of Price by Day of the Week
+     */
     public void setPriceByDay(ArrayList<String> day) {
         this.priceByDay.add(day);
     }
 
+    /**
+     * Set Method
+     *
+     * @param moviedim - ArrayList of Price by Movie Dimension (2D / 3D)
+     */
     public void setPriceByMovieDim(ArrayList<String> moviedim) {
         this.priceByMovieDim.add(moviedim);
     }
 
+    /**
+     * Set Method
+     *
+     * @param cinematype - ArrayList of Price by Type of Cinema (Regular Premium)
+     */
     public void setPriceByCinemaType(ArrayList<String> cinematype) {
         this.priceByCinemaType.add(cinematype);
     }
 
+    /**
+     * Get Specific price based on Age
+     *
+     * @param userage - User's Age
+     * @return - Default Price based on Age
+     */
     public double getPriceByAge(int userage) {
         switch (userage) {
             case 1 -> {
@@ -110,6 +166,12 @@ public class TicketCharges {
         return -1;
     }
 
+    /**
+     * Get Specific price based on Age
+     *
+     * @param day - Day of the Movie ShowTime
+     * @return - Default Price based on Day of the Week
+     */
     public double getPriceByDay(int day) {
         for (int i = 0; i < priceByDay.size(); i++) {
             if (day <= Integer.parseInt(priceByDay.get(i).get(0))) {
@@ -119,6 +181,12 @@ public class TicketCharges {
         return -1;
     }
 
+    /**
+     * Get Specific price based on Age
+     *
+     * @param dim - Movie's Dimension (2D / 3D)
+     * @return - Default Price based on Movie Dimension
+     */
     public double getPriceByDim(int dim) {
         for (int i = 0; i < priceByMovieDim.size(); i++) {
             if (dim == 0) {
@@ -130,6 +198,12 @@ public class TicketCharges {
         return -1;
     }
 
+    /**
+     * Get Specific price based on Age
+     *
+     * @param type - Cinema Type (Regular / Premium)
+     * @return - Default Price based on Type of Cinema
+     */
     public double getPriceByType(int type) {
         for (int i = 1; i <= priceByCinemaType.size(); i++) {
             if (type == i) {

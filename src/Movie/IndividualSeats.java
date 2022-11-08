@@ -41,25 +41,48 @@ public class IndividualSeats {
         this.isOccupied = occupied;
     }
 
+    /**
+     * Set Method
+     *
+     * @param seatID - Seat ID of this Seat.
+     */
     public void setSeatID(String seatID) {
         this.seatID = seatID;
     }
 
+    /**
+     * Set Method
+     *
+     * @param occupied - Occupancy of this Seat.
+     */
     public void setOccupied(boolean occupied) {
         isOccupied = occupied;
     }
 
+    /**
+     * Get Method
+     *
+     * @return - Seat ID
+     */
     public String getSeatID() {
         return seatID;
     }
 
+    /**
+     * Get Method
+     *
+     * @return Seat Type of this Seat (Single / Double)
+     */
     public SeatType getSeatType() {
         return seatType;
     }
 
+    /**
+     * Get Method
+     *
+     * @return - Get Status of this Seat (Occupied / Not Occupied)
+     */
     public boolean getSeatOccupied() {
         return isOccupied;
     }
-
-    ;
 }

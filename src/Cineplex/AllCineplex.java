@@ -144,13 +144,21 @@ public class AllCineplex extends Settings {
 
         switch (sortType) {
             case Top5Rating -> {
-                System.out.println("############Top 5 sale#############");
+                System.out.println(Settings.ANSI_CYAN);
+                System.out.println("*************************************************");
+                System.out.println("*             Top 5 Movies by Rating            *");
+                System.out.println("*************************************************");
+                System.out.println(Settings.ANSI_RESET);
                 tempMovie.sort(Comparator.comparing(Movie::getOverallRating));
                 Collections.reverse(tempMovie);
                 return tempMovie;
             }
             case Top5Sales -> {
-                System.out.println("############Top 5 rating############");
+                System.out.println(Settings.ANSI_CYAN);
+                System.out.println("*************************************************");
+                System.out.println("*          Top 5 Movies by Ticket Sale          *");
+                System.out.println("*************************************************");
+                System.out.println(Settings.ANSI_RESET);
                 tempMovie.sort(Comparator.comparing(Movie::getMovieTotalSales));
                 Collections.reverse(tempMovie);
                 return tempMovie;
