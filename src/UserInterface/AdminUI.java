@@ -69,7 +69,6 @@ public class AdminUI {
                 case 5-> {
                     Cineplex choseCinepelx = CineplexUI.CineplexInterface(cineplexes);
                     AddCinemaUI.AddCinemaInterface(choseCinepelx , cineplexes);
-
                 }
                 case 6-> {
                     System.out.println("5) Other Settings. Please select one of the following functions (Enter -1 to exit):");

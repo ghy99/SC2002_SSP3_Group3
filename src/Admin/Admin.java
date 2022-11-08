@@ -175,6 +175,8 @@ public class Admin {
      * @throws IOException to ensure the input has no error
      */
     public void HolidayDateFunctions(AllCineplex cineplex) throws IOException {
+        System.out.println("Current list of Holiday:");
+        printHoliday(cineplex);
         System.out.println("Holiday Dates, Please select one of the following functions:");
         System.out.println("\t1) Add Holiday Dates");
         System.out.println("\t2) Edit Holiday Dates");
@@ -198,27 +200,24 @@ public class Admin {
                         } else {
                             System.out.println("Invalid date: " + date + " is entered. Please try again.");
                         }
-
-                    } else
+                    } else {
                         System.out.println("Invalid date is entered.\nHoliday is not added.");
-
+                    }
                 } while (DateTime.StringToDateOnly(date) == null || !date.equals(confirmDate));
             }
             case 2 -> {
                 System.out.println("\nEditing holiday date:");
                 System.out.println("Select holiday dates to change:");
-                for (int i = 0; i < cineplex.getHoliday().size(); i++) {
-                    System.out.printf("\t%d) %s\n", i + 1, cineplex.getHoliday().get(i));
-                }
+                printHoliday(cineplex);
                 int index = GetNumberInput.getInt(1, cineplex.getHoliday().size(), -1) - 1;
                 if (index == -2) break;
                 String newDate;
                 do {
-                    System.out.println("Input New Date in DD-MM-YYYY format");
+                    System.out.println("Input New Date in DD-MM-YYYY format:");
                     newDate = scan.nextLine();
                     if (DateTime.StringToDateOnly(newDate) != null) {
                         confirmDate = DateTime.convertDate(DateTime.StringToDateOnly(newDate).getTime());
-                        if (newDate.equals(confirmDate) == true) {
+                        if (newDate.equals(confirmDate)) {
                             cineplex.editHoliday(index, newDate);
                             System.out.println("Date: " + newDate + " is edited.");
                             break;
@@ -227,17 +226,13 @@ public class Admin {
                         }
 
 
-                    } else System.out.println("Error time format time not change");
+                    } else System.out.println("Invalid date is entered.\nHoliday is not edited.");
                 } while (DateTime.StringToDateOnly(newDate) == null || !newDate.equals(confirmDate));
             }
             case 3 -> {
-                System.out.println("\tDelete Holiday Dates");
-
-                System.out.println("\t\tSelect holiday dates to change (Enter -1 to exit):");
-
-                for (int i = 0; i < cineplex.getHoliday().size(); i++) {
-                    System.out.printf("%d) %s \n", i + 1, cineplex.getHoliday().get(i));
-                }
+                System.out.println("\nDelete Holiday Dates");
+                System.out.println("Select holiday dates to change:");
+                printHoliday(cineplex);
                 int index = GetNumberInput.getInt(1, cineplex.getHoliday().size(), -1) - 1;
                 if (index != -2)
                     cineplex.deleteHoliday(index);
@@ -250,7 +245,6 @@ public class Admin {
 
     /**
      * This function is used to get the users input on what they want to do in the setting menu
-     *
      * @param choice2 = the input of the function they want to do
      * @throws IOException              is thrown if the reading of the input causes error
      * @throws NoSuchAlgorithmException is thrown if the function is not found
