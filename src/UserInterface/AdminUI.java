@@ -46,12 +46,7 @@ public class AdminUI {
                     admin.EditTicket(cineplexes);
                 }
                 case 2 -> {
-                    System.out.println("2) Holiday Dates, Please select one of the following functions:");
-                    System.out.println("\t1) Add Holiday Dates");
-                    System.out.println("\t2) Edit Holiday Dates");
-                    System.out.println("\t3) Delete Holiday Dates");
-                    choice2 = GetNumberInput.getInt(1, 3, -1);
-                    admin.HolidayDateFunctions(cineplexes,choice2);
+                    admin.HolidayDateFunctions(cineplexes);
                 }
                 case 3 -> {
                     MovieListingUI.MovieListingInterface(cineplexes);

@@ -28,6 +28,7 @@ public class Admin {
 
     /**
      * This method is used to return the username and hashed password
+     *
      * @param username = username the admin has entered
      * @param password = password the admin has entered
      * @param hashed   = used to keep the password secure
@@ -44,6 +45,7 @@ public class Admin {
 
     /**
      * Accessor of Username
+     *
      * @return username as string
      */
     public String getUsername() {
@@ -52,6 +54,7 @@ public class Admin {
 
     /**
      * Accessor of Password
+     *
      * @return password as string
      */
     public String getPassword() {
@@ -92,6 +95,7 @@ public class Admin {
 
     /**
      * This function is to change the ticket pricing charges
+     *
      * @throws IOException thrown if reading data from TicketPrice causes error
      */
     public void EditTicket(AllCineplex cineplex) throws IOException {
@@ -167,67 +171,64 @@ public class Admin {
 
     /**
      * This function is used to manage the add / edit / delete functions for the Holiday Dates
-     * @param choice2 for the user to input what they want to do
+     *
      * @throws IOException to ensure the input has no error
      */
-    public void HolidayDateFunctions(AllCineplex cineplex, int choice2) throws IOException {
+    public void HolidayDateFunctions(AllCineplex cineplex) throws IOException {
+        System.out.println("Holiday Dates, Please select one of the following functions:");
+        System.out.println("\t1) Add Holiday Dates");
+        System.out.println("\t2) Edit Holiday Dates");
+        System.out.println("\t3) Delete Holiday Dates");
+        int choice2 = GetNumberInput.getInt(1, 3, -1);
+        String confirmDate = "";
         Scanner scan = new Scanner(System.in);
         switch (choice2) {
             case 1 -> {
-                System.out.println("\tAdd Holiday Dates");
-                System.out.println("\t\tInput Date in DD-MM-YYYY format");
                 String date;
-                String confirmDate = "";
-
+                System.out.println("\nAdding Holiday Date:");
+                System.out.println("Input Date in DD-MM-YYYY format:");
                 do {
                     date = scan.nextLine();
                     if (DateTime.StringToDateOnly(date) != null) {
                         confirmDate = DateTime.convertDate(DateTime.StringToDateOnly(date).getTime());
-                        if(date.equals(confirmDate) == true){
+                        if (date.equals(confirmDate)) {
                             cineplex.AddHoliday(date);
                             System.out.println("Date: " + date + " is added.");
                             break;
                         } else {
-                            System.out.println("Invalid date: " +  date + " is entered. Please try again.");
+                            System.out.println("Invalid date: " + date + " is entered. Please try again.");
                         }
 
                     } else
-                        System.out.println("Error time format holiday not added");
+                        System.out.println("Invalid date is entered.\nHoliday is not added.");
 
                 } while (DateTime.StringToDateOnly(date) == null || !date.equals(confirmDate));
             }
             case 2 -> {
-
-                System.out.println("\tEdit holiday dates");
-
-                System.out.println("\t\tSelect holiday dates to change");
-
-                String confirmDate = "";
+                System.out.println("\nEditing holiday date:");
+                System.out.println("Select holiday dates to change:");
                 for (int i = 0; i < cineplex.getHoliday().size(); i++) {
-                    System.out.printf("%d) %s \n", i + 1, cineplex.getHoliday().get(i));
+                    System.out.printf("\t%d) %s\n", i + 1, cineplex.getHoliday().get(i));
                 }
-
                 int index = GetNumberInput.getInt(1, cineplex.getHoliday().size(), -1) - 1;
+                if (index == -2) break;
                 String newDate;
                 do {
                     System.out.println("Input New Date in DD-MM-YYYY format");
                     newDate = scan.nextLine();
                     if (DateTime.StringToDateOnly(newDate) != null) {
-
                         confirmDate = DateTime.convertDate(DateTime.StringToDateOnly(newDate).getTime());
-
-                        if(newDate.equals(confirmDate) == true){
+                        if (newDate.equals(confirmDate) == true) {
                             cineplex.editHoliday(index, newDate);
                             System.out.println("Date: " + newDate + " is edited.");
                             break;
                         } else {
-                            System.out.println("Invalid date: " +  newDate + " is entered. Please try again.");
+                            System.out.println("Invalid date: " + newDate + " is entered. Please try again.");
                         }
 
 
-
                     } else System.out.println("Error time format time not change");
-                } while (DateTime.StringToDateOnly(newDate) == null || !newDate.equals(confirmDate) );
+                } while (DateTime.StringToDateOnly(newDate) == null || !newDate.equals(confirmDate));
             }
             case 3 -> {
                 System.out.println("\tDelete Holiday Dates");
@@ -237,7 +238,7 @@ public class Admin {
                     System.out.printf("%d) %s \n", i + 1, cineplex.getHoliday().get(i));
                 }
                 int index = GetNumberInput.getInt(1, cineplex.getHoliday().size(), -1) - 1;
-                if (index != -1)
+                if (index != -2)
                     cineplex.deleteHoliday(index);
                 else {
                     System.out.println("Exiting...");
@@ -248,6 +249,7 @@ public class Admin {
 
     /**
      * This function is used to get the users input on what they want to do in the setting menu
+     *
      * @param choice2 = the input of the function they want to do
      * @throws IOException              is thrown if the reading of the input causes error
      * @throws NoSuchAlgorithmException is thrown if the function is not found
