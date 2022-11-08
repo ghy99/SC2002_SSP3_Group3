@@ -25,7 +25,12 @@ public class AllCineplex extends Settings {
 
     private final String filename = "movies.txt";
     private ArrayList<Cineplex> cineplexes;
+<<<<<<< Updated upstream
     private ArrayList<Movie> listOfMovies;
+=======
+
+    private ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
+>>>>>>> Stashed changes
 
     public AllCineplex() throws IOException {
         InitializeCineplexes();
@@ -116,7 +121,7 @@ public class AllCineplex extends Settings {
     public void updateListOfMovies(int index, Movie movie) throws IOException {
         //write to file
         this.listOfMovies.set(index, movie);
-        TextDB.UpdateTextDB(filename, this.listOfMovies);
+        TextDB.UpdateToTextDB(this.listOfMovies,filename );
 
     }
 
@@ -130,7 +135,7 @@ public class AllCineplex extends Settings {
      */
     public void removeMovie(int index, Movie movie) throws IOException {
         this.listOfMovies.set(index, movie);
-        TextDB.UpdateTextDB(filename, this.listOfMovies);
+        TextDB.UpdateToTextDB(this.listOfMovies,filename);
     }
 
     /**
@@ -201,6 +206,37 @@ public class AllCineplex extends Settings {
     }
 
     /**
+<<<<<<< Updated upstream
+=======
+     * This method initializes the cineplex. It reads the cineplex names stored
+     * and load it into the Cineplex ArrayList.
+     *
+     * @throws IOException to check if Cineplexes.txt exist.
+     */
+    public void InitializeCineplexes() throws IOException {
+        System.out.println("Initializing Cineplexes...\n...\n...");
+        try {
+            this.cineplexes = TextDB.readFromFile(File.separator + TextDB.Files.Cineplex.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
+        if (!movieFile.exists()) movieFile.createNewFile();
+
+        // movie instance
+        TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
+
+        updateUpdateMovieStat();
+
+        for (Cineplex cineplex : this.cineplexes) {
+            cineplex.InitializeMovies(this.listOfMovies);
+        }
+        System.out.println("Cineplexes are initialized\n");
+        dailyTask();
+    }
+
+    /**
+>>>>>>> Stashed changes
      * This method updates the Showing Status of the movie daily at 12AM.
      *
      * @throws IOException - Updates database on the Showing Status of the movie.
@@ -218,7 +254,7 @@ public class AllCineplex extends Settings {
                 }
             }
         }
-        TextDB.UpdateTextDB(filename, this.listOfMovies);
+        TextDB.UpdateToTextDB(this.listOfMovies,filename );
     }
 
     /**
