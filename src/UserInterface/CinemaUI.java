@@ -202,7 +202,7 @@ public class CinemaUI {
         } while (newDate == null);
 
         chosenCinema.updateCinemaTime(
-                chosenShow, chosenCineplex, newDate, movie,
+                chosenShow, newDate, movie,
                 chosenCinema.getShowTime().get(chosenShow).getDimension()
         );
         for (int k = 0; k < chosenCinema.getShowTime().size(); k++) {

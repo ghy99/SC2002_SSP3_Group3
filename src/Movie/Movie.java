@@ -283,7 +283,7 @@ public class Movie extends AllReviews {
      */
     public void printMovieDetails() {
         System.out.printf("\t\tMovie Title: %s\n", this.movieTitle);
-        System.out.printf("\t\tMovie Status: %s\tStart Date: %s\n", this.showingStatus,
+        System.out.printf("\t\tMovie Status: %s\t(Start Date: %s)\n", this.showingStatus,
                 DateTime.convertDate(this.startDate.getTime()));
         System.out.printf("\t\tMovie Director: %s\n", this.director);
         System.out.println("\t\tMovie Synopsis:");

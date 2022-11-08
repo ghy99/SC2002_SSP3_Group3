@@ -155,8 +155,8 @@ public class AllReviews {
         ArrayList<Review> tempReview = sortReview(sortType);
 
         for (Review review : tempReview) {
-            System.out.println("Username: " + review.getUserName());
-            System.out.println("Review Rating: " + review.getRating() + " Review: " + review.getReview());
+            System.out.println("\nUsername: " + review.getUserName());
+            System.out.println("Review Rating: " + review.getRating() + "\tReview: " + review.getReview());
         }
         System.out.println();
     }

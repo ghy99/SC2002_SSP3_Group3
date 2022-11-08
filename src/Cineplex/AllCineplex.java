@@ -18,23 +18,46 @@ import java.util.concurrent.TimeUnit;
  * It stores list of cineplex,list of movies and settings for the user.
  */
 public class AllCineplex extends Settings {
+    /**
+     * enum to check type of sorting (Rating / Sales)
+     */
     public enum MovieSort {
         Top5Rating,
         Top5Sales
     }
 
+    /**
+     * Filename for as directory path
+     * ArrayList of Cineplexes to store in Global
+     * ArrayList of Movies to store in Global
+     */
     private final String filename = "movies.txt";
     private ArrayList<Cineplex> cineplexes;
     private ArrayList<Movie> listOfMovies;
 
+    /**
+     * Constructor for AllCineplex
+     *
+     * @throws IOException
+     */
     public AllCineplex() throws IOException {
         InitializeCineplexes();
     }
 
+    /**
+     * Get Method
+     *
+     * @return ArrayList of Cineplex
+     */
     public ArrayList<Cineplex> getCineplexes() {
         return this.cineplexes;
     }
 
+    /**
+     * Set Method
+     *
+     * @param listOfMovies - Set the List of Movies the Cineplexes are showing
+     */
     public void setListOfMovies(ArrayList<Movie> listOfMovies) {
         this.listOfMovies = listOfMovies;
     }
@@ -43,7 +66,7 @@ public class AllCineplex extends Settings {
      * This method initializes the cineplex.
      * It reads the cineplex names stored and load it into the Cineplex ArrayList.
      *
-     * @throws IOException to check if Cineplexes.txt exist.
+     * @throws IOException to check if Cineplexes exist in Database
      */
     public void InitializeCineplexes() throws IOException {
         System.out.println("Initializing Cineplexes...\n...\n...");
@@ -54,17 +77,15 @@ public class AllCineplex extends Settings {
         }
         File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
         if (!movieFile.exists()) movieFile.createNewFile();
-
         // movie instance
         ArrayList<Movie> movieList = TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
-
         this.setListOfMovies(movieList);
         updateUpdateMovieStat();
 
         for (Cineplex cineplex : this.cineplexes) {
             cineplex.InitializeMovies(this.listOfMovies);
         }
-        System.out.println("Cineplexes are initialized\n");
+        System.out.println("Cineplexes are initialized!\n");
         dailyTask();
     }
 
@@ -72,7 +93,7 @@ public class AllCineplex extends Settings {
      * This method adds new movies created by Admin to Global list of movies and updates the database.
      *
      * @param movie - Newly created movie to be added.
-     * @throws IOException - Checks if movie database exists.
+     * @throws IOException - Checks if Movie Database exists.
      */
     public void addMovies(Movie movie) throws IOException {
         this.listOfMovies.add(movie);
@@ -102,7 +123,6 @@ public class AllCineplex extends Settings {
                 }
             }
         }
-//        return this.listOfMovies;
         return filteredMovies;
     }
 
@@ -114,7 +134,6 @@ public class AllCineplex extends Settings {
      * @throws IOException - Check if movie database exists.
      */
     public void updateListOfMovies(int index, Movie movie) throws IOException {
-        //write to file
         this.listOfMovies.set(index, movie);
         TextDB.UpdateTextDB(filename, this.listOfMovies);
 
@@ -144,7 +163,7 @@ public class AllCineplex extends Settings {
 
         switch (sortType) {
             case Top5Rating -> {
-                System.out.println(Settings.ANSI_CYAN);
+                System.out.println(Settings.ANSI_RED);
                 System.out.println("*************************************************");
                 System.out.println("*             Top 5 Movies by Rating            *");
                 System.out.println("*************************************************");
@@ -154,7 +173,7 @@ public class AllCineplex extends Settings {
                 return tempMovie;
             }
             case Top5Sales -> {
-                System.out.println(Settings.ANSI_CYAN);
+                System.out.println(Settings.ANSI_RED);
                 System.out.println("*************************************************");
                 System.out.println("*          Top 5 Movies by Ticket Sale          *");
                 System.out.println("*************************************************");
@@ -193,7 +212,7 @@ public class AllCineplex extends Settings {
                 }
             } else {
                 for (int i = 0; i < movies.size(); i++) {
-                    System.out.printf("%s %s %.1f \n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getOverallRating());
+                    System.out.printf("\t%s %s %.1f\n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getOverallRating());
                 }
             }
         }
@@ -234,7 +253,7 @@ public class AllCineplex extends Settings {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Show Time Updated at 12AM.");
+                System.out.println("Show Time of Movies are updated at 12AM.");
                 try {
                     updateUpdateMovieStat();
                 } catch (IOException e) {
@@ -278,9 +297,9 @@ public class AllCineplex extends Settings {
         int choice = 0;
         do {
             for (int j = 0; j < movielist.size(); j++) {
-                System.out.printf("%d) %s Rating: %.1f\n", j + 1, movielist.get(j).getMovieTitle(), movielist.get(j).getOverallRating());
+                System.out.printf("\t%d) %s\t(Ratings: %.1f)\n", j + 1, movielist.get(j).getMovieTitle(), movielist.get(j).getOverallRating());
             }
-            System.out.println("Enter movie number to view more movie details. (Enter -1) to return to main page.");
+            System.out.println("\nEnter movie number to view more movie details:");
             choice = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
             if (choice == -2) {
                 break;
@@ -289,7 +308,7 @@ public class AllCineplex extends Settings {
             } else {
                 movielist.get(choice).printMovieDetails();
 
-                System.out.println("\tIn what order would you like to see the reviews?  (Enter -1 to return to main page.");
+                System.out.println("\nIn what order would you like to see the reviews?");
                 System.out.println("\t1) Newest to oldest");
                 System.out.println("\t2) Oldest to newest");
                 System.out.println("\t3) Highest rating to lowest rating");

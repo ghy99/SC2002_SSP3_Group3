@@ -64,6 +64,7 @@ public class MainUI {
                     }
                     int choice = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
                     cineplexes.getCineplexes().get(choice).displayMovieTimings(cineplexes.getListOfMovies());
+                    System.out.println();
                 }
                 case 4 -> {
                     GuestUI.UserInterface(cineplexes);
