@@ -101,7 +101,7 @@ public class Cineplex {
      * @param cinemaName Cinema Name
      * @param cinemaType Cinema Type
      */
-    public void CreateNewCinema( String cinemaName , Cinema.CinemaType cinemaType) throws IOException {
+    public void CreateNewCinema( String cinemaName , Cinema.CinemaType cinemaType, AllCineplex cineplex) throws IOException {
         int cinemaAlpha = 'A';
 
         StringBuilder sb = new StringBuilder();
@@ -123,6 +123,8 @@ public class Cineplex {
         //Create txt
         File cinema = new File(cineplexDir + File.separator + newCinema.getCinemaName() + ".txt");
         if (!cinema.exists()) cinema.createNewFile();
+        newCinema.setCinemaDir(dirName + File.separator +newCinema.getCinemaName() + ".txt");
+        TextDB.UpdateToTextDB(TextDB.Files.Cineplex.toString(), cineplex.getCineplexes(), cineplex);
     }
 
     /**
