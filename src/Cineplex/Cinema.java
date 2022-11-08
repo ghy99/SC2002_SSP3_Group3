@@ -121,7 +121,7 @@ public class Cinema {
      */
     public void deleteCinemaTime(int index) throws IOException {
         this.showTime.remove(index);
-//        TextDB.UpdateToTextDB(this.getCinemaDir() , this.showTime, null);
+        TextDB.UpdateToTextDB( this.getCinemaDir() , this.showTime, MovieType.Dimension.THREE_D);
     }
 
     /**
