@@ -11,11 +11,8 @@ Haoyi|5.0|Avengers is life
 IT|NowShowing|ClownMan|Group of kids fight a child predator.|Child 1, Child 2, Child 3, Child 4|Horror|NOTBLOCKBUSTER|G|0|02-11-2022
 [
 weiming|3.0|Its so scary
-Rin|5.0|Best horror movie ever. Recommended to watch with your friends and family
+Rin|5.0|Best horror movie ever.
 desmond|3.0|Jump scares were too fake
-anthony|1.0|Not scary. 
-chew zhi qi|0.5|Coding god is not scared
-eddy|5.0|I LOVE IT!
 ]
 The Notebook|ComingSoon|RomanticPerson|Something about a notebook.|Pen, Paper, Notebook|Romance|NOTBLOCKBUSTER|R21|100|20-11-2022
 [

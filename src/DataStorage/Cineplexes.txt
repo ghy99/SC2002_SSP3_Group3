@@ -1,3 +1,3 @@
-Moblima JEM | APA:1:Premium, ARB:2:Regular, APC:3:Premium, ARD:4:Regular
-Moblima JEWEL | BPA:1:Premium, BRB:2:Regular, BRC:3:Regular, BRD:4:Regular
-Moblima Orchard | CPA:1:Premium, CRB:2:Regular, CRC:3:Regular, CPD:4:Premium
+Moblima JEM|APA:1:Premium,ARB:2:Regular,APC:3:Premium,ARD:4:Regular,ARF:1:Regular
+Moblima JEWEL|BPA:1:Premium,BRB:2:Regular,BRC:3:Regular,BRD:4:Regular
+Moblima Orchard|CPA:1:Premium,CRB:2:Regular,CRC:3:Regular,CPD:4:Premium
