@@ -245,11 +245,15 @@ public class Admin {
 
     /**
      * This function is used to get the users input on what they want to do in the setting menu
-     * @param choice2 = the input of the function they want to do
      * @throws IOException              is thrown if the reading of the input causes error
      * @throws NoSuchAlgorithmException is thrown if the function is not found
      */
-    public void SettingFunctions(AllCineplex cineplex, int choice2) throws IOException, NoSuchAlgorithmException {
+    public void SettingFunctions(AllCineplex cineplex) throws IOException, NoSuchAlgorithmException {
+        System.out.println("Settings\n");
+        System.out.println("select one of the following functions:");
+        System.out.println("\t1) Control the display of movie rankings to customers");
+        System.out.println("\t2) Help new staffs to register new Admin Account");
+        int choice2 = GetNumberInput.getInt(1, 2, -1);
         switch (choice2) {
             case 1 -> {
                 System.out.println("\t 1. Control the display of movie rankings to customers (Enter -1 to exit):");

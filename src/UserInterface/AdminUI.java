@@ -67,21 +67,15 @@ public class AdminUI {
                     }
                 }
                 case 5-> {
-                    Cineplex choseCinepelx = null;
+                    Cineplex chosenCineplex = null;
                     do{
-                        choseCinepelx = CineplexUI.CineplexInterface(cineplexes);
-
+                        chosenCineplex = CineplexUI.CineplexInterface(cineplexes);
                     }
-                    while (choseCinepelx == null);
-
-                    AddCinemaUI.AddCinemaInterface(choseCinepelx , cineplexes);
+                    while (chosenCineplex == null);
+                    AddCinemaUI.AddCinemaInterface(chosenCineplex , cineplexes);
                 }
                 case 6-> {
-                    System.out.println("5) Other Settings. Please select one of the following functions (Enter -1 to exit):");
-                    System.out.println("\t1) Control the display of movie rankings to customers");
-                    System.out.println("\t2) Help new staffs to register new Admin Account");
-                    choice2 = GetNumberInput.getInt(1, 2, -1);
-                    admin.SettingFunctions(cineplexes, choice2);
+                    admin.SettingFunctions(cineplexes);
                 }
                 default -> {
                     System.out.println("Invalid Input. Try again.");
