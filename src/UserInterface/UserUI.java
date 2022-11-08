@@ -50,7 +50,7 @@ public class UserUI {
                         System.out.println("Enter your password:");
                         number = sc.nextLine();
                         String temp = username.substring(username.lastIndexOf("admin/") + 6);
-
+                        cineplexes.clearScreen();
                         AdminInterface(Admin.login(temp, number), temp, number, cineplexes);
                         return;
                     }
@@ -113,7 +113,7 @@ public class UserUI {
                 }
             }
         }
-        System.out.println("Username and password is wrong!");
+        System.out.println("Username or Phone Number is wrong!");
         return false;
     }
 
