@@ -23,7 +23,7 @@ public class ReviewUI {
             System.out.printf("\t%d) %s\n", i+1 ,cineplexes.getListOfMovies().get(i).getMovieTitle());
         }
         int selectedMovie = GetNumberInput.getInt(1, cineplexes.getListOfMovies().size(), -1)-1;
-        if (selectedMovie == -1) return;
+        if (selectedMovie == -2) return;
 
         System.out.printf("What is your rating for this Movie %s (0.0-5.0):", cineplexes.getListOfMovies().get(selectedMovie));
         float rating = (float) GetNumberInput.getDouble(0, 5, -1);

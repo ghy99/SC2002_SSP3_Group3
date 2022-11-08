@@ -1,6 +1,6 @@
 package UserInterface;
 
-import Cineplex.*;
+import Cineplex.AllCineplex;
 import Service.GetNumberInput;
 import Service.Settings;
 
