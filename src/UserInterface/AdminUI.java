@@ -37,7 +37,8 @@ public class AdminUI {
             System.out.println("\t2) Holiday Dates");
             System.out.println("\t3) Movie's Functions");
             System.out.println("\t4) Movie Listing by rank");
-            System.out.println("\t5) Other Settings");
+            System.out.println("\t5) Add Cinema");
+            System.out.println("\t6) Other Settings");
 
             choice = GetNumberInput.getInt(1, 5, 11);
             cineplexes.clearScreen();
@@ -66,6 +67,11 @@ public class AdminUI {
                     }
                 }
                 case 5-> {
+                    Cineplex choseCinepelx = CineplexUI.CineplexInterface(cineplexes);
+                    AddCinemaUI.AddCinemaInterface(choseCinepelx , cineplexes);
+
+                }
+                case 6-> {
                     System.out.println("5) Other Settings. Please select one of the following functions (Enter -1 to exit):");
                     System.out.println("\t1) Control the display of movie rankings to customers");
                     System.out.println("\t2) Help new staffs to register new Admin Account");

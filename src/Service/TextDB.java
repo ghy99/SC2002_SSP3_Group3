@@ -3,9 +3,7 @@ package Service;
 
 import Customer.*;
 import Admin.*;
-import Cineplex.Cinema;
-import Cineplex.Cineplex;
-import Cineplex.ShowTime;
+import Cineplex.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -135,10 +133,10 @@ public class TextDB {
 
             Cineplex cineplex = new Cineplex(name);
 
-            String[] cinemas = star.nextToken().trim().split(", ");
+            String[] cinemas = star.nextToken().trim().split(",");
             for (String cinema : cinemas) {
                 String[] cinTypes = cinema.split(":");
-                Cinema c = new Cinema(cinTypes[0], cinTypes[1], Cinema.CinemaType.valueOf(cinTypes[2]));
+                Cinema c = new Cinema(cinTypes[0].trim(), cinTypes[1].trim(), Cinema.CinemaType.valueOf(cinTypes[2]));
                 cineplex.addCinema(c);
             }
             alr.add(cineplex);
@@ -664,6 +662,30 @@ public class TextDB {
 
         Update(fileName, alw);
     }
+
+    public static void UpdateToTextDB(String fileName, ArrayList<Cineplex> data , AllCineplex cineplex) throws IOException {
+        List alw = new ArrayList();// to store Professors data
+
+
+        for (int i = 0; i < cineplex.getCineplexes().size(); i++) {
+            StringBuilder st = new StringBuilder();
+            st.append(data.get(i).getCineplexName().trim());
+            st.append(SEPARATOR);
+            for (int j = 0; j < data.get(i).getListOfCinemas().size(); j++)
+            {
+                st.append(data.get(i).getListOfCinemas().get(j).getCinemaCode());
+                st.append(":");
+                st.append(data.get(i).getListOfCinemas().get(j).getCinemaName());
+                st.append(":");
+                st.append(data.get(i).getListOfCinemas().get(j).getCinemaType());
+                if(j + 1 <  data.get(i).getListOfCinemas().size())st.append(",");
+            }
+            alw.add(st.toString());
+        }
+
+        Update(fileName, alw);
+    }
+
 
     public static void Write(String fileName, List data) throws IOException {
 

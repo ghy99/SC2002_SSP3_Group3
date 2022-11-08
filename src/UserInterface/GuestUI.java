@@ -35,10 +35,9 @@ public class GuestUI {
         do {
             System.out.println("\nWhat would you like to do?");
             System.out.println("\t1) Select Cineplex.");
-            System.out.println("\t2) Print your Booking History.");
             System.out.println("\tEnter '11' to exit!");
 
-            choice = GetNumberInput.getInt(1, 2, 11);
+            choice = GetNumberInput.getInt(1, 1, 11);
             switch (choice) {
                 case 1 -> {
                     ArrayList<Object> sTnC = null, sSTnC = null;
@@ -76,15 +75,6 @@ public class GuestUI {
                     for (MovieTicket tix : allMovieTicket) {
                         TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
                         tix.printTicket();
-                    }
-                }
-                case 2 -> {
-                    System.out.println("Please give input your email that used to booked:");
-                    String Email = sc.nextLine();
-                    ArrayList<MovieTicket> movieTickets = TextDB.ReadFromFile(TextDB.Files.TransactionHistory.toString(), Email);
-                    for( MovieTicket mt : movieTickets)
-                    {
-                        mt.printTicket();
                     }
                 }
             }

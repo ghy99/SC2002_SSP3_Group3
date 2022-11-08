@@ -234,6 +234,7 @@ public class Admin {
                 System.out.println("\tDelete Holiday Dates");
 
                 System.out.println("\t\tSelect holiday dates to change (Enter -1 to exit):");
+
                 for (int i = 0; i < cineplex.getHoliday().size(); i++) {
                     System.out.printf("%d) %s \n", i + 1, cineplex.getHoliday().get(i));
                 }
@@ -284,6 +285,13 @@ public class Admin {
                 System.out.println("\t2) Help new staffs to register new Admin Account");
                 CreateAdmin();
             }
+        }
+    }
+
+    public void printHoliday(AllCineplex cineplex){
+
+        for (int i = 0; i < cineplex.getHoliday().size(); i++) {
+            System.out.printf("\t%d) %s\n", i + 1, cineplex.getHoliday().get(i));
         }
     }
 
