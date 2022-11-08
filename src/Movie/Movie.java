@@ -162,7 +162,7 @@ public class Movie extends AllReviews {
      */
     public void increaseMovieTotalSale(ArrayList<Movie> movies, int ticketnum) throws IOException {
         this.movieTotalSales += ticketnum;
-        TextDB.UpdateToTextDB(TextDB.Files.Movies.toString(), movies, new Review("", "", 0));
+        TextDB.UpdateToTextDB(movies,TextDB.Files.Movies.toString() );
     }
 
     /**

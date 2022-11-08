@@ -351,8 +351,7 @@ public class MovieSeatsNew {
 
         }
         if(isWrite) {
-            System.out.println("Writing seats to DB!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            TextDB.UpdateToTextDB(cinema.getCinemaDir(), this, cinema.getShowTime());
+            TextDB.UpdateToTextDB(cinema.getCinemaDir(),cinema.getShowTime(), MovieType.Dimension.THREE_D);
         }
         return overallList; //returns all the seats that are booked.
         // OverallList and seatsSelected lists are different.

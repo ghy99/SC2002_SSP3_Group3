@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-import static Service.TextDB.ReadFromFile;
-import static Service.TextDB.UpdateAdmin;
 
 /**
  * @author CHEW ZHI QI, GAN HAO YI, SANSKKRITI JAIN, TAN JUE LIN
@@ -60,7 +58,7 @@ public class Admin {
     public static int login(String username, String password) throws IOException, NoSuchAlgorithmException {
         //fetch data of admin info from txt storage
         ArrayList<Admin> emptyAdminList = new ArrayList<Admin>();
-        ArrayList<Admin> filledAdminList = ReadFromFile(emptyAdminList, "admin.txt");
+        ArrayList<Admin> filledAdminList = TextDB.ReadFromFile(emptyAdminList, "admin.txt");
         password = SHA256.toString(password);
         int flagNum = 0; //used to indicate if successfully logged in
         String dataName;
@@ -306,7 +304,7 @@ public class Admin {
         AdminList = getAdminList(filename);
         newAdmin = AddnewAdmin();
         AdminList.add(newAdmin);
-        UpdateAdmin(filename, AdminList);
+        TextDB.UpdateToTextDB(filename, AdminList,this);
     }
 
     /**
@@ -318,7 +316,7 @@ public class Admin {
      */
     public static ArrayList<Admin> getAdminList(String filename) throws IOException, NoSuchAlgorithmException {
         ArrayList<Admin> AdminList = new ArrayList<Admin>();
-        ReadFromFile(AdminList, filename);
+        TextDB.ReadFromFile(AdminList, filename);
         return AdminList;
     }
 

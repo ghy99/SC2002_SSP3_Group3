@@ -64,7 +64,7 @@ public class AllReviews {
         }
         if (0 <= rating && rating <= 5) {
             listOfReview.add(new Review(userName, review, rating));
-            TextDB.UpdateTextDB(TextDB.Files.Movies.toString(), movies);
+            TextDB.UpdateToTextDB(movies,TextDB.Files.Movies.toString() );
             System.out.println("Rating added!");
         } else {
             System.out.println("Rating not added! Please enter rating between 1-5!");
