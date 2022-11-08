@@ -50,12 +50,12 @@ Jaws I|Preview|Mr Shark|Humans destroy the ocean, sharks protect themselves, get
 Anthony's Solo Battle|Preview|Hao Yi|Student Anthony attempts to fix everyone's code but he is facing a lot of issues due to his team leader's inexperience.|Anthony, Hao Yi, Jue Lin|Mystery|NOTBLOCKBUSTER|G|0|10-11-2022
 [
 ]
-Anthony's Adventures|Preview|Hao Yi|Anthony faces SC2002's Prof LiFang's last minute project updates.|Anthony, LiFang|Action|NOTBLOCKBUSTER|G|0|10-11-2022
+Anthony's Adventures|Preview|Hao Yi|Anthony faces SC2002's Prof LiFang's last minute project updates.|Anthony, LiFang|Action|NOTBLOCKBUSTER|G|2|10-11-2022
 [
 ]
 JueLin Revisits for loops|Preview|Hao Yi and Anthony|JueLin returns from her Algorithm to face another Algorithm in SC2002!|JueLin, Prof LiFang|Comedy|NOTBLOCKBUSTER|G|0|10-11-2022
 [
 ]
-Jue Lin Solves Her For Loops|Preview|Jue Lin|Jue Lin beats her for loops and movie seats are implemented|JueLin, Moblima|Comedy|NOTBLOCKBUSTER|R21|0|10-11-2022
+Jue Lin Solves Her For Loops|Preview|Jue Lin|Jue Lin beats her for loops and movie seats are implemented|JueLin, Moblima|Comedy|NOTBLOCKBUSTER|R21|1|10-11-2022
 [
 ]
