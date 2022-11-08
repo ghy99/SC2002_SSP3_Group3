@@ -1,18 +1,4 @@
-
 package Movie;
-
-// Draw out matrix for movie theatres
-// Need to block out rows / columns for aisle
-// Different Seat Types such as
-// Wheelchair
-// Free Single seat
-// Occupied Single seat
-// Free Couple seat
-// Occupied Couple seat
-// Elite seats
-// Gold / Platinum / Ultima(?) seats
-// System does not allow unoccupied seats between selected seats
-
 
 import Cineplex.*;
 import Service.GetNumberInput;
@@ -25,44 +11,62 @@ import java.util.Scanner;
 
 /**
  * @author Jue Lin
- * This is the class for MovieSeats. It initializes the movie seats in each cinema and displays the seats.
+ * This is the class for MovieSeats.
+ * It initializes the movie seats in each cinema and displays the seats.
  */
 public class MovieSeatsNew {
-
+    /**
+     * rows of seat matrix
+     * columns of seat matrix
+     * rows of double seats
+     * aisle 1 row
+     * aisle 2 row
+     */
     int rows;
     int cols;
     int rowDoubleOne;
     int aisleOne;
     int aisleTwo;
 
-
-    //2D array to store all seats in array2D
+    /**
+     * 2D array to store all seats in array2D
+     */
     ArrayList<ArrayList<IndividualSeats>> array2D = new ArrayList<ArrayList<IndividualSeats>>(rows);
 
-
+    /**
+     * Constructor method
+     * @param rows - Row of Seat Matrix
+     * @param cols - Column of Seat Matrix
+     * @param rowDoubleOne - Row of Double Seats
+     * @param aisleOne - Aisle 1
+     * @param aisleTwo - Aisle 2
+     */
     public MovieSeatsNew(int rows, int cols, int rowDoubleOne, int aisleOne, int aisleTwo) {
         this.rows = rows;
         this.cols = cols;
         this.rowDoubleOne = rowDoubleOne;
         this.aisleOne = aisleOne;
         this.aisleTwo = aisleTwo;
-
     }
 
+    /**
+     * Get Method
+     * @return 2D Array of seats
+     */
     public ArrayList<ArrayList<IndividualSeats>> getArray2D() {
         return array2D;
     }
 
+    /**
+     * This method creates each seat object in the 2D Array of seats.
+     */
     public void SeatsCreation() {
-
-        //Create individual seats in 2D array
         for (int j = 0; j < this.rows; j++) {
             ArrayList<IndividualSeats> rowSeatsDouble = new ArrayList<IndividualSeats>(); //new row array
             ArrayList<IndividualSeats> rowSeatsSingle = new ArrayList<IndividualSeats>();//new row array
 
             for (int i = 0; i < this.cols; i++) {
                 if (j > this.rowDoubleOne) {
-
                     if (i == this.aisleOne || i == this.aisleTwo) {
                         IndividualSeats.SeatType aisleType = IndividualSeats.SeatType.Aisle;
                         IndividualSeats oneAisleSeat = new IndividualSeats("A1", aisleType, false);
@@ -84,18 +88,13 @@ public class MovieSeatsNew {
                         rowSeatsSingle.add(oneSingleSeat);
                     }
                 }
-
             }
-
             if (j > rowDoubleOne) {
                 array2D.add(rowSeatsDouble);
             } else {
                 array2D.add(rowSeatsSingle);
             }
-
         }
-
-
         //For SeatID
         int endRowIDNum;
         char endRowIDChar;

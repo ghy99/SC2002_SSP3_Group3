@@ -14,7 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * * @author CHEW ZHI QI, GAN HAO YI
- * * This is the Admin class inherits from Settings. It stores list of cineplex,list of movies and settings for the user.
+ * * This is the Admin class inherits from Settings.
+ * It stores list of cineplex,list of movies and settings for the user.
  */
 public class AllCineplex extends Settings {
     public enum MovieSort {
@@ -24,7 +25,6 @@ public class AllCineplex extends Settings {
 
     private final String filename = "movies.txt";
     private ArrayList<Cineplex> cineplexes;
-
     private ArrayList<Movie> listOfMovies;
 
     public AllCineplex() throws IOException {
@@ -39,28 +39,80 @@ public class AllCineplex extends Settings {
         this.listOfMovies = listOfMovies;
     }
 
+    /**
+     * This method initializes the cineplex.
+     * It reads the cineplex names stored and load it into the Cineplex ArrayList.
+     *
+     * @throws IOException to check if Cineplexes.txt exist.
+     */
+    public void InitializeCineplexes() throws IOException {
+        System.out.println("Initializing Cineplexes...\n...\n...");
+        try {
+            this.cineplexes = TextDB.readFromFile(File.separator + TextDB.Files.Cineplex.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
+        if (!movieFile.exists()) movieFile.createNewFile();
+
+        // movie instance
+        ArrayList<Movie> movieList = TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
+
+        this.setListOfMovies(movieList);
+        updateUpdateMovieStat();
+
+        for (Cineplex cineplex : this.cineplexes) {
+            cineplex.InitializeMovies(this.listOfMovies);
+        }
+        System.out.println("Cineplexes are initialized\n");
+        dailyTask();
+    }
+
+    /**
+     * This method adds new movies created by Admin to Global list of movies and updates the database.
+     *
+     * @param movie - Newly created movie to be added.
+     * @throws IOException - Checks if movie database exists.
+     */
     public void addMovies(Movie movie) throws IOException {
         this.listOfMovies.add(movie);
         TextDB.WriteToTextDB(filename, movie);
-        //write to file
     }
 
+    /**
+     * This method returns full list of movies including Coming Soon and End Of Showing Movies.
+     *
+     * @return List of All Movies.
+     */
     public ArrayList<Movie> getListOfMoviesforAdmin() {
         return this.listOfMovies;
     }
 
+    /**
+     * This method gets a list of filtered movie excluding Coming Soon and End Of Showing Movies.
+     *
+     * @return Filtered list of movies, only show Preview and Now Showing status.
+     */
     public ArrayList<Movie> getListOfMovies() {
         ArrayList<Movie> filteredMovies = new ArrayList<Movie>();
         for (Movie movie : this.listOfMovies) {
             if (movie.getShowingStatus() != Movie.MovieStatus.EndOfShowing) {
-                filteredMovies.add(movie);
+                if (movie.getShowingStatus() != Movie.MovieStatus.ComingSoon) {
+                    filteredMovies.add(movie);
+                }
             }
         }
 //        return this.listOfMovies;
         return filteredMovies;
     }
 
-
+    /**
+     * This method updates the list of movie with the latest updates changed by Admin.
+     *
+     * @param index - Index of the movie that was changed.
+     * @param movie - Movie that was changed.
+     * @throws IOException - Check if movie database exists.
+     */
     public void updateListOfMovies(int index, Movie movie) throws IOException {
         //write to file
         this.listOfMovies.set(index, movie);
@@ -68,6 +120,14 @@ public class AllCineplex extends Settings {
 
     }
 
+    /**
+     * This method changes the Showing Status of a movie into a EndOfShowing Status.
+     * It will not be displayed anymore unless edited by Admin.
+     *
+     * @param index - Index of Movie in a list of all movies.
+     * @param movie - Selected movie to be removed from Showing Status.
+     * @throws IOException - Exception if movie database does not exist.
+     */
     public void removeMovie(int index, Movie movie) throws IOException {
         this.listOfMovies.set(index, movie);
         TextDB.UpdateTextDB(filename, this.listOfMovies);
@@ -75,8 +135,9 @@ public class AllCineplex extends Settings {
 
     /**
      * This method sorts the List of Top 5 movies by either the Rating or the Sales.
-     * @param sortType
-     * @return
+     *
+     * @param sortType - and ArrayList of sorted movies.
+     * @return - A resorted list of movie.
      */
     private ArrayList<Movie> sortReview(MovieSort sortType) {
         ArrayList<Movie> tempMovie = (ArrayList<Movie>) this.listOfMovies.clone();
@@ -102,6 +163,7 @@ public class AllCineplex extends Settings {
 
     /**
      * This method prints the sorted list of movie according to Rating / Sales
+     *
      * @param movieSort - A sorted ArrayList of the Top 5 Movies
      */
     public void printSortedList(MovieSort movieSort) {
@@ -128,35 +190,6 @@ public class AllCineplex extends Settings {
             }
         }
         System.out.println();
-    }
-
-    /**
-     * This method initializes the cineplex. It reads the cineplex names stored
-     * and load it into the Cineplex ArrayList.
-     *
-     * @throws IOException to check if Cineplexes.txt exist.
-     */
-    public void InitializeCineplexes() throws IOException {
-        System.out.println("Initializing Cineplexes...\n...\n...");
-        try {
-            this.cineplexes = TextDB.readFromFile(File.separator + TextDB.Files.Cineplex.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
-        if (!movieFile.exists()) movieFile.createNewFile();
-
-        // movie instance
-        ArrayList<Movie> movieList = TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
-
-        this.setListOfMovies(movieList);
-        updateUpdateMovieStat();
-
-        for (Cineplex cineplex : this.cineplexes) {
-            cineplex.InitializeMovies(this.listOfMovies);
-        }
-        System.out.println("Cineplexes are initialized\n");
-        dailyTask();
     }
 
     /**

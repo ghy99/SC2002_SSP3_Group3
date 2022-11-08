@@ -1,6 +1,7 @@
 package UserInterface;
 
 import java.util.ArrayList;
+
 import Movie.*;
 import Service.*;
 
@@ -12,6 +13,7 @@ import Service.*;
 public class MovieUI {
     /**
      * This is the Movie Interface that allows user to select a movie.
+     *
      * @param movielist - Passes in a list of movie for user to select a movie.
      * @return - returns the movie selected by the user.
      */
@@ -38,15 +40,13 @@ public class MovieUI {
                 System.out.println("\n\nWould you like to choose another movie?");
                 System.out.println("\t1) Yes\n\t2) No");
                 int choice = GetNumberInput.getInt(1, 2, -1);
-                if (choice == -1 ) {
+                if (choice == -1) {
                     selectMovie = -1;
                     continue;
-                }
-                else if (choice == 1) {
+                } else if (choice == 1) {
                     selectMovie = -1;
                     continue;
-                }
-                else if (choice == 2) break;
+                } else if (choice == 2) break;
                 while (selectMovie < 0 || selectMovie >= movielist.size()) {
                     System.out.println("The number you keyed is out of range, please key again!");
                     System.out.println("Select your Movie from the list above: ");

@@ -1,6 +1,7 @@
 package Review;
 
 import Movie.Movie;
+import Service.Settings;
 import Service.TextDB;
 
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class AllReviews {
      * @param rating   Rating must be >= 0 and <=5
      * @param review   Review
      * @param movies   Movie to review
-     * @throws IOException
+     * @throws IOException - Check if Reviews Database is updated.
      */
     public void addReview(String userName, float rating, String review, ArrayList<Movie> movies) throws IOException {
         if (Objects.equals(userName, "")) {
@@ -72,6 +73,8 @@ public class AllReviews {
     }
 
     /**
+     * This method returns overall Rating
+     *
      * @return Float overall rating
      */
     public float getOverallRating() {
@@ -88,7 +91,11 @@ public class AllReviews {
         ArrayList<Review> tempReview = (ArrayList<Review>) this.listOfReview.clone();
         switch (sortType) {
             case NewToOld -> {
-                System.out.println("#########New to old review#########");
+                System.out.println(Settings.ANSI_CYAN);
+                System.out.println("*************************************************");
+                System.out.println("*  Reviews sorted from Lowest Rating to Highest *");
+                System.out.println("*************************************************");
+                System.out.println(Settings.ANSI_RESET);
                 Collections.reverse(tempReview);
                 return tempReview;
             }
@@ -98,13 +105,22 @@ public class AllReviews {
                 return tempReview;
             }
             case HighestToLowest -> {
+                System.out.println(Settings.ANSI_CYAN);
+                System.out.println("*************************************************");
+                System.out.println("*  Reviews sorted from Highest Rating to Lowest *");
+                System.out.println("*************************************************");
+                System.out.println(Settings.ANSI_RESET);
                 System.out.println("####Higest rating to lowest review####");
                 tempReview.sort(Comparator.comparing(Review::getRating));
                 Collections.reverse(tempReview);
                 return tempReview;
             }
             default -> {
-                System.out.println("##########Old to new review###########");
+                System.out.println(Settings.ANSI_CYAN);
+                System.out.println("*************************************************");
+                System.out.println("*      Reviews sorted from Oldest to Newest     *");
+                System.out.println("*************************************************");
+                System.out.println(Settings.ANSI_RESET);
                 return this.listOfReview;
             }
         }
@@ -131,6 +147,7 @@ public class AllReviews {
 
     /**
      * Print sorted list with given sort type
+     *
      * @param sortType Review sort type
      */
     public void printSortedReview(ReviewSort sortType) {
@@ -138,14 +155,15 @@ public class AllReviews {
         ArrayList<Review> tempReview = sortReview(sortType);
 
         for (Review review : tempReview) {
-            System.out.println( "Username: " + review.getUserName());
-            System.out.println("Review Rating: " + review.getRating() + " Review: " + review.getReview() );
+            System.out.println("Username: " + review.getUserName());
+            System.out.println("Review Rating: " + review.getRating() + " Review: " + review.getReview());
         }
         System.out.println();
     }
 
     /**
      * Big decimal for rounding overall rating
+     *
      * @param d
      * @return
      */

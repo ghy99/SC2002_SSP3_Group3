@@ -2,6 +2,7 @@ package Service;
 
 import Customer.Customer;
 import Movie.TicketCharges;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class Settings {
         System.out.println("ENV variable loaded!! \n\n");
 
         Customer temp = new Customer();
-        holiday = TextDB.ReadFromFile(TextDB.Files.Holiday.toString() , this);
+        holiday = TextDB.ReadFromFile(TextDB.Files.Holiday.toString(), this);
         TextDB.readFromFile(TextDB.Files.Customers.toString(), this.customerlist, temp);
         ticketCharges = new TicketCharges();
     }
@@ -98,17 +99,19 @@ public class Settings {
 
     /**
      * Update both isSale and isRating together
-     * @param sale Top 5 sales flag
+     *
+     * @param sale     Top 5 sales flag
      * @param isRating Top 5 rating flag
      */
-    public void setUserSort(Boolean sale , Boolean isRating) throws IOException {
+    public void setUserSort(Boolean sale, Boolean isRating) throws IOException {
         setRating(isRating);
         setRating(sale);
-        TextDB.UpdateToTextDB(TextDB.Files.Env.toString() , this);
+        TextDB.UpdateToTextDB(TextDB.Files.Env.toString(), this);
     }
 
     /**
      * This function is to add the date into the HolidayDates database
+     *
      * @param date = the user input of the date they want to add in the database
      * @throws IOException This Exception is thrown if reading file causes error.
      */
@@ -119,26 +122,31 @@ public class Settings {
 
     /**
      * This function is used to delete any stored holiday date in the database
+     *
      * @param index = the users input of the date they want to delete from the database
      * @throws IOException this is thrown if the reading from the file results in error
      */
     public void deleteHoliday(int index) throws IOException {
         this.holiday.remove(index);
-        TextDB.UpdateToTextDB(TextDB.Files.Holiday.toString(), this.holiday,this);
+        TextDB.UpdateToTextDB(TextDB.Files.Holiday.toString(), this.holiday, this);
     }
 
     /**
      * This function is used to update/change any dates in the database
+     *
      * @param index = the original data in the database before changing
-     * @param date = the input that needs to be changed in the database
+     * @param date  = the input that needs to be changed in the database
      * @throws IOException This Exception is thrown if reading file causes error.
      */
-    public void editHoliday(int index , String date) throws IOException {
+    public void editHoliday(int index, String date) throws IOException {
         this.holiday.remove(index);
         this.holiday.add(date);
         TextDB.WriteToTextDB(TextDB.Files.Holiday.toString(), date);
     }
 
+    /**
+     * This method clears the console screen.
+     */
     public void clearScreen() {
         for (int i = 0; i < 30; i++) {
             System.out.println();
