@@ -1,20 +1,11 @@
 package UserInterface;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
 
 import Cineplex.*;
 import Movie.*;
-import Service.GetNumberInput;
-import Service.Settings;
-import Service.TextDB;
-import Service.DateTime;
+import Service.*;
 
 /**
  * This is the Cineplex user Interface. Imported to call interface to view the movies at the cineplexes.

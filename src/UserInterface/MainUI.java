@@ -4,7 +4,6 @@ import Cineplex.*;
 import Service.GetNumberInput;
 import Service.Settings;
 
-
 /**
  * @authors GAN HAO YI, EDDY CHENG KUAN QUAN
  * Controls main through initializing everything needed.
@@ -29,16 +28,16 @@ public class MainUI {
         int option = 1;
         do {
             System.out.println("Select option (Enter -1 to exit):");
-            System.out.println("1) Display List of Cineplexes.");
-            System.out.println("2) Display List of Movies.");
-            System.out.println("3) Display List of Timing.");
-            System.out.println("4) Book as guest.");
-            System.out.println("5) Login with your Account.");
+            System.out.println("\t1) Display List of Cineplexes.");
+            System.out.println("\t2) Display List of Movies.");
+            System.out.println("\t3) Display List of Timing.");
+            System.out.println("\t4) Book as guest.");
+            System.out.println("\t5) Login with your Account.");
             if (cineplexes.isRating() || cineplexes.isSale()) {
-                System.out.println("6) Display Movies by Ranking.");
-                System.out.println("7) Add Review.");
+                System.out.println("\t6) Display Movies by Ranking.");
+                System.out.println("\t7) Add Review.");
             } else {
-                System.out.println("6) Add Review.");
+                System.out.println("\t6) Add Review.");
             }
 
             option = GetNumberInput.getInt(1, 7, -1);
@@ -50,15 +49,15 @@ public class MainUI {
             cineplexes.clearScreen();
             switch (option) {
                 case 1 -> {
-                    System.out.println("Displaying List of Cineplex.");
+                    System.out.println("Displaying List of Cineplex:");
                     cineplexes.displayCineplexList();
                 }
                 case 2 -> {
-                    System.out.println("Displaying List of Movies.");
+                    System.out.println("Displaying List of Movies:");
                     AllCineplex.displayMovieList(cineplexes.getListOfMovies());
                 }
                 case 3 -> {
-                    System.out.println("Displaying List of Timing.");
+                    System.out.println("Displaying List of Timing:");
                     System.out.println("Which cineplex would you like to view:");
                     for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
                         System.out.printf("\t%d) Branch %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
@@ -108,5 +107,3 @@ public class MainUI {
         } while (option > 0);
     }
 }
-
-

@@ -42,8 +42,6 @@ public class CustomerUI {
             System.out.println("\t4) Change your email.");
             System.out.println("\t5) Print your details.");
             System.out.println("\t6) Print your Booking History.");
-            System.out.println("\tEnter '-1' to exit!");
-
             choice = GetNumberInput.getInt(1, 6, -1);
             if (choice == -1) break;
             switch (choice) {
@@ -66,7 +64,7 @@ public class CustomerUI {
                     } while (allMovieTicket == null);
 
                     customer.printCustomerDetails();
-                    PaymentUI.PaymentInterface(cineplexes, customer, allMovieTicket, chosenCineplex, chosenMovie, sSTnC);
+                    PaymentUI.PaymentInterface(cineplexes, allMovieTicket, chosenMovie, sSTnC);
                     for (MovieTicket tix : allMovieTicket) {
                         TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
                         tix.printTicket();
@@ -82,13 +80,19 @@ public class CustomerUI {
                     customer.updateMovieGoerName(newName, customerArrayList);
                 }
                 case 3 -> {
-                    System.out.println("Enter your new number: ");
-                    String newNumber = sc.nextLine();
+                    String newNumber;
+                    do {
+                        System.out.println("Enter your new number: ");
+                        newNumber = sc.nextLine();
+                    } while (Objects.equals(newNumber, ""));
                     customer.updateMobileNumber(newNumber, customerArrayList);
                 }
                 case 4 -> {
-                    System.out.println("Enter your new email: ");
-                    String newEmail = sc.nextLine();
+                    String newEmail;
+                    do {
+                        System.out.println("Enter your new email: ");
+                        newEmail = sc.nextLine();
+                    } while (Objects.equals(newEmail, ""));
                     customer.updateEmail(newEmail, customerArrayList);
                 }
                 case 5 -> {
@@ -100,11 +104,8 @@ public class CustomerUI {
                         mt.printTicket();
                     }
                 }
-                default -> {
-                    System.out.println("Invalid Input. Try again.");
-                }
+                default -> System.out.println("Invalid Input. Try again.");
             }
         } while (choice > 6 || choice < 1);
     }
-
 }

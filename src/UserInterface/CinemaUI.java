@@ -54,9 +54,7 @@ public class CinemaUI {
                 for (int k = 0; k < newshowtimes; k++) {
                     System.out.printf("\nShowTime %d\n", k + 1);
                     Date newDate = null;
-                    // input date
                     do {
-                        // Add show time
                         System.out.println("\nPlease enter year (2022 - 2023):");
                         int year = GetNumberInput.getInt(2022, 2023, -1);
                         if (year < 2022) {
@@ -95,7 +93,6 @@ public class CinemaUI {
                         newDate = DateTime.StringToDate(date);
                     } while (newDate == null);
 
-                    // select 2D / 3D movie for this Cinema.
                     int three_d = 0;
                     MovieType.Dimension dim = null;
                     do {
@@ -214,6 +211,11 @@ public class CinemaUI {
         }
     }
 
+    /**
+     * This method is used to remove Show Times in selected Cineplex's Cinema.
+     * @param cineplexes - Used to update global list of ShowTime.
+     * @throws IOException - Checks if Cineplex's / Cinema's ShowTime database is empty.
+     */
     public static void removeShowTime(AllCineplex cineplexes) throws IOException {
         System.out.println("Please enter which cineplex showtime to edit :");
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {

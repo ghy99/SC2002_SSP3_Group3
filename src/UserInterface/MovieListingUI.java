@@ -11,7 +11,7 @@ import Service.*;
  * This is the Movie Listing Interface.
  * This is imported to call the interface for the admin to be able to add/edit/delete the movie listing
  *
- * @author GAN HAO YI, SANSKKRITI JAIN
+ * @author GAN HAO YI, CHEW ZHI QI, SANSKKRITI JAIN
  */
 public class MovieListingUI {
     /**
@@ -24,9 +24,11 @@ public class MovieListingUI {
         int num = -1;
         ArrayList<Movie> listOfMovies = cineplexes.getListOfMoviesforAdmin();
         do {
+            System.out.println(Settings.ANSI_CYAN);
             System.out.println("*************************************************");
             System.out.println("*                Movie Functions                *");
             System.out.println("*************************************************");
+            System.out.println(Settings.ANSI_RESET);
             System.out.println("\nSelect option for Movie Function:");
             System.out.println("\t1) Create a Movie Listing");
             System.out.println("\t2) Update a Movie Listing");
@@ -88,7 +90,6 @@ public class MovieListingUI {
                             CinemaUI.removeShowTime(cineplexes);
                         }
                     }
-
                 }
             }
         } while (num != 4);
@@ -104,8 +105,6 @@ public class MovieListingUI {
     public static void printMovieList(ArrayList<Movie> listOfMovies) {
         for (int i = 0; i < listOfMovies.size(); i++) {
             System.out.printf("%d) %s\n", i + 1, listOfMovies.get(i).getMovieTitle());
-//            listOfMovies.get(i).printMovieDetails();
-//            System.out.println();
         }
     }
 

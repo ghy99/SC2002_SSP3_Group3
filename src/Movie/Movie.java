@@ -10,12 +10,12 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * * @author CHEW ZHI QI, GAN HAO YI
- * * Movie class extends from AllReview to link up each movie will have a list of reviews
+ * @author CHEW ZHI QI, GAN HAO YI
+ * Movie class extends from AllReview to link up each movie will have a list of reviews
  */
 public class Movie extends AllReviews {
     /**
-     * enum movie status
+     * enum Movie Status
      */
     public enum MovieStatus {
         ComingSoon,
@@ -47,9 +47,9 @@ public class Movie extends AllReviews {
      * @param director      Movie Director
      * @param synopsis      Movie Synopsis
      * @param cast          List of Movie Casts
-     * @param moviecat      Movie
+     * @param moviecat      Movie Genre
      * @param blockbuster   Is Blockbuster
-     * @param movieClass    Movie Genre
+     * @param movieClass    Movie Ratings
      */
     public Movie(String movieTitle, MovieStatus showingStatus, String director,
                  String synopsis, ArrayList<String> cast,
@@ -74,18 +74,17 @@ public class Movie extends AllReviews {
      * @param director        Movie Director
      * @param synopsis        Movie Synopsis
      * @param cast            List of Movie Casts
-     * @param moviecat        Movie
+     * @param moviecat        Movie Genre
      * @param blockbuster     Is Blockbuster
-     * @param movieClass      Movie Genre
-     * @param movieTotalSales Movie sales
+     * @param movieClass      Movie Rating
+     * @param movieTotalSales Movie Total Sales
      */
     public Movie(
             String movieTitle, MovieStatus showingStatus, String director,
             String synopsis, ArrayList<String> cast,
             MovieType.Genre moviecat,
-            MovieType.Blockbuster blockbuster, MovieType.Class movieClass, int movieTotalSales , Date startDate
-    )
-    {
+            MovieType.Blockbuster blockbuster, MovieType.Class movieClass, int movieTotalSales, Date startDate
+    ) {
         this.movieTitle = movieTitle;
         this.showingStatus = showingStatus;
         this.director = director;
@@ -101,83 +100,57 @@ public class Movie extends AllReviews {
     public String getMovieTitle() {
         return this.movieTitle;
     }
-
     public MovieStatus getShowingStatus() {
         return this.showingStatus;
     }
-
     public String getDirector() {
         return director;
     }
-
     public String getSynopsis() {
         return this.synopsis;
     }
-
     public ArrayList<String> getCast() {
         return this.cast;
     }
-
     public MovieType.Genre getMovieGenre() {
         return this.MovieGenre;
     }
-
     public MovieType.Blockbuster getBlockBuster() {
         return BlockBuster;
     }
-
     public MovieType.Class getMovieClass() {
         return this.movieClass;
     }
-
     public Date getStartDate() {
         return startDate;
     }
-
     public int getMovieTotalSales() {
         return this.movieTotalSales;
     }
-
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
     }
-
     public void setShowingStatus(MovieStatus showingStatus) {
         this.showingStatus = showingStatus;
     }
-
     public void setDirector(String director) {
         this.director = director;
     }
-
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
-
     public void setCast(ArrayList<String> cast) {
         this.cast = cast;
     }
-
     public void setMovieGenre(MovieType.Genre movieGenre) {
         MovieGenre = movieGenre;
     }
-
     public void setBlockBuster(MovieType.Blockbuster blockBuster) {
         BlockBuster = blockBuster;
     }
-
     public void setMovieClass(MovieType.Class movieClass) {
         this.movieClass = movieClass;
     }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setMovieTotalSales(int movieTotalSales) {
-        this.movieTotalSales = movieTotalSales;
-    }
-
     public void updateShowingStatus(MovieStatus showingStatus) {
         this.showingStatus = showingStatus;
     }
@@ -193,7 +166,7 @@ public class Movie extends AllReviews {
     }
 
     /**
-     * Print movie details
+     * Print movie details of this Movie.
      */
     public void printMovieDetails() {
         System.out.printf("\t\tMovie Title: %s\n", this.movieTitle);
@@ -211,7 +184,7 @@ public class Movie extends AllReviews {
     }
 
     /**
-     * Print synopsis
+     * Print synopsis of this Movie.
      */
     public void printSynopsis() {
         String[] words = this.synopsis.split(" ");
