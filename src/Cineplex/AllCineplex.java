@@ -33,7 +33,8 @@ public class AllCineplex extends Settings {
      */
     private final String filename = "movies.txt";
     private ArrayList<Cineplex> cineplexes;
-    private ArrayList<Movie> listOfMovies;
+
+    private ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
 
     /**
      * Constructor for AllCineplex
@@ -78,8 +79,8 @@ public class AllCineplex extends Settings {
         File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
         if (!movieFile.exists()) movieFile.createNewFile();
         // movie instance
-        ArrayList<Movie> movieList = TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), new ArrayList<>());
-        this.setListOfMovies(movieList);
+        TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
+
         updateUpdateMovieStat();
 
         for (Cineplex cineplex : this.cineplexes) {
@@ -135,7 +136,7 @@ public class AllCineplex extends Settings {
      */
     public void updateListOfMovies(int index, Movie movie) throws IOException {
         this.listOfMovies.set(index, movie);
-        TextDB.UpdateTextDB(filename, this.listOfMovies);
+        TextDB.UpdateToTextDB(this.listOfMovies,filename );
 
     }
 
@@ -149,7 +150,7 @@ public class AllCineplex extends Settings {
      */
     public void removeMovie(int index, Movie movie) throws IOException {
         this.listOfMovies.set(index, movie);
-        TextDB.UpdateTextDB(filename, this.listOfMovies);
+        TextDB.UpdateToTextDB(this.listOfMovies,filename);
     }
 
     /**
@@ -237,7 +238,7 @@ public class AllCineplex extends Settings {
                 }
             }
         }
-        TextDB.UpdateTextDB(filename, this.listOfMovies);
+        TextDB.UpdateToTextDB(this.listOfMovies,filename );
     }
 
     /**

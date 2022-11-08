@@ -324,9 +324,8 @@ public class MovieSeatsNew {
                 overallList = checkCounter(c, Integer.parseInt(colnum) - 1, overallList);
             }
         }
-        if (isWrite) {
-            System.out.println("Writing seats to DB!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            TextDB.UpdateToTextDB(cinema.getCinemaDir(), this, cinema.getShowTime());
+        if(isWrite) {
+            TextDB.UpdateToTextDB(cinema.getCinemaDir(),cinema.getShowTime(), MovieType.Dimension.THREE_D);
         }
         return overallList;
     }

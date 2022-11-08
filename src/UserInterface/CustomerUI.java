@@ -113,7 +113,7 @@ public class CustomerUI {
                     customer.printCustomerDetails();
                 }
                 case 6 -> {
-                    ArrayList<MovieTicket> movieTickets = TextDB.ReadFromFile(TextDB.Files.TransactionHistory.toString(), customer.getEmail());
+                    ArrayList<MovieTicket> movieTickets = TextDB.readFromFile(TextDB.Files.TransactionHistory.toString(), customer.getEmail());
                     for (MovieTicket mt : movieTickets) {
                         mt.printTicket();
                     }
