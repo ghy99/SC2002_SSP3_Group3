@@ -227,7 +227,7 @@ public class MovieSeatsNew {
                     String right = right(SeatID, SeatID.length() - 1);
                     if (Character.isAlphabetic(SeatID.charAt(0))) {
                         if ((int) SeatID.charAt(0) > 64 && (int) SeatID.charAt(0) <= (65 + this.rows - 1)) {
-                            if (Integer.parseInt(right) >= 0 && Integer.parseInt(right) < this.cols) {
+                            if (Integer.parseInt(right) >= 0 && Integer.parseInt(right) <= this.cols) {
                                 isSeat = false;
 
                             }
