@@ -225,7 +225,7 @@ public class AllCineplex extends Settings {
         int choice = 0;
         do {
             for (int j = 0; j < movielist.size(); j++) {
-                System.out.printf("%d) %s\n", j + 1, movielist.get(j).getMovieTitle());
+                System.out.printf("%d) %s Rating: %.1f\n", j + 1, movielist.get(j).getMovieTitle(), movielist.get(j).getOverallRating());
             }
             System.out.println("Enter movie number to view more movie details. (Enter -1) to return to main page.");
             choice = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
