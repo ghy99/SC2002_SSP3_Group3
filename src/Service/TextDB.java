@@ -493,7 +493,7 @@ public class TextDB {
             st.append(SEPARATOR);
             st.append(DateTime.convertTime(showTimes.get(a).getTime().getTime()));
             st.append(SEPARATOR);
-            st.append(dim.toString());
+            st.append(showTimes.get(a).getDimension().toString());
             alw.add(st.toString());
             alw.add("[");
 

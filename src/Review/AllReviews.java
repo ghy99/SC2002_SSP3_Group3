@@ -88,7 +88,7 @@ public class AllReviews {
         ArrayList<Review> tempReview = (ArrayList<Review>) this.listOfReview.clone();
         switch (sortType) {
             case NewToOld -> {
-                System.out.println("##########Old to new review###########");
+                System.out.println("#########New to old review#########");
                 Collections.reverse(tempReview);
                 return tempReview;
             }
@@ -104,7 +104,7 @@ public class AllReviews {
                 return tempReview;
             }
             default -> {
-                System.out.println("#########New to old review#########");
+                System.out.println("##########Old to new review###########");
                 return this.listOfReview;
             }
         }
