@@ -2,12 +2,11 @@ package UserInterface;
 
 import Admin.Admin;
 import Cineplex.AllCineplex;
+import Cineplex.Cineplex;
 import Customer.Customer;
 import Service.GetNumberInput;
 import Service.Settings;
-import Service.TextDB;
 
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -19,10 +18,7 @@ import static UserInterface.AdminUI.AdminInterface;
  * @authors GAN HAO YI, CHEW ZHI QI
  */
 public class UserUI {
-    /**
-     * A list of customers is loaded in this variable when database is accessed.
-     */
-    private static ArrayList<Customer> customers = new ArrayList<Customer>();
+
 
     /**
      * This is the User Interface. It is called in mainUI and it controls the interface for the Login option.
@@ -44,7 +40,6 @@ public class UserUI {
         if (choice == -1) return;
         switch (choice) {
             case 1 -> {
-                customers = TextDB.readFromFile(TextDB.Files.Customers.toString(), customers, null);
                 do {
                     System.out.println("Enter your Username: (input -1 to go back to menu)");
                     username = sc.nextLine();
@@ -65,9 +60,9 @@ public class UserUI {
                         return;
                     }
                     // if username exist but wrong password keep asking for password
-                } while (!checkCustomerName(username, number));
+                } while (!checkCustomerName(username, number , cineplexes));
                 // else, check if username exist in customer.txt or new username
-                CustomerUI.CustomerInterface(cineplexes, customers, checkCustomerNumber(username, number));
+                CustomerUI.CustomerInterface(cineplexes, cineplexes.getCustomerlist(), checkCustomerNumber(username, number,cineplexes));
             }
             case 2 -> {
                 System.out.println("\nCreating an Account:");
@@ -102,12 +97,13 @@ public class UserUI {
     /**
      * This method checks that customer name exists in database
      *
-     * @param name   = name that user entered and used to check if the name exists
-     * @param number = number that user entered to match with the database
+     * @param name       = name that user entered and used to check if the name exists
+     * @param number     = number that user entered to match with the database
+     * @param cineplexes
      * @return boolean result
      */
-    public static boolean checkCustomerName(String name, String number) {
-        for (Customer customer : customers) {
+    public static boolean checkCustomerName(String name, String number, AllCineplex cineplexes) {
+        for (Customer customer : cineplexes.getCustomerlist()) {
             if (Objects.equals(customer.getMovieGoerName(), name)) {
                 if (Objects.equals(customer.getMobileNumber(), number)) {
                     return true;
@@ -128,8 +124,8 @@ public class UserUI {
      * @param number used to check if the number is correct and matches the value in the database.
      * @return the customer object
      */
-    public static Customer checkCustomerNumber(String name, String number) {
-        for (Customer customer : customers) {
+    public static Customer checkCustomerNumber(String name, String number , AllCineplex cineplexes) {
+        for (Customer customer : cineplexes.getCustomerlist()) {
             if (
                     Objects.equals(customer.getMovieGoerName(), name)
                             && Objects.equals(customer.getMobileNumber(), number)
