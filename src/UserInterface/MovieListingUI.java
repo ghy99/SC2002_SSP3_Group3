@@ -2,24 +2,20 @@ package UserInterface;
 
 import java.io.IOException;
 import java.util.*;
-
-import Cineplex.Cinema;
 import Cineplex.*;
-import Movie.Movie;
-import Movie.MovieType;
+import Movie.*;
 import Service.GetNumberInput;
-import Service.TextDB;
-
-import static Service.TextDB.readFromFile;
 
 /**
  * This is the Movie Listing Interface.
  * This is imported to call the interface for the admin to be able to add/edit/delete the movie listing
+ *
  * @author GAN HAO YI, SANSKKRITI JAIN
  */
 public class MovieListingUI {
     /**
      * This is the Movie Listing Interface for the admin to access the Movie database and make any changes
+     *
      * @param cineplexes = includes the movies listed at the various cineplexes
      * @throws Exception is thrown if there is an error in the implementation of any method.
      */
@@ -38,7 +34,7 @@ public class MovieListingUI {
             System.out.print("Please enter a choice: ");
             num = GetNumberInput.getInt(1, 4, 4);
 
-            switch(num) {
+            switch (num) {
                 case 1 -> {
                     Movie newMovie = createMovie();
                     cineplexes.addMovies(newMovie);
@@ -56,8 +52,8 @@ public class MovieListingUI {
                     Movie movie = cineplexes.getListOfMovies().get(choice);
                     modifyMovie(movie);
                     movie.printMovieDetails();
-
                     cineplexes.updateListOfMovies(choice, movie);
+
                     System.out.printf("Would you like to change the ShowTime of this movie %s?\n", movie.getMovieTitle());
                     System.out.println("\t1) Yes\n\t2) No");
                     int showtimechoice = GetNumberInput.getInt(1, 2, -1);
@@ -86,24 +82,12 @@ public class MovieListingUI {
     }
 
     /**
-     * This function is used to read the data from the movies.txt database
-     * @param filename = the txt file that the database is retrieved from
-     * @return the movies list from the movies.txt database
-     * @throws IOException is thrown if reading the data from the file causes an error
-     */
-    public static ArrayList<Movie> getMovieList(String filename) throws IOException {
-        Movie temp = null;
-        ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
-        listOfMovies = readFromFile(filename, listOfMovies);
-        return listOfMovies;
-    }
-
-    /**
      * This function is implemented to print the entire movies database
+     *
      * @param listOfMovies = contains the movies list and all details
      * @throws IOException is thrown if there is an error in reading the file contents
      */
-    public static void printMovieList(ArrayList<Movie> listOfMovies) throws IOException {
+    public static void printMovieList(ArrayList<Movie> listOfMovies) {
         for (int i = 0; i < listOfMovies.size(); i++) {
             System.out.printf("%d)\n", i + 1);
             listOfMovies.get(i).printMovieDetails();
@@ -113,6 +97,7 @@ public class MovieListingUI {
 
     /**
      * This method creates a new movie and returns an ArrayList of 2 movies
+     *
      * @return ArrayList of 2 movies, the first a 3D Movie, the second a 2D Movie.
      */
     public static Movie createMovie() {
@@ -121,10 +106,11 @@ public class MovieListingUI {
         System.out.println("*               Create New Movie                *");
         System.out.println("*************************************************");
 
-        String movieTitle, director, synopsis;
-        System.out.print("\nEnter movie title: "); //movie title
-        movieTitle = sc.nextLine();
-
+        String movieTitle = null, director = null, synopsis = null;
+        do {
+            System.out.print("\nEnter movie title: "); //movie title
+            movieTitle = sc.nextLine();
+        } while (movieTitle == null);
         System.out.println("\nSelect option for Movie Status (Enter -1 to exit): ");
         System.out.println("\t1) Coming soon!");
         System.out.println("\t2) Preview");
@@ -253,6 +239,7 @@ public class MovieListingUI {
 
     /**
      * This function is used to get the admin user to modify any movie details in the Movies.txt database.
+     *
      * @param movie = movie whose details need to be changed
      * @return the updated movie object
      */
@@ -357,7 +344,7 @@ public class MovieListingUI {
                     }
                 }
                 case 9 -> {
-                    break;
+                    return movie;
                 }
                 case -1 -> System.out.println("Exiting.");
             }
@@ -367,7 +354,8 @@ public class MovieListingUI {
 
     /**
      * This function is used to get the admin user to input the movie details that they want to
-       delete from the movies.txt database by changing the status to end of showing
+     * delete from the movies.txt database by changing the status to End Of Showing.
+     *
      * @param movie = the movie they want to delete
      * @return the movie object
      */

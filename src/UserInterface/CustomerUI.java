@@ -2,32 +2,32 @@ package UserInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Objects;
 import java.util.Scanner;
 
 import Cineplex.*;
 import Customer.Customer;
-import Movie.Movie;
-import Movie.MovieTicket;
-import Service.TextDB;
-import Service.GetNumberInput;
+import Movie.*;
+import Service.*;
 
 /**
  * This is the Customer User Interface. This is imported to call the Customer Interface to access their account.
+ *
  * @authors GAN HAO YI, CHEW ZHI QI
  */
 public class CustomerUI {
     /**
      * This is the Customer Interface for the customer to access their account and make changes to their details or
-        print their details and booking history.
-     * @param cineplexes = This object is passed into the Customer Interface to start the ticket booking process.
+     * print their details and booking history.
+     *
+     * @param cineplexes        = This object is passed into the Customer Interface to start the ticket booking process.
      * @param customerArrayList = this is passed to update the customer details in the customers file.
-     * @param customer = This is passed to access the customer details.
+     * @param customer          = This is passed to access the customer details.
      * @throws IOException is thrown if there is an error in reading the customer file
      */
     public static void CustomerInterface(AllCineplex cineplexes, ArrayList<Customer> customerArrayList, Customer customer) throws IOException {
-        System.out.println("************* Entering Customer Mode ***************");
+        System.out.println("*************************************************");
+        System.out.println("*         Welcome to the Customer Portal        *");
+        System.out.println("*************************************************");
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         customer.printCustomerDetails();
@@ -39,30 +39,31 @@ public class CustomerUI {
             System.out.println("\t4) Change your email.");
             System.out.println("\t5) Print your details.");
             System.out.println("\t6) Print your Booking History.");
-            System.out.println("\tEnter '11' to exit!");
+            System.out.println("\tEnter '-1' to exit!");
 
-            choice = GetNumberInput.getInt(1, 6, 11);
+            choice = GetNumberInput.getInt(1, 6, -1);
+            if (choice == -1) break;
             switch (choice) {
                 case 1 -> {
                     ArrayList<Object> sTnC = null, sSTnC = null;
                     ArrayList<MovieTicket> allMovieTicket = null;
-                    Cineplex choosenCineplex = CineplexUI.CineplexInterface(cineplexes);
+                    Cineplex chosenCineplex = CineplexUI.CineplexInterface(cineplexes);
 
                     Movie chosenMovie = MovieUI.MovieInterface(cineplexes.getListOfMovies());
                     do {
-                        sTnC = SelectDateUI.SelectDateInterFace(choosenCineplex , chosenMovie);
-                    }while (sTnC == null);
+                        sTnC = SelectDateUI.SelectDateInterFace(chosenCineplex, chosenMovie);
+                    } while (sTnC == null);
 
                     do {
-                        sSTnC = SelectDimensionUI.SelectDimensionUserInterface(choosenCineplex, sTnC);
-                    }while (sSTnC == null);
+                        sSTnC = SelectDimensionUI.SelectDimensionUserInterface(chosenCineplex, sTnC);
+                    } while (sSTnC == null);
 
                     do {
-                        allMovieTicket = SelectSeatsUI.SelectSeatsUserInterface(customer, choosenCineplex, chosenMovie ,sSTnC);
-                    }while (allMovieTicket == null);
+                        allMovieTicket = SelectSeatsUI.SelectSeatsUserInterface(customer, chosenCineplex, chosenMovie, sSTnC);
+                    } while (allMovieTicket == null);
 
                     customer.printCustomerDetails();
-                    PaymentUI.PaymentInterface(cineplexes, customer, allMovieTicket, choosenCineplex, chosenMovie ,sSTnC);
+                    PaymentUI.PaymentInterface(cineplexes, customer, allMovieTicket, chosenCineplex, chosenMovie, sSTnC);
                     for (MovieTicket tix : allMovieTicket) {
                         TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
                         tix.printTicket();
@@ -88,8 +89,7 @@ public class CustomerUI {
                 }
                 case 6 -> {
                     ArrayList<MovieTicket> movieTickets = TextDB.ReadFromFile(TextDB.Files.TransactionHistory.toString(), customer.getEmail());
-                    for( MovieTicket mt : movieTickets)
-                    {
+                    for (MovieTicket mt : movieTickets) {
                         mt.printTicket();
                     }
                 }
@@ -97,7 +97,7 @@ public class CustomerUI {
                     System.out.println("Invalid Input. Try again.");
                 }
             }
-        } while (choice < 10);
+        } while (choice > 6 || choice < 1);
     }
 
 }
