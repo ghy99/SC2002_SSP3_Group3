@@ -55,6 +55,7 @@ public class AdminUI {
                     System.out.println("\t2) Edit Holiday Dates");
                     System.out.println("\t3) Delete Holiday Dates");
                     choice2 = GetNumberInput.getInt(1, 3, -1);
+
                     admin.HolidayDateFunctions(cineplexes,choice2);
                 }
                 case 3 -> {

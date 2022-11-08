@@ -191,6 +191,8 @@ public class Admin {
      * @throws IOException to ensure the input has no error
      */
     public void HolidayDateFunctions(AllCineplex cineplex, int choice2) throws IOException {
+        System.out.println("The holiday dates are :");
+        printHoliday(cineplex);
         Scanner scan = new Scanner(System.in);
         switch (choice2) {
             case 1 -> {
@@ -228,6 +230,7 @@ public class Admin {
                 }
 
                 int index = GetNumberInput.getInt(1, cineplex.getHoliday().size(), -1) - 1;
+                if (index == -2) break;
                 String newDate;
                 do {
                     System.out.println("Input New Date in DD-MM-YYYY format");
@@ -253,11 +256,12 @@ public class Admin {
                 System.out.println("\tDelete Holiday Dates");
 
                 System.out.println("\t\tSelect holiday dates to change (Enter -1 to exit):");
+
                 for (int i = 0; i < cineplex.getHoliday().size(); i++) {
                     System.out.printf("%d) %s \n", i + 1, cineplex.getHoliday().get(i));
                 }
                 int index = GetNumberInput.getInt(1, cineplex.getHoliday().size(), -1) - 1;
-                if (index != -1)
+                if (index != -2)
                     cineplex.deleteHoliday(index);
                 else {
                     System.out.println("Exiting...");
@@ -304,6 +308,13 @@ public class Admin {
                 System.out.println("\t2) Help new staffs to register new Admin Account");
                 CreateAdmin();
             }
+        }
+    }
+
+    public void printHoliday(AllCineplex cineplex){
+
+        for (int i = 0; i < cineplex.getHoliday().size(); i++) {
+            System.out.printf("\t%d) %s\n", i + 1, cineplex.getHoliday().get(i));
         }
     }
 
