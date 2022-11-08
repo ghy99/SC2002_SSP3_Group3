@@ -75,7 +75,13 @@ public class AdminUI {
                     }
                 }
                 case 5-> {
-                    Cineplex choseCinepelx = CineplexUI.CineplexInterface(cineplexes);
+                    Cineplex choseCinepelx = null;
+                    do{
+                        choseCinepelx = CineplexUI.CineplexInterface(cineplexes);
+
+                    }
+                    while (choseCinepelx == null);
+
                     AddCinemaUI.AddCinemaInterface(choseCinepelx , cineplexes);
 
                 }
