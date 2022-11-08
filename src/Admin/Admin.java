@@ -177,20 +177,32 @@ public class Admin {
                 System.out.println("\tAdd Holiday Dates");
                 System.out.println("\t\tInput Date in DD-MM-YYYY format");
                 String date;
+                String confirmDate = "";
+
                 do {
                     date = scan.nextLine();
                     if (DateTime.StringToDateOnly(date) != null) {
-                        cineplex.AddHoliday(date);
-                        break;
+                        confirmDate = DateTime.convertDate(DateTime.StringToDateOnly(date).getTime());
+                        if(date.equals(confirmDate) == true){
+                            cineplex.AddHoliday(date);
+                            System.out.println("Date: " + date + " is added.");
+                            break;
+                        } else {
+                            System.out.println("Invalid date: " +  date + " is entered. Please try again.");
+                        }
+
                     } else
                         System.out.println("Error time format holiday not added");
 
-                } while (DateTime.StringToDateOnly(date) == null);
+                } while (DateTime.StringToDateOnly(date) == null || !date.equals(confirmDate));
             }
             case 2 -> {
+
                 System.out.println("\tEdit holiday dates");
 
                 System.out.println("\t\tSelect holiday dates to change");
+
+                String confirmDate = "";
                 for (int i = 0; i < cineplex.getHoliday().size(); i++) {
                     System.out.printf("%d) %s \n", i + 1, cineplex.getHoliday().get(i));
                 }
@@ -201,10 +213,21 @@ public class Admin {
                     System.out.println("Input New Date in DD-MM-YYYY format");
                     newDate = scan.nextLine();
                     if (DateTime.StringToDateOnly(newDate) != null) {
-                        cineplex.editHoliday(index, newDate);
-                        break;
+
+                        confirmDate = DateTime.convertDate(DateTime.StringToDateOnly(newDate).getTime());
+
+                        if(newDate.equals(confirmDate) == true){
+                            cineplex.editHoliday(index, newDate);
+                            System.out.println("Date: " + newDate + " is edited.");
+                            break;
+                        } else {
+                            System.out.println("Invalid date: " +  newDate + " is entered. Please try again.");
+                        }
+
+
+
                     } else System.out.println("Error time format time not change");
-                } while (DateTime.StringToDateOnly(newDate) == null);
+                } while (DateTime.StringToDateOnly(newDate) == null || !newDate.equals(confirmDate) );
             }
             case 3 -> {
                 System.out.println("\tDelete Holiday Dates");
