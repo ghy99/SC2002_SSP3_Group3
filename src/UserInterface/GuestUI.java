@@ -27,6 +27,9 @@ public class GuestUI {
      */
     public static void UserInterface(AllCineplex cineplexes) throws IOException {
         int choice = 0;
+
+        Cineplex chosenCineplex;
+        Movie chosenMovie;
         Scanner sc = new Scanner(System.in);
         Customer customer = new Customer();
         ArrayList<Object> sTnC = null, sSTnC = null;
@@ -36,10 +39,14 @@ public class GuestUI {
         System.out.println("*           Welcome to the Guest Portal         *");
         System.out.println("*************************************************");
         System.out.println(Settings.ANSI_RESET);
+        do {
+            chosenCineplex = CineplexUI.CineplexInterface(cineplexes);
+        } while (chosenCineplex == null);
 
-        Cineplex chosenCineplex = CineplexUI.CineplexInterface(cineplexes);
+        do {
+            chosenMovie = MovieUI.MovieInterface(cineplexes.getListOfMovies());
+        } while (chosenMovie == null);
 
-        Movie chosenMovie = MovieUI.MovieInterface(cineplexes.getListOfMovies());
         do {
             sTnC = SelectDateUI.SelectDateInterFace(chosenCineplex, chosenMovie);
         } while (sTnC == null);
@@ -52,31 +59,39 @@ public class GuestUI {
             allMovieTicket = SelectSeatsUI.SelectSeatsUserInterface(customer, chosenCineplex, chosenMovie, sSTnC);
         } while (allMovieTicket == null);
 
-        String name, number, email;
-        do {
-            do {
-                System.out.println("Please enter your name:");
-                name = sc.nextLine();
-            } while (Objects.equals(name, ""));
-            do {
-                System.out.println("Please enter your number:");
-                number = sc.nextLine();
-            } while (Objects.equals(number, ""));
-            do {
-                System.out.println("Please enter your email: (So that you will be able to check your transaction later)");
-                email = sc.nextLine();
-            } while (Objects.equals(email, ""));
-        } while (Objects.equals(email, ""));
-        customer.setMovieGoerName(name);
-        customer.setMobileNumber(number);
-        customer.setEmail(email);
-        customer.printCustomerDetails();
-        cineplexes.createCustomerAccount(customer); // Not checking if customer created account
-        PaymentUI.PaymentInterface(cineplexes, allMovieTicket, chosenMovie, sSTnC);
-        for (MovieTicket tix : allMovieTicket) {
-            TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
-            tix.printTicket();
+        if(allMovieTicket.size() == 0)
+        {
+            System.out.println("You canceled your booking! Thank you!");
+            return;
         }
-        chosenMovie.increaseMovieTotalSale(cineplexes.getListOfMovies(), allMovieTicket.size());
+        else {
+            String name, number, email;
+            do {
+                do {
+                    System.out.println("Please enter your name:");
+                    name = sc.nextLine();
+                } while (Objects.equals(name, ""));
+                do {
+                    System.out.println("Please enter your number:");
+                    number = sc.nextLine();
+                } while (Objects.equals(number, ""));
+                do {
+                    System.out.println("Please enter your email: (So that you will be able to check your transaction later)");
+                    email = sc.nextLine();
+                } while (Objects.equals(email, ""));
+            } while (Objects.equals(email, ""));
+            customer.setMovieGoerName(name);
+            customer.setMobileNumber(number);
+            customer.setEmail(email);
+            customer.printCustomerDetails();
+            cineplexes.createCustomerAccount(customer); // Not checking if customer created account
+            PaymentUI.PaymentInterface(cineplexes, allMovieTicket, chosenMovie, sSTnC);
+            for (MovieTicket tix : allMovieTicket) {
+                TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
+                tix.printTicket();
+            }
+            chosenMovie.increaseMovieTotalSale(cineplexes.getListOfMovies(), allMovieTicket.size());
+        }
+
     }
 }
