@@ -46,7 +46,7 @@ public class TextDB {
     /**
      * Read from db to retrieve list of customer
      * @param fileName Customers.txt
-     * @param customers ArrayList<Customer> instance
+     * @param customers ArrayList instance
      * @param customer Identifier for overloading methods
      * @throws IOException this is thrown if the reading from the file results in error
      */
@@ -74,7 +74,7 @@ public class TextDB {
     /**
      * Read from db to retrieve list of movies
      * @param fileName Movies.txt
-     * @param movies Arraylist<movie> instance will be populated
+     * @param movies Arraylist instance will be populated
      * @throws IOException this is thrown if the reading from the file results in error
      */
     public static void readFromFile(String fileName, ArrayList<Movie> movies) throws IOException {

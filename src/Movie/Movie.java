@@ -78,6 +78,7 @@ public class Movie extends AllReviews {
      * @param blockbuster     Is Blockbuster
      * @param movieClass      Movie Rating
      * @param movieTotalSales Movie Total Sales
+     * @param startDate       Start date
      */
     public Movie(
             String movieTitle, MovieStatus showingStatus, String director,
@@ -272,6 +273,7 @@ public class Movie extends AllReviews {
      * Increase movie sale and update DB
      *
      * @param movies all list for movie to update db
+     * @throws IOException this is thrown if the reading from the file results in error
      */
     public void increaseMovieTotalSale(ArrayList<Movie> movies, int ticketnum) throws IOException {
         this.movieTotalSales += ticketnum;

@@ -1,2 +1,5 @@
 eddyckq@gmail.com|APA202211082055|Moblima JEM|1|Avengers|09-11-2022;10:30|A4|DoubleSeat|Premium|TWO_D|BLOCKBUSTER
 eddyckq@gmail.com|APA202211082055|Moblima JEM|1|Avengers|09-11-2022;10:30|A5|Aisle|Premium|TWO_D|BLOCKBUSTER
+eddyckq@gmail.com|APA202211082112|Moblima JEM|1|Jue Lin Solves Her For Loops|13-11-2022;15:11|B1|SingleSeat|Premium|THREE_D|NOTBLOCKBUSTER
+eddyckq@gmail.com|ARF202211082113|Moblima JEM|1|Anthony's Adventures|11-11-2022;13:11|A4|DoubleSeat|Regular|TWO_D|NOTBLOCKBUSTER
+eddyckq@gmail.com|ARF202211082113|Moblima JEM|1|Anthony's Adventures|11-11-2022;13:11|A5|Aisle|Regular|TWO_D|NOTBLOCKBUSTER
