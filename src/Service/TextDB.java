@@ -8,23 +8,15 @@ import Movie.*;
 import Review.*;
 
 import java.io.*;
-<<<<<<< Updated upstream
-import java.nio.file.Path;
-=======
 import java.util.*;
->>>>>>> Stashed changes
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 
 
 public class TextDB {
-<<<<<<< Updated upstream
-=======
-
     /**
      * Enum text files name for our Textdb
      */
->>>>>>> Stashed changes
     public enum Files {
         Cineplex(File.separator + "Cineplexes.txt"),
         Movies(File.separator + "Movies.txt"),
