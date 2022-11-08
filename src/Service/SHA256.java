@@ -6,8 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 /**
- *  * @author CHEW ZHI QI
- *  * SHA256 class for hashing admin password
+ * @author CHEW ZHI QI
+ * SHA256 class for hashing admin password
  */
 public class SHA256 {
     /**
@@ -19,8 +19,7 @@ public class SHA256 {
         //Hashing Password
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(data.getBytes(StandardCharsets.UTF_8));
-        String encoded = Base64.getEncoder().encodeToString(hash);
 
-        return encoded;
+        return Base64.getEncoder().encodeToString(hash);
     }
 }

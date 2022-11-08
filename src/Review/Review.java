@@ -1,30 +1,29 @@
 package Review;
 
-import Movie.Movie;
-import Service.TextDB;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
 /**
- *  * @author CHEW ZHI QI
- *  * Review class for each review object
+ * * @author CHEW ZHI QI
+ * * Review class for each review object
  */
 public class Review {
-    /** Username */
+    /**
+     * Username
+     */
     private String userName;
-    /** Review */
+    /**
+     * Review
+     */
     private String review;
-    /** Rating */
+    /**
+     * Rating
+     */
     private float rating;
 
     /**
      * Review constructor
-     * @param userName Useranme
-     * @param review Review
-     * @param rating Rating
+     *
+     * @param userName Username of Guest adding Review. Defaults to Anon if no name is entered.
+     * @param review   Review
+     * @param rating   Rating
      */
     public Review(String userName, String review, float rating) {
         this.userName = userName;
@@ -34,6 +33,7 @@ public class Review {
 
     /**
      * Get username
+     *
      * @return username
      */
     public String getUserName() {
@@ -42,6 +42,7 @@ public class Review {
 
     /**
      * Get review
+     *
      * @return review
      */
     public String getReview() {
@@ -50,6 +51,7 @@ public class Review {
 
     /**
      * Get rating
+     *
      * @return rating
      */
     public float getRating() {

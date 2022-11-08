@@ -1,18 +1,4 @@
-
 package Movie;
-
-// Draw out matrix for movie theatres
-// Need to block out rows / columns for aisle
-// Different Seat Types such as
-// Wheelchair
-// Free Single seat
-// Occupied Single seat
-// Free Couple seat
-// Occupied Couple seat
-// Elite seats
-// Gold / Platinum / Ultima(?) seats
-// System does not allow unoccupied seats between selected seats
-
 
 import Cineplex.*;
 import Service.GetNumberInput;
@@ -24,45 +10,65 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * @author Jue Lin
- * This is the class for MovieSeats. It initializes the movie seats in each cinema and displays the seats.
+ * @authors TAN JUE LIN, CHEW ZHI QI
+ * This is the class for MovieSeats.
+ * It initializes the movie seats in each cinema and displays the seats.
  */
 public class MovieSeatsNew {
-
+    /**
+     * rows of seat matrix
+     * columns of seat matrix
+     * rows of double seats
+     * aisle 1 row
+     * aisle 2 row
+     */
     int rows;
     int cols;
     int rowDoubleOne;
     int aisleOne;
     int aisleTwo;
 
-
-    //2D array to store all seats in array2D
+    /**
+     * 2D array to store all seats in array2D
+     */
     ArrayList<ArrayList<IndividualSeats>> array2D = new ArrayList<ArrayList<IndividualSeats>>(rows);
 
-
+    /**
+     * Constructor method
+     *
+     * @param rows         - Row of Seat Matrix
+     * @param cols         - Column of Seat Matrix
+     * @param rowDoubleOne - Row of Double Seats
+     * @param aisleOne     - Aisle 1
+     * @param aisleTwo     - Aisle 2
+     */
     public MovieSeatsNew(int rows, int cols, int rowDoubleOne, int aisleOne, int aisleTwo) {
         this.rows = rows;
         this.cols = cols;
         this.rowDoubleOne = rowDoubleOne;
         this.aisleOne = aisleOne;
         this.aisleTwo = aisleTwo;
-
     }
 
+    /**
+     * Get Method
+     *
+     * @return 2D Array of seats
+     */
     public ArrayList<ArrayList<IndividualSeats>> getArray2D() {
         return array2D;
     }
 
+    /**
+     * This method creates each seat object in the 2D Array of seats.
+     */
     public void SeatsCreation() {
-
-        //Create individual seats in 2D array
         for (int j = 0; j < this.rows; j++) {
             ArrayList<IndividualSeats> rowSeatsDouble = new ArrayList<IndividualSeats>(); //new row array
             ArrayList<IndividualSeats> rowSeatsSingle = new ArrayList<IndividualSeats>();//new row array
 
             for (int i = 0; i < this.cols; i++) {
                 if (j > this.rowDoubleOne) {
-
                     if (i == this.aisleOne || i == this.aisleTwo) {
                         IndividualSeats.SeatType aisleType = IndividualSeats.SeatType.Aisle;
                         IndividualSeats oneAisleSeat = new IndividualSeats("A1", aisleType, false);
@@ -73,7 +79,6 @@ public class MovieSeatsNew {
                         rowSeatsDouble.add(oneDoubleSeat);
                     }
                 } else {
-
                     if (i == this.aisleOne || i == this.aisleTwo) {
                         IndividualSeats.SeatType aisleType = IndividualSeats.SeatType.Aisle;
                         IndividualSeats oneAisleSeat = new IndividualSeats("A1", aisleType, false);
@@ -84,58 +89,41 @@ public class MovieSeatsNew {
                         rowSeatsSingle.add(oneSingleSeat);
                     }
                 }
-
             }
-
             if (j > rowDoubleOne) {
                 array2D.add(rowSeatsDouble);
             } else {
                 array2D.add(rowSeatsSingle);
             }
-
         }
-
-
         //For SeatID
         int endRowIDNum;
         char endRowIDChar;
-
         //Input SeatID of each seat
         for (int i = 0; i < this.array2D.size(); i++) { //each row
             endRowIDNum = (65 + this.rows - 1) - i; //go backwards from the last row
             endRowIDChar = (char) endRowIDNum;
-
             for (int j = 0; j < this.array2D.get(i).size(); j++) { //for each row, under each column
                 String seatID = String.valueOf(endRowIDChar) + String.valueOf(j + 1);
                 this.array2D.get(i).get(j).setSeatID(seatID);
-
             }
         }
-
-
     }
 
-
+    /**
+     * This method prints the seats in the Cinema.
+     */
     public void PrintSeats() {
-
-        int endRowIDNum;
-        char endRowIDChar;
-
         for (int i = 0; i < this.array2D.size(); i++) {
-
-            endRowIDNum = (65 + this.rows - 1) - i;
-            endRowIDChar = (char) endRowIDNum;
-
             for (int j = 0; j < this.array2D.get(i).size(); j++) {
 
                 if (this.array2D.get(i).get(j).getSeatOccupied() == true) {
-                    System.out.print("|X|");
+                    System.out.print("| X |");
                 } else {
                     if (Objects.equals(this.array2D.get(i).get(j).getSeatType(), IndividualSeats.SeatType.SingleSeat)) {
-
                         System.out.print("|" + this.array2D.get(i).get(j).getSeatID() + "|");
                     } else if (Objects.equals(this.array2D.get(i).get(j).getSeatType(), IndividualSeats.SeatType.Aisle)) {
-                        System.out.print("|@|");
+                        System.out.print("| @ |");
                     } else { //pretty print double seats
                         if (j < this.aisleOne || j > this.aisleTwo) {
                             if (j % 2 == 0) {
@@ -150,41 +138,25 @@ public class MovieSeatsNew {
                                 System.out.print(" " + this.array2D.get(i).get(j).getSeatID() + "|");
                             }
                         }
-
                     }
                 }
-
-
             }
             System.out.println("");
-
         }
-
         System.out.println("Legend:");
         System.out.print("|@| Aisle  ");
         System.out.print("|_| Single Seat Available  ");
         System.out.print("|_ _| Double Seat Available  ");
         System.out.print("|X| Seat Taken");
         System.out.println("");
-
-
     }
 
-//    public boolean isDouble(String seatID){
-//
-//
-//        int i = (65+ this.rows-1) - seatID.charAt(0);
-//        int j = Integer.parseInt(seatID.charAt(1))-1;
-//
-//        if((this.array2D.get(i).get(j).getSeatType()).equals(IndividualSeats.SeatType.SingleSeat)){
-//            //System.out.println("One Single Seat '" + seatID+ "' is available");
-//            return false;
-//        } else {
-//            //System.out.println("One Double Seat '"+ seatID+ "' is available");
-//            return true;
-//        }
-//    }
-
+    /**
+     * This method checks if the seat is available.
+     *
+     * @param seatID - Seat ID of Seat to be checked
+     * @return True if seat is booked, False if seat is not booked.
+     */
     public boolean CheckSeat(String seatID) {
         boolean bookedStatus = true;
 
@@ -199,29 +171,35 @@ public class MovieSeatsNew {
                     } else {
                         System.out.println("One Double Seat '" + seatID + "' is available");
                     }
-
                     bookedStatus = false;
-
                 }
-
             }
         }
         return bookedStatus;
     }
 
+    /**
+     * This method selects the seats chosen and returns an ArrayList of seats chosen.
+     *
+     * @return An ArrayList of Seat ID as String
+     */
     public ArrayList<String> SelectSeats() {
         Scanner scan = new Scanner(System.in);
         ArrayList<String> seatsSelected = new ArrayList<String>();
-        System.out.println("Please input number of seats to be select");
-        int num = GetNumberInput.getInt(1, 99, -1);
+        int num = -1;
+        do {
+            System.out.println("\nPlease input the number of seats to be selected:");
+            num = GetNumberInput.getInt(1, 99, -1);
+            if (num == -1) continue;
+            else break;
+        } while (num == -1);
         int i = 0;
         boolean isSeat = true;
 
         while (i < num) {
             String SeatID = "";
-
             while (isSeat) {
-                System.out.println("Select a seat");
+                System.out.println("Select a seat:");
                 SeatID = scan.nextLine();
                 if (SeatID.length() == 2 || SeatID.length() == 3) {
                     String right = right(SeatID, SeatID.length() - 1);
@@ -229,7 +207,6 @@ public class MovieSeatsNew {
                         if ((int) SeatID.charAt(0) > 64 && (int) SeatID.charAt(0) <= (65 + this.rows - 1)) {
                             if (Integer.parseInt(right) >= 0 && Integer.parseInt(right) <= this.cols) {
                                 isSeat = false;
-
                             }
                         }
                     }
@@ -242,36 +219,47 @@ public class MovieSeatsNew {
             while (isSeatAva) {//seat ava
                 if (!CheckSeat(SeatID)) {
                     i++;
-                    System.out.println(SeatID + " is selected");
+                    System.out.println("\n" + SeatID + " is selected.");
                     seatsSelected.add(SeatID);
                     isSeat = true;
                     isSeatAva = false;
                 } else {
-                    System.out.println(SeatID + " is not available. Please reselect another seat");
+                    System.out.println("\n" + SeatID + " is not available. Please select another seat.");
                     SeatID = scan.nextLine();
                 }
             }
         }
-
         System.out.println("The seats selected are:");
         for (int j = 0; j < num; j++) {
-            System.out.print(seatsSelected.get(j) + " ");
+            System.out.printf("\t%s\n", seatsSelected.get(j));
         }
-
         return seatsSelected;
     }
 
+    /**
+     * Return Number part of the Seat.
+     *
+     * @param value  - Seat ID.
+     * @param length - Length of Seat ID minus alphabet of Seat ID.
+     * @return Number of the Seat.
+     */
     public static String right(String value, int length) {
-        // To get right characters from a string, change the begin index.
+        // To get right characters from a string, change beginIndex.
         return value.substring(value.length() - length);
     }
 
-
+    /**
+     * Check if seat ID has been added into the booked list of seats previously.
+     *
+     * @param c           - Column of Seat Array
+     * @param d           - Row of Seat Array
+     * @param overallList - ArrayList of booked Seats.
+     * @return
+     */
     public ArrayList<String> checkCounter(int c, int d, ArrayList<String> overallList) {
-
         boolean flagOne = false;
-        for (int i = 0; i < overallList.size(); i++) {
-            if (this.array2D.get(c).get(d).getSeatID().equals(overallList.get(i))) {
+        for (String s : overallList) {
+            if (this.array2D.get(c).get(d).getSeatID().equals(s)) {
                 flagOne = true;
                 break;
             }
@@ -279,51 +267,43 @@ public class MovieSeatsNew {
         if (flagOne == false) {
             overallList.add(this.array2D.get(c).get(d).getSeatID());
         }
-
         return overallList;
     }
 
-
+    /**
+     * This method books the seat and writes to database that seat is selected.
+     *
+     * @param seatsSelected - ArrayList of Seats selected.
+     * @param isWrite       - If true, update database, else, used to check which seat was booked.
+     * @param cinema        - Cinema that Seat is stored.
+     * @return An ArrayList of Seats that were booked.
+     * @throws IOException Checks if Cinema Seat exist in database.
+     */
     public ArrayList<String> BookSeats(ArrayList<String> seatsSelected, Boolean isWrite, Cinema cinema) throws IOException {
-
         int endRowIDNum;
         char endRowIDChar;
         endRowIDNum = (65 + this.rows - 1);
         endRowIDChar = (char) endRowIDNum; //changes for when the number of rows changes
-
         ArrayList<String> overallList = new ArrayList<String>();
-
 
         for (int k = 0; k < seatsSelected.size(); k++) {
             char rowLetterChar = seatsSelected.get(k).charAt(0);
-            String rowLetterString = String.valueOf(rowLetterChar);
-            //System.out.println("row Letter" + String.valueOf(rowLetterString));
-
             int c = (endRowIDChar - '0') - (rowLetterChar - '0'); //gives the relative position
-            //System.out.println("row Letter" + c);
-
             String colnum = right(seatsSelected.get(k), seatsSelected.get(k).length() - 1);
-            //System.out.println("HERE"+colnum);
             int colnumInt = Integer.parseInt(colnum) - 1;
-
             //checks if each seat selected is a doubleseat
             if (Objects.equals(this.array2D.get(c).get(colnumInt).getSeatType(), IndividualSeats.SeatType.DoubleSeat)) {
-
                 if (colnumInt < aisleOne || colnumInt > aisleTwo) {  //if its a doubleseat, check if its before or after aisle
-
-
                     if (colnumInt % 2 == 0) {
                         this.array2D.get(c).get(Integer.parseInt(colnum) - 1).setOccupied(true); //if double seat, then need cross two consecutive seats
                         this.array2D.get(c).get(Integer.parseInt(colnum)).setOccupied(true);
                         overallList = checkCounter(c, Integer.parseInt(colnum) - 1, overallList);
                         overallList = checkCounter(c, Integer.parseInt(colnum), overallList);
-
                     } else {
                         this.array2D.get(c).get(Integer.parseInt(colnum) - 1).setOccupied(true); //if double seat, then need cross two consecutive seats
                         this.array2D.get(c).get(Integer.parseInt(colnum) - 1 - 1).setOccupied(true);
                         overallList = checkCounter(c, Integer.parseInt(colnum) - 1, overallList);
                         overallList = checkCounter(c, Integer.parseInt(colnum) - 1 - 1, overallList);
-
                     }
                 } else {
                     if (colnumInt % 2 == 1) {
@@ -337,48 +317,16 @@ public class MovieSeatsNew {
                         this.array2D.get(c).get(Integer.parseInt(colnum) - 1 - 1).setOccupied(true);
                         overallList = checkCounter(c, Integer.parseInt(colnum) - 1, overallList);
                         overallList = checkCounter(c, Integer.parseInt(colnum) - 1 - 1, overallList);
-
-
                     }
                 }
-
             } else { //else means a single seat is selected
                 this.array2D.get(c).get(Integer.parseInt(colnum) - 1).setOccupied(true);
                 overallList = checkCounter(c, Integer.parseInt(colnum) - 1, overallList);
-
-
             }
-
         }
         if(isWrite) {
             TextDB.UpdateToTextDB(cinema.getCinemaDir(),cinema.getShowTime(), MovieType.Dimension.THREE_D);
         }
-        return overallList; //returns all the seats that are booked.
-        // OverallList and seatsSelected lists are different.
-        // OverallList includes the counterparts of the doubleseats that was not taken into account when booking
+        return overallList;
     }
-
-
-    public static void main(String[] args) {
-        MovieSeatsNew movieSeatsNew = new MovieSeatsNew(5, 5, 4, 2, 3);
-        movieSeatsNew.SeatsCreation();
-        movieSeatsNew.PrintSeats();
-
-        System.out.println(movieSeatsNew.SelectSeats());
-
-    }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-

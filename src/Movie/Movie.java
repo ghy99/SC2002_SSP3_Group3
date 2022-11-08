@@ -97,60 +97,173 @@ public class Movie extends AllReviews {
         this.startDate = startDate;
     }
 
+    /**
+     * Get Method
+     *
+     * @return Movie Title
+     */
     public String getMovieTitle() {
         return this.movieTitle;
     }
+
+    /**
+     * Get Method
+     *
+     * @return Movie's Showing Status
+     */
     public MovieStatus getShowingStatus() {
         return this.showingStatus;
     }
+
+    /**
+     * Get Method
+     *
+     * @return Director
+     */
     public String getDirector() {
         return director;
     }
+
+    /**
+     * Get Method
+     *
+     * @return Synopsis
+     */
     public String getSynopsis() {
         return this.synopsis;
     }
+
+    /**
+     * Get Method
+     *
+     * @return casts
+     */
     public ArrayList<String> getCast() {
         return this.cast;
     }
+
+    /**
+     * Get Method
+     *
+     * @return Movie's Genre
+     */
     public MovieType.Genre getMovieGenre() {
         return this.MovieGenre;
     }
+
+    /**
+     * Get Method
+     *
+     * @return Movie's Blockbuster status
+     */
     public MovieType.Blockbuster getBlockBuster() {
         return BlockBuster;
     }
+
+    /**
+     * Get Method
+     *
+     * @return Movie's Ratings
+     */
     public MovieType.Class getMovieClass() {
         return this.movieClass;
     }
+
+    /**
+     * Get Method
+     *
+     * @return Date when Movie starts showing.
+     */
     public Date getStartDate() {
         return startDate;
     }
+
+    /**
+     * Get Method
+     *
+     * @return Movie total sale
+     */
     public int getMovieTotalSales() {
         return this.movieTotalSales;
     }
+
+    /**
+     * Set Method
+     *
+     * @param movieTitle - Set Movie Title
+     */
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
     }
+
+    /**
+     * Set Method
+     *
+     * @param showingStatus - Set Showing Status
+     */
     public void setShowingStatus(MovieStatus showingStatus) {
         this.showingStatus = showingStatus;
     }
+
+    /**
+     * Set Method
+     *
+     * @param director - Set Director
+     */
     public void setDirector(String director) {
         this.director = director;
     }
+
+    /**
+     * Set Method
+     *
+     * @param synopsis - Set Synopsis
+     */
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
+
+    /**
+     * Set Method
+     *
+     * @param cast - Set list of casts
+     */
     public void setCast(ArrayList<String> cast) {
         this.cast = cast;
     }
+
+    /**
+     * Set Method
+     *
+     * @param movieGenre - Set Movie Genre
+     */
     public void setMovieGenre(MovieType.Genre movieGenre) {
         MovieGenre = movieGenre;
     }
+
+    /**
+     * Set Method
+     *
+     * @param blockBuster - Set Blockbuster
+     */
     public void setBlockBuster(MovieType.Blockbuster blockBuster) {
         BlockBuster = blockBuster;
     }
+
+    /**
+     * Set Method
+     *
+     * @param movieClass - Set Movie Ratings
+     */
     public void setMovieClass(MovieType.Class movieClass) {
         this.movieClass = movieClass;
     }
+
+    /**
+     * Update Method
+     *
+     * @param showingStatus - Update Movie Showing Status
+     */
     public void updateShowingStatus(MovieStatus showingStatus) {
         this.showingStatus = showingStatus;
     }

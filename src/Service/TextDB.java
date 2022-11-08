@@ -6,10 +6,8 @@ import Admin.*;
 import Cineplex.*;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
@@ -17,9 +15,6 @@ import Movie.*;
 import Review.*;
 
 public class TextDB {
-
-
-
     public enum Files {
         Cineplex(File.separator + "Cineplexes.txt"),
         Movies(File.separator + "Movies.txt"),
