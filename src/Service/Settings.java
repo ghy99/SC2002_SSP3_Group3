@@ -104,8 +104,8 @@ public class Settings {
      * @param isRating Top 5 rating flag
      */
     public void setUserSort(Boolean sale, Boolean isRating) throws IOException {
-        setRating(isRating);
-        setRating(sale);
+        this.isSale = sale;
+        this.isRating= isRating;
         TextDB.UpdateToTextDB(TextDB.Files.Env.toString(), this);
     }
 

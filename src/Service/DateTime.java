@@ -11,9 +11,12 @@ import java.util.Date;
  */
 public class DateTime extends Date {
     /**
-     * Time format that we need
+     * Time format that we need dd-MM-yyyy;HH:mm
      */
     public static final SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy;HH:mm");
+    /**
+     * Time format that we need dd-MM-yyyy
+     */
     public static final SimpleDateFormat sf1 = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
@@ -83,6 +86,11 @@ public class DateTime extends Date {
         return cinemaCode + dateFormatter.format(super.getTime());
     }
 
+    /**
+     * Get Mon - Sat
+      * @param date date
+     * @return Return 1-7
+     */
     public static int getDayNumberOld(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
