@@ -34,7 +34,7 @@ public class CineplexUI {
             System.out.printf("\t%d: Cineplex Name: %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
         }
         selectCineplex = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
-        if(selectCineplex != -1)
+        if(selectCineplex > -1)
             return  cineplexes.getCineplexes().get(selectCineplex);
         else
             return null;

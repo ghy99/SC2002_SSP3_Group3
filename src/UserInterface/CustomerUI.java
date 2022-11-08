@@ -63,13 +63,21 @@ public class CustomerUI {
                         allMovieTicket = SelectSeatsUI.SelectSeatsUserInterface(customer, chosenCineplex, chosenMovie, sSTnC);
                     } while (allMovieTicket == null);
 
-                    customer.printCustomerDetails();
-                    PaymentUI.PaymentInterface(cineplexes, allMovieTicket, chosenMovie, sSTnC);
-                    for (MovieTicket tix : allMovieTicket) {
-                        TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
-                        tix.printTicket();
+                    if(allMovieTicket.size() == 0)
+                    {
+                        System.out.println("You canceled your booking! Thank you!");
                     }
-                    chosenMovie.increaseMovieTotalSale(cineplexes.getListOfMovies(), allMovieTicket.size());
+                    else
+                    {
+                        customer.printCustomerDetails();
+                        PaymentUI.PaymentInterface(cineplexes, allMovieTicket, chosenMovie, sSTnC);
+                        for (MovieTicket tix : allMovieTicket) {
+                            TextDB.WriteToTextDB(TextDB.Files.TransactionHistory.toString(), customer, tix);
+                            tix.printTicket();
+                        }
+                        chosenMovie.increaseMovieTotalSale(cineplexes.getListOfMovies(), allMovieTicket.size());
+                    }
+
                 }
                 case 2 -> {
                     String newName;
