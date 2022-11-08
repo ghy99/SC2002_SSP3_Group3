@@ -13,8 +13,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * @author CHEW ZHI QI
+ * This class stores the Interface to select date when booking movie.
+ */
 public class SelectDateUI {
-    public static ArrayList<Object> SelectDateInterFace(Cineplex cineplex , Movie movie) {
+    /**
+     * This method stores the Interface to Select the date of the movie when customer is booking seats.
+     *
+     * @param cineplex - Used to get list of ShowTime from global variable.
+     * @param movie    - Used to check which dates are available for this movie.
+     * @return - Returns an ArrayList of the selected date, the Cinema and its ShowTime.
+     */
+    public static ArrayList<Object> SelectDateInterFace(Cineplex cineplex, Movie movie) {
         System.out.println(Settings.ANSI_CYAN);
         System.out.println("*************************************************");
         System.out.println("*              Select Date of Movie             *");
@@ -47,13 +58,14 @@ public class SelectDateUI {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
             LocalDate STDate = java.time.LocalDate.now();
             for (int d = 0; d < 7; d++) {
-                System.out.printf("%s) %s\n", d + 1, formatter.format(STDate));
+                System.out.printf("\t%d) %s\n", d + 1, formatter.format(STDate));
                 STDates.add(formatter.format(STDate));
                 STDate = STDate.plusDays(1);
             }
             System.out.println("Select your date from the list above: ");
             selectDate = GetNumberInput.getInt(1, 7, -1) - 1;
             if (selectDate < 0) {
+                System.out.println("Input out of range. Try Again.");
                 return null;
             }
             selectedDate = STDates.get(selectDate);
@@ -65,7 +77,7 @@ public class SelectDateUI {
                 }
             }
             if (dateChecking == -1) {
-                System.out.printf("%s no showtime for this movies on %s. Please select another Date.\n\n", cineplex.getCineplexName(), selectedDate);
+                System.out.printf("Cineplex %s has no showtime for this movie on %s. Please select another Date.\n\n", cineplex.getCineplexName(), selectedDate);
                 return null;
             }
         }

@@ -10,6 +10,7 @@ import Service.TextDB;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
+
 import static UserInterface.AdminUI.AdminInterface;
 
 /**
@@ -39,9 +40,9 @@ public class UserUI {
         System.out.println(Settings.ANSI_RESET);
         System.out.println("Select an option:");
         System.out.println("\t1) Login\n\t2) Create an account");
-        int choice = GetNumberInput.getInt(1,2 , -1);
+        int choice = GetNumberInput.getInt(1, 2, -1);
         if (choice == -1) return;
-        switch(choice) {
+        switch (choice) {
             case 1 -> {
                 customers = TextDB.readFromFile(TextDB.Files.Customers.toString(), customers, null);
                 do {
@@ -60,14 +61,11 @@ public class UserUI {
                     }
                     System.out.println("Enter your phone number: (input -1 to go back to menu)");
                     number = sc.nextLine();
-
                     if (Objects.equals(number, "-1")) {
                         return;
                     }
-
                     // if username exist but wrong password keep asking for password
                 } while (!checkCustomerName(username, number));
-
                 // else, check if username exist in customer.txt or new username
                 CustomerUI.CustomerInterface(cineplexes, customers, checkCustomerNumber(username, number));
             }
@@ -103,12 +101,12 @@ public class UserUI {
 
     /**
      * This method checks that customer name exists in database
+     *
      * @param name   = name that user entered and used to check if the name exists
      * @param number = number that user entered to match with the database
      * @return boolean result
      */
     public static boolean checkCustomerName(String name, String number) {
-//        ArrayList<Customer> customers = new ArrayList<Customer>();
         for (Customer customer : customers) {
             if (Objects.equals(customer.getMovieGoerName(), name)) {
                 if (Objects.equals(customer.getMobileNumber(), number)) {
@@ -125,6 +123,7 @@ public class UserUI {
 
     /**
      * This method returns a Customer object if name and number that was entered matches a value in database
+     *
      * @param name   = the customers name
      * @param number used to check if the number is correct and matches the value in the database.
      * @return the customer object
@@ -133,7 +132,7 @@ public class UserUI {
         for (Customer customer : customers) {
             if (
                     Objects.equals(customer.getMovieGoerName(), name)
-                    && Objects.equals(customer.getMobileNumber(), number)
+                            && Objects.equals(customer.getMobileNumber(), number)
             ) {
                 return customer;
             }

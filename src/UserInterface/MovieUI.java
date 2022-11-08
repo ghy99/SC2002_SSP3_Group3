@@ -33,13 +33,20 @@ public class MovieUI {
                 }
                 System.out.println("Select your Movie from the list above:");
                 selectMovie = GetNumberInput.getInt(1, movielist.size(), -1) - 1;
-                System.out.println("\nThis is the movie you have selected.");
+                System.out.println("\nThis is the movie you have selected.\n");
                 movielist.get(selectMovie).printMovieDetails();
-                System.out.println("Would you like to choose another movie?");
+                System.out.println("\n\nWould you like to choose another movie?");
                 System.out.println("\t1) Yes\n\t2) No");
                 int choice = GetNumberInput.getInt(1, 2, -1);
-                if (choice == -1 || choice == 2) break;
-                else if (choice == 1) continue;
+                if (choice == -1 ) {
+                    selectMovie = -1;
+                    continue;
+                }
+                else if (choice == 1) {
+                    selectMovie = -1;
+                    continue;
+                }
+                else if (choice == 2) break;
                 while (selectMovie < 0 || selectMovie >= movielist.size()) {
                     System.out.println("The number you keyed is out of range, please key again!");
                     System.out.println("Select your Movie from the list above: ");

@@ -1,15 +1,19 @@
 package Service;
 
-import Customer.*;
+import Customer.Customer;
 import Movie.TicketCharges;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * @authors CHEW ZHI QI, GAN HAO YI, TAN JUE LIN
  * Setting class to hold environmental global variable
  */
 public class Settings {
+    /**
+     * Set Print Colours
+     */
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -27,16 +31,24 @@ public class Settings {
      * Flag for user be able to see top 5 rating movie
      */
     private boolean isRating;
+    /**
+     * Stores Global list of holidays to check
+     */
     private ArrayList<String> holiday;
+    /**
+     * Store current ticket charges
+     */
     private TicketCharges ticketCharges;
-
+    /**
+     * Store current list of customers for login
+     */
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
 
     public Settings() throws IOException {
-        Boolean[] env = TextDB.ReadFromFile(File.separator + TextDB.Files.Env.toString());
+        Boolean[] env = TextDB.ReadFromFile(File.separator + TextDB.Files.Env);
         setSale(env[0]);
         setRating(env[1]);
-        System.out.println("EVN variable loaded!! \n\n");
+        System.out.println("ENV variable loaded!! \n\n");
 
         Customer temp = new Customer();
         holiday = TextDB.ReadFromFile(TextDB.Files.Holiday.toString() , this);
@@ -46,11 +58,6 @@ public class Settings {
 
     public ArrayList<Customer> getCustomerlist() {
         return customerlist;
-    }
-
-    public void addCustomer(Customer customer) {
-        this.customerlist.add(customer);
-
     }
 
     /**
@@ -85,16 +92,8 @@ public class Settings {
         return holiday;
     }
 
-    public void setHoliday(ArrayList<String> holiday) {
-        this.holiday = holiday;
-    }
-
     public TicketCharges getTicketCharges() {
         return ticketCharges;
-    }
-
-    public void setTicketCharges(TicketCharges ticketCharges) {
-        this.ticketCharges = ticketCharges;
     }
 
     /**

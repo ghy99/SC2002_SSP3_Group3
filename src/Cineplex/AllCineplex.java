@@ -73,6 +73,11 @@ public class AllCineplex extends Settings {
         TextDB.UpdateTextDB(filename, this.listOfMovies);
     }
 
+    /**
+     * This method sorts the List of Top 5 movies by either the Rating or the Sales.
+     * @param sortType
+     * @return
+     */
     private ArrayList<Movie> sortReview(MovieSort sortType) {
         ArrayList<Movie> tempMovie = (ArrayList<Movie>) this.listOfMovies.clone();
 
@@ -95,23 +100,26 @@ public class AllCineplex extends Settings {
         }
     }
 
+    /**
+     * This method prints the sorted list of movie according to Rating / Sales
+     * @param movieSort - A sorted ArrayList of the Top 5 Movies
+     */
     public void printSortedList(MovieSort movieSort) {
         ArrayList<Movie> movies = sortReview(movieSort);
-
         if (movieSort.equals(MovieSort.Top5Sales)) {
             if (movies.size() > 5) {
                 for (int i = 0; i < 5; i++) {
-                    System.out.printf("%s %s %d \n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getMovieTotalSales());
+                    System.out.printf("\t%s %s %d\n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getMovieTotalSales());
                 }
             } else {
                 for (int i = 0; i < movies.size(); i++) {
-                    System.out.printf("%s %s %d \n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getMovieTotalSales());
+                    System.out.printf("\t%s %s %d\n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getMovieTotalSales());
                 }
             }
         } else {
             if (movies.size() > 5) {
                 for (int i = 0; i < 5; i++) {
-                    System.out.printf("%s %s %.1f \n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getOverallRating());
+                    System.out.printf("\t%s %s %.1f\n", i + 1, movies.get(i).getMovieTitle(), movies.get(i).getOverallRating());
                 }
             } else {
                 for (int i = 0; i < movies.size(); i++) {
@@ -147,29 +155,34 @@ public class AllCineplex extends Settings {
         for (Cineplex cineplex : this.cineplexes) {
             cineplex.InitializeMovies(this.listOfMovies);
         }
-
         System.out.println("Cineplexes are initialized\n");
         dailyTask();
     }
 
+    /**
+     * This method updates the Showing Status of the movie daily at 12AM.
+     *
+     * @throws IOException - Updates database on the Showing Status of the movie.
+     */
     private void updateUpdateMovieStat() throws IOException {
         for (Movie currMovie : this.getListOfMovies()) {
             if (currMovie.getShowingStatus() != Movie.MovieStatus.EndOfShowing) {
                 Date currDate = new Date();
-                if (currMovie.getStartDate().getTime() <= currDate.getTime()) {//show time
+                if (currMovie.getStartDate().getTime() <= currDate.getTime()) {
                     currMovie.setShowingStatus(Movie.MovieStatus.NowShowing);
                 } else if (currMovie.getStartDate().getTime() - currDate.getTime() < 604800000) {
                     currMovie.setShowingStatus(Movie.MovieStatus.Preview);
-                } else {//coming
+                } else {
                     currMovie.setShowingStatus(Movie.MovieStatus.ComingSoon);
-
                 }
             }
         }
-
         TextDB.UpdateTextDB(filename, this.listOfMovies);
     }
 
+    /**
+     * Updates current list of Movies' Showing Status at 12AM.
+     */
     private void dailyTask() {
         Calendar today = Calendar.getInstance();
         today.set(Calendar.HOUR_OF_DAY, 0);
@@ -180,7 +193,7 @@ public class AllCineplex extends Settings {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("task happens");
+                System.out.println("Show Time Updated at 12AM.");
                 try {
                     updateUpdateMovieStat();
                 } catch (IOException e) {
@@ -192,7 +205,6 @@ public class AllCineplex extends Settings {
     }
 
     /**
-     * Done by : Eddy Cheng, Gan Hao Yi
      * This Method displays the list of cineplex(Branches) available.
      */
     public void displayCineplexList() {

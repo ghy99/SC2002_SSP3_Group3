@@ -1,13 +1,15 @@
 package UserInterface;
 
-import Cineplex.*;
-import Movie.*;
-import Service.*;
+import Cineplex.Cinema;
+import Cineplex.AllCineplex;
+import Cineplex.Cineplex;
+import Movie.Movie;
+import Movie.MovieType;
+import Service.DateTime;
+import Service.GetNumberInput;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * This is the Cinema Interface. Imported to call User interface to allow editing the showtime.
@@ -39,8 +41,8 @@ public class CinemaUI {
      * This method adds new ShowTimes to each cinema that each cineplex has.
      * This is used right after a new movie has been created. User MUST create new ShowTime for all cinemas.
      *
-     * @param cineplexes
-     * @throws IOException
+     * @param cineplexes - Update new ShowTime in global storage.
+     * @throws IOException - To check if ShowTime can be written into text file.
      */
     public static void addNewShowTime(AllCineplex cineplexes, Movie movie) throws IOException {
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
@@ -213,6 +215,7 @@ public class CinemaUI {
 
     /**
      * This method is used to remove Show Times in selected Cineplex's Cinema.
+     *
      * @param cineplexes - Used to update global list of ShowTime.
      * @throws IOException - Checks if Cineplex's / Cinema's ShowTime database is empty.
      */
