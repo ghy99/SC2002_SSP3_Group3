@@ -24,7 +24,7 @@ public class AddCinemaUI {
         System.out.println("\t\t 1)Premium:");
         System.out.println("\t\t 2)Regular:");
 
-        int typeChoice = GetNumberInput.getInt(1,2,-1);
+        int typeChoice = GetNumberInput.getInt(1,2,-1) - 1;
 
         cineplex.CreateNewCinema(cinema, Cinema.CinemaType.values()[typeChoice] , cineplexes);
     }
