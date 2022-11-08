@@ -36,16 +36,25 @@ public class AddCinemaUI {
         System.out.printf("\nPlease enter Cinema number (Range: %d onwards):", cineplex.getNoOfCinemas());
         do {
             if (cinema.equals("-1")) continue;
-            if (Integer.parseInt(cinema) < cineplex.getNoOfCinemas()) continue;
-            cinema = sc.nextLine();
+
+            if(sc.hasNextInt())
+            {
+                cinema = sc.next();
+                if (Integer.parseInt(cinema) > cineplex.getNoOfCinemas()) break;
+            }
         } while (Objects.equals(cinema, ""));
 
-        System.out.println("\nPlease select the type of Cinema:");
-        System.out.println("\t1) Premium:");
-        System.out.println("\t2) Regular:");
+        int typeChoice = -1;
+        do{
+            System.out.println("\nPlease select the type of Cinema:");
+            System.out.println("\t1) Premium:");
+            System.out.println("\t2) Regular:");
 
-        int typeChoice = GetNumberInput.getInt(1, 2, -1) - 1;
+            typeChoice = GetNumberInput.getInt(1, 2, -1) - 1;
+            if(typeChoice < -1) break;
+        }while (typeChoice < 0);
 
+        if(typeChoice < -1) return;
         cineplex.CreateNewCinema(cinema, Cinema.CinemaType.values()[typeChoice], cineplexes);
     }
 }
