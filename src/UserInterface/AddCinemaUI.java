@@ -22,9 +22,9 @@ public class AddCinemaUI {
             cinema = sc.nextLine();
         }while (Objects.equals(cinema, ""));
 
-        System.out.println("\t Please enter cinema type:");
-        System.out.println("\t\t 1)Premium:");
-        System.out.println("\t\t 2)Regular:");
+        System.out.println("\nPlease enter cinema type:");
+        System.out.println("\t1) Premium:");
+        System.out.println("\t2) Regular:");
 
         int typeChoice = GetNumberInput.getInt(1,2,-1) - 1;
 

@@ -45,7 +45,7 @@ public class MainUI {
 
             if (option == -1) {
                 System.out.println("Exiting...");
-                break;
+                return;
             }
             cineplexes.clearScreen();
             switch (option) {

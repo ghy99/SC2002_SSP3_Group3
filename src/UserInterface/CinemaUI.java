@@ -5,7 +5,9 @@ import Movie.*;
 import Service.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * This is the Cinema Interface. Imported to call User interface to allow editing the showtime.
@@ -131,13 +133,23 @@ public class CinemaUI {
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
             System.out.printf("\t%s) %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
         }
-        Cineplex chosenCineplex = cineplexes.getCineplexes().get(GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1);
+        int choice1 = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
+        if (choice1 == -2) {
+            System.out.println("Exiting.");
+            return;
+        }
+        Cineplex chosenCineplex = cineplexes.getCineplexes().get(choice1);
 
         System.out.println("Please enter which cinema showtime to edit :");
         for (int i = 0; i < chosenCineplex.getNoOfCinemas(); i++) {
             System.out.printf("\t%s) %s Cinema %s\n", i + 1, chosenCineplex.getListOfCinemas().get(i).getCinemaType(), chosenCineplex.getListOfCinemas().get(i).getCinemaName());
         }
-        Cinema chosenCinema = chosenCineplex.getListOfCinemas().get(GetNumberInput.getInt(1, chosenCineplex.getNoOfCinemas(), -1) - 1);
+        int choice2 = GetNumberInput.getInt(1, chosenCineplex.getNoOfCinemas(), -1) - 1;
+        if (choice2 == -2) {
+            System.out.println("Exiting.");
+            return;
+        }
+        Cinema chosenCinema = chosenCineplex.getListOfCinemas().get(choice2);
 
         System.out.printf("Current showtime in %s\n", chosenCinema.getCinemaName());
         for (int i = 0; i < chosenCinema.getShowTime().size(); i++) {
@@ -145,6 +157,10 @@ public class CinemaUI {
         }
         System.out.println("Please select ShowTime to edit:");
         int chosenShow = GetNumberInput.getInt(1, chosenCinema.getShowTime().size(), -1) - 1;
+        if (chosenShow == -1) {
+            System.out.println("Exiting.");
+            return;
+        }
         Date newDate = null;
         do {
             System.out.println("Please enter year (2022-2023):");
@@ -196,5 +212,47 @@ public class CinemaUI {
                     DateTime.convertTime(chosenCinema.getShowTime().get(k).getTime().getTime())
             );
         }
+    }
+
+    public static void removeShowTime(AllCineplex cineplexes) throws IOException {
+        System.out.println("Please enter which cineplex showtime to edit :");
+        for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
+            System.out.printf("\t%s) %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
+        }
+        int choice1 = GetNumberInput.getInt(1, cineplexes.getCineplexes().size(), -1) - 1;
+        if (choice1 == -2) {
+            System.out.println("Exiting.");
+            return;
+        }
+        Cineplex chosenCineplex = cineplexes.getCineplexes().get(choice1);
+        if (chosenCineplex.getNoOfCinemas() == 0) {
+            System.out.println("This Cinema does not have any shows currently.");
+            return;
+        }
+        System.out.println("Please enter which cinema showtime to edit :");
+        for (int i = 0; i < chosenCineplex.getNoOfCinemas(); i++) {
+            System.out.printf("\t%s) %s Cinema %s\n", i + 1, chosenCineplex.getListOfCinemas().get(i).getCinemaType(), chosenCineplex.getListOfCinemas().get(i).getCinemaName());
+        }
+        int choice2 = GetNumberInput.getInt(1, chosenCineplex.getNoOfCinemas(), -1) - 1;
+        if (choice2 == -2) {
+            System.out.println("Exiting.");
+            return;
+        }
+        Cinema chosenCinema = chosenCineplex.getListOfCinemas().get(choice2);
+        if (chosenCinema.getShowTime().size() == 0) {
+            System.out.println("There is no ShowTime in this Cinema.");
+            return;
+        }
+        System.out.printf("Current showtime in Cinema %s\n", chosenCinema.getCinemaName());
+        for (int i = 0; i < chosenCinema.getShowTime().size(); i++) {
+            System.out.printf("\t%s) %s %s\n", i + 1, chosenCinema.getShowTime().get(i).getMovie().getMovieTitle(), DateTime.convertTime(chosenCinema.getShowTime().get(i).getTime().getTime()));
+        }
+        System.out.println("Please select ShowTime to edit:");
+        int chosenShow = GetNumberInput.getInt(1, chosenCinema.getShowTime().size(), -1) - 1;
+        if (chosenShow == -2) {
+            System.out.println("Exiting.");
+            return;
+        }
+        chosenCinema.deleteCinemaTime(chosenShow);
     }
 }

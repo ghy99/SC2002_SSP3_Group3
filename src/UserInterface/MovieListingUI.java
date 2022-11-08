@@ -38,6 +38,7 @@ public class MovieListingUI {
             switch (num) {
                 case 1 -> {
                     Movie newMovie = createMovie();
+                    newMovie.printMovieDetails();
                     cineplexes.addMovies(newMovie);
                     CinemaUI.UserInterface(cineplexes, 1, newMovie);
                 }
@@ -67,15 +68,27 @@ public class MovieListingUI {
                 }
                 case 3 -> {
                     System.out.println("*************************************************");
-                    System.out.println("*                Removing Movie                 *");
+                    System.out.println("*           Removing Movie / ShowTime           *");
                     System.out.println("*************************************************");
                     int choice;
-                    System.out.println("\nWhich movie would you like to remove?");
-                    printMovieList(listOfMovies);
-                    choice = GetNumberInput.getInt(1, listOfMovies.size(), -1) - 1;
-                    if (choice == -2) break;
-                    Movie deletingMovie = deleteMovie(listOfMovies.get(choice));
-                    cineplexes.removeMovie(choice, deletingMovie);
+                    System.out.println("\nWould you like to remove a Movie or ShowTime?");
+                    System.out.println("\t1) Remove Movie\n\t2) Remove ShowTime");
+                    int which = GetNumberInput.getInt(1, 2, -1);
+                    if (which == -1) break;
+                    switch (which) {
+                        case 1 -> {
+                            System.out.println("\nWhich movie would you like to remove?");
+                            printMovieList(listOfMovies);
+                            choice = GetNumberInput.getInt(1, listOfMovies.size(), -1) - 1;
+                            if (choice == -2) break;
+                            Movie deletingMovie = deleteMovie(listOfMovies.get(choice));
+                            cineplexes.removeMovie(choice, deletingMovie);
+                        }
+                        case 2 -> {
+                            CinemaUI.removeShowTime(cineplexes);
+                        }
+                    }
+
                 }
             }
         } while (num != 4);
@@ -90,9 +103,9 @@ public class MovieListingUI {
      */
     public static void printMovieList(ArrayList<Movie> listOfMovies) {
         for (int i = 0; i < listOfMovies.size(); i++) {
-            System.out.printf("%d)\n", i + 1);
-            listOfMovies.get(i).printMovieDetails();
-            System.out.println();
+            System.out.printf("%d) %s\n", i + 1, listOfMovies.get(i).getMovieTitle());
+//            listOfMovies.get(i).printMovieDetails();
+//            System.out.println();
         }
     }
 
