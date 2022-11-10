@@ -21,7 +21,7 @@ public class SelectDimensionUI {
      *
      * @param cineplex - Passed in to get the Global list of Cinema, Movie and ShowTime.
      * @param sTnC     - Stores Specific ShowTime of Movie and the Cinema it is showing in.
-     * @return
+     * @return ArrayList of Selected ShowTime and Cinema
      */
     public static ArrayList<Object> SelectDimensionUserInterface(Cineplex cineplex, ArrayList<Object> sTnC) {
         int three_d = 0;

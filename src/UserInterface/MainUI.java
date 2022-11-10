@@ -76,8 +76,8 @@ public class MainUI {
                     System.out.println("Displaying Movies by Ranking.");
                     if (cineplexes.isRating() || cineplexes.isSale()) {
                         if (cineplexes.isRating() && cineplexes.isSale()) {
-                            System.out.println("\t1) View by top 5 sale ");
-                            System.out.println("\t2) View by top 5 rating ");
+                            System.out.println("\t1) View by Top 5 Sales");
+                            System.out.println("\t2) View by Top 5 Ratings");
                             int userInput = GetNumberInput.getInt(1, 2, -1);
                             switch (userInput) {
                                 case 1 -> {

@@ -16,7 +16,21 @@ import java.util.Scanner;
 
 import static Movie.MovieSeatsNew.right;
 
+/**
+ * @author CHEW ZHI QI
+ * This is the Select Seat User Interface. User selects Cinema Seats for their movie through this User Interface.
+ */
 public class SelectSeatsUI {
+    /**
+     * This User Interface controls the operation to select Cinema Seats.
+     *
+     * @param customer    - Customer buying ticket
+     * @param cineplex    - Cineplex where Movie is watched
+     * @param chosenMovie - Movie to be watched
+     * @param sSTnC       - ShowTime and Cinema of Movie being watched
+     * @return - ArrayList of MovieTickets that are bought
+     * @throws IOException - Check if Seats Database Exists
+     */
     public static ArrayList<MovieTicket> SelectSeatsUserInterface(Customer customer, Cineplex cineplex,
                                                                   Movie chosenMovie, ArrayList<Object> sSTnC) throws IOException {
         Scanner sc = new Scanner(System.in);
