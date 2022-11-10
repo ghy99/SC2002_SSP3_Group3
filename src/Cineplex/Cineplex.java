@@ -157,7 +157,6 @@ public class Cineplex {
                             allST.add(st);
                             cinemas.add(c);
                             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-                            System.out.printf("%s:%s \n", st.getMovie().getMovieTitle(), timeFormat.format(st.getTime()));
                         }
                     }
                 }
@@ -172,14 +171,14 @@ public class Cineplex {
                 String previousString = dateFormat.format(allST.get(0).getTime());
                 System.out.printf("\t\t%s", previousString);
                 for (int k = 0; k < allST.size(); k++) {
-                    System.out.printf("\tCinema %s", cinemas.get(k).getCinemaName());
                     if (Objects.equals(previousString, dateFormat.format(allST.get(k).getTime()))) {
                         previousString = "";
+                        System.out.printf("\t(%s)Cinema %s", cinemas.get(k).getCinemaType().ToString() ,cinemas.get(k).getCinemaName());
                         System.out.printf("%s:%s", previousString, timeFormat.format(allST.get(k).getTime()));
                         previousString = dateFormat.format(allST.get(k).getTime());
                     } else {
                         previousString = dateFormat.format(allST.get(k).getTime());
-                        System.out.printf("\n\t\t%s\tCinema %s:%s", previousString, cinemas.get(k).getCinemaName(), timeFormat.format(allST.get(k).getTime()));
+                        System.out.printf("\n\t\t%s\t(%s)Cinema %s:%s", previousString, cinemas.get(k).getCinemaType().ToString(), cinemas.get(k).getCinemaName(), timeFormat.format(allST.get(k).getTime()));
                     }
                 }
                 System.out.println();
