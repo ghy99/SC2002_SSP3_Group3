@@ -52,6 +52,7 @@ public class AllReviews {
 
     /**
      * Add a new review
+     *
      * @param userName Name of reviewer
      * @param rating   Rating must be ">= 0 and <=5"
      * @param review   Review
@@ -64,7 +65,7 @@ public class AllReviews {
         }
         if (0 <= rating && rating <= 5) {
             listOfReview.add(new Review(userName, review, rating));
-            TextDB.UpdateToTextDB(movies,TextDB.Files.Movies.toString() );
+            TextDB.UpdateToTextDB(movies, TextDB.Files.Movies.toString());
             System.out.println("Rating added!");
         } else {
             System.out.println("Rating not added! Please enter rating between 1-5!");
@@ -154,16 +155,9 @@ public class AllReviews {
 
         ArrayList<Review> tempReview = sortReview(sortType);
 
-        if(tempReview.size() > 1)
-        {
-            for (Review review : tempReview) {
-                System.out.println("\nUsername: " + review.getUserName());
-                System.out.println("Review Rating: " + review.getRating() + "\tReview: " + review.getReview());
-            }
-        }
-        else
-        {
-            System.out.println("NA");
+        for (Review review : tempReview) {
+            System.out.println("\nUsername: " + review.getUserName());
+            System.out.println("Review Rating: " + review.getRating() + "\tReview: " + review.getReview());
         }
         System.out.println();
     }
