@@ -68,7 +68,7 @@ public class SelectDimensionUI {
             int count = 1;
             for (int i = 0; i < allST.size(); i++) {
                 if (Objects.equals(selectedDate, DateTime.convertDate(allST.get(i).getTime().getTime())) && Objects.equals(allST.get(i).getDimension(), dim)) {
-                    System.out.printf("\t%s) Cinema %s: %s %s\n", count++, cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle(), DateTime.convertTime(allST.get(i).getTime().getTime()));
+                    System.out.printf("\t%s) (%s)Cinema %s: %s %s\n", count++, cinemas.get(i).getCinemaType().toString(), cinemas.get(i).getCinemaName(), allST.get(i).getMovie().getMovieTitle(), DateTime.convertTime(allST.get(i).getTime().getTime()));
                     specificST.add(allST.get(i));
                     specificCin.add(cinemas.get(i));
                     size++;
