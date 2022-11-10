@@ -99,7 +99,9 @@ public class AllReviews {
                 return tempReview;
             }
             case LowestToHigest -> {
-                System.out.println("####Lowest rating to highest review####");
+                System.out.println("*************************************************");
+                System.out.println("*       Lowest rating to highest review         *");
+                System.out.println("*************************************************");
                 tempReview.sort(Comparator.comparing(Review::getRating));
                 return tempReview;
             }
@@ -109,7 +111,6 @@ public class AllReviews {
                 System.out.println("*  Reviews sorted from Highest Rating to Lowest *");
                 System.out.println("*************************************************");
                 System.out.println(Settings.ANSI_RESET);
-                System.out.println("####Higest rating to lowest review####");
                 tempReview.sort(Comparator.comparing(Review::getRating));
                 Collections.reverse(tempReview);
                 return tempReview;
