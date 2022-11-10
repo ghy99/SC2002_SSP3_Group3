@@ -44,9 +44,6 @@ homing|3.0|Its alright
 Jaws I|NowShowing|Mr Shark|Humans destroy the ocean, sharks protect themselves, get killed by humans instead.|Shark 1, Shark 2, Shark 3, Some Annoying Human|Western|NOTBLOCKBUSTER|G|0|10-11-2022
 [
 ]
-Jaws I|NowShowing|Mr Shark|Humans destroy the ocean, sharks protect themselves, get killed by humans instead.|Shark 1, Shark 2, Shark 3, Some Annoying Human|Western|NOTBLOCKBUSTER|G|0|10-11-2022
-[
-]
 Anthony's Solo Battle|NowShowing|Hao Yi|Student Anthony attempts to fix everyone's code but he is facing a lot of issues due to his team leader's inexperience.|Anthony, Hao Yi, Jue Lin|Mystery|NOTBLOCKBUSTER|G|0|10-11-2022
 [
 ]

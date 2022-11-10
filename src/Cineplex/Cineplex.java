@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -154,15 +154,16 @@ public class Cineplex {
                 if (listOfShowtime.size() > 0) {
                     for (ShowTime st : listOfShowtime) {
                         if (Objects.equals(st.getMovie().getMovieTitle(), movielist.get(j).getMovieTitle())) {
-                            allST.add(st);
-                            cinemas.add(c);
-                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-                            System.out.printf("%s:%s \n", st.getMovie().getMovieTitle(), timeFormat.format(st.getTime()));
+                            Date currDate = new Date();
+                            if (st.getTime().getTime() >= currDate.getTime()) {
+                                allST.add(st);
+                                cinemas.add(c);
+                                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            }
                         }
                     }
                 }
             }
-
 
             if (allST.size() > 0) {
                 //allST.sort(Comparator.comparing(ShowTime::getTimeHour));
@@ -172,14 +173,14 @@ public class Cineplex {
                 String previousString = dateFormat.format(allST.get(0).getTime());
                 System.out.printf("\t\t%s", previousString);
                 for (int k = 0; k < allST.size(); k++) {
-                    System.out.printf("\tCinema %s", cinemas.get(k).getCinemaName());
                     if (Objects.equals(previousString, dateFormat.format(allST.get(k).getTime()))) {
                         previousString = "";
-                        System.out.printf("%s:%s", previousString, timeFormat.format(allST.get(k).getTime()));
+                        System.out.printf("\t(%s)Cinema %s", cinemas.get(k).getCinemaType().ToString() ,cinemas.get(k).getCinemaName());
+                        System.out.printf("%s - %s", previousString, timeFormat.format(allST.get(k).getTime()));
                         previousString = dateFormat.format(allST.get(k).getTime());
                     } else {
                         previousString = dateFormat.format(allST.get(k).getTime());
-                        System.out.printf("\n\t\t%s\tCinema %s:%s", previousString, cinemas.get(k).getCinemaName(), timeFormat.format(allST.get(k).getTime()));
+                        System.out.printf("\n\t\t%s\t(%s)Cinema %s - %s", previousString, cinemas.get(k).getCinemaType().ToString(), cinemas.get(k).getCinemaName(), timeFormat.format(allST.get(k).getTime()));
                     }
                 }
                 System.out.println();
