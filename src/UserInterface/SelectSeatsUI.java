@@ -72,7 +72,10 @@ public class SelectSeatsUI {
                         cinema.getCinemaType(), specificST.getDimension(), specificST.getMovie().getBlockBuster());
                 allMovieTikcet.add(movieTicket);
             }
+
+            specificST.PrintSeats();
         }
+
         return allMovieTikcet;
     }
 }
