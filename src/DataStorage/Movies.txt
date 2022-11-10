@@ -1,4 +1,4 @@
-Avengers|Preview|ChickenMan|Group of people comes together to fight purple grape.|Metal Frisbee, Metal Boy, New Axe, Arrows, Russian|Action|BLOCKBUSTER|PG13|7|10-11-2022
+Avengers|NowShowing|ChickenMan|Group of people comes together to fight purple grape.|Metal Frisbee, Metal Boy, New Axe, Arrows, Russian|Action|BLOCKBUSTER|PG13|7|10-11-2022
 [
 Richard Tan|0.4|the purple giant is so cute and the sunset was amazing
 Jane Tan|4.0|Very powerful CGI!
@@ -23,7 +23,7 @@ Zoey|4.1|By far the most outstanding and fabulous movie
 Veron|5.0|Full of emotions!! I cant get enough of it
 Xeor|4.5|SLAYYYYYYYYYYY
 ]
-Transformers: Dark of the Moon|Preview|Michael Bay|Cars and Trucks fight Planes.|Car, Truck, Underachieving White Boy|Action|BLOCKBUSTER|M18|20|10-11-2022
+Transformers: Dark of the Moon|NowShowing|Michael Bay|Cars and Trucks fight Planes.|Car, Truck, Underachieving White Boy|Action|BLOCKBUSTER|M18|20|10-11-2022
 [
 fuming|2.3|Its underwhelming
 venus|1.5|Not recommended to watch
@@ -33,7 +33,7 @@ Ubin|4.5|The visual effects keeps the audience engaged
 Genshin|2.0|The writing is exceptionally poor
 Winnie|3.7|The movie was very realistic
 ]
-Train to Busan|Preview|Yeon Sang-ho|Seok-Woo is a fund manager in Seoul. He is separated from his wife and lives with his daughter Soo-An. Seok-Woo doesn't spend much time with his daughter or show affection to her. On the night before Soo-An's birthday, Soo-An insists on seeing her mother for her birthday. Seok-Woo has no other choce, but to take her to Busan. Early next morning, they board the KTX train for Busan at Seoul Station. Before the KTX train leaves Seoul Station, a zombie-like girl jumps onto the train. The train is infected with a horrific virus that is spreading like wildfire. Seok-Woo, Soo-An and the other passengers on the KTX train must now fight for their lives.|Gong Yoo, Jung Yu-Mi, Ma Dong-Seok, Kim Soo-Ahn, Kim Eui-Sung, Choi Woo-Sik, Ahn So-Hee|Mystery|BLOCKBUSTER|M18|0|10-11-2022
+Train to Busan|NowShowing|Yeon Sang-ho|Seok-Woo is a fund manager in Seoul. He is separated from his wife and lives with his daughter Soo-An. Seok-Woo doesn't spend much time with his daughter or show affection to her. On the night before Soo-An's birthday, Soo-An insists on seeing her mother for her birthday. Seok-Woo has no other choce, but to take her to Busan. Early next morning, they board the KTX train for Busan at Seoul Station. Before the KTX train leaves Seoul Station, a zombie-like girl jumps onto the train. The train is infected with a horrific virus that is spreading like wildfire. Seok-Woo, Soo-An and the other passengers on the KTX train must now fight for their lives.|Gong Yoo, Jung Yu-Mi, Ma Dong-Seok, Kim Soo-Ahn, Kim Eui-Sung, Choi Woo-Sik, Ahn So-Hee|Mystery|BLOCKBUSTER|M18|0|10-11-2022
 [
 Ben|3.0|The zombies were not realistic
 Gong Yoo|5.0|I acted in it, of course its 5.0/5.0
@@ -41,21 +41,18 @@ Jennie|5.0|My sunbaes acting is top notch. Vote for him for daesang
 Benjamin|5.0|I have never seen such a action packed movie
 homing|3.0|Its alright
 ]
-Jaws I|Preview|Mr Shark|Humans destroy the ocean, sharks protect themselves, get killed by humans instead.|Shark 1, Shark 2, Shark 3, Some Annoying Human|Western|NOTBLOCKBUSTER|G|0|10-11-2022
+Jaws I|NowShowing|Mr Shark|Humans destroy the ocean, sharks protect themselves, get killed by humans instead.|Shark 1, Shark 2, Shark 3, Some Annoying Human|Western|NOTBLOCKBUSTER|G|0|10-11-2022
 [
 ]
-Jaws I|Preview|Mr Shark|Humans destroy the ocean, sharks protect themselves, get killed by humans instead.|Shark 1, Shark 2, Shark 3, Some Annoying Human|Western|NOTBLOCKBUSTER|G|0|10-11-2022
+Anthony's Solo Battle|NowShowing|Hao Yi|Student Anthony attempts to fix everyone's code but he is facing a lot of issues due to his team leader's inexperience.|Anthony, Hao Yi, Jue Lin|Mystery|NOTBLOCKBUSTER|G|0|10-11-2022
 [
 ]
-Anthony's Solo Battle|Preview|Hao Yi|Student Anthony attempts to fix everyone's code but he is facing a lot of issues due to his team leader's inexperience.|Anthony, Hao Yi, Jue Lin|Mystery|NOTBLOCKBUSTER|G|0|10-11-2022
+Anthony's Adventures|NowShowing|Hao Yi|Anthony faces SC2002's Prof LiFang's last minute project updates.|Anthony, LiFang|Action|NOTBLOCKBUSTER|G|2|10-11-2022
 [
 ]
-Anthony's Adventures|Preview|Hao Yi|Anthony faces SC2002's Prof LiFang's last minute project updates.|Anthony, LiFang|Action|NOTBLOCKBUSTER|G|2|10-11-2022
+JueLin Revisits for loops|NowShowing|Hao Yi and Anthony|JueLin returns from her Algorithm to face another Algorithm in SC2002!|JueLin, Prof LiFang|Comedy|NOTBLOCKBUSTER|G|0|10-11-2022
 [
 ]
-JueLin Revisits for loops|Preview|Hao Yi and Anthony|JueLin returns from her Algorithm to face another Algorithm in SC2002!|JueLin, Prof LiFang|Comedy|NOTBLOCKBUSTER|G|0|10-11-2022
-[
-]
-Jue Lin Solves Her For Loops|Preview|Jue Lin|Jue Lin beats her for loops and movie seats are implemented|JueLin, Moblima|Comedy|NOTBLOCKBUSTER|R21|1|10-11-2022
+Jue Lin Solves Her For Loops|NowShowing|Jue Lin|Jue Lin beats her for loops and movie seats are implemented|JueLin, Moblima|Comedy|NOTBLOCKBUSTER|R21|1|10-11-2022
 [
 ]
