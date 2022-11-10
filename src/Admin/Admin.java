@@ -80,7 +80,7 @@ public class Admin {
 
     /**
      * This function is to change the ticket pricing charges
-     *
+     * @param cineplex Current instance of cinepelx
      * @throws IOException thrown if reading data from TicketPrice causes error
      */
     public void EditTicket(AllCineplex cineplex) throws IOException {
@@ -159,8 +159,8 @@ public class Admin {
 
     /**
      * This function is used to manage the add / edit / delete functions for the Holiday Dates
-     *
-     * @throws IOException to ensure the input has no error
+     * @param cineplex Cureent instance of cineplex
+     * @throws IOException
      */
     public void HolidayDateFunctions(AllCineplex cineplex) throws IOException {
         System.out.println(Settings.ANSI_CYAN);
