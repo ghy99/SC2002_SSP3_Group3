@@ -30,10 +30,10 @@ public class CinemaUI {
             case 1 -> {
                 System.out.printf("\n\nAdding ShowTime for movie: %s.", movie.getMovieTitle());
                 System.out.println("Creating ShowTime for each Cineplex.\n");
-                addNewShowTime(cineplexes, movie);
+                addNewShowTimeUI(cineplexes, movie);
             }
             // update movie timing
-            case 2 -> UpdateShowTime(cineplexes, movie);
+            case 2 -> UpdateShowTimeUI(cineplexes, movie);
         }
     }
 
@@ -44,7 +44,7 @@ public class CinemaUI {
      * @param cineplexes - Update new ShowTime in global storage.
      * @throws IOException - To check if ShowTime can be written into text file.
      */
-    public static void addNewShowTime(AllCineplex cineplexes, Movie movie) throws IOException {
+    public static void addNewShowTimeUI(AllCineplex cineplexes, Movie movie) throws IOException {
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
             Cineplex chosenCineplex = cineplexes.getCineplexes().get(i);
             System.out.printf("Creating ShowTime for Cineplex %s\n", chosenCineplex.getCineplexName());
@@ -127,7 +127,7 @@ public class CinemaUI {
      * @param cineplexes is passed into the method to update the global list of movies used by the app.
      * @throws IOException is used when updating the database.
      */
-    public static void UpdateShowTime(AllCineplex cineplexes, Movie movie) throws IOException {
+    public static void UpdateShowTimeUI(AllCineplex cineplexes, Movie movie) throws IOException {
         System.out.println("Please enter which cineplex showtime to edit :");
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
             System.out.printf("\t%s) %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
@@ -219,7 +219,7 @@ public class CinemaUI {
      * @param cineplexes - Used to update global list of ShowTime.
      * @throws IOException - Checks if Cineplex's / Cinema's ShowTime database is empty.
      */
-    public static void removeShowTime(AllCineplex cineplexes) throws IOException {
+    public static void removeShowTimeUI(AllCineplex cineplexes) throws IOException {
         System.out.println("Please enter which cineplex showtime to edit :");
         for (int i = 0; i < cineplexes.getCineplexes().size(); i++) {
             System.out.printf("\t%s) %s\n", i + 1, cineplexes.getCineplexes().get(i).getCineplexName());
