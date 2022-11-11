@@ -87,7 +87,7 @@ public class MovieListingUI {
                             cineplexes.removeMovie(choice, deletingMovie);
                         }
                         case 2 -> {
-                            CinemaUI.removeShowTime(cineplexes);
+                            CinemaUI.removeShowTimeUI(cineplexes);
                         }
                     }
                 }

@@ -71,13 +71,34 @@ public class AllCineplex extends Settings {
      */
     public void InitializeCineplexes() throws IOException {
         System.out.println("Initializing Cineplexes...\n...\n...");
-        try {
-            this.cineplexes = TextDB.readFromFile(File.separator + TextDB.Files.Cineplex.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        File cinplexFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Cineplex.toString());
+        if (!cinplexFile.exists()) cinplexFile.createNewFile();
+        this.cineplexes = TextDB.readFromFile(File.separator + TextDB.Files.Cineplex.toString());
+
         File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
         if (!movieFile.exists()) movieFile.createNewFile();
+        // movie instance
+        TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
+
+        File adminFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Admin.toString());
+        if (!adminFile.exists()) adminFile.createNewFile();
+
+        File customerFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Customers.toString());
+        if (!customerFile.exists()) customerFile.createNewFile();
+
+        File envFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Env.toString());
+        if (!envFile.exists()) envFile.createNewFile();
+
+        File holidayFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Holiday.toString());
+        if (!holidayFile.exists()) holidayFile.createNewFile();
+
+        File ticketPrice = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.TicketPrice.toString());
+        if (!ticketPrice.exists()) ticketPrice.createNewFile();
+
+        File transactionHis = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.TransactionHistory.toString());
+        if (!transactionHis.exists()) transactionHis.createNewFile();
+        
         // movie instance
         TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
 
