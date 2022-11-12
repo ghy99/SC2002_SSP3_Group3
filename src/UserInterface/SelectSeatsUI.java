@@ -68,7 +68,7 @@ public class SelectSeatsUI {
                 MovieTicket movieTicket = new MovieTicket(customer.getEmail(),
                         cineplex.getCineplexName(), cinema.getCinemaName(), chosenMovie.getMovieTitle(),
                         new DateTime().ToTID(cinema.getCinemaCode()), seat, specificST.getTime(),
-                        specificST.getArray2D().get(c).get(Integer.parseInt(right)).getSeatType(),
+                        specificST.getArray2D().get(c).get(Integer.parseInt(right) - 1).getSeatType(),
                         cinema.getCinemaType(), specificST.getDimension(), specificST.getMovie().getBlockBuster());
                 allMovieTikcet.add(movieTicket);
             }

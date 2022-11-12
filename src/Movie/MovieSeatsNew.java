@@ -291,6 +291,7 @@ public class MovieSeatsNew {
             int c = (endRowIDChar - '0') - (rowLetterChar - '0'); //gives the relative position
             String colnum = right(seatsSelected.get(k), seatsSelected.get(k).length() - 1);
             int colnumInt = Integer.parseInt(colnum) - 1;
+            System.out.printf("colnum: %s\tcolnumint: %d", colnum, colnumInt);
             //checks if each seat selected is a doubleseat
             if (Objects.equals(this.array2D.get(c).get(colnumInt).getSeatType(), IndividualSeats.SeatType.DoubleSeat)) {
                 if (colnumInt < aisleOne || colnumInt > aisleTwo) {  //if its a doubleseat, check if its before or after aisle
@@ -321,12 +322,17 @@ public class MovieSeatsNew {
                 }
             } else { //else means a single seat is selected
                 this.array2D.get(c).get(Integer.parseInt(colnum) - 1).setOccupied(true);
+                System.out.println("here2");
                 overallList = checkCounter(c, Integer.parseInt(colnum) - 1, overallList);
+                System.out.println("here3");
             }
         }
+        System.out.println("here4");
         if(isWrite) {
             TextDB.UpdateToTextDB(cinema.getCinemaDir(),cinema.getShowTime(), MovieType.Dimension.THREE_D);
         }
+        System.out.println("here5");
+
         return overallList;
     }
 }
