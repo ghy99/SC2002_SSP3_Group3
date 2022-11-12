@@ -87,8 +87,6 @@ public class AllCineplex extends Settings {
         File customerFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Customers.toString());
         if (!customerFile.exists()) customerFile.createNewFile();
 
-        File envFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Env.toString());
-        if (!envFile.exists()) envFile.createNewFile();
 
         File holidayFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Holiday.toString());
         if (!holidayFile.exists()) holidayFile.createNewFile();
@@ -98,7 +96,7 @@ public class AllCineplex extends Settings {
 
         File transactionHis = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.TransactionHistory.toString());
         if (!transactionHis.exists()) transactionHis.createNewFile();
-        
+
         // movie instance
         TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
 
@@ -267,9 +265,9 @@ public class AllCineplex extends Settings {
      */
     private void dailyTask() {
         Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.HOUR_OF_DAY, 23);
+        today.set(Calendar.MINUTE, 59);
+        today.set(Calendar.SECOND, 59);
 // every night at 2am you run your task
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {

@@ -46,6 +46,8 @@ public class Settings {
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
 
     public Settings() throws IOException {
+        File envFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Env.toString());
+        if (!envFile.exists()) envFile.createNewFile();
         Boolean[] env = TextDB.ReadFromFile(File.separator + TextDB.Files.Env);
         setSale(env[0]);
         setRating(env[1]);
