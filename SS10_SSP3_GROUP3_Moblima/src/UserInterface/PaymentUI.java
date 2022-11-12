@@ -54,6 +54,10 @@ public class PaymentUI {
         System.out.printf("\t%d Student tickets\n", student);
         System.out.printf("\t%d Adult tickets\n", adult);
         System.out.printf("\t%d Senior Citizen tickets\n", senior);
+        if (checkHoliday(cineplexes.getHoliday(), specificST.getTime()))
+            System.out.println("true");
+        else
+            System.out.println("false");
         // holiday / weekend / weekday price
         double holidayprice = checkHoliday(cineplexes.getHoliday(), specificST.getTime()) ?
                 cineplexes.getTicketCharges().getPriceByDay(8) : checkWeekend(cineplexes, specificST.getTime());
@@ -70,6 +74,8 @@ public class PaymentUI {
         // Calculating Senior Citizen Price
         double seniorprice = (cineplexes.getTicketCharges().getPriceByAge(3)
                 + holidayprice + cintypeprice + moviedimprice) * senior;
+        System.out.printf("holiday: %.1f\tcinema type: %.1f\tmovie dim: %.1f\n", holidayprice, cintypeprice, moviedimprice);
+        System.out.printf("student: %.1f\tadult: %.1f\tsenior: %.1f\n", studentprice, adultprice, seniorprice);
         double ticketprice = studentprice + adultprice + seniorprice;
         // Check if blockbuster, add blockbuster charge
         if (chosenMovie.getBlockBuster() == MovieType.Blockbuster.BLOCKBUSTER) {
