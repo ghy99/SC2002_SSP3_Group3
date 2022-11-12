@@ -54,10 +54,6 @@ public class PaymentUI {
         System.out.printf("\t%d Student tickets\n", student);
         System.out.printf("\t%d Adult tickets\n", adult);
         System.out.printf("\t%d Senior Citizen tickets\n", senior);
-        if (checkHoliday(cineplexes.getHoliday(), specificST.getTime()))
-            System.out.println("true");
-        else
-            System.out.println("false");
         // holiday / weekend / weekday price
         double holidayprice = checkHoliday(cineplexes.getHoliday(), specificST.getTime()) ?
                 cineplexes.getTicketCharges().getPriceByDay(8) : checkWeekend(cineplexes, specificST.getTime());
