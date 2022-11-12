@@ -14,15 +14,6 @@ weiming|3.0|Its so scary
 Rin|5.0|Best horror movie ever.
 desmond|3.0|Jump scares were too fake
 ]
-The Notebook|ComingSoon|RomanticPerson|Something about a notebook.|Pen, Paper, Notebook|Romance|NOTBLOCKBUSTER|R21|100|20-11-2022
-[
-freddy|5.0|The movie is so touching
-jia ling|4.0|Very insightful movie. Teaches you about life
-raymond|3.1|The movie was great!!
-Zoey|4.1|By far the most outstanding and fabulous movie
-Veron|5.0|Full of emotions!! I cant get enough of it
-Xeor|4.5|SLAYYYYYYYYYYY
-]
 Transformers: Dark of the Moon|NowShowing|Michael Bay|Cars and Trucks fight Planes.|Car, Truck, Underachieving White Boy|Action|BLOCKBUSTER|M18|20|10-11-2022
 [
 fuming|2.3|Its underwhelming
@@ -33,7 +24,7 @@ Ubin|4.5|The visual effects keeps the audience engaged
 Genshin|2.0|The writing is exceptionally poor
 Winnie|3.7|The movie was very realistic
 ]
-Train to Busan|NowShowing|Yeon Sang-ho|Seok-Woo is a fund manager in Seoul. He is separated from his wife and lives with his daughter Soo-An. Seok-Woo doesn't spend much time with his daughter or show affection to her. On the night before Soo-An's birthday, Soo-An insists on seeing her mother for her birthday. Seok-Woo has no other choce, but to take her to Busan. Early next morning, they board the KTX train for Busan at Seoul Station. Before the KTX train leaves Seoul Station, a zombie-like girl jumps onto the train. The train is infected with a horrific virus that is spreading like wildfire. Seok-Woo, Soo-An and the other passengers on the KTX train must now fight for their lives.|Gong Yoo, Jung Yu-Mi, Ma Dong-Seok, Kim Soo-Ahn, Kim Eui-Sung, Choi Woo-Sik, Ahn So-Hee|Mystery|BLOCKBUSTER|M18|0|10-11-2022
+Train to Busan|NowShowing|Yeon Sang-ho|Seok-Woo is a fund manager in Seoul. He is separated from his wife and lives with his daughter Soo-An. Seok-Woo doesn't spend much time with his daughter or show affection to her. On the night before Soo-An's birthday, Soo-An insists on seeing her mother for her birthday. Seok-Woo has no other choce, but to take her to Busan. Early next morning, they board the KTX train for Busan at Seoul Station. Before the KTX train leaves Seoul Station, a zombie-like girl jumps onto the train. The train is infected with a horrific virus that is spreading like wildfire. Seok-Woo, Soo-An and the other passengers on the KTX train must now fight for their lives.|Gong Yoo, Jung Yu-Mi, Ma Dong-Seok, Kim Soo-Ahn, Kim Eui-Sung, Choi Woo-Sik, Ahn So-Hee|Mystery|BLOCKBUSTER|M18|20|10-11-2022
 [
 Ben|3.0|The zombies were not realistic
 Gong Yoo|5.0|I acted in it, of course its 5.0/5.0

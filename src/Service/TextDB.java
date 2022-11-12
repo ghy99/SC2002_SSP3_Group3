@@ -643,6 +643,7 @@ public class TextDB {
             alw.add("]");
         }
 
+//        Write(fileName, alw);
         Update(fileName, alw);
     }
 

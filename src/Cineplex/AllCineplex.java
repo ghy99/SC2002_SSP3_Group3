@@ -79,7 +79,7 @@ public class AllCineplex extends Settings {
         File movieFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Movies.toString());
         if (!movieFile.exists()) movieFile.createNewFile();
         // movie instance
-        TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
+//        TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
 
         File adminFile = new File(TextDB.getCurrentDirectory() + File.separator + TextDB.Files.Admin.toString());
         if (!adminFile.exists()) adminFile.createNewFile();
@@ -100,13 +100,14 @@ public class AllCineplex extends Settings {
         // movie instance
         TextDB.readFromFile(File.separator + TextDB.Files.Movies.toString(), this.listOfMovies);
 
-        updateUpdateMovieStat();
+
+        dailyTask();
+//        updateUpdateMovieStat();
 
         for (Cineplex cineplex : this.cineplexes) {
             cineplex.InitializeMovies(this.listOfMovies);
         }
         System.out.println("Cineplexes are initialized!\n");
-        dailyTask();
     }
 
     /**
@@ -313,13 +314,13 @@ public class AllCineplex extends Settings {
      */
     public static void displayMovieList(ArrayList<Movie> list) {
         ArrayList<Movie> movielist = list;
-
         int choice = 0;
         do {
             for (int j = 0; j < movielist.size(); j++) {
                 if(movielist.get(j).getListOfReview().size() > 1)
-                System.out.printf("\t%d) %s\t(Ratings: %.1f)\n", j + 1, movielist.get(j).getMovieTitle(), movielist.get(j).getOverallRating());
-                else System.out.printf("\t%d) %s\t(Ratings: NA)\n", j + 1, movielist.get(j).getMovieTitle());
+                    System.out.printf("\t%d) %s\t(Ratings: %.1f)\n", j + 1, movielist.get(j).getMovieTitle(), movielist.get(j).getOverallRating());
+                else
+                    System.out.printf("\t%d) %s\t(Ratings: NA)\n", j + 1, movielist.get(j).getMovieTitle());
 
             }
             System.out.println("\nEnter movie number to view more movie details:");

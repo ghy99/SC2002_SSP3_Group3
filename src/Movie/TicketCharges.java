@@ -205,9 +205,9 @@ public class TicketCharges {
      * @return - Default Price based on Type of Cinema
      */
     public double getPriceByType(int type) {
-        for (int i = 1; i <= priceByCinemaType.size(); i++) {
+        for (int i = 0; i < priceByCinemaType.size(); i++) {
             if (type == i) {
-                return Double.parseDouble(priceByCinemaType.get(i - 1).get(1));
+                return Double.parseDouble(priceByCinemaType.get(i).get(1));
             }
         }
         return -1;
