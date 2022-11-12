@@ -2,7 +2,8 @@
 ## SS10 Group 3
 
 ### SC2002 Project Moblima
-### Demoe Video : https://www.youtube.com/watch?v=83jECiP8IPw&ab_channel=ZhiQiChew
+### Demo Video : https://www.youtube.com/watch?v=83jECiP8IPw&ab_channel=ZhiQiChew
+### Gitub Video : https://github.com/ghy99/SC2002_SSP3_Group3
 
 ### Welcome Message
 ___
